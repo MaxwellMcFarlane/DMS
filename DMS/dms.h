@@ -11,30 +11,30 @@ class DMS
 {
 public:
     DMS();
+    DMS(string name);    
 
     //method@1: create table
-    void createTable(string cmd);
+    void createTable(string tableName);
     //method@2: get table (directly through db)
-    void getTable(string cmd);
-    //method@3: get query
-    void getQuery(string cmd);
-    //method@4: dump table
-    void dumpTable(string cmd);
-    //method@5: rename table
-    void renameTable(string name);
-    //method@6: close database
+    Table* getTable(string tableName);       
+    //method@3: dump table
+    void dumpTable(string tableName);
+    //method@4: rename table
+    void renameTable(string tableName, string newName);
+    //method@5: close database
     void close();
+    //method@6: close database
+    void checkExist(string tableName);
 
 private:
 
     //callback methods
-    static int cb_drop_table     (void *data, int argc, char **argv, char **azColName);
-    static int cb_table_size     (void *data, int argc, char **argv, char **azColName);
-    static int cb_list_all_tables(void *data, int argc, char **argv, char **azColName);
-    static int cb_check_existance(void *data, int argc, char **argv, char **azColName);
-    static int cbCreateTable   (void *data, int argc, char **argv, char **azColName);
+    static int cbDropTable     (void *data, int argc, char **argv, char **azColName);
+    static int cbListAllTables(void *data, int argc, char **argv, char **azColName);
+    static int cbCheckExist(void *data, int argc, char **argv, char **azColName);
     //used to manipulate table with correct info
-//    vector <*Table> sensList;
+    vector <Table*> sensList;
+    string filename;
     Table lookup;
     sqlite3 *db;
 };
