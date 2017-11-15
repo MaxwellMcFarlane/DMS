@@ -4,11 +4,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    ../DMS/dms.cpp \
-    ../DMS/table.cpp
-
-LIBS += -l sqlite3
+    log.cpp \
+    config.cpp \
+    baseclass.cpp
 
 HEADERS += \
-    ../DMS/dms.h \
-    ../DMS/table.h
+    log.h \
+    config.h \
+    macros.h \
+    baseclass.h
+
