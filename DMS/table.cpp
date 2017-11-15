@@ -5,7 +5,7 @@ Table::Table()
 
 }
 
-Table::Table(string tableName, sqlite3 *db){
+Table::Table(string tableName, sqlite3 *db, Log * log){
 
     int rc = 0;
     char *ermsg = 0;
@@ -13,13 +13,24 @@ Table::Table(string tableName, sqlite3 *db){
     this->tableName = tableName.c_str();
     this->db = db;
 
+    this->log = log;
+
     string cmd;
 
     if(tableName == "LOOKUP"){
           cmd = "CREATE TABLE ";
             cmd += tableName;
             cmd +=
-            "(ID BLOB PRIMARY KEY  NOT NULL);";
+            "(ID TEXT PRIMARY KEY  NOT NULL);";
+    }
+    else if(tableName == "DATA"){
+        cmd = "CREATE TABLE ";
+        cmd += tableName;
+        cmd += " (ID TEXT NOT NULL, "
+                     "TS TEXT PRIMARY KEY NOT NULL, "
+                       "RAWDATA TEXT NOT NULL, "
+                       "CALDATA TEXT, "
+                       "CALMODE INT);";
     }
     else if(tableName.at(0) == 'S'){
         cmd = "CREATE TABLE ";
@@ -31,14 +42,17 @@ Table::Table(string tableName, sqlite3 *db){
                        "CALMODE INT NOT NULL);";
     }
     sql = cmd.c_str();
-    cout << sql << endl;
+//    cout << sql << endl;
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
-        cerr << tableName << " could not be created.\n";
+        *log << "Error: " << rc << "\n";
+        if(rc == 1){*log << "Table:" << tableName << " already exists.\n";}
+        *log << tableName << " could not be created.\n";
     }
     else{
-        cerr << tableName << " was created.\n";
+        *log << tableName << " was created.\n";
+        *log << "Dimensions: " << cmd << "\n";
     }
     tableLength = 0;
 }
@@ -58,17 +72,19 @@ void Table::addToTable(string info){
     cmd+=" VALUES(";
     cmd += info;
     cmd += ");";
-    cout << cmd << endl;
+//    cout << cmd << endl;
 
     sql = cmd.c_str();
 
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
-        cerr << "Item could not be inserted.\n";
+        *log << "Error: " << rc;
+        if(rc == 19){*log << "Item:" << info << " already exists.\n";}
+        *log << " Item could not be inserted.\n";
     }
-    else{
-        cerr << "Item was inserted.\n";
+    else{        
+        *log << tableName << ": Item was inserted.\n";
         tableLength++;
     }
 }
@@ -86,19 +102,20 @@ void Table::delRow(string col, string index){
     cmd += " = ";
     cmd += index;
     cmd += ";";
-    cout << cmd << endl;
+//    cout << cmd << endl;
 
     sql = cmd.c_str();
 
-    rc = sqlite3_exec(db,sql,cbDelRow,0, &ermsg);
+    rc = sqlite3_exec(db,sql,cbDelRow,log, &ermsg);
 
     if(rc != SQLITE_OK){
-        cerr << "Row couldn't be deleted.\n";
+        *log << "Error: " << rc;
+        *log << tableName << ": Row couldn't be deleted.\n";
     }
     else{
-        cerr << "Row was deleted.\n";
+        *log << tableName << " row[ " << index << "] was deleted.\n";
         tableLength--;
-    }
+    }    
 }
 
 string Table::createQuery(string col, string op){
@@ -121,16 +138,49 @@ string Table::createQuery(string col, string op){
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
 
-    cout << result << endl;
+//    cout << result << endl;
 
     if(rc == SQLITE_ERROR){
-        cerr << "Query wasn't created.\n";
+        *log << "Error: " << rc;
+        *log << tableName << " was accessed.\n";
+        *log << "Query wasn't created.\n";
     }
     else{
-        cerr << "Queary created.\n";
+        *log << "Query created.\n";
     }
 
     return result;
+}
+
+void Table::updateTable(string index, string op){
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+
+    string cmd = "UPDATE ";
+    cmd += tableName;
+    cmd += " SET ";
+    cmd += op;
+    cmd += " WHERE ";
+    cmd += index;
+    cmd += ";";
+    sql = cmd.c_str();
+    cout << cmd << endl;
+    string result;
+    rc = sqlite3_exec(db,sql,cbUpdate,&result, &ermsg);
+
+    if(rc == SQLITE_ERROR){
+        *log << "Error: " << rc;
+        *log << tableName << " was accessed.\n";
+        *log << "Couldn't update.\n";
+    }
+    else{
+        *log << tableName << " was updated.\n";
+    }
+}
+
+void Table::alterTable(string col, string op){
+
 }
 
 //callback methods
@@ -146,30 +196,56 @@ int Table::cbCreateTable(void *data, int argc, char **argv, char **azColName){
 }
 
 int Table::cbAddToTable(void *data, int argc, char **argv, char **azColName){
+    Log * log0 = (Log *)data;
     if(argc < 1){
-        cerr << "Couldn't add to table.\n";
+        *log0 << "Couldn't add to table.\n";
     }
     else{
-        cerr << "Data has been added to table.\n";
+        *log0 << "Data has been added to table.\n";
     }
     return 0;
 }
 
 int Table::cbDelRow(void *data, int argc, char **argv, char **azColName){
+    Log * log0 = (Log *)data;
     if(argc < 1){
-        cerr << "Row couldn't be deleted.\n";
+        *log0 << "Row couldn't be deleted.\n";
     }
     else{
-        cerr << "Row was deleted.\n";
+        *log0 << "Row was deleted.\n";
     }
     return 0;
 }
 
 int Table::cbCreateQuery(void *data, int argc, char **argv, char **azColName){
     int i;
-    string * result = (string *) data;
-    for(i = 0; i < argc; i++){*result += argv[i];if(i < argc-1){*result += "|";}}
-    *result += "\n";
+    string * result = (string *) data;   
+    for(i = 0; i < argc; i++){
+        if(argv[i] != NULL){*result += argv[i];}
+        if(i < argc-1){*result += "|";}}
+    *result += "\n";    
+    return 0;
+}
+
+int Table::cbUpdate(void *data, int argc, char **argv, char **azColName){
+    Log * log0 = (Log *)data;
+    if(argc < 1){
+        *log0 << "Table was not updated.\n";
+    }
+    else{
+        *log0 << "Table was deleted.\n";
+    }
+    return 0;
+}
+
+int Table::cbAlter(void *data, int argc, char **argv, char **azColName){
+    Log * log0 = (Log *)data;
+    if(argc < 1){
+        *log0 << "Table couldn't be altered.\n";
+    }
+    else{
+        *log0 << "Table was altered.\n";
+    }
     return 0;
 }
 

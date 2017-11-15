@@ -4,6 +4,10 @@
 #include <sqlite3.h>
 #include <vector>
 #include "table.h"
+#include "../tools/macros.h"
+#include "../tools/config.h"
+#include "../tools/baseclass.h"
+#include "../tools/log.h"
 
 using namespace std;
 
@@ -25,18 +29,21 @@ public:
     void close();
     //method@6: close database
     void checkExist(string tableName);
+    Log* getLog();
+    void dumpLog();
 
 private:
 
     //callback methods
     static int cbDropTable     (void *data, int argc, char **argv, char **azColName);
-    static int cbListAllTables(void *data, int argc, char **argv, char **azColName);
     static int cbCheckExist(void *data, int argc, char **argv, char **azColName);
     //used to manipulate table with correct info
     vector <Table*> sensList;
     string filename;
     Table lookup;
     sqlite3 *db;
+    Log * log = new Log("log.txt");
+
 };
 
 #endif // DMS_H

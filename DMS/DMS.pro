@@ -5,9 +5,13 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     dms.cpp \
-    table.cpp
+    table.cpp\
+    ../tools/log.cpp\
+    ../tools/baseclass.cpp
 LIBS += -l sqlite3
 
 HEADERS += \
     dms.h \
-    table.h
+    table.h\
+    ../tools/log.h\
+    ../tools/baseclass.h

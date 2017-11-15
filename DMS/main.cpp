@@ -7,46 +7,66 @@ using namespace std;
 int main()
 {
     DMS db("scada.db");
+    Log * log;
+    log = db.getLog();
+
     db.createTable("LOOKUP");
-    db.createTable("S0");
+    db.createTable("DATA");
     db.createTable("S1");
-    db.createTable("S2");
-    db.createTable("S3");
-    db.createTable("S4");
-    db.createTable("S5");
-    db.createTable("S6");
-    db.createTable("S7");
-    db.createTable("S8");
+    db.createTable("S2");    
 
-    db.getTable("LOOKUP")->addToTable("1");
-    db.getTable("LOOKUP")->addToTable("2");
-    db.getTable("LOOKUP")->addToTable("3");
-    db.getTable("LOOKUP")->addToTable("4");
-    db.getTable("LOOKUP")->addToTable("5");
-    db.getTable("LOOKUP")->addToTable("6");
-    db.getTable("LOOKUP")->addToTable("7");
-    db.getTable("LOOKUP")->addToTable("8");
+    db.getTable("LOOKUP")->addToTable("'0xf32'");
+    db.getTable("LOOKUP")->addToTable("'0xff2'");
+    db.getTable("LOOKUP")->addToTable("'0xfb2'");
 
-    db.getTable("S2")->addToTable("1,2,1,5,1");
-    db.getTable("S0")->addToTable("1,1,1,1,1");
-    db.getTable("S0")->addToTable("2,5,1,1,1");
-    db.getTable("S0")->addToTable("3,1,2,1,4");
-    db.getTable("S0")->addToTable("4,1,6,1,1");
-    db.getTable("S0")->addToTable("5,1,6,1,1");
-    db.getTable("S0")->addToTable("6,1,6,1,1");
-    db.getTable("S0")->addToTable("7,1,6,1,1");
-    db.getTable("S0")->addToTable("8,1,6,1,1");
-    db.getTable("S0")->addToTable("9,1,6,1,1");
-    db.getTable("S0")->addToTable("10,1,6,1,1");
+    db.getTable("DATA")->addToTable("'0xf32','2:00',13,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xf32','2:23',15,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xf32','2:48',11,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xf32','2:80',22,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xff2','5:41',66,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xff2','6:01',67,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xff2','7:02',69,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xf32','8:45',65,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xff2','11:23',64,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xff2','12:53',63,NULL,NULL");
+    db.getTable("DATA")->addToTable("'0xf32','14:35',62,NULL,NULL");
 
-    db.dumpTable("S3");
+    db.dumpTable("S1");
     db.dumpTable("S2");
 
-    db.getTable("S0")->createQuery("RAWDATA", "RAWDATA > 2");
-    db.getTable("LOOKUP")->createQuery("*", "");
-    db.getTable("S0")->createQuery("*", "");
-    db.getTable("S0")->createQuery("ID,RAWDATA,CALDATA", "");
-    db.getTable("S0")->createQuery("MAX(ID)", "");
-    db.getTable("S0")->createQuery("MIN(RAWDATA)", "");
-    db.getTable("S0")->createQuery("MAX(TS)", "");
+    cout<< "Rawdata larger than 500 " << endl;
+    cout << db.getTable("DATA")->createQuery("RAWDATA", "RAWDATA > 500") << endl;
+    cout<< "\n";
+    cout<< "All sensors in architecture" << endl;
+    cout << db.getTable("LOOKUP")->createQuery("*", "")<< endl;
+    cout<< "\n";
+    cout<< "All data collected" << endl;
+    cout << db.getTable("DATA")->createQuery("*", "")<< endl;
+    cout<< "\n";
+
+    db.getTable("DATA")->updateTable("TS = '2:00'", "CALDATA = 18");
+    db.getTable("DATA")->updateTable("TS = '2:00'", "CALMODE = 1");
+    db.getTable("DATA")->updateTable("TS > '2:00'", "CALDATA = 34");
+    db.getTable("DATA")->updateTable("TS > '2:00'", "CALMODE = 16");
+
+    cout<< "All data collected" << endl;
+    cout << db.getTable("DATA")->createQuery("*", "")<< endl;
+    cout<< "\n";
+
+    cout<< "All sensors, rawdata, and caldata" << endl;
+    cout << db.getTable("DATA")->createQuery("ID,TS,RAWDATA,CALDATA", "")<< endl;
+    cout<< "\n";
+    cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
+    cout << db.getTable("DATA")->createQuery("MAX(ID)", "")<< endl;
+    cout<< "\n";
+    cout<< "Smallest calibrated data point" << endl;
+    cout << db.getTable("DATA")->createQuery("MIN(CALDATA)", "")<< endl;
+    cout<< "\n";
+    cout<< "Largest Rawdata point with time" << endl;
+    cout << db.getTable("DATA")->createQuery("TS, MAX(RAWDATA)", "")<< endl;
+    cout<< "\n";
+    cout<< "Average caldata point with time" << endl;
+    cout << db.getTable("DATA")->createQuery("AVG(CALDATA)", "")<< endl;
+
+    db.close();
 }

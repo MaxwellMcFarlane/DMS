@@ -52,10 +52,14 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../DMS/main.cpp \
 		../DMS/dms.cpp \
-		../DMS/table.cpp 
+		../DMS/table.cpp \
+		../tools/log.cpp \
+		../tools/baseclass.cpp 
 OBJECTS       = main.o \
 		dms.o \
-		table.o
+		table.o \
+		log.o \
+		baseclass.o
 DIST          = ../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/qdevice.pri \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/device_config.prf \
@@ -235,9 +239,13 @@ DIST          = ../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/yacc.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/lex.prf \
 		../DMS/DMS.pro dms.h \
-		table.h ../DMS/main.cpp \
+		table.h \
+		../tools/log.h \
+		../tools/baseclass.h ../DMS/main.cpp \
 		../DMS/dms.cpp \
-		../DMS/table.cpp
+		../DMS/table.cpp \
+		../tools/log.cpp \
+		../tools/baseclass.cpp
 QMAKE_TARGET  = DMS
 DESTDIR       = 
 TARGET        = DMS
@@ -658,15 +666,33 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../DMS/main.cpp 
+main.o: ../DMS/main.cpp ../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../DMS/main.cpp
 
 dms.o: ../DMS/dms.cpp ../DMS/dms.h \
-		../DMS/table.h
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dms.o ../DMS/dms.cpp
 
 table.o: ../DMS/table.cpp ../DMS/table.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o table.o ../DMS/table.cpp
+
+log.o: ../tools/log.cpp ../tools/log.h \
+		../tools/baseclass.h \
+		../tools/macros.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o log.o ../tools/log.cpp
+
+baseclass.o: ../tools/baseclass.cpp ../tools/baseclass.h \
+		../tools/macros.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o baseclass.o ../tools/baseclass.cpp
 
 ####### Install
 
