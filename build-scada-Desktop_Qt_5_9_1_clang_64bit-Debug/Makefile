@@ -52,10 +52,18 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../scada/main.cpp \
 		../DMS/dms.cpp \
-		../DMS/table.cpp 
+		../DMS/table.cpp \
+		../scada/ControlSubSystem/branch.cpp \
+		../scada/ControlSubSystem/state.cpp \
+		../tools/baseclass.cpp \
+		../tools/log.cpp 
 OBJECTS       = main.o \
 		dms.o \
-		table.o
+		table.o \
+		branch.o \
+		state.o \
+		baseclass.o \
+		log.o
 DIST          = ../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/qdevice.pri \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/device_config.prf \
@@ -236,9 +244,18 @@ DIST          = ../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/yacc.prf \
 		../../Desktop/Qt/5.9.1/clang_64/mkspecs/features/lex.prf \
 		../scada/scada.pro ../DMS/dms.h \
-		../DMS/table.h ../scada/main.cpp \
+		../DMS/table.h \
+		ControlSubSystem/branch.h \
+		ControlSubSystem/state.h \
+		../tools/baseclass.h \
+		../tools/log.h \
+		../tools/macros.h ../scada/main.cpp \
 		../DMS/dms.cpp \
-		../DMS/table.cpp
+		../DMS/table.cpp \
+		../scada/ControlSubSystem/branch.cpp \
+		../scada/ControlSubSystem/state.cpp \
+		../tools/baseclass.cpp \
+		../tools/log.cpp
 QMAKE_TARGET  = scada
 DESTDIR       = 
 TARGET        = scada
@@ -661,15 +678,59 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../scada/main.cpp 
+main.o: ../scada/main.cpp ../scada/ControlSubSystem/branch.h \
+		../scada/ControlSubSystem/state.h \
+		../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../scada/main.cpp
 
 dms.o: ../DMS/dms.cpp ../DMS/dms.h \
-		../DMS/table.h
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dms.o ../DMS/dms.cpp
 
-table.o: ../DMS/table.cpp ../DMS/table.h
+table.o: ../DMS/table.cpp ../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o table.o ../DMS/table.cpp
+
+branch.o: ../scada/ControlSubSystem/branch.cpp ../scada/ControlSubSystem/branch.h \
+		../scada/ControlSubSystem/state.h \
+		../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o branch.o ../scada/ControlSubSystem/branch.cpp
+
+state.o: ../scada/ControlSubSystem/state.cpp ../scada/ControlSubSystem/state.h \
+		../scada/ControlSubSystem/branch.h \
+		../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o state.o ../scada/ControlSubSystem/state.cpp
+
+baseclass.o: ../tools/baseclass.cpp ../tools/baseclass.h \
+		../tools/macros.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o baseclass.o ../tools/baseclass.cpp
+
+log.o: ../tools/log.cpp ../tools/log.h \
+		../tools/baseclass.h \
+		../tools/macros.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o log.o ../tools/log.cpp
 
 ####### Install
 

@@ -5,10 +5,19 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     ../DMS/dms.cpp \
-    ../DMS/table.cpp
+    ../DMS/table.cpp \
+    ControlSubSystem/branch.cpp \
+    ControlSubSystem/state.cpp \
+    ../tools/baseclass.cpp \
+    ../tools/log.cpp
 
 LIBS += -l sqlite3
 
 HEADERS += \
     ../DMS/dms.h \
-    ../DMS/table.h
+    ../DMS/table.h \
+    ControlSubSystem/branch.h \
+    ControlSubSystem/state.h \
+    ../tools/baseclass.h \
+    ../tools/log.h \
+    ../tools/macros.h

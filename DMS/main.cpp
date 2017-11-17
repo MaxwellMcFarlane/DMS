@@ -45,7 +45,8 @@ int main()
     db.getTable("CalModTable")->addToTable("7,17,'volt','∆'");
 
     cout<< "Rawdata larger than 50 " << endl;
-    cout << db.getTable("SampleTable")->createQuery("RAWDATA", "RAWDATA > 50") << endl;
+    cout << db.getTable("SampleTable")->createQuery("RAWDATA", "RAWDATA < 100") << endl;
+    if(db.getTable("SampleTable")->createQuery("RAWDATA", "RAWDATA < 100") == ""){cout << "hello" << endl;}
     cout<< "\n";
     cout<< "All sensors in architecture" << endl;
     cout << db.getTable("HubTable")->createQuery("*", "")<< endl;

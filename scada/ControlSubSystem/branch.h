@@ -11,7 +11,7 @@ public:
     State *branchState;
     string condition;
 
-     Branch (State *branchState, string condition );
+     Branch (State branchState, string condition );
     ~Branch();
 };
 

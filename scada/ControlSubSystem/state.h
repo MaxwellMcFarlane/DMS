@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include "branch.h"
+#include "../DMS/dms.h"
+#include "../DMS/table.h"
 using namespace std;
 
 class Branch;
@@ -14,7 +16,7 @@ class State{
      int numOfBranches;
      State(string name);
      void loadBranches(Branch branch);
-     State nextstate(string condition );
+     State nextstate(DMS *db);
      ~State();
 
 };
