@@ -6,67 +6,70 @@ using namespace std;
 
 int main()
 {
-    DMS db("scada.db");
+    DMS db("scada.db", "../deftables_config.txt");
     Log * log;
     log = db.getLog();
 
-    db.createTable("LOOKUP");
-    db.createTable("DATA");
-    db.createTable("S1");
-    db.createTable("S2");    
+    db.getTable("HubTable")->addToTable("0xf32,'volt'");
+    db.getTable("HubTable")->addToTable("0xff2,'volt'");
+    db.getTable("HubTable")->addToTable("0xff2,'volt'");
+    db.getTable("HubTable")->addToTable("0xfb2,'amp'");
+    db.getTable("HubTable")->addToTable("0xfa2,'amp'");
+    db.getTable("HubTable")->addToTable("0xfca,'volt'");
 
-    db.getTable("LOOKUP")->addToTable("'0xf32'");
-    db.getTable("LOOKUP")->addToTable("'0xff2'");
-    db.getTable("LOOKUP")->addToTable("'0xfb2'");
+    db.getTable("SampleTable")->addToTable("1,'0xf32','2:00',13");
+    db.getTable("SampleTable")->addToTable("2,'0xf32','2:23',15");
+    db.getTable("SampleTable")->addToTable("3,'0xf32','2:48',11");
+    db.getTable("SampleTable")->addToTable("4,'0xf32','2:80',22");
+    db.getTable("SampleTable")->addToTable("5,'0xff2','5:41',66");
+    db.getTable("SampleTable")->addToTable("6,'0xff2','6:01',67");
+    db.getTable("SampleTable")->addToTable("7,'0xff2','7:02',69");
+    db.getTable("SampleTable")->addToTable("8,'0xf32','8:45',65");
+    db.getTable("SampleTable")->addToTable("9,'0xff2','11:23',64");
+    db.getTable("SampleTable")->addToTable("10,'0xff2','12:53',63");
+    db.getTable("SampleTable")->addToTable("11,'0xf32','14:35',62");
 
-    db.getTable("DATA")->addToTable("'0xf32','2:00',13,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xf32','2:23',15,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xf32','2:48',11,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xf32','2:80',22,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xff2','5:41',66,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xff2','6:01',67,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xff2','7:02',69,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xf32','8:45',65,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xff2','11:23',64,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xff2','12:53',63,NULL,NULL");
-    db.getTable("DATA")->addToTable("'0xf32','14:35',62,NULL,NULL");
+    db.getTable("CalibratedSampleTable")->addToTable("1,'5:41',66,1");
+    db.getTable("CalibratedSampleTable")->addToTable("2,'6:01',67,1");
+    db.getTable("CalibratedSampleTable")->addToTable("3,'7:02',69,1");
+    db.getTable("CalibratedSampleTable")->addToTable("4,'8:45',65,1");
+    db.getTable("CalibratedSampleTable")->addToTable("5,'11:23',64,1");
+    db.getTable("CalibratedSampleTable")->addToTable("6,'12:53',63,1");
+    db.getTable("CalibratedSampleTable")->addToTable("7,'14:35',62,1");
 
-    db.dumpTable("S1");
-    db.dumpTable("S2");
+    db.getTable("CalModTable")->addToTable("2,17,'volt','ß'");
+    db.getTable("CalModTable")->addToTable("3,17,'volt','∂'");
+    db.getTable("CalModTable")->addToTable("4,17,'volt','∂'");
+    db.getTable("CalModTable")->addToTable("5,17,'volt','ƒ'");
+    db.getTable("CalModTable")->addToTable("6,17,'volt','å'");
+    db.getTable("CalModTable")->addToTable("7,17,'volt','∆'");
 
-    cout<< "Rawdata larger than 500 " << endl;
-    cout << db.getTable("DATA")->createQuery("RAWDATA", "RAWDATA > 500") << endl;
+    cout<< "Rawdata larger than 50 " << endl;
+    cout << db.getTable("SampleTable")->createQuery("RAWDATA", "RAWDATA > 50") << endl;
     cout<< "\n";
     cout<< "All sensors in architecture" << endl;
-    cout << db.getTable("LOOKUP")->createQuery("*", "")<< endl;
+    cout << db.getTable("HubTable")->createQuery("*", "")<< endl;
     cout<< "\n";
     cout<< "All data collected" << endl;
-    cout << db.getTable("DATA")->createQuery("*", "")<< endl;
+    cout << db.getTable("CalModTable")->createQuery("*", "")<< endl;
     cout<< "\n";
 
-    db.getTable("DATA")->updateTable("TS = '2:00'", "CALDATA = 18");
-    db.getTable("DATA")->updateTable("TS = '2:00'", "CALMODE = 1");
-    db.getTable("DATA")->updateTable("TS > '2:00'", "CALDATA = 34");
-    db.getTable("DATA")->updateTable("TS > '2:00'", "CALMODE = 16");
+    db.getTable("CalModTable")->updateTable("Type = 'volt'", "ModelNumber = 18");
+    db.getTable("CalModTable")->updateTable("Type = 'amp'", "ModelNumber = 5");
 
     cout<< "All data collected" << endl;
-    cout << db.getTable("DATA")->createQuery("*", "")<< endl;
+    cout << db.getTable("CalModTable")->createQuery("*", "")<< endl;
     cout<< "\n";
 
     cout<< "All sensors, rawdata, and caldata" << endl;
-    cout << db.getTable("DATA")->createQuery("ID,TS,RAWDATA,CALDATA", "")<< endl;
+    cout << db.getTable("SampleTable")->createQuery("SensorID,TimeStamp,RAWDATA", "")<< endl;
     cout<< "\n";
     cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
-    cout << db.getTable("DATA")->createQuery("MAX(ID)", "")<< endl;
-    cout<< "\n";
-    cout<< "Smallest calibrated data point" << endl;
-    cout << db.getTable("DATA")->createQuery("MIN(CALDATA)", "")<< endl;
-    cout<< "\n";
+    cout << db.getTable("SampleTable")->createQuery("MAX(SensorID)", "")<< endl;
+    cout<< "\n";    
     cout<< "Largest Rawdata point with time" << endl;
-    cout << db.getTable("DATA")->createQuery("TS, MAX(RAWDATA)", "")<< endl;
+    cout << db.getTable("SampleTable")->createQuery("TimeStamp, MAX(RAWDATA)", "")<< endl;
     cout<< "\n";
-    cout<< "Average caldata point with time" << endl;
-    cout << db.getTable("DATA")->createQuery("AVG(CALDATA)", "")<< endl;
-
+    db.getTable("SampleTable")->exp("*","");
     db.close();
 }
