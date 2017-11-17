@@ -1,6 +1,7 @@
 #ifndef DMS_H
 #define DMS_H
 #include <iostream>
+#include <fstream>
 #include <sqlite3.h>
 #include <vector>
 #include "table.h"
@@ -16,9 +17,11 @@ class DMS
 public:
     DMS();
     DMS(string name);    
+    DMS(string name, string dbConfig);
 
     //method@1: create table
     void createTable(string tableName);
+    void createTable(string tableName, string dim);
     //method@2: get table (directly through db)
     Table* getTable(string tableName);       
     //method@3: dump table

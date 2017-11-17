@@ -1,47 +1,36 @@
 
-Tue Nov 14 00:57:59 2017
+Thu Nov 16 23:11:26 2017
 DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID BLOB PRIMARY KEY  NOT NULL);
-S0 was created.
-Dimensions: CREATE TABLE S0 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+HubTable was created.
+Dimensions: (HubSN TEXT PRIMARY KEY  NOT NULL,NumberOfSensors TEXT NOT NULL);
+SampleTable was created.
+Dimensions: (Sample TEXT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibrationTable was created.
+Dimensions: (CalIndex INT PRIMARY KEY NOT NULL, Sample BLOB NOT NULL, ModelNumber BLOB NOT NULL, CalibrationTimeStamp BLOB NOT NULL, CalibrationValue BLOB NOT NULL);
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S3 was created.
-Dimensions: CREATE TABLE S3 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S4 was created.
-Dimensions: CREATE TABLE S4 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S5 was created.
-Dimensions: CREATE TABLE S5 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S6 was created.
-Dimensions: CREATE TABLE S6 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S7 was created.
-Dimensions: CREATE TABLE S7 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S8 was created.
-Dimensions: CREATE TABLE S8 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-S2: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-S0: Item was inserted.
-Table: S3 was deleted.
-Table: S2 was deleted.
+Dimensions: 
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
 Query created.
 Query created.
 Query created.
@@ -49,576 +38,50 @@ Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 00:57:59 2017
+export.
+Thu Nov 16 23:11:26 2017
 
-Tue Nov 14 14:21:32 2017
+Fri Nov 17 01:19:55 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID INT NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Table:HubTable already exists.
+HubTable could not be created.
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibrationSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+HubTable was created.
+Dimensions: CREATE TABLE HubTable(HubSN TEXT PRIMARY KEY  NOT NULL,NumberOfSensors TEXT NOT NULL);
 Error: 1
-Table:S1 already exists.
-S1 could not be created.
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Tue Nov 14 14:21:32 2017
-
-Tue Nov 14 14:22:26 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Tue Nov 14 14:22:26 2017
-
-Tue Nov 14 14:22:36 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Tue Nov 14 14:22:36 2017
-
-Tue Nov 14 14:24:02 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Tue Nov 14 14:24:02 2017
-
-Tue Nov 14 14:31:57 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:31:57 2017
-
-Tue Nov 14 14:35:04 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:1 already exists.
- Item could not be inserted.
-Error: 19Item:2 already exists.
- Item could not be inserted.
-Error: 19Item:3 already exists.
- Item could not be inserted.
-Error: 19Item:4 already exists.
- Item could not be inserted.
-Error: 19Item:5 already exists.
- Item could not be inserted.
-Error: 19Item:6 already exists.
- Item could not be inserted.
-Error: 19Item:7 already exists.
- Item could not be inserted.
-Error: 19Item:8 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:35:04 2017
-
-Tue Nov 14 14:40:51 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:40:51 2017
-
-Tue Nov 14 14:41:12 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:41:12 2017
-
-Tue Nov 14 14:42:09 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID BLOB PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID INT NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:42:09 2017
-
-Tue Nov 14 14:51:17 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:51:17 2017
-
-Tue Nov 14 14:52:18 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:52:18 2017
-
-Tue Nov 14 14:52:59 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 14:52:59 2017
-
-Tue Nov 14 19:55:53 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID BLOB PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID INT NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 19:55:53 2017
-
-Tue Nov 14 20:13:17 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID BLOB PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID TEXT NOT NULL, TS TEXT NOT NULL, RAWDATA TEXT NOT NULL, CALDATA TEXT, CALMODE INT);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
+Dimensions: 
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
 Query created.
 Query created.
 Query created.
@@ -626,984 +89,57 @@ Query created.
 Query created.
 Query created.
 Query created.
-Query created.
-Tue Nov 14 20:13:17 2017
+export.
+Fri Nov 17 01:19:56 2017
 
-Tue Nov 14 20:14:49 2017
+Fri Nov 17 01:22:02 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibrationSampleTable already exists.
+CalibrationSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
+Dimensions: 
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 20:14:49 2017
-
-Tue Nov 14 20:17:08 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
  Item could not be inserted.
-Error: 19Item:0xff2 already exists.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
  Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
  Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:34:35 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
  Item could not be inserted.
-Error: 19Item:0xff2 already exists.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
  Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
  Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:34:50 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
  Item could not be inserted.
-Error: 19Item:0xff2 already exists.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
  Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
  Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:35:10 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
  Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:35:29 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:35:59 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:36:05 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:36:53 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:37:29 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:38:59 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:39:16 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:39:50 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:41:48 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:42:05 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:42:54 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:43:21 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:43:41 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-
-Tue Nov 14 20:45:17 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:45:33 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID TEXT PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID TEXT NOT NULL, TS TEXT PRIMARY KEY NOT NULL, RAWDATA TEXT NOT NULL, CALDATA TEXT, CALMODE INT);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:45:39 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,200,13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,223,15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,248,11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,280,22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,541,66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,601,67,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,702,69,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,845,65,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1123,64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1253,63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,1435,62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:47:30 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID TEXT PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID TEXT NOT NULL, TS TEXT PRIMARY KEY NOT NULL, RAWDATA TEXT NOT NULL, CALDATA TEXT, CALMODE INT);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 20:47:30 2017
-
-Tue Nov 14 20:47:56 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,200,13,1,1 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,223,15,1,1 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,248,11,1,1 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,280,22,1,1 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,541,66,1,1 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,601,67,1,1 already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 20:47:56 2017
-
-Tue Nov 14 20:49:21 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,200,13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,223,15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,248,11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,280,22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,541,66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,601,67,NULL,NULL already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:51:46 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,200,13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,223,15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,248,11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,280,22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,541,66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,601,67,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,702,69,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,845,65,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1123,64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1253,63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,1435,62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-
-Tue Nov 14 20:52:57 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,200,13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,223,15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,248,11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,280,22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,541,66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,601,67,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,702,69,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,845,65,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1123,64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xff2,1253,63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:0xf32,1435,62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 20:52:57 2017
-
-Tue Nov 14 20:56:20 2017
-DataBase scada.db is opened.
-Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
  Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
@@ -1612,497 +148,1122 @@ Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
 Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 20:56:20 2017
+Query created.
+export.
+Fri Nov 17 01:22:02 2017
 
-Tue Nov 14 20:56:36 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID TEXT PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID TEXT NOT NULL, TS TEXT PRIMARY KEY NOT NULL, RAWDATA TEXT NOT NULL, CALDATA TEXT, CALMODE INT);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Error: 1 Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 20:56:36 2017
-
-Tue Nov 14 21:02:06 2017
+Fri Nov 17 01:22:22 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibrationSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+HubTable was created.
+Dimensions: CREATE TABLE HubTable(HubSN TEXT PRIMARY KEY  NOT NULL,NumberOfSensors TEXT NOT NULL);
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:0xf32 already exists.
- Item could not be inserted.
-Error: 19Item:0xff2 already exists.
- Item could not be inserted.
-Error: 19Item:0xfb2 already exists.
- Item could not be inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
+Dimensions: 
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 21:02:06 2017
+Query created.
+export.
+Fri Nov 17 01:22:22 2017
 
-Tue Nov 14 21:03:15 2017
-DataBase scada.db is opened.
-LOOKUP was created.
-Dimensions: CREATE TABLE LOOKUP(ID TEXT PRIMARY KEY  NOT NULL);
-DATA was created.
-Dimensions: CREATE TABLE DATA (ID TEXT NOT NULL, TS TEXT PRIMARY KEY NOT NULL, RAWDATA TEXT NOT NULL, CALDATA TEXT, CALMODE INT);
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-LOOKUP: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-DATA: Item was inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Query created.
-Tue Nov 14 21:03:15 2017
-
-Tue Nov 14 21:05:58 2017
+Fri Nov 17 01:22:34 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibrationSampleTable already exists.
+CalibrationSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
+Dimensions: 
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
  Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 21:05:58 2017
+Query created.
+export.
+Fri Nov 17 01:22:34 2017
 
-Tue Nov 14 21:06:49 2017
+Fri Nov 17 01:24:25 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibrationSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+HubTable was created.
+Dimensions: CREATE TABLE HubTable(HubSN TEXT PRIMARY KEY  NOT NULL,NumberOfSensors TEXT NOT NULL);
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
+Table:SampleTable already exists.
+SampleTable could not be created.
 S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
+Dimensions: 
 S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
- Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
-Query created.
-Query created.
-Query created.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
+Dimensions: 
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 21:06:49 2017
+Query created.
+export.
+Fri Nov 17 01:24:25 2017
 
-Tue Nov 14 21:07:44 2017
+Fri Nov 17 01:30:35 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
+Table:SampleTable already exists.
+SampleTable could not be created.
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
  Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
 Query created.
 Query created.
 Query created.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
 Query created.
 Query created.
 Query created.
 Query created.
-Query created.
-Query created.
-Tue Nov 14 21:07:44 2017
+export.
+Fri Nov 17 01:30:35 2017
 
-Tue Nov 14 21:08:06 2017
+Fri Nov 17 01:31:00 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
-Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
- Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
- Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
- Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
+Table:HubTable already exists.
+HubTable could not be created.
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
 Query created.
-Query created.
-Query created.
-DATA was updated.
-DATA was updated.
-Error: 1DATA was accessed.
-Couldn't update.
-Error: 1DATA was accessed.
-Couldn't update.
+Error: 1HubTable was accessed.
+Query wasn't created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Query created.
-Tue Nov 14 21:08:06 2017
+export.
+Fri Nov 17 01:31:00 2017
 
-Tue Nov 14 21:08:55 2017
+Fri Nov 17 01:32:20 2017
+DataBase scada.db is opened.
+HubTable was created.
+Dimensions: (HubSN INT NOT NULL,SensorId INTEGER PRIMARY KEY AUTOINCREMENT, SensorType TEXT);
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+Error: 19Item:0xff2,0,'volt' already exists.
+ Item could not be inserted.
+HubTable: Item was inserted.
+Error: 19Item:0xfb2,1,'amp' already exists.
+ Item could not be inserted.
+Error: 19Item:0xfa2,1,'amp' already exists.
+ Item could not be inserted.
+Error: 19Item:0xfca,1,'volt' already exists.
+ Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:32:20 2017
+
+Fri Nov 17 01:32:52 2017
+DataBase scada.db is opened.
+HubTable was created.
+Dimensions: (HubSN INT NOT NULL,SensorId INTEGER PRIMARY KEY AUTOINCREMENT, SensorType TEXT);
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+HubTable: Item was inserted.
+Error: 19Item:0xff2,0,'volt' already exists.
+ Item could not be inserted.
+HubTable: Item was inserted.
+Error: 19Item:0xfb2,1,'amp' already exists.
+ Item could not be inserted.
+Error: 19Item:0xfa2,1,'amp' already exists.
+ Item could not be inserted.
+Error: 19Item:0xfca,1,'volt' already exists.
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:32:52 2017
+
+Fri Nov 17 01:33:34 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
  Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
+Error: 19Item:1,'5:41',66,1 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
+Error: 19Item:2,'6:01',67,1 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
+Error: 19Item:3,'7:02',69,1 already exists.
  Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
 Query created.
 Query created.
 Query created.
-DATA was updated.
-DATA was updated.
-DATA was updated.
-DATA was updated.
 Query created.
 Query created.
 Query created.
 Query created.
-Query created.
-Query created.
-Tue Nov 14 21:08:55 2017
+export.
+Fri Nov 17 01:33:34 2017
 
-Tue Nov 14 21:14:52 2017
+Fri Nov 17 01:34:19 2017
+DataBase scada.db is opened.
+HubTable was created.
+Dimensions: (SensorId INTEGER PRIMARY KEY AUTOINCREMENT, HubSN INT NOT NULL, SensorType TEXT);
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:34:19 2017
+
+Fri Nov 17 01:37:58 2017
 DataBase scada.db is opened.
 Error: 1
-Table:LOOKUP already exists.
-LOOKUP could not be created.
+Table:HubTable already exists.
+HubTable could not be created.
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Error: 1HubTable was accessed.
+Query wasn't created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:37:58 2017
+
+Fri Nov 17 01:38:51 2017
+DataBase scada.db is opened.
+HubTable was created.
+Dimensions: (SensorId INTEGER PRIMARY KEY AUTOINCREMENT, HubSN INT NOT NULL, SensorType TEXT);
 Error: 1
-Table:DATA already exists.
-DATA could not be created.
-S1 was created.
-Dimensions: CREATE TABLE S1 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-S2 was created.
-Dimensions: CREATE TABLE S2 (ID INT PRIMARY KEY NOT NULL, TS BLOB NOT NULL, RAWDATA BLOB NOT NULL, CALDATA BLOB NOT NULL, CALMODE INT NOT NULL);
-Error: 19Item:'0xf32' already exists.
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2' already exists.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
  Item could not be inserted.
-Error: 19Item:'0xfb2' already exists.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:00',13,NULL,NULL already exists.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:23',15,NULL,NULL already exists.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:48',11,NULL,NULL already exists.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','2:80',22,NULL,NULL already exists.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','5:41',66,NULL,NULL already exists.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','6:01',67,NULL,NULL already exists.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','7:02',69,NULL,NULL already exists.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','8:45',65,NULL,NULL already exists.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','11:23',64,NULL,NULL already exists.
+Error: 19Item:1,'5:41',66,1 already exists.
  Item could not be inserted.
-Error: 19Item:'0xff2','12:53',63,NULL,NULL already exists.
+Error: 19Item:2,'6:01',67,1 already exists.
  Item could not be inserted.
-Error: 19Item:'0xf32','14:35',62,NULL,NULL already exists.
+Error: 19Item:3,'7:02',69,1 already exists.
  Item could not be inserted.
-Table: S1 was deleted.
-Table: S2 was deleted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
 Query created.
 Query created.
 Query created.
-DATA was updated.
-DATA was updated.
-DATA was updated.
-DATA was updated.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:38:51 2017
+
+Fri Nov 17 01:39:24 2017
+DataBase scada.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 1 Item could not be inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
 Query created.
-Tue Nov 14 21:14:52 2017
+Query created.
+export.
+Fri Nov 17 01:39:24 2017
+
+Fri Nov 17 01:39:57 2017
+DataBase scada.db is opened.
+HubTable was created.
+Dimensions: (SensorId INTEGER PRIMARY KEY AUTOINCREMENT, HubSN INT NOT NULL, SensorType TEXT);
+SampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, SensorID TEXT NOT NULL,TimeStamp Text NOT NULL, RawData TEXT NOT NULL);
+CalibratedSampleTable was created.
+Dimensions: (SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal TEXT NOT NULL, ModelNumber TEXT NOT NULL);
+CalModTable was created.
+Dimensions: (SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:39:57 2017
+
+Fri Nov 17 01:42:03 2017
+DataBase scada.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:42:03 2017
+
+Fri Nov 17 01:44:46 2017
+DataBase scada.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+CalModTable was updated.
+CalModTable was updated.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:44:46 2017
+
+Fri Nov 17 01:50:44 2017
+DataBase scada.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+CalModTable was updated.
+CalModTable was updated.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:50:44 2017
+
+Fri Nov 17 01:52:39 2017
+DataBase scada.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+HubTable: Item was inserted.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'0xff2','5:41',66 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'0xff2','6:01',67 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'0xff2','7:02',69 already exists.
+ Item could not be inserted.
+Error: 19Item:8,'0xf32','8:45',65 already exists.
+ Item could not be inserted.
+Error: 19Item:9,'0xff2','11:23',64 already exists.
+ Item could not be inserted.
+Error: 19Item:10,'0xff2','12:53',63 already exists.
+ Item could not be inserted.
+Error: 19Item:11,'0xf32','14:35',62 already exists.
+ Item could not be inserted.
+Error: 19Item:1,'5:41',66,1 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'6:01',67,1 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'7:02',69,1 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'8:45',65,1 already exists.
+ Item could not be inserted.
+Error: 19Item:5,'11:23',64,1 already exists.
+ Item could not be inserted.
+Error: 19Item:6,'12:53',63,1 already exists.
+ Item could not be inserted.
+Error: 19Item:7,'14:35',62,1 already exists.
+ Item could not be inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+CalModTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+CalModTable was updated.
+CalModTable was updated.
+Query created.
+Query created.
+Query created.
+Query created.
+export.
+Fri Nov 17 01:52:40 2017

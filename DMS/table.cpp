@@ -5,6 +5,34 @@ Table::Table()
 
 }
 
+Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+    this->tableName = tableName;
+    this->dimensions = dim;
+
+    this->db = db;
+    string cmd;
+    this->log = log;
+    cmd += "CREATE TABLE ";
+    cmd += tableName + " " + dim;
+    sql = cmd.c_str();
+
+    rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
+
+    if(rc != SQLITE_OK){
+        *log << "Error: " << rc << "\n";
+        if(rc == 1){*log << "Table:" << tableName << " already exists.\n";}
+        *log << tableName << " could not be created.\n";
+    }
+    else{
+        *log << tableName << " was created.\n";
+        *log << "Dimensions: " << dim << "\n";
+    }
+    tableLength = 0;
+}
+
 Table::Table(string tableName, sqlite3 *db, Log * log){
 
     int rc = 0;
@@ -14,35 +42,33 @@ Table::Table(string tableName, sqlite3 *db, Log * log){
     this->db = db;
 
     this->log = log;
-
     string cmd;
 
-    if(tableName == "LOOKUP"){
+    if(tableName == "HubTable"){
           cmd = "CREATE TABLE ";
             cmd += tableName;
             cmd +=
-            "(ID TEXT PRIMARY KEY  NOT NULL);";
+            "(HubSN TEXT PRIMARY KEY  NOT NULL,"
+            "NumberOfSensors TEXT NOT NULL);";
     }
-    else if(tableName == "DATA"){
+    else if(tableName == "SampleTable"){
         cmd = "CREATE TABLE ";
         cmd += tableName;
-        cmd += " (ID TEXT NOT NULL, "
-                     "TS TEXT PRIMARY KEY NOT NULL, "
-                       "RAWDATA TEXT NOT NULL, "
-                       "CALDATA TEXT, "
-                       "CALMODE INT);";
+        cmd += " (Sample TEXT PRIMARY KEY NOT NULL, "
+                     "SensorID TEXT NOT NULL, "
+                       "RawData TEXT NOT NULL, "
+                       "CalData TEXT);";
     }
-    else if(tableName.at(0) == 'S'){
+    else if(tableName == "CalibrationTable"){
         cmd = "CREATE TABLE ";
         cmd += tableName;
-        cmd += " (ID INT PRIMARY KEY NOT NULL, "
-                     "TS BLOB NOT NULL, "
-                       "RAWDATA BLOB NOT NULL, "
-                       "CALDATA BLOB NOT NULL, "
-                       "CALMODE INT NOT NULL);";
+        cmd += " (CalIndex INT PRIMARY KEY NOT NULL, "
+                     "Sample BLOB NOT NULL, "
+                       "ModelNumber BLOB NOT NULL, "
+                       "CalibrationTimeStamp BLOB NOT NULL, "
+                       "CalibrationValue BLOB NOT NULL);";
     }
     sql = cmd.c_str();
-//    cout << sql << endl;
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
@@ -67,15 +93,13 @@ void Table::addToTable(string info){
     const char * sql;
     string cmd = "INSERT INTO ";
     cmd+= tableName;
-    if(tableName == "LOOKUP"){cmd += lookupDim;}
-    else if(tableName.at(0) == 'S'){cmd += sensorTbDim;}
+    cmd+= " " + dimensions;
     cmd+=" VALUES(";
     cmd += info;
     cmd += ");";
-//    cout << cmd << endl;
 
     sql = cmd.c_str();
-
+//    cout << cmd << endl;
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
@@ -88,8 +112,6 @@ void Table::addToTable(string info){
         tableLength++;
     }
 }
-
-
 
 void Table::delRow(string col, string index){
     int rc = 0;
@@ -138,8 +160,6 @@ string Table::createQuery(string col, string op){
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
 
-//    cout << result << endl;
-
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
         *log << tableName << " was accessed.\n";
@@ -150,6 +170,43 @@ string Table::createQuery(string col, string op){
     }
 
     return result;
+}
+
+void Table::exp(string col, string op){
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+
+    string cmd = "SELECT ";
+    cmd += col;
+    cmd += " FROM ";
+    cmd += tableName;
+    if(!op.empty()){
+        cmd += " WHERE ";
+        cmd += op;
+    }
+    cmd += ";";
+    cout << cmd << endl;
+    sql = cmd.c_str();
+
+    ofstream myfile("data.csv");
+    string result;
+    rc = sqlite3_exec(db,sql,cbExp,(void*)&result, &ermsg);
+
+    myfile << result;
+    myfile.close();
+//    cout << rc << endl;
+    if(rc == SQLITE_ERROR){
+        *log << "Error: " << rc;
+        *log << tableName << " was accessed.\n";
+        *log << "...\n";
+        cerr << "no export";
+    }
+    else{
+        cerr << "export";
+        *log << "export.\n";
+    }
+
 }
 
 void Table::updateTable(string index, string op){
@@ -165,13 +222,13 @@ void Table::updateTable(string index, string op){
     cmd += index;
     cmd += ";";
     sql = cmd.c_str();
-    cout << cmd << endl;
+//    cout << cmd << endl;
     string result;
     rc = sqlite3_exec(db,sql,cbUpdate,&result, &ermsg);
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
-        *log << tableName << " was accessed.\n";
+        *log << tableName << " attempted access.\n";
         *log << "Couldn't update.\n";
     }
     else{
@@ -182,6 +239,8 @@ void Table::updateTable(string index, string op){
 void Table::alterTable(string col, string op){
 
 }
+
+void Table::setDimensions(string newD){dimensions = newD;}
 
 //callback methods
 
@@ -249,3 +308,19 @@ int Table::cbAlter(void *data, int argc, char **argv, char **azColName){
     return 0;
 }
 
+int Table::cbExp(void *data, int argc, char **argv, char **azColName){
+    string * myfile = (string*)data;
+    //prints out columns
+    for(int i = 0; i < argc; i++){
+        *myfile += azColName[i];
+        *myfile += ",";
+    }
+    *myfile += "\n";
+    for(int i = 0; i < argc; i++){
+        *myfile += argv[i];
+        *myfile +=  ",";
+        cout << argv[i] << endl;
+    }
+    *myfile += "\n";
+    cout << *myfile << endl;
+}

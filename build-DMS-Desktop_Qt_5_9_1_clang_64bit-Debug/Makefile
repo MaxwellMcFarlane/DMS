@@ -682,7 +682,11 @@ dms.o: ../DMS/dms.cpp ../DMS/dms.h \
 		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dms.o ../DMS/dms.cpp
 
-table.o: ../DMS/table.cpp ../DMS/table.h
+table.o: ../DMS/table.cpp ../DMS/table.h \
+		../tools/macros.h \
+		../tools/config.h \
+		../tools/baseclass.h \
+		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o table.o ../DMS/table.cpp
 
 log.o: ../tools/log.cpp ../tools/log.h \
