@@ -27,10 +27,18 @@ public:
     void addToTable(string info);
     void delRow(string col, string index);
     //provide cols, the table name, and operation
+    //query with delimitter
+    string createQuery(string cmd);     //unfinished
+    bool isQueryEmpty(string cmd);     //unfinished
+    //query without delimitter
     string createQuery(string col, string op);
     void alterTable(string index, string op);
     void updateTable(string col, string op);
-    void exp(string col, string op);
+    void exp(string col, string op, string filePath);
+
+    //clearing function for table so that information doesn't get tangeled
+
+    vector<char*> delimitter(string cmd);
 
     //callback methods
     static int cbAddToTable    (void *data, int argc, char **argv, char **azColName);

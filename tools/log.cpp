@@ -15,21 +15,18 @@
  * @param:std::string fileName, the name of the file, gets stored
 **/
 
-Log::Log() {
-    SHOW_WHERE;
+Log::Log() {    
     this->fileName = "default.txt";
     fh.open(fileName, std::ofstream::app);
 }
 
 
-Log::Log(std::string fileName) {
-    SHOW_WHERE;
+Log::Log(std::string fileName) {    
     this->fileName = fileName;
     fh.open(fileName, std::ofstream::app);
 }
 
-Log::Log(Log &obj) {
-    SHOW_WHERE;
+Log::Log(Log &obj) {    
     this->fileName = obj.fileName;
     fh.open(fileName, std::ofstream::app);
 }

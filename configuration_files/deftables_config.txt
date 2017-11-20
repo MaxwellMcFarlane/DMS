@@ -1,0 +1,12 @@
+HubTable
+(SensorId INTEGER PRIMARY KEY AUTOINCREMENT, HubSN INT NOT NULL, SensorType TEXT);
+(HubSN, SensorType)
+SampleTable
+(SampleIndex INTEGER PRIMARY KEY AUTOINCREMENT, SensorID BLOB NOT NULL,TimeStamp BLOB NOT NULL, RawData BLOB NOT NULL);
+(SensorID,TimeStamp, RawData)
+CalibratedSampleTable
+(SampleIndex INT PRIMARY KEY NOT NULL, CalibrationTimeStamp TEXT NOT NULL, CalVal INT NOT NULL, ModelNumber INT NOT NULL);
+(SampleIndex, CalibrationTimeStamp, CalVal, ModelNumber)
+CalModTable
+(SensorId INT NOT NULL, ModelNumber INT NOT NULL, TYPE TEXT NOT NULL, Coefficient TEXT NOT NULL,PRIMARY KEY(SensorId,ModelNumber));
+(SensorId, ModelNumber, Type, Coefficient)

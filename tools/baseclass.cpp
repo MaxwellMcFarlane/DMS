@@ -12,6 +12,4 @@ baseclass::baseclass()
     // Increment the created object count.
     idCnt++;
 
-    // Be carefull of the ordering here.
-    SHOW_WHERE;
 }

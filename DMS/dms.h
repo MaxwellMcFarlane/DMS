@@ -18,22 +18,20 @@ public:
     DMS();
     DMS(string name);    
     DMS(string name, string dbConfig);
+    DMS(string name, string dbConfig, string logPath);
 
-    //method@1: create table
     void createTable(string tableName);
-    void createTable(string tableName, string dim);
-    //method@2: get table (directly through db)
-    Table* getTable(string tableName);       
-    //method@3: dump table
-    void dumpTable(string tableName);
-    //method@4: rename table
-    void renameTable(string tableName, string newName);
-    //method@5: close database
-    void close();
-    //method@6: close database
+    void createTable(string tableName, string dim);    
+    Table* getTable(string tableName);           
+    void dumpTable(string tableName); 
+    void renameTable(string tableName, string newName);    
+    void close();    
     void checkExist(string tableName);
     Log* getLog();
-    void dumpLog();
+    void getNewLog();
+    void loadDataBase(string  myfile);
+
+    vector<char*> delimitter(string cmd);
 
 private:
 

@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    DMS db("test.db", "../deftables_config.txt");
+    DMS db("test1.db", "../deftables_config.txt");
     DMS *db_pointer=&db;
     Log * log;
     log = db.getLog();
@@ -15,7 +15,8 @@ int main()
     db.getTable("SampleTable")->addToTable("1,'0xf32','2:00',13");
     db.getTable("SampleTable")->addToTable("2,'0xf32','2:23',15");
     db.getTable("SampleTable")->addToTable("3,'0xf32','2:48',11");
-   db.getTable("SampleTable")->addToTable("4,'0xf32','2:80',22");
+
+    db.getTable("SampleTable")->addToTable("4,'0xf32','2:80',22");
 
     //condition queried by modemanager is that rawdata is greater than 30
     string s = db.getTable("SampleTable")->createQuery("RAWDATA","RAWDATA > 30");

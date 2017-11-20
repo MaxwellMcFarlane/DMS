@@ -1,9 +1,6 @@
 #include "table.h"
 
-Table::Table()
-{
-
-}
+Table::Table(){}
 
 Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
     int rc = 0;
@@ -99,7 +96,6 @@ void Table::addToTable(string info){
     cmd += ");";
 
     sql = cmd.c_str();
-//    cout << cmd << endl;
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
@@ -107,7 +103,7 @@ void Table::addToTable(string info){
         if(rc == 19){*log << "Item:" << info << " already exists.\n";}
         *log << " Item could not be inserted.\n";
     }
-    else{        
+    else{
         *log << tableName << ": Item was inserted.\n";
         tableLength++;
     }
@@ -124,7 +120,6 @@ void Table::delRow(string col, string index){
     cmd += " = ";
     cmd += index;
     cmd += ";";
-//    cout << cmd << endl;
 
     sql = cmd.c_str();
 
@@ -137,24 +132,14 @@ void Table::delRow(string col, string index){
     else{
         *log << tableName << " row[ " << index << "] was deleted.\n";
         tableLength--;
-    }    
+    }
 }
 
-string Table::createQuery(string col, string op){
+string Table::createQuery(string cmd){
     int rc = 0;
     char *ermsg = 0;
     const char * sql;
 
-    string cmd = "SELECT ";
-    cmd += col;
-    cmd += " FROM ";
-    cmd += tableName;
-    if(!op.empty()){
-        cmd += " WHERE ";
-        cmd += op;
-    }
-    cmd += ";";
-    cout << cmd << endl;
     sql = cmd.c_str();
 
     string result;
@@ -172,7 +157,7 @@ string Table::createQuery(string col, string op){
     return result;
 }
 
-void Table::exp(string col, string op){
+string Table::createQuery(string col, string op){
     int rc = 0;
     char *ermsg = 0;
     const char * sql;
@@ -186,24 +171,54 @@ void Table::exp(string col, string op){
         cmd += op;
     }
     cmd += ";";
-    cout << cmd << endl;
     sql = cmd.c_str();
 
-    ofstream myfile("data.csv");
+    string result;
+    rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
+
+    if(rc == SQLITE_ERROR){
+        *log << "Error: " << rc;
+        *log << tableName << " was accessed.\n";
+        *log << "Query wasn't created.\n";
+    }
+    else{
+        *log << "Query created.\n";
+    }
+
+    return result;
+}
+
+void Table::exp(string col, string op, string filePath){
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+
+    string cmd = "SELECT ";
+    cmd += col;
+    cmd += " FROM ";
+    cmd += tableName;
+    if(!op.empty()){
+        cmd += " WHERE ";
+        cmd += op;
+    }
+    cmd += ";";
+    sql = cmd.c_str();
+
+    ofstream myfile(filePath);
     string result;
     rc = sqlite3_exec(db,sql,cbExp,(void*)&result, &ermsg);
 
     myfile << result;
     myfile.close();
-//    cout << rc << endl;
+
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
         *log << tableName << " was accessed.\n";
         *log << "...\n";
-        cerr << "no export";
+        cerr << "no export\n";
     }
     else{
-        cerr << "export";
+        cerr << "export\n";
         *log << "export.\n";
     }
 
@@ -222,7 +237,6 @@ void Table::updateTable(string index, string op){
     cmd += index;
     cmd += ";";
     sql = cmd.c_str();
-//    cout << cmd << endl;
     string result;
     rc = sqlite3_exec(db,sql,cbUpdate,&result, &ermsg);
 
@@ -241,6 +255,22 @@ void Table::alterTable(string col, string op){
 }
 
 void Table::setDimensions(string newD){dimensions = newD;}
+
+bool Table::isQueryEmpty(string cmd){
+
+}
+
+vector<char*> Table::delimitter(string cmd){
+    vector<char*> k;
+    char * it;
+    it = strtok((char*)cmd.c_str(), " ");
+    while(it != NULL){
+        k.push_back(it);
+        it = strtok(NULL, " ");
+    }
+
+    return k;
+}
 
 //callback methods
 
@@ -278,11 +308,11 @@ int Table::cbDelRow(void *data, int argc, char **argv, char **azColName){
 
 int Table::cbCreateQuery(void *data, int argc, char **argv, char **azColName){
     int i;
-    string * result = (string *) data;   
+    string * result = (string *) data;
     for(i = 0; i < argc; i++){
         if(argv[i] != NULL){*result += argv[i];}
         if(i < argc-1){*result += "|";}}
-    *result += "\n";    
+    *result += "\n";
     return 0;
 }
 
@@ -311,16 +341,19 @@ int Table::cbAlter(void *data, int argc, char **argv, char **azColName){
 int Table::cbExp(void *data, int argc, char **argv, char **azColName){
     string * myfile = (string*)data;
     //prints out columns
+    static int n = 1;
+    if(n == 1){
+        for(int i = 0; i < argc; i++){
+                if(argv[i] != NULL){*myfile += azColName[i];}
+                if(i < argc-1){*myfile += ",";}
+        }
+        *myfile += "\n";
+        n--;
+    }
     for(int i = 0; i < argc; i++){
-        *myfile += azColName[i];
-        *myfile += ",";
+        if(argv[i] != NULL){*myfile += argv[i];}
+        if(i < argc-1){*myfile +=  ",";}
     }
     *myfile += "\n";
-    for(int i = 0; i < argc; i++){
-        *myfile += argv[i];
-        *myfile +=  ",";
-        cout << argv[i] << endl;
-    }
-    *myfile += "\n";
-    cout << *myfile << endl;
+    return 0;
 }
