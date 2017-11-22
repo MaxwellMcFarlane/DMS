@@ -18,7 +18,7 @@ State State::nextstate(DMS *db){
         //if the condition has been met return the  next state from the branches
         // "RAWDATA","RAWDATA > 30"
         string tmp = db->getTable("SampleTable")->createQuery("RAWDATA",b.condition);
-        if(tmp != "") return *(b.branchState);
+        if(!tmp.empty()) return *(b.branchState);
     }
     return *this;
 }

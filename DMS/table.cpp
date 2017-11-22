@@ -2,7 +2,7 @@
 
 Table::Table(){}
 
-Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
+Table::Table(string tableName, string dim, sqlite3 *db, Log *log){    
     int rc = 0;
     char *ermsg = 0;
     const char * sql;
@@ -30,8 +30,7 @@ Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
     tableLength = 0;
 }
 
-Table::Table(string tableName, sqlite3 *db, Log * log){
-
+Table::Table(string tableName, sqlite3 *db, Log * log){    
     int rc = 0;
     char *ermsg = 0;
     const char * sql;
@@ -206,6 +205,7 @@ void Table::exp(string col, string op, string filePath){
 
     ofstream myfile(filePath);
     string result;
+    headerN++;
     rc = sqlite3_exec(db,sql,cbExp,(void*)&result, &ermsg);
 
     myfile << result;
@@ -250,14 +250,12 @@ void Table::updateTable(string index, string op){
     }
 }
 
-void Table::alterTable(string col, string op){
-
-}
-
 void Table::setDimensions(string newD){dimensions = newD;}
 
 bool Table::isQueryEmpty(string cmd){
-
+    string s = createQuery(cmd);
+    if(s.empty()){return true;}
+    else{return false;}
 }
 
 vector<char*> Table::delimitter(string cmd){
@@ -275,12 +273,15 @@ vector<char*> Table::delimitter(string cmd){
 //callback methods
 
 int Table::cbCreateTable(void *data, int argc, char **argv, char **azColName){
+    Log * log0 = (Log *)data;
     if(argc < 1){
-        cerr << "Table couldn't be created\n";
+        *log0 << "Table couldn't be created\n";
     }
     else{
-        cerr << "Table could be created.\n";
-    }
+        *log0 << "Table could be created.\n";
+    }    
+    (void)argv;
+    (void)azColName;
     return 0;
 }
 
@@ -291,7 +292,9 @@ int Table::cbAddToTable(void *data, int argc, char **argv, char **azColName){
     }
     else{
         *log0 << "Data has been added to table.\n";
-    }
+    }    
+    (void)argv;
+    (void)azColName;
     return 0;
 }
 
@@ -303,6 +306,8 @@ int Table::cbDelRow(void *data, int argc, char **argv, char **azColName){
     else{
         *log0 << "Row was deleted.\n";
     }
+    (void)argv;
+    (void)azColName;
     return 0;
 }
 
@@ -313,6 +318,7 @@ int Table::cbCreateQuery(void *data, int argc, char **argv, char **azColName){
         if(argv[i] != NULL){*result += argv[i];}
         if(i < argc-1){*result += "|";}}
     *result += "\n";
+    (void)azColName;
     return 0;
 }
 
@@ -324,31 +330,22 @@ int Table::cbUpdate(void *data, int argc, char **argv, char **azColName){
     else{
         *log0 << "Table was deleted.\n";
     }
-    return 0;
-}
-
-int Table::cbAlter(void *data, int argc, char **argv, char **azColName){
-    Log * log0 = (Log *)data;
-    if(argc < 1){
-        *log0 << "Table couldn't be altered.\n";
-    }
-    else{
-        *log0 << "Table was altered.\n";
-    }
+    (void)argv;
+    (void)azColName;
     return 0;
 }
 
 int Table::cbExp(void *data, int argc, char **argv, char **azColName){
     string * myfile = (string*)data;
-    //prints out columns
-    static int n = 1;
-    if(n == 1){
+
+    //prints out columns    
+    if(headerN == 1){
         for(int i = 0; i < argc; i++){
                 if(argv[i] != NULL){*myfile += azColName[i];}
                 if(i < argc-1){*myfile += ",";}
         }
         *myfile += "\n";
-        n--;
+        headerN--;
     }
     for(int i = 0; i < argc; i++){
         if(argv[i] != NULL){*myfile += argv[i];}
@@ -357,3 +354,5 @@ int Table::cbExp(void *data, int argc, char **argv, char **azColName){
     *myfile += "\n";
     return 0;
 }
+
+int Table::headerN = 0;

@@ -255,3 +255,7 @@ Error: 19Item:3,'0xf32','2:48',11 already exists.
 SampleTable: Item was inserted.
 Query created.
 Query created.
+
+Tue Nov 21 12:04:31 2017
+DataBase test1.db is opened.
+Unable to open file.

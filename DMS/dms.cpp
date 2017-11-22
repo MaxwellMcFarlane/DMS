@@ -11,7 +11,7 @@ DMS::DMS()
 
 DMS::DMS(string name, string dbConfig){
     int rc = 0;
-    char *ermsg = 0;
+//    char *ermsg = 0;
     time_t now = time(0);
     string dt = ctime(&now);
 
@@ -45,7 +45,7 @@ DMS::DMS(string name, string dbConfig){
 
 DMS::DMS(string name){
     int rc = 0;
-    char *ermsg = 0;
+//    char *ermsg = 0;
     //current time
     time_t now = time(0);
     string dt = ctime(&now);
@@ -64,7 +64,7 @@ DMS::DMS(string name){
 
 DMS::DMS(string name, string dbConfig, string logPath){
     int rc = 0;
-    char *ermsg = 0;
+//    char *ermsg = 0;
     log = new Log(logPath);
     time_t now = time(0);
     string dt = ctime(&now);
@@ -112,6 +112,7 @@ Table* DMS::getTable(string tableName){
         Table * t = sensList.at(i);
         if(tableName == t->getTableName()){return t;}
     }    
+    return 0;
 }
 
 void DMS::dumpTable(string tableName){
@@ -138,9 +139,6 @@ void DMS::dumpTable(string tableName){
         *log << "Table: " << t->getTableName() << " was deleted.\n";
     }
 }
-
-void DMS::checkExist(string tableName){}
-void DMS::renameTable(string tableName, string newName){}
 
 vector<char*> DMS::delimitter(string cmd){
     vector<char*> k;
@@ -188,6 +186,7 @@ int DMS::cbDropTable(void *data, int argc, char **argv, char **azColName){
     int i;
     for(i = 0; i < argc; i++){*log0 << azColName[i] << " ";}
     *log0 << "\n";
+    (void)argv;
     return 0;
 }
 

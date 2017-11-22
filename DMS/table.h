@@ -31,8 +31,7 @@ public:
     string createQuery(string cmd);     //unfinished
     bool isQueryEmpty(string cmd);     //unfinished
     //query without delimitter
-    string createQuery(string col, string op);
-    void alterTable(string index, string op);
+    string createQuery(string col, string op);   
     void updateTable(string col, string op);
     void exp(string col, string op, string filePath);
 
@@ -46,8 +45,7 @@ public:
     static int cbTableSize     (void *data, int argc, char **argv, char **azColName);
     static int cbCreateTable   (void *data, int argc, char **argv, char **azColName);
     static int cbCreateQuery   (void *data, int argc, char **argv, char **azColName);
-    static int cbUpdate        (void *data, int argc, char **argv, char **azColName);
-    static int cbAlter         (void *data, int argc, char **argv, char **azColName);
+    static int cbUpdate        (void *data, int argc, char **argv, char **azColName);    
     static int cbExp           (void *data, int argc, char **argv, char **azColName);
 private:
     string tableName;
@@ -55,6 +53,7 @@ private:
     string dimensions;
     sqlite3 * db;
     Log * log;
+    static int headerN;
 };
 
 #endif // TABLE_H

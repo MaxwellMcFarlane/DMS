@@ -5,6 +5,7 @@
 #include <sqlite3.h>
 #include <vector>
 #include "table.h"
+#include "dmswd.h"
 #include "../tools/macros.h"
 #include "../tools/config.h"
 #include "../tools/baseclass.h"
@@ -23,10 +24,8 @@ public:
     void createTable(string tableName);
     void createTable(string tableName, string dim);    
     Table* getTable(string tableName);           
-    void dumpTable(string tableName); 
-    void renameTable(string tableName, string newName);    
-    void close();    
-    void checkExist(string tableName);
+    void dumpTable(string tableName);     
+    void close();        
     Log* getLog();
     void getNewLog();
     void loadDataBase(string  myfile);
@@ -36,8 +35,7 @@ public:
 private:
 
     //callback methods
-    static int cbDropTable     (void *data, int argc, char **argv, char **azColName);
-    static int cbCheckExist(void *data, int argc, char **argv, char **azColName);
+    static int cbDropTable     (void *data, int argc, char **argv, char **azColName);    
     //used to manipulate table with correct info
     vector <Table*> sensList;
     string filename;

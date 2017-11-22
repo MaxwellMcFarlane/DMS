@@ -19,7 +19,7 @@ int main()
     db.getTable("SampleTable")->addToTable("4,'0xf32','2:80',22");
 
     //condition queried by modemanager is that rawdata is greater than 30
-    string s = db.getTable("SampleTable")->createQuery("RAWDATA","RAWDATA > 30");
+   // string s = db.getTable("SampleTable")->createQuery("RAWDATA","RAWDATA > 30");
 
 
     State s0("IDLE");
