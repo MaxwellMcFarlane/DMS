@@ -11,7 +11,7 @@ DMS::DMS()
 
 DMS::DMS(string name, string dbConfig){
     int rc = 0;
-//    char *ermsg = 0;
+    char *ermsg = 0;
     time_t now = time(0);
     string dt = ctime(&now);
 
@@ -19,6 +19,9 @@ DMS::DMS(string name, string dbConfig){
 
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
+    //allow system to accept foreign keys
+    rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
+    cout << rc << endl;
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
@@ -26,15 +29,19 @@ DMS::DMS(string name, string dbConfig){
         *log <<"Error: " << rc << " has occured.\n";
     }
 
-    string tableName,dimensions;
+    string tableName,dimensions,dummy;
     ifstream myconfig(dbConfig);
 
     if(myconfig.is_open()){
         while(!myconfig.eof()){
+            //searches for the next chunk of text
+            while(tableName.empty()){getline(myconfig,tableName);}
             getline(myconfig,tableName);
-            getline(myconfig,dimensions);
+            //gets the list of dimensions
+            while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
+//            getline(myconfig,dimensions);
             createTable(tableName,dimensions);
-            getline(myconfig,dimensions);            
+            getline(myconfig,dimensions);
             getTable(tableName)->setDimensions(dimensions);
         }
         myconfig.close();
@@ -45,7 +52,7 @@ DMS::DMS(string name, string dbConfig){
 
 DMS::DMS(string name){
     int rc = 0;
-//    char *ermsg = 0;
+    char *ermsg = 0;
     //current time
     time_t now = time(0);
     string dt = ctime(&now);
@@ -54,6 +61,9 @@ DMS::DMS(string name){
 
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
+    //allow system to accept foreign keys
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
+    cout << rc << endl;
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
@@ -62,7 +72,7 @@ DMS::DMS(string name){
     }
 }
 
-DMS::DMS(string name, string dbConfig, string logPath){
+DMS::DMS(string name, string dbConfig, string logPath){    
     int rc = 0;
 //    char *ermsg = 0;
     log = new Log(logPath);
@@ -73,23 +83,35 @@ DMS::DMS(string name, string dbConfig, string logPath){
 
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
+    //allow system to accept foreign keys
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
     else{
         *log <<"Error: " << rc << " has occured.\n";
     }
-
-    string tableName,dimensions;
+    createTable("ConfigFileTable","(configID INTEGER PRIMARY KEY AUTOINCREMENT, Configuration TEXT);");
+    getTable("ConfigFileTable")->setDimensions("Configuration");
+    string tableName,dimensions,dummy;;
     ifstream myconfig(dbConfig);
 
     if(myconfig.is_open()){
         while(!myconfig.eof()){
-            getline(myconfig,tableName);
-            getline(myconfig,dimensions);
+            //searches for the next chunk of text
+            while(tableName.empty()){getline(myconfig,tableName);}
+            //gets the list of dimensions
+            while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
+            //creates table
             createTable(tableName,dimensions);
+            getTable("ConfigFileTable")->addToTable("'" + tableName + " " + dimensions + "'");
             getline(myconfig,dimensions);
+            //sets dimensions to a usable format
             getTable(tableName)->setDimensions(dimensions);
+            //reset parsing variables            
+            tableName = "";
+            dimensions = "";
+            dummy = "";
         }
         myconfig.close();
     }
@@ -161,11 +183,14 @@ void DMS::loadDataBase(string myfilePath){
     string tableName;
     string data;
     if(myfile.is_open()){
-        getline(myfile,tableName);
-        while(!myfile.eof()){
-            getline(myfile,data);
-            getTable(tableName)->addToTable(data);
+        getline(myfile,tableName);                
+        if(getTable(tableName) != 0){
+            while(!myfile.eof()){
+                getline(myfile,data);
+                getTable(tableName)->addToTable(data);
+            }
         }
+        else{*log << "Table Retrieval Error.\n";}
         myfile.close();
         }
     else{*log << "Unable to load data.\n"; cerr << "Unable to open file.\n";}

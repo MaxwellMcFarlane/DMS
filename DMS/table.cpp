@@ -15,7 +15,6 @@ Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
     cmd += "CREATE TABLE ";
     cmd += tableName + " " + dim;
     sql = cmd.c_str();
-
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
@@ -92,14 +91,13 @@ void Table::addToTable(string info){
     cmd+= " " + dimensions;
     cmd+=" VALUES(";
     cmd += info;
-    cmd += ");";
-
+    cmd += ");";   
     sql = cmd.c_str();
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
 
     if(rc != SQLITE_OK){
-        *log << "Error: " << rc;
-        if(rc == 19){*log << "Item:" << info << " already exists.\n";}
+        *log << "Error: " << rc << " in " << tableName << "\n";
+        if(rc == 19){*log << "Item: " << info << " caused a constraint violation.\n";}
         *log << " Item could not be inserted.\n";
     }
     else{

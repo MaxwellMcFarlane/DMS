@@ -29,7 +29,6 @@ public:
     Log* getLog();
     void getNewLog();
     void loadDataBase(string  myfile);
-
     vector<char*> delimitter(string cmd);
 
 private:

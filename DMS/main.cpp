@@ -12,15 +12,18 @@ int main()
 
     DMS db("../scada.db", "../configuration_files/deftables_config.txt","../log.txt");
 
-    db.createTable("SampleTable");
-    db.createTable("HubTable");
-    db.createTable("CalibratedSampleTable");
-    db.createTable("CalModTable");
 
-    db.loadDataBase("../testbench_files/SampleTableTB.txt");
-    db.loadDataBase("../testbench_files/HubTableTB.txt");
-    db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
-    db.loadDataBase("../testbench_files/CalModTableTB.txt");
+    //order is very important here because tables are constrained by others
+    db.loadDataBase("../testbench_files/StateTableTB.txt");
+    db.loadDataBase("../testbench_files/BranchTableTB.txt");
+    db.loadDataBase("../testbench_files/ConditionTableTB.txt");
+
+    db.loadDataBase("../testbench_files/SensorTableTB.txt");
+    db.loadDataBase("../testbench_files/SensorConfTableTB.txt");
+    db.loadDataBase("../testbench_files/CalConfTableTB.txt");
+
+    db.loadDataBase("../testbench_files/SampleTableTB.txt");    
+    db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
     /**SHOW DATABASE**/
 
@@ -52,10 +55,10 @@ int main()
 //    cout<< "\n";
 
 //    db.getTable("SampleTable")->exp("*","","../data.csv");
-    db.getTable("SampleTable")->exp("TimeStamp,RawData","RawData > 200","../data2.csv");
-    db.getTable("HubTable")->exp("*","","../data1.csv");    
+//    db.getTable("SampleTable")->exp("TimeStamp,RawData","RawData > 200","../data2.csv");
+//    db.getTable("HubTable")->exp("*","","../data1.csv");
 
-    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
-    for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
+//    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
+//    for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
     db.close();
 }
