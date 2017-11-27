@@ -9,6 +9,8 @@
 #include <Windows.h>
 #endif
 
+#include <sys/time.h>
+
 static void CCONV ssleep(int);
 
 static void CCONV
@@ -80,7 +82,17 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
 
+	struct timeval stop, start;
+	gettimeofday(&start, NULL);
+	//do stuff
 	printf("Voltage Changed: %.4f\n", voltage);
+	gettimeofday(&stop, NULL);
+	
+	
+	int elapsed = ((stop.tv_sec - start.tv_sec) * 1000000) + (stop.tv_usec - start.tv_usec);
+	printf("time: %d micro seconds\n",elapsed);
+	
+	//printf("took %lu\n", stop.tv_usec - start.tv_usec);
 }
 
 /*
@@ -187,7 +199,7 @@ main(int argc, char **argv) {
 		fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
 		goto done;
 	}
-
+	
 	/*
 	* Open the channel synchronously: waiting a maximum of 5 seconds.
 	*/
@@ -199,6 +211,24 @@ main(int argc, char **argv) {
 			Phidget_getErrorDescription(res, &errs);
 			fprintf(stderr, "failed to open channel:%s\n", errs);
 		}
+		goto done;
+	}
+	
+	
+	unsigned int* DI;
+	res = PhidgetVoltageInput_getDataInterval(ch, DI);
+	if (res != EPHIDGET_OK) {
+		Phidget_getErrorDescription(res, &errs);
+		fprintf(stderr, "failed to get Default DataInterval: %s\n", errs);
+		goto done;
+	}
+	printf("Default DI: %u \n", DI);
+	
+	*DI = 500;
+	res = PhidgetVoltageInput_setDataInterval(ch, *DI);
+	if (res != EPHIDGET_OK) {
+		Phidget_getErrorDescription(res, &errs);
+		fprintf(stderr, "failed to set DataInterval: %s\n", errs);
 		goto done;
 	}
 
