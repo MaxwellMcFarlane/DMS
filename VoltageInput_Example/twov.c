@@ -88,10 +88,19 @@ int main(int argc, char **argv) {
 			Phidget_getErrorDescription(res2, &errs);
 			fprintf(stderr, "read error: %s\n", errs);
 		}
-		Sleep(500);		
+		ssleep(500);		
 	}
 	Phidget_close((PhidgetHandle)ch1);
 	PhidgetVoltageInput_delete(&ch1);
 	Phidget_close((PhidgetHandle)ch2);
 	PhidgetVoltageInput_delete(&ch2);
+}
+
+static void CCONV
+ssleep(int tm) {
+#ifdef _WIN32
+	Sleep(tm * 1000);
+#else
+	sleep(tm);
+#endif
 }
