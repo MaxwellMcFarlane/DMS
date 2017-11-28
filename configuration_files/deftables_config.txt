@@ -41,9 +41,9 @@ SensorTable
 
 SampleTable
 (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 
-	SensorId 	INT,
-	TimeStamp 	TEXT NOT NULL, 
-	RawData 	TEXT NOT NULL, 
+	SensorId 	INTEGER,
+	TimeStamp 	INTEGER NOT NULL, 
+	RawData 	INTEGER NOT NULL, 
 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
 *
 (SensorId,TimeStamp, RawData)
@@ -51,7 +51,7 @@ SampleTable
 CalibratedSampleTable
 (	CalId 		INTEGER PRIMARY KEY AUTOINCREMENT, 
 	SampleId 	INTEGER, 
-	CalTimeStamp 	TEXT NOT NULL, 
+	CalTimeStamp 	INTEGER NOT NULL, 
 	CalVal 		INTEGER NOT NULL, 
 	ModelNumber 	INTEGER NOT NULL, 
 	MarkToDelete 	INTEGER NOT NULL, 
