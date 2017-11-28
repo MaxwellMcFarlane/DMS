@@ -27,10 +27,17 @@ public:
     void addToTable(string info);
     void delRow(string col, string index);
     //provide cols, the table name, and operation
-    string createQuery(string col, string op);
-    void alterTable(string index, string op);
+    //query with delimitter
+    string createQuery(string cmd);     //unfinished
+    bool isQueryEmpty(string cmd);     //unfinished
+    //query without delimitter
+    string createQuery(string col, string op);   
     void updateTable(string col, string op);
-    void exp(string col, string op);
+    void exp(string col, string op, string filePath);
+
+    //clearing function for table so that information doesn't get tangeled
+
+    vector<char*> delimitter(string cmd);
 
     //callback methods
     static int cbAddToTable    (void *data, int argc, char **argv, char **azColName);
@@ -38,8 +45,7 @@ public:
     static int cbTableSize     (void *data, int argc, char **argv, char **azColName);
     static int cbCreateTable   (void *data, int argc, char **argv, char **azColName);
     static int cbCreateQuery   (void *data, int argc, char **argv, char **azColName);
-    static int cbUpdate        (void *data, int argc, char **argv, char **azColName);
-    static int cbAlter         (void *data, int argc, char **argv, char **azColName);
+    static int cbUpdate        (void *data, int argc, char **argv, char **azColName);    
     static int cbExp           (void *data, int argc, char **argv, char **azColName);
 private:
     string tableName;
@@ -47,6 +53,7 @@ private:
     string dimensions;
     sqlite3 * db;
     Log * log;
+    static int headerN;
 };
 
 #endif // TABLE_H
