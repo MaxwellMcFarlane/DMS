@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     ControlSubSystem/branch.cpp \
     ControlSubSystem/state.cpp \
     ../tools/baseclass.cpp \
-    ../tools/log.cpp
+    ../tools/log.cpp \
+    ControlSubSystem/modemanager.cpp
 
 LIBS += -l sqlite3
 
@@ -20,4 +21,5 @@ HEADERS += \
     ControlSubSystem/state.h \
     ../tools/baseclass.h \
     ../tools/log.h \
-    ../tools/macros.h
+    ../tools/macros.h \
+    ControlSubSystem/modemanager.h
