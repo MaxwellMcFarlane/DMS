@@ -125,3 +125,344 @@ Error: 19Item:3,'0xf32','2:48',11 already exists.
 SampleTable: Item was inserted.
 Query created.
 Query created.
+
+Fri Nov 17 03:44:27 2017
+DataBase test.db is opened.
+Unable to open file.
+
+Fri Nov 17 03:46:34 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+
+Fri Nov 17 03:51:40 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 03:52:13 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Query created.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 03:52:47 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+
+Fri Nov 17 03:53:11 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Query created.
+Query created.
+
+Fri Nov 17 03:53:40 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 03:54:15 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 03:54:38 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',22 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 03:55:04 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',64 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 13:10:14 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 13:10:53 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',50 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 13:11:21 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',0 already exists.
+ Item could not be inserted.
+Query created.
+
+Fri Nov 17 13:12:12 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',0 already exists.
+ Item could not be inserted.
+Query created.
+
+Tue Nov 28 01:41:14 2017
+DataBase test.db is opened.
+Error: 1
+Table:HubTable already exists.
+HubTable could not be created.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1
+Table:CalModTable already exists.
+CalModTable could not be created.
+Error: 19Item:1,'0xf32','2:00',13 already exists.
+ Item could not be inserted.
+Error: 19Item:2,'0xf32','2:23',15 already exists.
+ Item could not be inserted.
+Error: 19Item:3,'0xf32','2:48',11 already exists.
+ Item could not be inserted.
+Error: 19Item:4,'0xf32','2:80',0 already exists.
+ Item could not be inserted.
+Query created.
