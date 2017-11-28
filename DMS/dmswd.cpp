@@ -16,7 +16,7 @@ vector<char*> DMSWD::check(){
     string s = dms->getTable(tableTarget)->createQuery(captureCol,lookCol + " > " + value);
     vector<char*> k;
     char * it;
-    it = strtok((char*)cmd.c_str(), " ");
+    it = strtok((char*)s.c_str(), " ");
     while(it != NULL){
         k.push_back(it);
         it = strtok(NULL, " ");

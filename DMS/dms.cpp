@@ -93,7 +93,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
     }
     createTable("ConfigFileTable","(configID INTEGER PRIMARY KEY AUTOINCREMENT, Configuration TEXT);");
     getTable("ConfigFileTable")->setDimensions("Configuration");
-    string tableName,dimensions,dummy;;
+    string tableName,dimensions,dummy;
     ifstream myconfig(dbConfig);
 
     if(myconfig.is_open()){
@@ -172,6 +172,49 @@ vector<char*> DMS::delimitter(string cmd){
     }
 
     return k;
+}
+
+bool DMS::controlQuery(string cmd){    
+    string tableName, col, sql;
+    vector<char*> list;
+    char * t;
+    t = strtok((char*)cmd.c_str(), ", ");
+    while(t != NULL){
+        list.push_back(t);
+        t = strtok(NULL, ", ");
+    }
+    tableName = (string)list.at(6);
+    col = (string)list.at(4);
+
+    sql = "select " + col + " from " + tableName + " where ";
+//    for(int i = 0; i < (int)list.size() ; i ++){cout << list.at(i) << endl;}
+    for(int i = 8; i < (int)list.size() ; i ++){sql +=  (string)list.at(i) + " ";}
+
+    if((string)list.at(0) != "null"){
+        string sensors = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where SensorType = " + (string)list.at(0) + ";");
+        vector<char*> sensorlist;
+        char * it;
+        it = strtok((char*)sensors.c_str(), "\n");
+        while(it != NULL){
+            sensorlist.push_back(it);
+            it = strtok(NULL, "\n");
+        }
+        for(int i = 0; i < (int)sensorlist.size(); i++){
+            if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = " + sensorlist.at(i) + ";")){return true;}
+        }
+        return false;
+    }
+    else if((string)list.at(1) != "null" && (string)list.at(2) != "null"){
+        string sensor = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where hubid = " + (string)list.at(1)
+                                                              + " and  portnumber = " + (string)list.at(2) + ";");
+        char * it;
+        it = strtok((char*)sensor.c_str(), "\n");
+        sensor = (string)it;
+        if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = " + sensor + ";")){return true;}
+        return false;
+    }
+    else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
+
 }
 
 Log* DMS::getLog(){return log;}
