@@ -93,7 +93,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
     }
     createTable("ConfigFileTable","(configID INTEGER PRIMARY KEY AUTOINCREMENT, Configuration TEXT);");
     getTable("ConfigFileTable")->setDimensions("Configuration");
-    string tableName,dimensions,dummy;;
+    string tableName,dimensions,dummy;
     ifstream myconfig(dbConfig);
 
     if(myconfig.is_open()){
@@ -172,6 +172,28 @@ vector<char*> DMS::delimitter(string cmd){
     }
 
     return k;
+}
+
+bool DMS::controlQuery(string cmd){
+//    vector<char*> condition;
+//    condition = delimitter(cmd);
+//    if(condition.at(0) != "NULL"){
+//        string sensors = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where SensorType = " + condition.at(0));
+//        vector<char*> sensorlist;
+//        char * it;
+//        it = strtok((char*)sensors.c_str(), " ");
+//        while(it != NULL){
+//            sensorlist.push_back(it);
+//            it = strtok(NULL, " ");
+//        }
+
+////        for(int i = 0; i < (int)sensorlist.size(); i++){
+////            getTable("")
+////        }
+//    }
+//    else if(condition.at(1) != "NULL" && condition.at(2) != "NULL"){}
+//    else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
+
 }
 
 Log* DMS::getLog(){return log;}

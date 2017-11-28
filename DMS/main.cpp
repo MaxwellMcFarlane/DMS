@@ -47,12 +47,12 @@ int main()
 //    cout<< "All sensors, rawdata, and caldata" << endl;
 //    cout << db.getTable("SampleTable")->createQuery("SensorID,TimeStamp,RAWDATA", "")<< endl;
 //    cout<< "\n";
-//    cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
-//    cout << db.getTable("SampleTable")->createQuery("MAX(SensorID)", "")<< endl;
-//    cout<< "\n";
-//    cout<< "Largest Rawdata point with time" << endl;
-//    cout << db.getTable("SampleTable")->createQuery("TimeStamp,MAX(RAWDATA)", "")<< endl;
-//    cout<< "\n";
+    cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
+    cout << db.getTable("SampleTable")->createQuery("MAX(SensorID)", "")<< endl;
+    cout<< "\n";
+    cout<< "Largest Rawdata point with time" << endl;
+    cout << db.getTable("SampleTable")->createQuery("TimeStamp,MAX(RAWDATA)", "")<< endl;
+    cout<< "\n";
 
 //    db.getTable("SampleTable")->exp("*","","../data.csv");
 //    db.getTable("SampleTable")->exp("TimeStamp,RawData","RawData > 200","../data2.csv");

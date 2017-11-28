@@ -5,7 +5,6 @@
 #include <sqlite3.h>
 #include <vector>
 #include "table.h"
-#include "dmswd.h"
 #include "../tools/macros.h"
 #include "../tools/config.h"
 #include "../tools/baseclass.h"
@@ -23,13 +22,14 @@ public:
 
     void createTable(string tableName);
     void createTable(string tableName, string dim);    
-    Table* getTable(string tableName);           
-    void dumpTable(string tableName);     
+    Table* getTable(string tableName);
+    void dumpTable(string tableName);
     void close();        
     Log* getLog();
     void getNewLog();
     void loadDataBase(string  myfile);
-    vector<char*> delimitter(string cmd);
+    vector<char*> delimitter(string cmd);    
+    bool controlQuery(string cmd);
 
 private:
 
