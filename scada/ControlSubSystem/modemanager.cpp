@@ -70,7 +70,7 @@ void ModeManager::configure(){
                     else{
                         Branch tempBranch(&to, branchLine[2]);
                         from.loadBranch(tempBranch);
-                        cout<<"CFG: A Branch from State " + from.name +" to State " +tempBranch.branchState->name+" with the condition '"+tempBranch.condition+"' has been successfully loaded!\n";
+                        cout<<"CFG: A Branch from State " + from.name +" to State " +tempBranch.branchState->name+" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
 
                     }
 
@@ -88,9 +88,11 @@ string  ModeManager::getCurrentState(){
     return this->currentState->name;
 }
 
-void ModeManager::nextstate(){
+void ModeManager::nextstate(DMS* db){
 
-
+    //State temp=this->currentState->nextstate(db);
+//    cout<< this->currentState->name+"\n";
+//    this->currentState=&temp;
 }
 
 vector<string> ModeManager::split(const string s, char delimiter)
