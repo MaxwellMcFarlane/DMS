@@ -83,11 +83,13 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-
-	
-	printf("Voltage Changed: %.4f\n", voltage);
+	int hubSN = -1;
+	int hubPort = -1;
+	Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
+	Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
+	printf("Voltage Changed: %.4f %d %d \n", voltage, hubSN, hubPort);
 	char vbuff[100];
-	snprintf(vbuff, 100, "%f", voltage);
+	snprintf(vbuff, 100, "%d, %d, %f", hubSN, hubPort, voltage);
 	strcat(ctx, vbuff);
 	strcat(ctx, "\n");
 }
@@ -212,7 +214,6 @@ main(int argc, char **argv) {
 		}
 		goto done;
 	}
-	
 	
 	unsigned int* DI;
 	res = PhidgetVoltageInput_getDataInterval(ch, DI);

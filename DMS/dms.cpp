@@ -200,7 +200,6 @@ bool DMS::controlQuery(string cmd){
             it = strtok(NULL, "\n");
         }        
         for(int i = 0; i < (int)sensorlist.size(); i++){
-            cout << sql + " and sensorid = " + sensorlist.at(i) + ";" << endl;
             if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = '" + sensorlist.at(i) + "';")){return true;}
         }
         return false;
