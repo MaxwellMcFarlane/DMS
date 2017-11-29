@@ -16,10 +16,10 @@ public:
     vector<State> states;
     State* currentState;
     ModeManager(string fileName);
-    State* getState(string name);
+    State getState(string name);
     void configure();
     string  getCurrentState();
-    void reconfigure();
+    void nextstate();
     ~ModeManager();
     vector<string> split(const string s, char delimiter);
 
