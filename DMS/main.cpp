@@ -22,8 +22,8 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 60") << endl;
-    cout << db.controlQuery("null : 		3890: 		4: 		Select RawData from SampleTable where RawData < 30") << endl;
+    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 0") << endl;
+    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 
     /**SHOW DATABASE**/
 

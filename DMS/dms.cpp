@@ -187,7 +187,7 @@ bool DMS::controlQuery(string cmd){
     col = (string)list.at(4);
 
     sql = "select " + col + " from " + tableName + " where ";
-    for(int i = 0; i < (int)list.size() ; i ++){cout << list.at(i) << endl;}
+//    for(int i = 0; i < (int)list.size() ; i ++){cout << list.at(i) << endl;}
     for(int i = 8; i < (int)list.size() ; i ++){sql +=  (string)list.at(i) + " ";}
 
     if((string)list.at(0) != "null"){
@@ -200,19 +200,18 @@ bool DMS::controlQuery(string cmd){
             it = strtok(NULL, "\n");
         }        
         for(int i = 0; i < (int)sensorlist.size(); i++){
-            if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = " + sensorlist.at(i) + ";")){return true;}
+            cout << sql + " and sensorid = " + sensorlist.at(i) + ";" << endl;
+            if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = '" + sensorlist.at(i) + "';")){return true;}
         }
         return false;
     }
-    else if((string)list.at(1) != "null" && (string)list.at(2) != "null"){
-        cout << "Select SensorId from SensorTable where hubid = " + (string)list.at(1)
-                + " and  portnumber = " + (string)list.at(2) + ";" << endl;
+    else if((string)list.at(1) != "null" && (string)list.at(2) != "null"){       
         string sensor = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where hubid = " + (string)list.at(1)
                                                               + " and  portnumber = " + (string)list.at(2) + ";");
         char * it;
         it = strtok((char*)sensor.c_str(), "\n");
         sensor = (string)it;        
-        if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = " + sensor + ";")){return true;}
+        if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = '" + sensor + "';")){return true;}
         return false;
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
