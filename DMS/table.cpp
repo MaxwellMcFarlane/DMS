@@ -92,7 +92,8 @@ void Table::addToTable(string info){
     cmd+=" VALUES(";
     cmd += info;
     cmd += ");";   
-    sql = cmd.c_str();
+    sql = cmd.c_str();    
+
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
 
     if(rc != SQLITE_OK){

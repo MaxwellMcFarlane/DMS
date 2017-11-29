@@ -8,11 +8,8 @@ using namespace std;
 
 int main()
 {
-    /**LOADDATABASE**/
-
+    /**LOADDATABASE**/    
     DMS db("../scada.db", "../configuration_files/deftables_config.txt","../log.txt");
-
-
     //order is very important here because tables are constrained by others
     db.loadDataBase("../testbench_files/StateTableTB.txt");
     db.loadDataBase("../testbench_files/BranchTableTB.txt");
@@ -25,8 +22,8 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    cout << db.controlQuery("'volt', 		null, 		null, 		Select RawData from SampleTable where RawData > 1000") << endl;
-    cout << db.controlQuery(" null , 		3890 , 		1 , 		Select RawData from SampleTable where RawData < 3") << endl;
+    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 60") << endl;
+    cout << db.controlQuery("null : 		3890: 		4: 		Select RawData from SampleTable where RawData < 30") << endl;
 
     /**SHOW DATABASE**/
 
