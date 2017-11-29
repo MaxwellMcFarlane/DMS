@@ -6,7 +6,6 @@
 #include <vector>
 #include "table.h"
 #include "../tools/macros.h"
-#include "../tools/config.h"
 #include "../tools/baseclass.h"
 #include "../tools/log.h"
 

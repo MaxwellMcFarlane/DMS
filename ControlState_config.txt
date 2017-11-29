@@ -6,8 +6,8 @@
 'Jump'w
 'Shout'
 #BRANCHES
-'Idle'	,	'Run', 		'volt' , 		null , 		null , 		Select RawData from SampleTable where RawData > 60
-'Run'	,	'Shout', 	'volt' , 		null , 		null , 		Select RawData from SampleTable where RawData > 100
-'Shout',	'Warn', 	'amp' , 		null , 		null , 		Select RawData from SampleTable where RawData > 120
-'Warn',		'Run', 		 null , 		3890 , 		1 , 		Select RawData from SampleTable where RawData > 140
-'Run',		'Run', 		 null , 		3890 , 		4 , 		Select RawData from SampleTable where RawData < 30
+'Idle'	,	'Run', 		'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 60
+'Run'	,	'Shout', 	'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 100
+'Shout',	'Warn', 	'amp' : 		null: 		null: 		Select RawData from SampleTable where RawData > 120
+'Warn',		'Run', 		 null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 140
+'Run',		'Run', 		 null : 		3890: 		4: 		Select RawData from SampleTable where RawData < 30

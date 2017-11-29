@@ -31,17 +31,17 @@ CalConfTable
 (StateId, Type, Coefficient)
 
 SensorTable
-(	SensorId 	INTEGER PRIMARY KEY AUTOINCREMENT, 
+(	SensorId 	TEXT PRIMARY KEY, 
 	HubID 		INT NOT NULL, 
 	PortNumber 	INT NOT NULL, 
 	SensorType 	TEXT,
 	UNIQUE (HubID, PortNumber));
 *
-(HubID, PortNumber, SensorType)
+(SensorId, HubID, PortNumber, SensorType)
 
 SampleTable
 (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 
-	SensorId 	INTEGER,
+	SensorId 	TEXT,
 	TimeStamp 	INTEGER NOT NULL, 
 	RawData 	INTEGER NOT NULL, 
 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
@@ -62,7 +62,7 @@ CalibratedSampleTable
 SensorConfTable
 (	SensorConfId	INTEGER PRIMARY KEY AUTOINCREMENT,
 	StateId		INTEGER,
-	SensorId	INTEGER,
+	SensorId	TEXT,
 	SampleRate	INTEGER NOT NULL,
 	Priority	INTEGER,
 	MaxValue	INTEGER,
