@@ -12,7 +12,7 @@
  * this program allows the user to switch between append mode and truncate mode
  * so that no information is not permanently lost while the program is running.
  * <p>
- * @param:std::string fileName, the name of the file, gets stored
+ * @param:std::string fileName, the name of the file, getState stored
 **/
 
 Log::Log() {    

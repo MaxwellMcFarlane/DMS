@@ -15,7 +15,7 @@ class State{
      vector<Branch> branches;
      int numOfBranches;
      State(string name);
-     void loadBranches(Branch branch);
+     void loadBranch(Branch branch);
      State nextstate(DMS *db);
      ~State();
 

@@ -37,7 +37,7 @@ DMS::DMS(string name, string dbConfig){
             //searches for the next chunk of text
             while(tableName.empty()){getline(myconfig,tableName);}
             getline(myconfig,tableName);
-            //gets the list of dimensions
+            //getState the list of dimensions
             while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
 //            getline(myconfig,dimensions);
             createTable(tableName,dimensions);
@@ -100,7 +100,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
         while(!myconfig.eof()){
             //searches for the next chunk of text
             while(tableName.empty()){getline(myconfig,tableName);}
-            //gets the list of dimensions
+            //getState the list of dimensions
             while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
             //creates table
             createTable(tableName,dimensions);
