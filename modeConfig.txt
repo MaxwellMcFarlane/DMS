@@ -1,6 +1,5 @@
 #STATE
 STATES:
-‘IDLE’,’RUN’,’STOP’
+IDLE,RUN,STOP
 BRANCHES:
-‘IDLE’,’RUN’,'volt’:null:null:Select RawData from SampleTable where RawData > 0
-‘IDLE’,’STOP’,’LAUGH OUT LOUD’
+IDLE,RUN,'volt':null:null:Select RawData from SampleTable where RawData < 0
