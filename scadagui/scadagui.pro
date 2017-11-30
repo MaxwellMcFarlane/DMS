@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-11-28T18:02:34
+# Project created by QtCreator 2017-11-29T17:52:43
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = scada_frontend
+TARGET = scadagui
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,10 +25,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp\
+    ../DMS/dms.cpp \
+    ../DMS/dmswd.cpp \
+    ../DMS/table.cpp \
+    ../tools/baseclass.cpp \
+    ../tools/log.cpp \
+    exportwindow.cpp \
+    tableeditwindow.cpp
+
+LIBS += -l sqlite3
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h\
+    ../DMS/dms.h \
+    ../DMS/dmswd.h \
+    ../DMS/table.h \
+    ../tools/baseclass.h \
+    ../tools/log.h \
+    ../tools/macros.h \
+    exportwindow.h \
+    tableeditwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    exportwindow.ui \
+    tableeditwindow.ui

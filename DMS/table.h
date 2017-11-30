@@ -32,8 +32,7 @@ public:
     //query without delimitter
     string createQuery(string col, string op);   
     void updateTable(string col, string op);
-    void exp(string col, string op, string filePath);
-
+    void exp(string col, string op, string filePath);    
     //clearing function for table so that information doesn't get tangeled
 
     vector<char*> delimitter(string cmd);

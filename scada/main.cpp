@@ -11,6 +11,10 @@ using namespace std;
 
 int main()
 {
+
+    ModeManager m("../ControlState_config.txt");
+    cout << "Mode Manager Configured" << endl;
+
     DMS db("../scada.db","../configuration_files/deftables_config.txt","../log.txt");
     db.loadDataBase("../testbench_files/StateTableTB.txt");
     db.loadDataBase("../testbench_files/BranchTableTB.txt");
@@ -25,6 +29,7 @@ int main()
     //cout << db.controlQuery("'volt':null:null:Select RawData from SampleTable where RawData > 0");
     //cout << db.getTable("SampleTable")->isQueryEmpty("Select * from SampleTable");
     ModeManager m("../modeConfig.txt");
+
     m.configure();
     DMS *dbp=&db;
     cout<<m.currentState<<endl;
