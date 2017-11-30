@@ -19,7 +19,7 @@ public:
     State getState(string name);
     void configure();
     string  getCurrentState();
-    void nextstate();
+    void nextstate(DMS *db);
     ~ModeManager();
     vector<string> split(const string s, char delimiter);
 
