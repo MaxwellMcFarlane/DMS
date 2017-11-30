@@ -31,18 +31,15 @@ void ModeManager::configure(){
 
     string stateDeclaration("STATES:");
     string branchDeclaration("BRANCHES:");
-    string line;
+    string line;    
     while (!file.eof())
     {
         getline(file,line);
-
-        //cout<<"haha\n";
-
         if(line.at(0) == '#'){
-            //meant for comments
+            //meant for comments            
         }
         else if (line.find(stateDeclaration) != std::string::npos) {
-            getline(file,line);
+            getline(file,line);  
             vector<string > stateLine= ModeManager::split(line,',');
             for(string s: stateLine){
                 State tempState(s);
@@ -50,14 +47,10 @@ void ModeManager::configure(){
                 this->states.push_back(tempState);
             }
         }
-
-
         if (line.find(branchDeclaration) != std::string::npos) {
-
-
             while(!file.eof()){
-                getline(file,line);
-                vector<string > branchLine= ModeManager::split(line,',');
+                getline(file,line);                
+                vector<string> branchLine= ModeManager::split(line,',');
                 State from= ModeManager::getState(branchLine[0]);
                 if(!from.name.compare("NULL")){
                     cout<<"CFG: State " + branchLine[0] + " is not in your state declaration!\n";
@@ -99,7 +92,7 @@ vector<string> ModeManager::split(const string s, char delimiter)
     string token;
     istringstream tokenStream(s);
     while (getline(tokenStream, token, delimiter))
-    {
+    {        
         tokens.push_back(token);
     }
     return tokens;

@@ -11,7 +11,8 @@ using namespace std;
 
 int main()
 {
-    ModeManager m("../modeConfig.txt");
+    ModeManager m("../ControlState_config.txt");
+    cout << "Mode Manager Configured" << endl;
     m.configure();
 
     return 0;
