@@ -2,5 +2,4 @@
 STATES:
 IDLE,RUN,STOP
 BRANCHES:
-IDLE,RUN,LAUGH OUT LOUD
-IDLE,STOP,LAUGH OUT LOUD
+IDLE,RUN,'volt':null:null:Select RawData from SampleTable where RawData < 0

@@ -29,11 +29,16 @@ public:
     void loadDataBase(string  myfile);
     vector<char*> delimitter(string cmd);    
     bool controlQuery(string cmd);
+    string getTableHeaders(string tableName);
+    vector<Table*> getTableList();
+    void loadConfigTable();
+    bool isSensorExist(string sensorName);
 
 private:
 
     //callback methods
-    static int cbDropTable     (void *data, int argc, char **argv, char **azColName);    
+    static int cbDropTable           (void *data, int argc, char **argv, char **azColName);
+    static int cbgetTableHeaders     (void *data, int argc, char **argv, char **azColName);
     //used to manipulate table with correct info
     vector <Table*> sensList;
     string filename;

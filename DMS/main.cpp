@@ -22,8 +22,8 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 0") << endl;
-    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
+//    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 0") << endl;
+//    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 
     /**SHOW DATABASE**/
 
@@ -47,12 +47,12 @@ int main()
 //    cout<< "All sensors, rawdata, and caldata" << endl;
 //    cout << db.getTable("SampleTable")->createQuery("SensorID,TimeStamp,RAWDATA", "")<< endl;
 //    cout<< "\n";
-    cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
-    cout << db.getTable("SampleTable")->createQuery("MAX(SensorID)", "")<< endl;
-    cout<< "\n";
-    cout<< "Largest Rawdata point with time" << endl;
-    cout << db.getTable("SampleTable")->createQuery("TimeStamp,MAX(RAWDATA)", "")<< endl;
-    cout<< "\n";
+//    cout<< "All last id" << endl; //assuming that id order is shown in value, least to greatest
+//    cout << db.getTable("SampleTable")->createQuery("MAX(SensorID)", "")<< endl;
+//    cout<< "\n";
+//    cout<< "Largest Rawdata point with time" << endl;
+//    cout << db.getTable("SampleTable")->createQuery("TimeStamp,MAX(RAWDATA)", "")<< endl;
+//    cout<< "\n";
 
 //    db.getTable("SampleTable")->exp("*","","../data.csv");
 //    db.getTable("SampleTable")->exp("TimeStamp,RawData","RawData > 200","../data2.csv");
@@ -60,5 +60,8 @@ int main()
 
 //    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
 //    for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
+//    cout << db.getTableHeaders("SensorTable") << endl;
+    db.loadConfigTable();
+//    cout<< db.isSensorExist("'s0'") << endl;
     db.close();
 }
