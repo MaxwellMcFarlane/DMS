@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-Sensor::Sensor(int a)
+Sensor::Sensor()
 {
 
 }
