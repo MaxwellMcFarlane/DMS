@@ -1,6 +1,5 @@
 
 Thu Nov 23 13:34:19 2017
-DataBase ../scada.db is opened.
 StateTable was created.
 Dimensions: (	StateId		INTEGER PRIMARY KEY AUTOINCREMENT, 	StateName 	TEXT UNIQUE NOT NULL);
 BranchTable was created.
