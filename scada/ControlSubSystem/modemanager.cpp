@@ -3,6 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+
+ModeManager::ModeManager(){}
+
 ModeManager::ModeManager(string fileName)
 {
     this->fileName=fileName;
@@ -16,7 +19,9 @@ ModeManager::~ModeManager()
 
 State ModeManager::getState(string name){
     for(State s: this->states){
-        if(!s.name.compare(name)){
+//        cout << s.name << endl;
+//        cout << name << endl;
+        if(strcmp(s.name.c_str(),name.c_str()) == 0){
             return s;
         }
     }
