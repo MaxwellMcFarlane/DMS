@@ -32,18 +32,22 @@ int main()
 
     m.configure();
     DMS *dbp=&db;
+    cout<<m.currentState<<endl;
     m.nextstate(dbp);
+//    cout<<m.currentState<<endl;
 
-    State s1("STOP");
-    State s2("RUN");
+        //test for transition
+//            State s1("IDLE");
+//            State s2("RUN");
+//            State s3("FINISH");
 
-    Branch b1(&s2,"2");
-    Branch b2(&s1,"1");
+//            Branch b1(s2,"'volt':null:null:Select RawData from SampleTable where RawData <0");
+//            Branch b2(s3,"'volt':null:null:Select RawData from SampleTable where RawData <60");
 
-    s1.loadBranch(b1);
-    s2.loadBranch(b2);
+//            s1.loadBranch(b1);
+//            s1.loadBranch(b2);
+//            //cout<<s1.numOfBranches;
+//            cout<<"Next state is: "+s1.nextstate(dbp)->name<<endl;
 
-    cout<<s1.nextstate(1)->name<<endl;
-
-    return 0;
+//    return 0;
 }

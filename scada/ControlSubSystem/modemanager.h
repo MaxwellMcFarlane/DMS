@@ -14,12 +14,12 @@ class ModeManager
 public:
     string fileName;
     vector<State> states;
-    State* currentState;
+    string currentState;
     ModeManager(string fileName);
     ModeManager();
     State getState(string name);
     void configure();
-    string  getCurrentState();
+    string  getCurrentStateName();
     void nextstate(DMS *db);
     ~ModeManager();
     vector<string> split(const string s, char delimiter);
