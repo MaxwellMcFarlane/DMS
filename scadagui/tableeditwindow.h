@@ -4,7 +4,18 @@
 #include "../DMS/dms.h"
 #include "../DMS/table.h"
 #include <QWidget>
-
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QProgressBar>
+#include <QWidget>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QProgressBar>
+#include "../scada/ControlSubSystem/branch.h"
+#include "../scada/ControlSubSystem/modemanager.h"
+#include "../scada/ControlSubSystem/state.h"
 namespace Ui {
 class tableEditWindow;
 }
@@ -18,12 +29,17 @@ public:
     explicit tableEditWindow(QWidget *parent = 0, DMS * db = 0);
     ~tableEditWindow();
 
-private slots:
-    void on_pushButton_clicked();
+private slots:    
 
     void on_listWidget_itemSelectionChanged();
 
+    void on_Savebutton_clicked();
+
+    void on_Previewbutton_clicked();
+
 private:
+
+    bool checkModeManagerConfigure(string file);
     Ui::tableEditWindow *ui;
     DMS * db;
 };

@@ -4,6 +4,7 @@
 #include "../DMS/table.h"
 #include <QWidget>
 #include <QKeyEvent>
+#include <QFileDialog>
 
 namespace Ui {
 class ExportWindow;

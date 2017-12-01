@@ -8,9 +8,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);    
-    db = new DMS("/Users/maxwellmcfarlane/scada_repo/scada.db", "/Users/maxwellmcfarlane/scada_repo/configuration_files/deftables_config.txt","/Users/maxwellmcfarlane/scada_repo/log.txt");
-    ui->SensorArch->setText(QString::fromStdString(db->getTableHeaders("SensorTable") + "\n" + db->getTable("SensorTable")->createQuery("Select * from SensorTable")));
-    ui->StateArch->setText(QString::fromStdString(db->getTableHeaders("StateTable") + "\n" + db->getTable("StateTable")->createQuery("Select * from StateTable")));
+    db = new DMS("/Users/maxwellmcfarlane/scada_repo/scada.db",
+                 "/Users/maxwellmcfarlane/scada_repo/configuration_files/deftables_config.txt",
+                 "/Users/maxwellmcfarlane/scada_repo/log.txt");    
+    ui->SensorArch->setText(QString::fromStdString(db->getTableHeaders("SensorTable")
+                                                   + "\n"
+                                                   + db->getTable("SensorTable")->createQuery("Select * from SensorTable")));
+    ui->StateArch->setText(QString::fromStdString(db->getTableHeaders("StateTable")
+                                                  + "\n"
+                                                  + db->getTable("StateTable")->createQuery("Select * from StateTable")));
 }
 
 MainWindow::~MainWindow()

@@ -21,18 +21,21 @@ public:
 
     void createTable(string tableName);
     void createTable(string tableName, string dim);    
+
     Table* getTable(string tableName);
     void dumpTable(string tableName);
     void close();        
     Log* getLog();
     void getNewLog();
-    void loadDataBase(string  myfile);
+
     vector<char*> delimitter(string cmd);    
     bool controlQuery(string cmd);
     string getTableHeaders(string tableName);
     vector<Table*> getTableList();
-    void loadConfigTable();
-    bool isSensorExist(string sensorName);
+
+    void loadDataBase(string  myfile);
+    void loadConfigTable(string fileName , string myfile);
+    bool isSensorExist(string sensorName);    
 
 private:
 
@@ -45,6 +48,8 @@ private:
     Table lookup;
     sqlite3 *db;
     Log * log = new Log("log.txt");
+
+    static int n;
 
 };
 

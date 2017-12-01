@@ -22,9 +22,6 @@ ExportWindow::ExportWindow(QWidget *parent, DMS *db):
 }
 
 
-
-
-
 ExportWindow::~ExportWindow()
 {
     delete ui;
@@ -60,13 +57,16 @@ void ExportWindow::on_Preview_clicked()
     }
 }
 
-void ExportWindow::on_Export_clicked(){
+void ExportWindow::on_Export_clicked(){    
     string columnSelect = ui->ColumnEdit->text().toStdString();
-    string condition = ui->ConditionEdit->text().toStdString();
-    string filePath = ui->FilePath->text().toStdString();
-    if(filePath.empty()){filePath = "export.csv";}
-    QListWidgetItem * dummy = ui->listWidget->currentItem();
-    string table = dummy->text().toStdString();
-    if(!columnSelect.empty()){db->getTable(table)->exp(columnSelect,condition,filePath);}
-    else{ui->TableExportView->setText(QString::fromStdString("Bad Constraints"));}
+    string condition = ui->ConditionEdit->text().toStdString();        
+    if(!columnSelect.empty()){
+        QString fileName  = QFileDialog::getSaveFileName(this,tr("Export File"),"/");
+        string filePath = fileName.toStdString();
+        QListWidgetItem * dummy = ui->listWidget->currentItem();
+        string table = dummy->text().toStdString();
+        db->getTable(table)->exp(columnSelect,condition,filePath);
+        close();
+    }
+    else{ui->TableExportView->setText(QString::fromStdString("Bad Constraints"));}    
 }
