@@ -15,7 +15,8 @@ ModeManager::~ModeManager()
 }
 
 State ModeManager::getState(string name){
-    for(State s: this->states){
+
+    for(State s: states){
 
         if(!s.name.compare(name)){
             //State *p=&s;
@@ -29,77 +30,100 @@ State ModeManager::getState(string name){
 
 void ModeManager::configure(){
     ifstream file;
+    int lineCount=0;
     file.open(fileName.c_str());
-    if (!file)
+    log->trunc_file();
+    if (!file){
         cout<<"CFG: File " + fileName + " couldn't be found!\n";
-    int i=0;
+        *log<<"CFG: File " + fileName + " couldn't be found!\n";
+    }
     string stateDeclaration("STATES:");
     string branchDeclaration("BRANCHES:");
-    string line;    
+    string line;
     while (!file.eof())
     {
+        lineCount++;
         getline(file,line);
+
         if(line.at(0) == '#'){
-            //meant for comments            
+            // # is for commenting
+
         }
         else if (line.find(stateDeclaration) != std::string::npos) {
-            getline(file,line);  
+            getline(file,line);
             vector<string > stateLine= ModeManager::split(line,',');
             for(string s: stateLine){
                 State tempState(s);
                 cout<<"CFG: State " +tempState.name + " has been successfully created!\n";
-                this->states.push_back(tempState);
+
+                states.push_back(tempState);
             }
         }
+
+
         if (line.find(branchDeclaration) != std::string::npos) {
-<<<<<<< HEAD
 
-            while(!file.eof()){
+            while(!file.eof()) {
+                lineCount++;
                 getline(file,line);
-                vector<string > branchLine= ModeManager::split(line,',');
-                string from=ModeManager::getState(branchLine[0]).name;
+                if(line.at(0) == '#'){
+                    // # is for commenting
 
-                if(!from.compare("NULL")){
-=======
-            while(!file.eof()){
-                getline(file,line);                
-                vector<string> branchLine= ModeManager::split(line,',');
-                State from= ModeManager::getState(branchLine[0]);
-                if(!from.name.compare("NULL")){
->>>>>>> refs/remotes/origin/master
-                    cout<<"CFG: State " + branchLine[0] + " is not in your state declaration!\n";
                 }
                 else{
-                    string to= ModeManager::getState(branchLine[1]).name;
-                    if(!to.compare("NULL")){
-                        cout<<"CFG: File " + branchLine[1] + " is not in your state declaration!\n";
+                    lineCount++;
+                    vector<string > branchLine= ModeManager::split(line,',');
+                    if(branchLine.size()>3){
+                        cout<<"CFG_ERROR: In line number "<<lineCount<<" you gave "<<branchLine.size() <<" parameters. The branch declaration is expecting 3 parameters: STATE_FROM,STATE_TO,CONDITION!"<<"\n";
+                        *log<<"\n";
                     }
                     else{
-                        Branch tempBranch(ModeManager::getState(branchLine[1]), branchLine[2]);
-                        ModeManager::getState(branchLine[0]).loadBranch(tempBranch);
-                        cout<<"CFG: A Branch from State " + from +" to State " + to +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
+                        string from=ModeManager::getState(branchLine[0]).name;
+
+                        if(!from.compare("NULL")){
+                            cout<<"CFG_ERROR: State " + branchLine[0] + " is not in your state declaration!\n";
+                            *log<<"CFG_ERROR: State " + branchLine[0] + " is not in your state declaration!\n";
+                        }
+                        else{
+                            string to= ModeManager::getState(branchLine[1]).name;
+                            if(!to.compare("NULL")){
+                                cout<<"CFG_ERROR: File " + branchLine[1] + " is not in your state declaration!\n";
+                                *log<<"CFG_ERROR: File " + branchLine[1] + " is not in your state declaration!\n";
+
+                            }
+                            else{
+                                Branch tempBranch( getState( branchLine[1]), branchLine[2]);
+                                for(int i=0;i< states.size();i++){
+                                    if(!states[i].name.compare(branchLine[0])) states[i].loadBranch(tempBranch);
+                                }
+                                cout<<"CFG: A Branch from State " + from +" to State " + tempBranch.branchState->name +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
+                            }
+
+                        }
                     }
 
                 }
             }
-
         }
     }
     file.close();
-    if(!this->states.empty()) {
-        this->currentState=(this->states[0]).name;
-        cout<<"CFG: DONE! State " + this->currentState + " is assigned to be the default current state.\n";
-
+    if(!states.empty()) {
+        currentState=(states[0]).name;
+        cout<<"CFG: DONE! State " + currentState + " is assigned to be the default current state.\n";
     }
 }
 
 
 
 void ModeManager::nextstate(DMS* db){
-    string temp=currentState;
-    string a=ModeManager::getState(temp).nextstate(db)->name;
-    //this->currentState=ModeManager::getState(temp).nextstate(db)->name;
-    cout<<a<<endl;
+    for(int i=0;i< states.size();i++){
+        if(!states[i].name.compare(currentState)){
+
+            currentState=states[i].nextstate(db);
+             cout<<states[i].nextstate(db)<<endl;
+        }
+    }
+
 }
 
 vector<string> ModeManager::split(const string s, char delimiter)
@@ -108,7 +132,7 @@ vector<string> ModeManager::split(const string s, char delimiter)
     string token;
     istringstream tokenStream(s);
     while (getline(tokenStream, token, delimiter))
-    {        
+    {
         tokens.push_back(token);
     }
     return tokens;

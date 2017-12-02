@@ -5,7 +5,7 @@
 using namespace std;
 State::State (string name){
     this->name=name;
-     this->numOfBranches=0;
+    this->numOfBranches=0;
 }
 
 
@@ -14,18 +14,21 @@ void State::loadBranch(Branch branch){
 
     this->branches.push_back(branch);
 
+
 }
 
-State* State::nextstate(DMS* db){
-    cout<<this->numOfBranches<<endl;
-    for(Branch b : this->branches) {
-        //throw the condition in the database  with query
-        //if the condition has been met return the  next state from the branches
-        bool a=db->controlQuery(b.condition);
-        cout<< a<<endl;
-        if(a ) {cout<< "ha"<<endl;return (b.branchState);}
+string State::nextstate(DMS* db){
+
+    for(int i=0; i< branches.size();i++) {
+        bool a=db->controlQuery(branches[i].condition);
+
+        if(a){
+            cout<<branches[i].branchState->name<<endl;
+            return (branches[i].branchState->name);
+
+        }
     }
-    return this;
+    return this->name;
 }
 
 State::~State(){
