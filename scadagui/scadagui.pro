@@ -32,7 +32,10 @@ SOURCES += \
     ../tools/baseclass.cpp \
     ../tools/log.cpp \
     exportwindow.cpp \
-    tableeditwindow.cpp
+    tableeditwindow.cpp \
+    ../scada/ControlSubSystem/branch.cpp \
+    ../scada/ControlSubSystem/modemanager.cpp \
+    ../scada/ControlSubSystem/state.cpp
 
 LIBS += -l sqlite3
 
@@ -45,7 +48,10 @@ HEADERS += \
     ../tools/log.h \
     ../tools/macros.h \
     exportwindow.h \
-    tableeditwindow.h
+    tableeditwindow.h \
+    ../scada/ControlSubSystem/branch.h \
+    ../scada/ControlSubSystem/modemanager.h \
+    ../scada/ControlSubSystem/state.h
 
 FORMS += \
         mainwindow.ui \

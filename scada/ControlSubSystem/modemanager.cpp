@@ -3,6 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+
+ModeManager::ModeManager(){}
+
 ModeManager::ModeManager(string fileName)
 {
     this->fileName=fileName;
@@ -15,9 +18,13 @@ ModeManager::~ModeManager()
 }
 
 State ModeManager::getState(string name){
+<<<<<<< HEAD
 
     for(State s: states){
 
+=======
+    for(State s: this->states){
+>>>>>>> refs/remotes/origin/master
         if(!s.name.compare(name)){
             //State *p=&s;
             return s;

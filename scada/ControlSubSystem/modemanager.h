@@ -17,6 +17,7 @@ public:
     vector<State> states;
     string currentState;
     ModeManager(string fileName);
+    ModeManager();
     State getState(string name);
     void configure();
     string  getCurrentStateName();
