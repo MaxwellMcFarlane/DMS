@@ -263,6 +263,7 @@ main(int argc, char **argv) {
     }
 
     unsigned int* DI;
+    DI = malloc(sizeof(unsigned int));
     *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
     if (res != EPHIDGET_OK) {
