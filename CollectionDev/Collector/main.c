@@ -281,18 +281,22 @@ int main(int argc, char **argv) {
     volatile unsigned sink;
     struct timespec before, after;
     clock_gettime(CLOCK_MONOTONIC, &before);
+    printf("***** MAIN LOOP ***** (%llu)", ((unsigned long long)(before.tv_sec) * 1000 +
+                                             (unsigned long long)(before.tv_usec) / 1000));
     while(1){
         for(size_t i=0; i<10000000; ++i){
               sink++;
         }
         clock_gettime(CLOCK_MONOTONIC, &after);
-        unsigned long long diff =
-                  ((unsigned long long)(after.tv_sec) * 1000 +
-                  (unsigned long long)(after.tv_usec) / 1000) -
+        unsigned long long current = ((unsigned long long)(after.tv_sec) * 1000 +
+        (unsigned long long)(after.tv_usec) / 1000);
+
+        unsigned long long diff = current -
                   ((unsigned long long)(before.tv_sec) * 1000 +
                   (unsigned long long)(before.tv_usec) / 1000);
-         if(cpu_time_used > 5000){
-          printf("***** PUSH TO DMS *****");
+         if(diff > 5000){
+          printf("***** PUSH TO DMS ***** (%llu)", current);
+
          }
     }
 
