@@ -186,7 +186,7 @@ int main(int argc, char **argv) {
     char samples[1000];
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 1;
+    int numbSensors = 2;
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = 10000; // in msec
+        map[i].samplingPeriod = 2000 + i * 600; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -294,9 +294,9 @@ int main(int argc, char **argv) {
         if(((int) diff.tv_sec) > 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
-            printf("***** PUSH TO DMS ***** (%i %i)/n", (long) before.tv_sec, before.tv_nsec);
+            printf("***** PUSH TO DMS ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
             printf("%s", samples);
-            printf("***** PUSH TO DMS *****/n");
+            printf("***** PUSH TO DMS *****\n");
             samples = "\0";
 
         }
