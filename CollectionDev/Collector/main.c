@@ -311,7 +311,7 @@ int main(int argc, char **argv) {
             buff.samples[0] = '\0';
             FILE *fp
             fp = freopen(SAMPLE_BACKUPFILE, "w");
-            fp = fprintf("%s", &buff.samples);
+            fprintf(fp, "%s", &buff.samples);
             fclose(fp);
             free(fp);
 
