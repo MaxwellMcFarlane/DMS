@@ -352,8 +352,6 @@ int main(int argc, char **argv) {
             }
             sqlite3_close(db);
 
-
-
             // console print
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
