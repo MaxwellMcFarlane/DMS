@@ -119,7 +119,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     struct timespec tv;
     //gettimeofday(&tv, NULL);
     // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
-    clock_gettime(CLOCK_REALTIME, &tv); // BROKEN
+    clock_gettime(CLOCK_REALTIME, &tv);
     unsigned long long millisecondsSinceEpoch =
             (unsigned long long)(tv.tv_sec) * 1000 +
             (unsigned long long)(tv.tv_nsec) / 1000000;
@@ -184,7 +184,7 @@ initChannel(PhidgetHandle ch, void *ctx) {
 int main(int argc, char **argv) {
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 3;
+    int numbSensors = 1;
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = i * 1000; // in msec
+        map[i].samplingPeriod = 10000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -289,7 +289,7 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
-        if((long) diff.tv_sec > 30){
+        if(((int) diff.tv_sec) > 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("***** PUSH TO DMS ***** (%i %i)", (long) before.tv_sec, before.tv_nsec);
