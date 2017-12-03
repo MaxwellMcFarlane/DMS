@@ -38,10 +38,10 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     int channel;
     int serial;
 
-    if(ctx != nullptr){
-        struct Map map;
-        map = (struct Map) *ctx;
-        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, &map.samplingPeriod);
+    if(!ctx){
+        struct Map *map;
+        map = (struct Map*) ctx;
+        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, *map->samplingPeriod);
         if (res != EPHIDGET_OK) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
@@ -239,7 +239,7 @@ main(int argc, char **argv) {
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 2;
-    struct Map map[numbSensors];
+    Map map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
