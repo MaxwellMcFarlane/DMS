@@ -16,6 +16,7 @@
 
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 #define DMSBUFFER_SMPLTHRESHOLD 30
+#define DMSBUFFER_SMPL_TIME 5
 
 struct Sensor{
     int hub;
@@ -299,13 +300,20 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
-        if(((int) diff.tv_sec) > 5 || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
+        if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("******** PUSH TO DMS ********\n");
+
+            // consol print
             printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             buff.samples[0] = '\0';
+            FILE *fp
+            fp = freopen(SAMPLE_BACKUPFILE, "w");
+            fp = fprintf("%s", buff.samples);
+            fclose(fp);
+            free(fp);
 
         }
     }
