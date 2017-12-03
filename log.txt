@@ -86073,3 +86073,2956 @@ Query created.
 Query created.
 Fri Dec 01 09:41:44 2017
 >>>>>>> 70471fdb2ce0089566b805cb559b00cd1540f323
+
+Sun Dec  3 02:17:38 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sun Dec  3 02:26:23 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Table Retrieval Error.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+Sun Dec  3 02:26:23 2017
+
+Sun Dec  3 02:37:25 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sun Dec  3 02:39:44 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sun Dec  3 03:01:06 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+SampleTable row[ 1] was deleted.
+SampleTable row[ 2] was deleted.
+SampleTable row[ 3] was deleted.
+SampleTable row[ 4] was deleted.
+SampleTable row[ 5] was deleted.
+SampleTable row[ 6] was deleted.
+SampleTable row[ 7] was deleted.
+SampleTable row[ 8] was deleted.
+SampleTable row[ 9] was deleted.
+SampleTable row[ 10] was deleted.
+SampleTable row[ 11] was deleted.
+SampleTable row[ 12] was deleted.
+SampleTable row[ 13] was deleted.
+SampleTable row[ 14] was deleted.
+SampleTable row[ 15] was deleted.
+SampleTable row[ 16] was deleted.
+SampleTable row[ 17] was deleted.
+SampleTable row[ 18] was deleted.
+SampleTable row[ 19] was deleted.
+SampleTable row[ 20] was deleted.
+SampleTable row[ 21] was deleted.
+SampleTable row[ 22] was deleted.
+SampleTable row[ 23] was deleted.
+SampleTable row[ 24] was deleted.
+SampleTable row[ 25] was deleted.
+SampleTable row[ 26] was deleted.
+SampleTable row[ 27] was deleted.
+SampleTable row[ 28] was deleted.
+SampleTable row[ 29] was deleted.
+SampleTable row[ 30] was deleted.
+SampleTable row[ 31] was deleted.
+SampleTable row[ 32] was deleted.
+SampleTable row[ 33] was deleted.
+SampleTable row[ 34] was deleted.
+SampleTable row[ 35] was deleted.
+SampleTable row[ 36] was deleted.
+SampleTable row[ 37] was deleted.
+SampleTable row[ 38] was deleted.
+SampleTable row[ 39] was deleted.
+SampleTable row[ 40] was deleted.
+SampleTable row[ 41] was deleted.
+SampleTable row[ 42] was deleted.
+SampleTable row[ 43] was deleted.
+SampleTable row[ 44] was deleted.
+SampleTable row[ 45] was deleted.
+SampleTable row[ 46] was deleted.
+SampleTable row[ 47] was deleted.
+SampleTable row[ 48] was deleted.
+SampleTable row[ 49] was deleted.
+SampleTable row[ 50] was deleted.
+SampleTable row[ 51] was deleted.
+SampleTable row[ 52] was deleted.
+SampleTable row[ 53] was deleted.
+SampleTable row[ 54] was deleted.
+SampleTable row[ 55] was deleted.
+Query created.
+SampleTable row[ 1] was deleted.
+SampleTable row[ 2] was deleted.
+SampleTable row[ 3] was deleted.
+SampleTable row[ 4] was deleted.
+SampleTable row[ 5] was deleted.
+SampleTable row[ 6] was deleted.
+SampleTable row[ 7] was deleted.
+SampleTable row[ 8] was deleted.
+SampleTable row[ 9] was deleted.
+SampleTable row[ 10] was deleted.
+SampleTable row[ 11] was deleted.
+SampleTable row[ 12] was deleted.
+SampleTable row[ 13] was deleted.
+SampleTable row[ 14] was deleted.
+SampleTable row[ 15] was deleted.
+SampleTable row[ 16] was deleted.
+SampleTable row[ 17] was deleted.
+SampleTable row[ 18] was deleted.
+SampleTable row[ 19] was deleted.
+SampleTable row[ 20] was deleted.
+SampleTable row[ 21] was deleted.
+SampleTable row[ 22] was deleted.
+SampleTable row[ 23] was deleted.
+SampleTable row[ 24] was deleted.
+SampleTable row[ 25] was deleted.
+SampleTable row[ 26] was deleted.
+SampleTable row[ 27] was deleted.
+SampleTable row[ 28] was deleted.
+SampleTable row[ 29] was deleted.
+SampleTable row[ 30] was deleted.
+SampleTable row[ 31] was deleted.
+SampleTable row[ 32] was deleted.
+SampleTable row[ 33] was deleted.
+SampleTable row[ 34] was deleted.
+SampleTable row[ 35] was deleted.
+SampleTable row[ 36] was deleted.
+SampleTable row[ 37] was deleted.
+SampleTable row[ 38] was deleted.
+SampleTable row[ 39] was deleted.
+SampleTable row[ 40] was deleted.
+SampleTable row[ 41] was deleted.
+SampleTable row[ 42] was deleted.
+SampleTable row[ 43] was deleted.
+SampleTable row[ 44] was deleted.
+SampleTable row[ 45] was deleted.
+SampleTable row[ 46] was deleted.
+SampleTable row[ 47] was deleted.
+SampleTable row[ 48] was deleted.
+SampleTable row[ 49] was deleted.
+SampleTable row[ 50] was deleted.
+SampleTable row[ 51] was deleted.
+SampleTable row[ 52] was deleted.
+SampleTable row[ 53] was deleted.
+SampleTable row[ 54] was deleted.
+SampleTable row[ 55] was deleted.
+SampleTable row[ 56] was deleted.
+SampleTable row[ 57] was deleted.
+SampleTable row[ 58] was deleted.
+SampleTable row[ 59] was deleted.
+SampleTable row[ 60] was deleted.
+SampleTable row[ 61] was deleted.
+SampleTable row[ 62] was deleted.
+SampleTable row[ 63] was deleted.
+SampleTable row[ 64] was deleted.
+SampleTable row[ 65] was deleted.
+SampleTable row[ 66] was deleted.
+SampleTable row[ 67] was deleted.
+SampleTable row[ 68] was deleted.
+SampleTable row[ 69] was deleted.
+SampleTable row[ 70] was deleted.
+SampleTable row[ 71] was deleted.
+SampleTable row[ 72] was deleted.
+SampleTable row[ 73] was deleted.
+SampleTable row[ 74] was deleted.
+SampleTable row[ 75] was deleted.
+SampleTable row[ 76] was deleted.
+SampleTable row[ 77] was deleted.
+SampleTable row[ 78] was deleted.
+SampleTable row[ 79] was deleted.
+SampleTable row[ 80] was deleted.
+SampleTable row[ 81] was deleted.
+SampleTable row[ 82] was deleted.
+SampleTable row[ 83] was deleted.
+SampleTable row[ 84] was deleted.
+SampleTable row[ 85] was deleted.
+SampleTable row[ 86] was deleted.
+SampleTable row[ 87] was deleted.
+SampleTable row[ 88] was deleted.
+SampleTable row[ 89] was deleted.
+SampleTable row[ 90] was deleted.
+SampleTable row[ 91] was deleted.
+SampleTable row[ 92] was deleted.
+SampleTable row[ 93] was deleted.
+SampleTable row[ 94] was deleted.
+SampleTable row[ 95] was deleted.
+SampleTable row[ 96] was deleted.
+SampleTable row[ 97] was deleted.
+SampleTable row[ 98] was deleted.
+SampleTable row[ 99] was deleted.
+SampleTable row[ 100] was deleted.
+SampleTable row[ 101] was deleted.
+SampleTable row[ 102] was deleted.
+SampleTable row[ 103] was deleted.
+SampleTable row[ 104] was deleted.
+SampleTable row[ 105] was deleted.
+SampleTable row[ 106] was deleted.
+SampleTable row[ 107] was deleted.
+SampleTable row[ 108] was deleted.
+SampleTable row[ 109] was deleted.
+SampleTable row[ 110] was deleted.
+SampleTable row[ 111] was deleted.
+SampleTable row[ 112] was deleted.
+SampleTable row[ 113] was deleted.
+SampleTable row[ 114] was deleted.
+SampleTable row[ 115] was deleted.
+SampleTable row[ 116] was deleted.
+SampleTable row[ 117] was deleted.
+SampleTable row[ 118] was deleted.
+SampleTable row[ 119] was deleted.
+SampleTable row[ 120] was deleted.
+SampleTable row[ 121] was deleted.
+SampleTable row[ 122] was deleted.
+SampleTable row[ 123] was deleted.
+SampleTable row[ 124] was deleted.
+SampleTable row[ 125] was deleted.
+SampleTable row[ 126] was deleted.
+SampleTable row[ 127] was deleted.
+SampleTable row[ 128] was deleted.
+SampleTable row[ 129] was deleted.
+SampleTable row[ 130] was deleted.
+SampleTable row[ 131] was deleted.
+SampleTable row[ 132] was deleted.
+SampleTable row[ 133] was deleted.
+SampleTable row[ 134] was deleted.
+SampleTable row[ 135] was deleted.
+SampleTable row[ 136] was deleted.
+SampleTable row[ 137] was deleted.
+SampleTable row[ 138] was deleted.
+SampleTable row[ 139] was deleted.
+SampleTable row[ 140] was deleted.
+SampleTable row[ 141] was deleted.
+SampleTable row[ 142] was deleted.
+SampleTable row[ 143] was deleted.
+SampleTable row[ 144] was deleted.
+SampleTable row[ 145] was deleted.
+SampleTable row[ 146] was deleted.
+SampleTable row[ 147] was deleted.
+SampleTable row[ 148] was deleted.
+SampleTable row[ 149] was deleted.
+SampleTable row[ 150] was deleted.
+SampleTable row[ 151] was deleted.
+SampleTable row[ 152] was deleted.
+SampleTable row[ 153] was deleted.
+SampleTable row[ 154] was deleted.
+SampleTable row[ 155] was deleted.
+SampleTable row[ 156] was deleted.
+SampleTable row[ 157] was deleted.
+SampleTable row[ 158] was deleted.
+SampleTable row[ 159] was deleted.
+SampleTable row[ 160] was deleted.
+SampleTable row[ 161] was deleted.
+SampleTable row[ 162] was deleted.
+SampleTable row[ 163] was deleted.
+SampleTable row[ 164] was deleted.
+SampleTable row[ 165] was deleted.
+SampleTable row[ 166] was deleted.
+SampleTable row[ 167] was deleted.
+SampleTable row[ 168] was deleted.
+SampleTable row[ 169] was deleted.
+SampleTable row[ 170] was deleted.
+SampleTable row[ 171] was deleted.
+SampleTable row[ 172] was deleted.
+SampleTable row[ 173] was deleted.
+SampleTable row[ 174] was deleted.
+SampleTable row[ 175] was deleted.
+SampleTable row[ 176] was deleted.
+SampleTable row[ 177] was deleted.
+SampleTable row[ 178] was deleted.
+SampleTable row[ 179] was deleted.
+SampleTable row[ 180] was deleted.
+SampleTable row[ 181] was deleted.
+SampleTable row[ 182] was deleted.
+SampleTable row[ 183] was deleted.
+SampleTable row[ 184] was deleted.
+SampleTable row[ 185] was deleted.
+SampleTable row[ 186] was deleted.
+SampleTable row[ 187] was deleted.
+SampleTable row[ 188] was deleted.
+SampleTable row[ 189] was deleted.
+SampleTable row[ 190] was deleted.
+SampleTable row[ 191] was deleted.
+SampleTable row[ 192] was deleted.
+SampleTable row[ 193] was deleted.
+SampleTable row[ 194] was deleted.
+SampleTable row[ 195] was deleted.
+SampleTable row[ 196] was deleted.
+SampleTable row[ 197] was deleted.
+SampleTable row[ 198] was deleted.
+SampleTable row[ 199] was deleted.
+SampleTable row[ 200] was deleted.
+SampleTable row[ 201] was deleted.
+SampleTable row[ 202] was deleted.
+SampleTable row[ 203] was deleted.
+SampleTable row[ 204] was deleted.
+SampleTable row[ 205] was deleted.
+SampleTable row[ 206] was deleted.
+SampleTable row[ 207] was deleted.
+SampleTable row[ 208] was deleted.
+SampleTable row[ 209] was deleted.
+SampleTable row[ 210] was deleted.
+SampleTable row[ 211] was deleted.
+SampleTable row[ 212] was deleted.
+SampleTable row[ 213] was deleted.
+SampleTable row[ 214] was deleted.
+SampleTable row[ 215] was deleted.
+SampleTable row[ 216] was deleted.
+SampleTable row[ 217] was deleted.
+SampleTable row[ 218] was deleted.
+SampleTable row[ 219] was deleted.
+SampleTable row[ 220] was deleted.
+SampleTable row[ 221] was deleted.
+SampleTable row[ 222] was deleted.
+SampleTable row[ 223] was deleted.
+SampleTable row[ 224] was deleted.
+SampleTable row[ 225] was deleted.
+SampleTable row[ 226] was deleted.
+SampleTable row[ 227] was deleted.
+SampleTable row[ 228] was deleted.
+SampleTable row[ 229] was deleted.
+SampleTable row[ 230] was deleted.
+SampleTable row[ 231] was deleted.
+SampleTable row[ 232] was deleted.
+SampleTable row[ 233] was deleted.
+SampleTable row[ 234] was deleted.
+SampleTable row[ 235] was deleted.
+SampleTable row[ 236] was deleted.
+SampleTable row[ 237] was deleted.
+SampleTable row[ 238] was deleted.
+SampleTable row[ 239] was deleted.
+SampleTable row[ 240] was deleted.
+SampleTable row[ 241] was deleted.
+SampleTable row[ 242] was deleted.
+SampleTable row[ 243] was deleted.
+SampleTable row[ 244] was deleted.
+SampleTable row[ 245] was deleted.
+SampleTable row[ 246] was deleted.
+SampleTable row[ 247] was deleted.
+SampleTable row[ 248] was deleted.
+SampleTable row[ 249] was deleted.
+SampleTable row[ 250] was deleted.
+SampleTable row[ 251] was deleted.
+SampleTable row[ 252] was deleted.
+SampleTable row[ 253] was deleted.
+SampleTable row[ 254] was deleted.
+SampleTable row[ 255] was deleted.
+SampleTable row[ 256] was deleted.
+SampleTable row[ 257] was deleted.
+SampleTable row[ 258] was deleted.
+SampleTable row[ 259] was deleted.
+SampleTable row[ 260] was deleted.
+SampleTable row[ 261] was deleted.
+SampleTable row[ 262] was deleted.
+SampleTable row[ 263] was deleted.
+SampleTable row[ 264] was deleted.
+SampleTable row[ 265] was deleted.
+SampleTable row[ 266] was deleted.
+SampleTable row[ 267] was deleted.
+SampleTable row[ 268] was deleted.
+SampleTable row[ 269] was deleted.
+SampleTable row[ 270] was deleted.
+SampleTable row[ 271] was deleted.
+SampleTable row[ 272] was deleted.
+SampleTable row[ 273] was deleted.
+SampleTable row[ 274] was deleted.
+SampleTable row[ 275] was deleted.
+SampleTable row[ 276] was deleted.
+SampleTable row[ 277] was deleted.
+SampleTable row[ 278] was deleted.
+SampleTable row[ 279] was deleted.
+SampleTable row[ 280] was deleted.
+SampleTable row[ 281] was deleted.
+SampleTable row[ 282] was deleted.
+SampleTable row[ 283] was deleted.
+SampleTable row[ 284] was deleted.
+SampleTable row[ 285] was deleted.
+SampleTable row[ 286] was deleted.
+SampleTable row[ 287] was deleted.
+SampleTable row[ 288] was deleted.
+SampleTable row[ 289] was deleted.
+SampleTable row[ 290] was deleted.
+SampleTable row[ 291] was deleted.
+SampleTable row[ 292] was deleted.
+SampleTable row[ 293] was deleted.
+SampleTable row[ 294] was deleted.
+SampleTable row[ 295] was deleted.
+SampleTable row[ 296] was deleted.
+SampleTable row[ 297] was deleted.
+SampleTable row[ 298] was deleted.
+SampleTable row[ 299] was deleted.
+SampleTable row[ 300] was deleted.
+SampleTable row[ 301] was deleted.
+SampleTable row[ 302] was deleted.
+SampleTable row[ 303] was deleted.
+SampleTable row[ 304] was deleted.
+SampleTable row[ 305] was deleted.
+SampleTable row[ 306] was deleted.
+SampleTable row[ 307] was deleted.
+SampleTable row[ 308] was deleted.
+SampleTable row[ 309] was deleted.
+SampleTable row[ 310] was deleted.
+SampleTable row[ 311] was deleted.
+SampleTable row[ 312] was deleted.
+SampleTable row[ 313] was deleted.
+SampleTable row[ 314] was deleted.
+SampleTable row[ 315] was deleted.
+SampleTable row[ 316] was deleted.
+SampleTable row[ 317] was deleted.
+SampleTable row[ 318] was deleted.
+SampleTable row[ 319] was deleted.
+SampleTable row[ 320] was deleted.
+SampleTable row[ 321] was deleted.
+SampleTable row[ 322] was deleted.
+SampleTable row[ 323] was deleted.
+SampleTable row[ 324] was deleted.
+SampleTable row[ 325] was deleted.
+SampleTable row[ 326] was deleted.
+SampleTable row[ 327] was deleted.
+SampleTable row[ 328] was deleted.
+SampleTable row[ 329] was deleted.
+SampleTable row[ 330] was deleted.
+SampleTable row[ 331] was deleted.
+SampleTable row[ 332] was deleted.
+SampleTable row[ 333] was deleted.
+SampleTable row[ 334] was deleted.
+SampleTable row[ 335] was deleted.
+SampleTable row[ 336] was deleted.
+SampleTable row[ 337] was deleted.
+SampleTable row[ 338] was deleted.
+SampleTable row[ 339] was deleted.
+SampleTable row[ 340] was deleted.
+SampleTable row[ 341] was deleted.
+SampleTable row[ 342] was deleted.
+SampleTable row[ 343] was deleted.
+SampleTable row[ 344] was deleted.
+SampleTable row[ 345] was deleted.
+SampleTable row[ 346] was deleted.
+SampleTable row[ 347] was deleted.
+SampleTable row[ 348] was deleted.
+SampleTable row[ 349] was deleted.
+SampleTable row[ 350] was deleted.
+SampleTable row[ 351] was deleted.
+SampleTable row[ 352] was deleted.
+SampleTable row[ 353] was deleted.
+SampleTable row[ 354] was deleted.
+SampleTable row[ 355] was deleted.
+SampleTable row[ 356] was deleted.
+SampleTable row[ 357] was deleted.
+SampleTable row[ 358] was deleted.
+SampleTable row[ 359] was deleted.
+SampleTable row[ 360] was deleted.
+SampleTable row[ 361] was deleted.
+SampleTable row[ 362] was deleted.
+SampleTable row[ 363] was deleted.
+Query created.
+SampleTable row[ 1] was deleted.
+SampleTable row[ 2] was deleted.
+SampleTable row[ 3] was deleted.
+SampleTable row[ 4] was deleted.
+SampleTable row[ 5] was deleted.
+SampleTable row[ 6] was deleted.
+SampleTable row[ 7] was deleted.
+SampleTable row[ 8] was deleted.
+SampleTable row[ 9] was deleted.
+SampleTable row[ 10] was deleted.
+SampleTable row[ 11] was deleted.
+SampleTable row[ 12] was deleted.
+SampleTable row[ 13] was deleted.
+SampleTable row[ 14] was deleted.
+SampleTable row[ 15] was deleted.
+SampleTable row[ 16] was deleted.
+SampleTable row[ 17] was deleted.
+SampleTable row[ 18] was deleted.
+SampleTable row[ 19] was deleted.
+SampleTable row[ 20] was deleted.
+SampleTable row[ 21] was deleted.
+SampleTable row[ 22] was deleted.
+SampleTable row[ 23] was deleted.
+SampleTable row[ 24] was deleted.
+SampleTable row[ 25] was deleted.
+SampleTable row[ 26] was deleted.
+SampleTable row[ 27] was deleted.
+SampleTable row[ 28] was deleted.
+SampleTable row[ 29] was deleted.
+SampleTable row[ 30] was deleted.
+SampleTable row[ 31] was deleted.
+SampleTable row[ 32] was deleted.
+SampleTable row[ 33] was deleted.
+SampleTable row[ 34] was deleted.
+SampleTable row[ 35] was deleted.
+SampleTable row[ 36] was deleted.
+SampleTable row[ 37] was deleted.
+SampleTable row[ 38] was deleted.
+SampleTable row[ 39] was deleted.
+SampleTable row[ 40] was deleted.
+SampleTable row[ 41] was deleted.
+SampleTable row[ 42] was deleted.
+SampleTable row[ 43] was deleted.
+SampleTable row[ 44] was deleted.
+SampleTable row[ 45] was deleted.
+SampleTable row[ 46] was deleted.
+Query created.
+
+Sun Dec  3 03:09:41 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:11:09 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:14:01 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:15:01 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+
+Sun Dec  3 03:15:23 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:16:05 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 19 in CalibratedSampleTable
+Item: 1,500,66,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 2,600,67,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 3,700,69,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 4,745,65,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 5,1100,64,1,1 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 6,1123,63,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 7,1124,62,1,0 caused a constraint violation.
+ Item could not be inserted.
+
+Sun Dec  3 03:16:42 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 19 in CalibratedSampleTable
+Item: 1,500,66,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 2,600,67,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 3,700,69,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 4,745,65,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 5,1100,64,1,1 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 6,1123,63,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 7,1124,62,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:17:45 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 19 in CalibratedSampleTable
+Item: 1,500,66,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 2,600,67,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 3,700,69,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 4,745,65,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 5,1100,64,1,1 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 6,1123,63,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 7,1124,62,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+
+Sun Dec  3 03:20:19 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+Error: 19 in CalibratedSampleTable
+Item: 1,500,66,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 2,600,67,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 3,700,69,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 4,745,65,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 5,1100,64,1,1 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 6,1123,63,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalibratedSampleTable
+Item: 7,1124,62,1,0 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+
+Sun Dec  3 03:20:58 2017
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+Table Retrieval Error.
+DataBase ../scada.db is opened.
+ConfigFileTable was created.
+Dimensions: (fileName TEXT PRIMARY KEY, contents TEXT);
+StateTable was created.
+Dimensions: (	StateId		INTEGER PRIMARY KEY AUTOINCREMENT, 	StateName 	TEXT UNIQUE NOT NULL);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+BranchTable was created.
+Dimensions: (	BranchId 	INTEGER PRIMARY KEY AUTOINCREMENT,	FromState 	TEXT,	ToState 	TEXT,	Condition 	TEXT NOT NULL,	FOREIGN KEY(FromState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY(ToState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalConfTable was created.
+Dimensions: (	ModelNumber 	INTEGER PRIMARY KEY AUTOINCREMENT,		StateId 	INT, 	Type 		TEXT NOT NULL, 	Coefficient 	TEXT NOT NULL, 	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorTable was created.
+Dimensions: (	SensorId 	TEXT PRIMARY KEY, 	HubID 		INT NOT NULL, 	PortNumber 	INT NOT NULL, 	SensorType 	TEXT,	UNIQUE (HubID, PortNumber));
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SampleTable was created.
+Dimensions: (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 	SensorId 	TEXT NOT NULL,	TimeStamp 	INTEGER NOT NULL, 	RawData 	INTEGER NOT NULL, 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalibratedSampleTable was created.
+Dimensions: (	CalId 		INTEGER PRIMARY KEY AUTOINCREMENT, 	SampleId 	INTEGER, 	CalTimeStamp 	INTEGER NOT NULL, 	CalVal 		INTEGER NOT NULL, 	ModelNumber 	INTEGER NOT NULL, 	MarkToDelete 	INTEGER NOT NULL, 	FOREIGN KEY (SampleId) REFERENCES SampleTable (SampleId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorConfTable was created.
+Dimensions: (	SensorConfId	INTEGER PRIMARY KEY AUTOINCREMENT,	StateId		INTEGER,	SensorId	TEXT,	SampleRate	INTEGER NOT NULL,	Priority	INTEGER,	MaxValue	INTEGER,	MinValue	INTGER,	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s5',342,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s4',341,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s3',142,1,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s2',124,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s2',235,1,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s3',532,1,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s5',324,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 4,'log','[2,3,4,0]' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 2,'poly','[4,2,1,3,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 3,'exp','[2,3,4,0]' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 1,'linear','[2,3]' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:21:08 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:21:45 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:23:31 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+ConfigFileTable was created.
+Dimensions: (fileName TEXT PRIMARY KEY, contents TEXT);
+StateTable was created.
+Dimensions: (	StateId		INTEGER PRIMARY KEY AUTOINCREMENT, 	StateName 	TEXT UNIQUE NOT NULL);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+BranchTable was created.
+Dimensions: (	BranchId 	INTEGER PRIMARY KEY AUTOINCREMENT,	FromState 	TEXT,	ToState 	TEXT,	Condition 	TEXT NOT NULL,	FOREIGN KEY(FromState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY(ToState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalConfTable was created.
+Dimensions: (	ModelNumber 	INTEGER PRIMARY KEY AUTOINCREMENT,		StateId 	INT, 	Type 		TEXT NOT NULL, 	Coefficient 	TEXT NOT NULL, 	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorTable was created.
+Dimensions: (	SensorId 	TEXT PRIMARY KEY, 	HubID 		INT NOT NULL, 	PortNumber 	INT NOT NULL, 	SensorType 	TEXT,	UNIQUE (HubID, PortNumber));
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SampleTable was created.
+Dimensions: (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 	SensorId 	TEXT NOT NULL,	TimeStamp 	INTEGER NOT NULL, 	RawData 	INTEGER NOT NULL, 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalibratedSampleTable was created.
+Dimensions: (	CalId 		INTEGER PRIMARY KEY AUTOINCREMENT, 	SampleId 	INTEGER, 	CalTimeStamp 	INTEGER NOT NULL, 	CalVal 		INTEGER NOT NULL, 	ModelNumber 	INTEGER NOT NULL, 	MarkToDelete 	INTEGER NOT NULL, 	FOREIGN KEY (SampleId) REFERENCES SampleTable (SampleId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorConfTable was created.
+Dimensions: (	SensorConfId	INTEGER PRIMARY KEY AUTOINCREMENT,	StateId		INTEGER,	SensorId	TEXT,	SampleRate	INTEGER NOT NULL,	Priority	INTEGER,	MaxValue	INTEGER,	MinValue	INTGER,	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+
+Sun Dec  3 03:23:52 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Table Retrieval Error.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+Sun Dec  3 03:23:52 2017
+
+Sun Dec  3 03:23:57 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:26:30 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+
+Sun Dec  3 03:26:41 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Idle' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Run' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Warn' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Count' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Jump' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'Shout' caused a constraint violation.
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Table Retrieval Error.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+Sun Dec  3 03:26:41 2017
+
+Sun Dec  3 03:26:58 2017
+DataBase ../scada.db is opened.
+ConfigFileTable was created.
+Dimensions: (fileName TEXT PRIMARY KEY, contents TEXT);
+StateTable was created.
+Dimensions: (	StateId		INTEGER PRIMARY KEY AUTOINCREMENT, 	StateName 	TEXT UNIQUE NOT NULL);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+BranchTable was created.
+Dimensions: (	BranchId 	INTEGER PRIMARY KEY AUTOINCREMENT,	FromState 	TEXT,	ToState 	TEXT,	Condition 	TEXT NOT NULL,	FOREIGN KEY(FromState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY(ToState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalConfTable was created.
+Dimensions: (	ModelNumber 	INTEGER PRIMARY KEY AUTOINCREMENT,		StateId 	INT, 	Type 		TEXT NOT NULL, 	Coefficient 	TEXT NOT NULL, 	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorTable was created.
+Dimensions: (	SensorId 	TEXT PRIMARY KEY, 	HubID 		INT NOT NULL, 	PortNumber 	INT NOT NULL, 	SensorType 	TEXT,	UNIQUE (HubID, PortNumber));
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SampleTable was created.
+Dimensions: (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 	SensorId 	TEXT NOT NULL,	TimeStamp 	INTEGER NOT NULL, 	RawData 	INTEGER NOT NULL, 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+CalibratedSampleTable was created.
+Dimensions: (	CalId 		INTEGER PRIMARY KEY AUTOINCREMENT, 	SampleId 	INTEGER, 	CalTimeStamp 	INTEGER NOT NULL, 	CalVal 		INTEGER NOT NULL, 	ModelNumber 	INTEGER NOT NULL, 	MarkToDelete 	INTEGER NOT NULL, 	FOREIGN KEY (SampleId) REFERENCES SampleTable (SampleId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+SensorConfTable was created.
+Dimensions: (	SensorConfId	INTEGER PRIMARY KEY AUTOINCREMENT,	StateId		INTEGER,	SensorId	TEXT,	SampleRate	INTEGER NOT NULL,	Priority	INTEGER,	MaxValue	INTEGER,	MinValue	INTGER,	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Table Retrieval Error.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sun Dec  3 03:28:01 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:30:03 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:36:50 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 03:39:20 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sun Dec  3 13:43:15 2017
+DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Query created.
+Query created.
+Query created.
+Query created.
