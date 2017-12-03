@@ -59,6 +59,13 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
         }
+        uint32_t check = 0;
+        res = PhidgetVoltageInput_getDataInterval((PhidgetVoltageInputHandle) phid, &check);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device data interval\n");
+            return;
+        }
+        printf("SET DI %i %i %i",map->key.hub, map->key.port, check);
 
         res = PhidgetVoltageInput_setVoltageChangeTrigger((PhidgetVoltageInputHandle) phid, 0);
         if (res != EPHIDGET_OK) {
@@ -256,11 +263,11 @@ main(int argc, char **argv) {
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
-        printf("%i", i);
+        printf("%i\n", i);
         // read HUB and Port
         map[i].key.hub = 497194;
         map[i].key.port = i;
-        map[i].samplingPeriod = 2000; // in msec
+        map[i].samplingPeriod = 5000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
