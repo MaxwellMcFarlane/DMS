@@ -11,10 +11,6 @@ int main(int, char** argv){
     while(!done){
         while(getline(input, line)){
             std::cout << line << "\n";
-            for(int i = 0; i < 999; i++){
-                i++;
-                i--;
-            }
         }
         if(input.eof()){
             input.clear();
