@@ -226,8 +226,8 @@ int main(int argc, char **argv) {
     char *ermsg = 0;
     sqlite3 *db;
     sqlite3_open(DB_PATH, &db);
-    rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
-    rc = sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
     printf("after exec");
     sqlite3_exec(db,
                  "insert into "
