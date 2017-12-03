@@ -25,9 +25,22 @@
 
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 
-// forward declare Map struct and Key struct
-struct Map;
-struct Key;
+// struct for map structure adapted from
+// https://stackoverflow.com/questions/21958247/map-like-structure-in-c-use-int-and-struct-to-determine-a-value
+// and the wikipedia page on structs
+// utilizing linear search for Keys as there will not be an absurd ammount of sensors
+// and this will not be called relatively often
+
+struct Key{
+    int hub;
+    int port;
+};
+
+struct Map{
+    struct Key key;
+    PhidgetVoltageInputHandle ch;
+    uint32_t samplingPeriod;
+};
 
 static void CCONV ssleep(int);
 
@@ -239,7 +252,7 @@ main(int argc, char **argv) {
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 2;
-    Map map[numbSensors];
+    struct Map map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
@@ -383,20 +396,3 @@ ssleep(int tm) {
     sleep(tm);
 #endif
 }
-
-// struct for map structure adapted from
-// https://stackoverflow.com/questions/21958247/map-like-structure-in-c-use-int-and-struct-to-determine-a-value
-// and the wikipedia page on structs
-// utilizing linear search for Keys as there will not be an absurd ammount of sensors
-// and this will not be called relatively often
-
-struct Key{
-    int hub;
-    int port;
-};
-
-struct Map{
-    struct Key key;
-    PhidgetVoltageInputHandle ch;
-    uint32_t samplingPeriod;
-};
