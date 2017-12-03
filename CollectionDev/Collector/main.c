@@ -223,9 +223,9 @@ int main(int argc, char **argv) {
     }
 
 
-//    char** ermsg;
+    char** ermsg;
 
-//    sqlite3 *db;
+    sqlite3 *db;
 //    sqlite3_open(DB_PATH,&db);
 //    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
 //    sqlite3_exec(db, ".separator |", 0, 0, ermsg);
@@ -330,19 +330,19 @@ int main(int argc, char **argv) {
             char final[5000] = "";
             strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
-                //printf("%s\n", buff.samples[i]);
+                //printf("%s", buff.samples[i]);
                 strcat(final, buff.samples[i]);
                 strcat(final, ",");
             }
             strcat(final, SAMPLE_POSTFIX);
             printf("%s\n", final);
             sqlite3_open(DB_PATH,&db);
-            sqlite3_exec(db, tmp, 0, 0, ermsg);
+            sqlite3_exec(db, final, 0, 0, ermsg);
             sqlite3_close(db);
 
-            // consol print
+            // console print
             //printf("%s", &buff.samples);
-            printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
+            printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             buff.index = 0;
             //.samples[0] = '\0';
             FILE *fp;
