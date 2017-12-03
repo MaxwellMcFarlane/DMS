@@ -15,12 +15,18 @@
 #include <errno.h>
 
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
+#define DMSBUFFER_SMPLTHRESHOLD 30
 
 struct Sensor{
     int hub;
     int port;
     PhidgetVoltageInputHandle ch;
     uint32_t samplingPeriod;
+};
+
+struct dmsBuffer{
+    int numSample;
+    char samples[1000];
 };
 
 static void CCONV ssleep(int);
@@ -133,7 +139,11 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     char msg[32]; // 32 hardcode count for below (account for '\0')
     snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
-    strcat(ctx, msg);
+
+    if(ctx){
+        struct dmsBuffer* append = (struct dmsBuffer*) ctx;
+        strcat(&append->samples, msg);
+    }
 
     // file backup
     FILE *fp;
@@ -183,7 +193,7 @@ initChannel(PhidgetHandle ch, void *ctx) {
 
 int main(int argc, char **argv) {
 
-    char samples[1000];
+    struct dmsBuffer buff;
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 2;
@@ -232,7 +242,7 @@ int main(int argc, char **argv) {
     }
 
     for(int i = 0; i < numbSensors; i++){
-        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &samples);
+        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &dmsBuffer);
         if (res != EPHIDGET_OK) {
             Phidget_getErrorDescription(res, &errs);
             fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
@@ -256,7 +266,7 @@ int main(int argc, char **argv) {
         }
     }
     // give some time for sensors to attach
-    ssleep(5);
+    ssleep(3);
 
 
     // check if channel is attached and report status
@@ -279,8 +289,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    //printf("Gathering data for 20 seconds...\n");
-    //ssleep(20);
     // enter main loop
     volatile unsigned sink;
     struct timespec before, after, diff;
@@ -291,11 +299,11 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
-        if(((int) diff.tv_sec) > 5){
+        if(((int) diff.tv_sec) > 5 || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("******** PUSH TO DMS ********\n");
-            printf("%s", &samples);
+            printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
             samples[0] = '\0';
 
