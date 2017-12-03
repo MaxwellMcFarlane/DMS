@@ -288,6 +288,8 @@ int main(int argc, char **argv) {
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if((long) diff.tv_sec > 30){
+            before = after;
+            clock_gettime(CLOCK_MONOTONIC, &after);
             printf("***** PUSH TO DMS ***** (%i %i)", (long) before.tv_sec, before.tv_nsec);
 
         }
