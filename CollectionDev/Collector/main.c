@@ -10,6 +10,7 @@
 #endif
 
 #include <time.h>
+#include <sys/time.h>
 #include <string.h>
 #include <errno.h>
 
