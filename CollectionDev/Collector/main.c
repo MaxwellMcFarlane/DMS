@@ -348,7 +348,9 @@ int main(int argc, char **argv) {
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
+                printf("%s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
+                prinf("%s\n", ermsg);
             }
             sqlite3_close(db);
 
