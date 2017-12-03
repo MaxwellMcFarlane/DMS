@@ -226,7 +226,7 @@ int main(int argc, char **argv) {
     char** ermsg;
 
     sqlite3 *db;
-    sqlite3_open(DB_PATH,&db);
+    //sqlite3_open(DB_PATH,&db);
     printf("after open\n");
     //sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
     //sqlite3_exec(db, ".separator |", 0, 0, ermsg);
@@ -341,15 +341,15 @@ int main(int argc, char **argv) {
             printf("%s\n", final);*/
 
             // multiple individual insert
-            //sqlite3_open(DB_PATH,&db);
+            sqlite3_open(DB_PATH,&db);
             for(int i = 0; i < buff.index; i++){
                 //printf("%s", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                //sqlite3_exec(db, final, 0, 0, ermsg);
+                sqlite3_exec(db, final, 0, 0, ermsg);
             }
-            //sqlite3_close(db);
+            sqlite3_close(db);
 
 
 
