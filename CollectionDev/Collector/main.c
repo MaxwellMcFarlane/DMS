@@ -341,7 +341,7 @@ int main(int argc, char **argv) {
             printf("%s\n", final);*/
 
             // multiple individual insert
-            sqlite3_open(DB_PATH,&db);
+            //sqlite3_open(DB_PATH,&db);
             for(int i = 0; i < buff.index; i++){
                 //printf("%s", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
@@ -349,7 +349,7 @@ int main(int argc, char **argv) {
                 strcat(final, SAMPLE_POSTFIX);
                 //sqlite3_exec(db, final, 0, 0, ermsg);
             }
-            sqlite3_close(db);
+            //sqlite3_close(db);
 
 
 
