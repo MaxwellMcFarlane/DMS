@@ -5,7 +5,7 @@
 #include <phidget22.h>
 
 using namespace std;
-// i think this needs to be a run function in sensormanager
+// I think this needs to be a run function in sensormanager
 // use threading to start it
 int main(){
     // Setup
