@@ -118,9 +118,9 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     int numBits = write(samplePipeFile, msg, sizeof(msg));
     printf("Wrote to pipe\n");
     printf("%i\n", numBits);
-    int n = close(samplePipeFile);
-    printf("%i\n", n);
-    printf("closed pipe file\n");
+    // int n = close(samplePipeFile);
+    // printf("%i\n", n);
+    // printf("closed pipe file\n");
 
     FILE *fp;
     fp = fopen(SAMPLE_BACKUPFILE, "a");
@@ -207,9 +207,9 @@ main(int argc, char **argv) {
     int numBits = write(samplePipeFile, msg, sizeof(msg));
     printf("Wrote to pipe\n");
     printf("%i\n", numBits);
-    int n = close(samplePipeFile);
-    printf("%i\n", n);
-    printf("closed pipe file\n");
+    // int n = close(samplePipeFile);
+    // printf("%i\n", n);
+    // printf("closed pipe file\n");
 
     PhidgetVoltageInputHandle ch1;
     PhidgetVoltageInputHandle ch2;
