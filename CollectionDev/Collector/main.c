@@ -15,7 +15,7 @@
 #include <errno.h>
 
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
-#define DMSBUFFER_SMPLTHRESHOLD 30
+#define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
 
 struct Sensor{
@@ -27,7 +27,7 @@ struct Sensor{
 
 struct dmsBuffer{
     int numSample;
-    char samples[1000];
+    char samples[2000];
 };
 
 static void CCONV ssleep(int);
