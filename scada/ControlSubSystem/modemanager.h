@@ -15,6 +15,10 @@
     @author Robson Adem
     @version 1.0 12/03/17
 */
+
+class State;
+class DMS;
+
 class ModeManager
 {
 

@@ -13,6 +13,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QProgressBar>
+#include <QTextStream>
 #include "../scada/ControlSubSystem/branch.h"
 #include "../scada/ControlSubSystem/modemanager.h"
 #include "../scada/ControlSubSystem/state.h"

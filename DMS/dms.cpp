@@ -90,20 +90,20 @@ DMS::DMS(string name, string dbConfig, string logPath){
 
     rc = sqlite3_open(name.c_str(),&db);
 
-    if(!fExist){
-        this->loadDataBase("../testbench_files/StateTableTB.txt");
-        this->loadDataBase("../testbench_files/BranchTableTB.txt");
-        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
+//    if(!fExist){
+//        this->loadDataBase("../testbench_files/StateTableTB.txt");
+//        this->loadDataBase("../testbench_files/BranchTableTB.txt");
+//        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
 
-        this->loadDataBase("../testbench_files/SensorTableTB.txt");
-        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
-        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
+//        this->loadDataBase("../testbench_files/SensorTableTB.txt");
+//        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
+//        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
 
-        this->loadDataBase("../testbench_files/SampleTableTB.txt");
-        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
+//        this->loadDataBase("../testbench_files/SampleTableTB.txt");
+//        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
 
-        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
-    }
+//        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+//    }
 
     //allow system to accept foreign keys
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
@@ -217,11 +217,7 @@ bool DMS::controlQuery(string cmd){
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-<<<<<<< HEAD
 
-=======
-//        cout << sql << endl;
->>>>>>> refs/remotes/origin/master
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
@@ -256,9 +252,9 @@ void DMS::loadConfigTable(string fileName, string myfilePath){
                          (std::istreambuf_iterator<char>()    ) );
     string cmd = "insert into configfiletable(filename,contents) values('"+ fileName +"', \"" + content +"\" );";
     int rc;
-    char * zErrmsg;
-
+    char * zErrmsg;    
     rc = sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
+    cout << zErrmsg;
 }
 
 void DMS::close(){
@@ -292,6 +288,9 @@ bool DMS::isSensorExist(string sensorName){
     }
     else{return true;}
 }
+
+void DMS::setCurrentState(State *currentState){this->currentState = currentState;}
+State* DMS::getCurrentState(){return currentState;}
 
 //Callback Functions
 int DMS::cbDropTable(void *data, int argc, char **argv, char **azColName){
@@ -378,6 +377,7 @@ int DMS::cbSize(void *data, int argc, char **argv, char **azColName){
     *number = (string)*argv;
     (void)argc;
     (void)azColName;
+    return 0;
 }
 
 
