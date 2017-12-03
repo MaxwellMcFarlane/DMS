@@ -215,8 +215,8 @@ main(int argc, char **argv) {
 		goto done;
 	}
 	
-	/*unsigned int* DI;
-	res = PhidgetVoltageInput_getDataInterval(ch, DI);
+	unsigned int* DI;
+	/*res = PhidgetVoltageInput_getDataInterval(ch, DI);
 	if (res != EPHIDGET_OK) {
 		Phidget_getErrorDescription(res, &errs);
 		fprintf(stderr, "failed to get Default DataInterval: %s\n", errs);
