@@ -51,7 +51,7 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     int channel;
     int serial;
 
-    if(!ctx){
+    if(ctx){
         struct Map *map;
         map = (struct Map*) ctx;
         res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, map->samplingPeriod);
