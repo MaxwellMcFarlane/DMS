@@ -294,9 +294,9 @@ int main(int argc, char **argv) {
         if(((int) diff.tv_sec) > 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
-            printf("***** PUSH TO DMS ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
-            printf("%s", samples);
-            printf("***** PUSH TO DMS *****\n");
+            printf("******** PUSH TO DMS ********\n);
+            printf("     %s", samples);
+            printf("*****************************\n");
             samples[0] = '\0';
 
         }
