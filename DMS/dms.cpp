@@ -345,21 +345,30 @@ void DMS::clearTable(string tableName){
 
 
 void DMS::resetRowIdTable(string tableName,string col){
-    string cmd,cmd1;
+    string cmd,cmd1,cmd2;
     int rc;
-    string minIndex;
-    int index;
-    cmd1 = "select Min(rowid) from "+tableName + ";";
-    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &minIndex, 0);
-//    index =
-    cout << stoi(minIndex) + getTable(tableName)->count() << endl;
-    cout << minIndex << endl;
-    for(int j = 1; j < getTable(tableName)->count() + 1;j++){
-        for(int i = stoi(minIndex); i < stoi(minIndex) + getTable(tableName)->count() -1;i++){
-            cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(j) +" WHERE " + col + "= "+ to_string(i) +";";
-            cout << cmd << endl;
-            rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
-        }
+    string maxIndex,minIndex;
+    int index,sqindex;
+    cmd1 = "select Max(rowid) from "+tableName + ";";
+    cmd2 = "select Min(rowid) from "+tableName + ";";
+    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &maxIndex, 0);
+    index = stoi(maxIndex);
+    rc = sqlite3_exec(db,cmd2.c_str(),cbSize,(void *) &minIndex, 0);
+    sqindex = stoi(minIndex);
+    int j = 1;
+    while(j != index){
+        cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(sqindex) +" WHERE " + col + "= "+ to_string(j) +";";
+        cout << cmd << endl;
+//        cout << !getTable(tableName)->isQueryEmpty("select rowid from "
+//                                                   + tableName
+//                                                   + " where " +col+ "="
+//                                                   +to_string(j) + ";") << endl;
+        rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
+        if(!getTable(tableName)->isQueryEmpty("select rowid from "
+                                             + tableName
+                                             + " where " +col+ "="
+                                             +to_string(j) + ";")){sqindex++;}
+        j++;
     }
 }
 

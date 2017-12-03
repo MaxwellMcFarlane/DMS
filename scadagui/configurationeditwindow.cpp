@@ -96,6 +96,14 @@ void ConfigurationEditWindow::on_Savebutton_clicked()
     string configname = dummy->text().toStdString();
 
     string edits = ui->FileEditor->toPlainText().toStdString();
+    /**
+      try{
+      mode.configure(txtFile);
+}
+catch(const std::exception &e){
+ e.what();//the error message
+}
+      **/
     if(!checkModeManagerConfigure(edits)){QMessageBox::about(this,"Error","Error File Corrupt Resolve Error");}
     db->getTable("ConfigFileTable")->updateTable("filename = " + configname,edits);
 }
