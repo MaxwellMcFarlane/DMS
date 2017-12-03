@@ -204,7 +204,7 @@ int main(int argc, char **argv) {
     buff.index = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 4;
+    int numbSensors = 1;
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
