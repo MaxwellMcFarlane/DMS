@@ -115,13 +115,16 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     char* samplePipe = SAMPLEPIPE;
     samplePipeFile = open(samplePipe, O_WRONLY);
     printf("Writing to pipe\n");
-    char* msg = SAMPLEPIPE_SETUP_MESSAGE;
-    int numBits = write(samplePipeFile, msg, sizeof(msg));
+    char msg[32]; // 32 hardcode count for below (account for '\0')
+    snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    strcat(msg, "\0");
+    printf("%s", msg);
+    int numBits = write(samplePipeFile, &msg, sizeof(msg));
     printf("Wrote to pipe\n");
     printf("%i\n", numBits);
-    // int n = close(samplePipeFile);
-    // printf("%i\n", n);
-    // printf("closed pipe file\n");
+    int n = close(samplePipeFile);
+    printf("%i\n", n);
+    printf("closed pipe file\n");
 
     FILE *fp;
     fp = fopen(SAMPLE_BACKUPFILE, "a");
@@ -208,9 +211,9 @@ main(int argc, char **argv) {
     int numBits = write(samplePipeFile, msg, sizeof(msg));
     printf("Wrote to pipe\n");
     printf("%i\n", numBits);
-    // int n = close(samplePipeFile);
-    // printf("%i\n", n);
-    // printf("closed pipe file\n");
+    int n = close(samplePipeFile);
+    printf("%i\n", n);
+    printf("closed pipe file\n");
 
     PhidgetVoltageInputHandle ch1;
     PhidgetVoltageInputHandle ch2;

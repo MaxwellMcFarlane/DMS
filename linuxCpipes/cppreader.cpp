@@ -3,7 +3,7 @@
 #include <string>
 
 int main(int, char** argv){
-    std::ifstream input("/tmp/myfifo");
+    std::ifstream input("/tmp/samplePipe");
     std::string line;
     //char dlm = ';';
     int i = 0;
