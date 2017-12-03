@@ -141,16 +141,16 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
-    /*// print to string buffer
+    // print to string buffer
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
 
-        char msg[100]; // 32 hardcode count for below (account for '\0')
+        char* msg[100]; // 32 hardcode count for below (account for '\0')
         snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f),", millisecondsSinceEpoch, voltage);
         strcat(msg, "\0");
-        buffptr->samples[buffptr->index] = msg;
+        *buffptr->samples[buffptr->index] = msg;
         buffptr->index++;
-    }*/
+    }
 
     // file backup
     FILE *fp;
@@ -202,8 +202,6 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
-
-    buff.samples[buff.index] = "hello";
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
