@@ -54,7 +54,7 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     if(!ctx){
         struct Map *map;
         map = (struct Map*) ctx;
-        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, *map->samplingPeriod);
+        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, map->samplingPeriod);
         if (res != EPHIDGET_OK) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
