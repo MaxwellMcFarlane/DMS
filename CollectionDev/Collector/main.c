@@ -206,7 +206,7 @@ int main(int argc, char **argv) {
     for(int i = 0; i < MAXBUFFERED_SAMPLES; i++){
         buff.samples[i] = "\0";
     }
-    printf("INSTANTIATED");
+
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
     struct Sensor map[numbSensors];
@@ -227,17 +227,17 @@ int main(int argc, char **argv) {
     }
 
 
-    char** ermsg;
+//    char** ermsg;
 
-    sqlite3 *db;
-    sqlite3_open(DB_PATH,&db);
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
-    sqlite3_exec(db, ".separator |", 0, 0, ermsg);
+//    sqlite3 *db;
+//    sqlite3_open(DB_PATH,&db);
+//    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
+//    sqlite3_exec(db, ".separator |", 0, 0, ermsg);
 
-    sqlite3_exec(db,
-                 "insert into "
-                 "sampletable(sensorid,timestamp,rawdata) "
-                 "values('s0',123212,2131231);",0,0,ermsg);
+//    sqlite3_exec(db,
+//                 "insert into "
+//                 "sampletable(sensorid,timestamp,rawdata) "
+//                 "values('s0',123212,2131231);",0,0,ermsg);
 
 
     printf("%s\n", ermsg);
