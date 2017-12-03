@@ -121,7 +121,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
     clock_gettime(CLOCK_REALTIME, &tv);
     long millisecondsSinceEpoch =
-            ((long)(tv.tv_sec) * 1000) + (tv.tv_usec / 1000000);
+            ((long)(tv.tv_sec) * 1000) + (tv.tv_nsec / 1000000);
 
     int hubSN = -1;
     int hubPort = -1;
