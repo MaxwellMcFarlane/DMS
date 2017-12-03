@@ -16,9 +16,9 @@ int main()
     // cout << "Mode Manager Configured" << endl;
 
     DMS db("../scada.db","../configuration_files/deftables_config.txt","../log.txt");
-    db.loadDataBase("../testbench_files/StateTableTB.txt");
-    db.loadDataBase("../testbench_files/BranchTableTB.txt");
-    db.loadDataBase("../testbench_files/ConditionTableTB.txt");
+    //db.loadDataBase("../testbench_files/StateTableTB.txt");
+    //db.loadDataBase("../testbench_files/BranchTableTB.txt");
+    //db.loadDataBase("../testbench_files/ConditionTableTB.txt");
 
     db.loadDataBase("../testbench_files/SensorTableTB.txt");
     db.loadDataBase("../testbench_files/SensorConfTableTB.txt");
@@ -26,28 +26,37 @@ int main()
 
     db.loadDataBase("../testbench_files/SampleTableTB.txt");
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
-    ModeManager m("../modeConfig.txt");
-
-// Test for Mode Manager
-    m.configure();
     DMS *dbp=&db;
-    cout<<"CurrentState: "+m.currentState<<endl;
-    m.nextstate(dbp);
-    cout<<"CurrentState: "+m.currentState<<endl;
+    try{
+        ModeManager m("../configuration_files/control_config.txt", dbp);
 
+        // Test for Mode Manager with data reaction
+        m.configure();
+        cout<<"CurrentState: "+m.currentState<<endl;
+        m.nextstate();
+        cout<<"CurrentState: "+m.currentState<<endl;
+        m.nextstate();
+        cout<<"CurrentState: "+m.currentState<<endl;
+        m.nextstate();
+        cout<<"CurrentState: "+m.currentState<<endl;
+    }
+    catch (const std::exception& e) {
+        std::cout <<e.what();
+    }
 
     // Unit test for state and state transition
-//                State s1("IDLE");
-//                State s2("RUN");
-//                State s3("FINISH");
+    //                State s1("IDLE");
+    //                State s2("RUN");
+    //                State s3("FINISH");
 
-//                Branch b1(s2,"'volt':null:null:Select RawData from SampleTable where RawData >60");
-//                Branch b2(s3,"'volt':null:null:Select RawData from SampleTable where RawData <0");
+    //                Branch b1(s2,"'s0':Select RawData from SampleTable where RawData  <0");
+    //                Branch b2(s3,"'s0':Select RawData from SampleTable where RawData >60");
 
-//                s1.loadBranch(b1);
-//                s1.loadBranch(b2);
-//                //cout<<s1.numOfBranches;
-//                cout<<"Next state is: "+s1.nextstate(dbp)<<endl;
+    //                s1.loadBranch(b1);
+    //                s1.loadBranch(b2);
+    //                //cout<<s1.numOfBranches;
+    //                cout<<"Next state is: "+s1.nextstate(dbp)<<endl;
 
-        return 0;
+
+    return 0;
 }

@@ -3,10 +3,9 @@ using namespace std;
 #include "branch.h"
 #include "state.h"
 
-Branch::Branch (State branchState, string condition ){
-    this->branchState=&branchState;
+Branch::Branch (State *branchState, string condition ){
+    this->branchState=branchState;
     this->condition=condition;
-    //cout<<this->branchState->name<<endl;
 }
 
 Branch::~Branch(){
