@@ -3,6 +3,9 @@
 
 #include "../DMS/dms.h"
 #include "../DMS/table.h"
+#include "exportwindow.h"
+#include "tableeditwindow.h"
+#include "configurationeditwindow.h"
 #include <QMainWindow>
 #include <QKeyEvent>
 
@@ -22,6 +25,8 @@ private slots:
     void on_actionExport_Table_triggered();
 
     void on_actionConfiguration_triggered();
+
+    void on_actionEdit_Table_triggered();
 
 private:
     Ui::MainWindow *ui;
