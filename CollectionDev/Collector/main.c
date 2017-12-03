@@ -305,7 +305,7 @@ int main(int argc, char **argv) {
             printf("******** PUSH TO DMS ********\n");
             printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
-            samples[0] = '\0';
+            buff.samples[0] = '\0';
 
         }
     }
