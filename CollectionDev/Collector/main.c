@@ -184,7 +184,7 @@ initChannel(PhidgetHandle ch, void *ctx) {
 int main(int argc, char **argv) {
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 4;
+    int numbSensors = 3;
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = 3000; // in msec
+        map[i].samplingPeriod = i * 1000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
