@@ -279,12 +279,13 @@ int main(int argc, char **argv) {
     //ssleep(20);
     // enter main loop
     clock_t lastUpdated, now;
+    volatile unsigned sink;
     while(true){
         for(size_t i=0; i<10000000; ++i)
               sink++;
 
           clock_t end = clock();
-          double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+          double cpu_time_used = ((double) (now - lastUpdated)) / CLOCKS_PER_SEC;
          if(cpu_time_used > 5){
           printf("for loop took %f seconds to execute \n", cpu_time_used);
          }
