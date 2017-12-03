@@ -203,7 +203,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
-    buff.samples =
+    //buff.samples =
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
