@@ -297,7 +297,7 @@ int main(int argc, char **argv) {
             printf("***** PUSH TO DMS ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
             printf("%s", samples);
             printf("***** PUSH TO DMS *****\n");
-            samples[0] = "\0";
+            samples[0] = '\0';
 
         }
     }
