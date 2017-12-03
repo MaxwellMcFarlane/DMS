@@ -54,21 +54,12 @@ void ModeManager::configure(){
             }
         }
         if (line.find(branchDeclaration) != std::string::npos) {
-<<<<<<< HEAD
-
             while(!file.eof()){
                 getline(file,line);
                 vector<string > branchLine= ModeManager::split(line,',');
                 string from=ModeManager::getState(branchLine[0]).name;
 
                 if(!from.compare("NULL")){
-=======
-            while(!file.eof()){
-                getline(file,line);                
-                vector<string> branchLine= ModeManager::split(line,',');
-                State from= ModeManager::getState(branchLine[0]);
-                if(!from.name.compare("NULL")){
->>>>>>> refs/remotes/origin/master
                     cout<<"CFG: State " + branchLine[0] + " is not in your state declaration!\n";
                 }
                 else{
