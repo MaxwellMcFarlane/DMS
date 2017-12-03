@@ -327,9 +327,9 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
-            /*char* tmp[5000] = "\0" SAMPLE_PREFIX;
-            char* prefix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
-            strcat(&tmp, prefix);*/
+            char* final[5000];
+            //char* prefix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
+            //strcat(&tmp, prefix);*/
             for(int i = 0; i < buff.index - 1; i++){
                 printf("%s\n", buff.samples[i]);
                 //strcat(&tmp, buff.samples[i]);
