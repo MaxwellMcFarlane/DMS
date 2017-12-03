@@ -141,7 +141,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
-    // print to string buffer
+    /*// print to string buffer
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
 
@@ -150,7 +150,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         strcat(msg, "\0");
         buffptr->samples[buffptr->index] = msg;
         buffptr->index++;
-    }
+    }*/
 
     // file backup
     FILE *fp;
@@ -202,6 +202,8 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+
+    buff.samples[buff.index] = "hello";
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
@@ -327,7 +329,7 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
-            char* tmp[5000] = "\0" SAMPLE_PREFIX;
+            /*char* tmp[5000] = "\0" SAMPLE_PREFIX;
             char* prefix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
             strcat(&tmp, prefix);
             for(int i = 0; i < buff.index - 1; i++){
@@ -341,7 +343,7 @@ int main(int argc, char **argv) {
             //sqlite3_open(DB_PATH,&db);
             sqlite3_exec(db, tmp, 0, 0, ermsg);
             sqlite3_close(db);
-
+*/
             // consol print
             //printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
