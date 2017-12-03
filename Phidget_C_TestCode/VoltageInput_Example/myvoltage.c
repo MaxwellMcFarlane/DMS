@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
 			Phidget_getErrorDescription(res, &errs);
 			fprintf(stderr, "read error: %s\n", errs);
 		}
-		Sleep(500);		
+		sleep(1); // originall Sleep(500) for windows		
 	}
 	Phidget_close((PhidgetHandle)ch);
 	PhidgetVoltageInput_delete(&ch);
