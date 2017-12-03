@@ -133,11 +133,12 @@ void Table::delRow(string col, string index){
     cmd += col;
     cmd += " = ";
     cmd += index;
-    cmd += ";";
-
+    cmd += ";";    
     sql = cmd.c_str();
 
     rc = sqlite3_exec(db,sql,cbDelRow,log, &ermsg);
+
+    cout << cmd << endl;
 //    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
@@ -145,7 +146,7 @@ void Table::delRow(string col, string index){
         *log << tableName << ": Row couldn't be deleted.\n";
     }
     else{
-        *log << tableName << " row[ " << index << "] was deleted.\n";
+        *log << tableName << " row[ " << index << "] was deleted.\n";        
         tableLength--;
     }
 }
@@ -290,6 +291,19 @@ vector<char*> Table::delimitter(string cmd){
     return k;
 }
 
+int Table::count(){
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+    string size;
+    string cmd = "SELECT count(*) from ";
+    cmd+= tableName;
+    cmd += ";";
+    sql = cmd.c_str();
+
+    rc = sqlite3_exec(db,sql,cbSize,(void *)&size, &ermsg);
+    return stoi(size);
+}
 //callback methods
 
 int Table::cbCreateTable(void *data, int argc, char **argv, char **azColName){
@@ -373,6 +387,13 @@ int Table::cbExp(void *data, int argc, char **argv, char **azColName){
     }
     *myfile += "\n";
     return 0;
+}
+
+int Table::cbSize(void *data, int argc, char **argv, char **azColName){
+    string * number = (string *) data;
+    *number = (string)*argv;
+    (void)argc;
+    (void)azColName;
 }
 
 int Table::headerN = 0;

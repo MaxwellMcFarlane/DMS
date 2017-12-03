@@ -13,9 +13,15 @@ tableEditWindow::tableEditWindow(QWidget *parent, DMS *db):
     ui(new Ui::tableEditWindow)
 {
     ui->setupUi(this);
-    this->db = db;    
-    ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("ControlState_config.txt")));    
-    ui->FileEditor->setText(QString::fromStdString("<No Contents>"));
+    this->db = db;
+    vector<Table*> list = db->getTableList();
+    for(int i = 0; i < (int)list.size(); i++){
+        Table dummy = *list.at(i);
+
+        if(dummy.getTableName() != "ConfigFileTable"){
+            ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString(dummy.getTableName())));
+        }
+    }
 }
 
 tableEditWindow::~tableEditWindow()
@@ -26,88 +32,47 @@ tableEditWindow::~tableEditWindow()
 void tableEditWindow::on_listWidget_itemSelectionChanged()
 {
     QListWidgetItem * dummy = ui->listWidget->currentItem();
-    string configname = dummy->text().toStdString();    
-    string wholeTable = db->getTableHeaders("ConfigFileTable")
-            + "\n"
-            + db->getTable("ConfigFileTable")->createQuery("Select contents from ConfigFileTable where fileName = '"
-                                                           +configname + "';");
-    ui->FileContentView->setText(QString::fromStdString(wholeTable));
+    string table = dummy->text().toStdString();
+    string wholeTable = db->getTableHeaders(table) + "\n" + db->getTable(table)->createQuery("Select * from " + table + ";");
+    ui->TableContentView->setText(QString::fromStdString(wholeTable));
 }
 
-void tableEditWindow::on_Savebutton_clicked()
+void tableEditWindow::on_getTablebutton_clicked()
 {
     QListWidgetItem * dummy = ui->listWidget->currentItem();
-    string configname = dummy->text().toStdString();
-
-    string edits = ui->FileEditor->toPlainText().toStdString();
-    if(!checkModeManagerConfigure(edits)){QMessageBox::about(this,"Error","Error File Corrupt Resolve Error");}
-    db->getTable("ConfigFileTable")->updateTable("filename = " + configname,edits);
-}
-
-void tableEditWindow::on_Previewbutton_clicked()
-{
-    QListWidgetItem * dummy = ui->listWidget->currentItem();
-    string configname = dummy->text().toStdString();
+    string tableName = dummy->text().toStdString();
     if(true){
-        string dummy = db->getTable("ConfigFileTable")->createQuery("Select contents from ConfigFileTable where fileName = '"
-                                                                    +configname + "';");
-        vector<char*> list;
+        string dummy = db->getTable(tableName)->createQuery("Select * from " + tableName + ";");
+        vector <char*> list;
         char * it;
         it = strtok((char*)dummy.c_str(), "\n");
         while(it != NULL){
             list.push_back(it);
             it = strtok(NULL, "\n");
         }
-        string print;
+        ui->tableWidget->setRowCount(list.size()+1);
+        ui->tableWidget->setColumnCount(1);
         for(int i = 0; i < (int)list.size(); i++){
-            print += to_string(i) + ". " + list[i] + "\n";
+            ui->tableWidget->setItem(i,1,new QTableWidgetItem(QString::fromStdString(list.at(i))));
         }
-        ui->FileEditor->setText(QString::fromStdString(print));
-    }
-    else{
-        ui->FileEditor->setText(QString::fromStdString("Bad Constraints"));
     }
 }
+void tableEditWindow::on_deletebutton_clicked()
+{
+    QModelIndexList selection = ui->tableWidget->selectionModel()->selectedRows();
+    QListWidgetItem * dummy = ui->listWidget->currentItem();
+    string tableName = dummy->text().toStdString();
 
-bool tableEditWindow::checkModeManagerConfigure(string file){
+    QModelIndexList select = ui->tableWidget->selectionModel()->selectedRows();
 
-    string stateDeclaration("STATES:");
-    string branchDeclaration("BRANCHES:");
-    ModeManager m;
-    bool state = false;
-    bool branch = false;
-    if(file.empty()){return false;}
-    vector<char*> list;
-    char * it;
-    it = strtok((char*)file.c_str(), ".\n");
-    while(it != NULL){
-        if(!isdigit(*it))list.push_back(it);
-        it = strtok(NULL, ".\n");
+    for(int i=0; i< select.count(); i++)
+    {
+        db->getTable(tableName)->delRow("rowid",to_string(i+1));
     }
+    db->resetRowIdTable(tableName);
 
-    for(int i = 0; i < (int)list.size(); i++){cout << list.at(i) << endl;}
 
-    for(int i = 0; i < (int)list.size(); i++){
-        string line(list.at(i));
-        if(line.at(0) == '#'){}
-        if(list.size() != 3){return false;}
-        else if(strcmp(list.at(i),stateDeclaration.c_str()) == 0){state = true; branch = false;}
-        else if(!line.compare(branchDeclaration)){state = false;branch = true;}
-        else if (state) {
-            vector<string > stateLine= m.split(line,',');
-            for(string s: stateLine){
-                State tempState(s);
-                m.states.push_back(tempState);
-            }
-        }
-        else if (branch) {
-                vector<string> branchLine= m.split(line,',');
-//                for(int i = 0; i < (int)branchLine.size(); i++){cout << branchLine.at(i) << endl;}
-                State from= m.getState(branchLine[0]);
-                State to = m.getState(branchLine[1]);
-                if(!from.name.compare("NULL")){return false;}
-                if(!to.name.compare("NULL")){return false;}
-        }
-    }
-    return true;
+    //    string edits = ui->FileEditor->toPlainText().toStdString();
+    //    if(!checkModeManagerConfigure(edits)){QMessageBox::about(this,"Error","Error File Corrupt Resolve Error");}
+    //    db->getTable("ConfigFileTable")->updateTable("filename = " + configname,edits);
 }

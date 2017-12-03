@@ -33,13 +33,12 @@ private slots:
 
     void on_listWidget_itemSelectionChanged();
 
-    void on_Savebutton_clicked();
+    void on_getTablebutton_clicked();
 
-    void on_Previewbutton_clicked();
+    void on_deletebutton_clicked();
 
 private:
 
-    bool checkModeManagerConfigure(string file);
     Ui::tableEditWindow *ui;
     DMS * db;
 };

@@ -24,8 +24,11 @@ int main()
 
     db.loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
 
-    cout << db.controlQuery("'s0':Select RawData from SampleTable where RawData > 0") << endl;
-    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
+//    db.clearTable("SampleTable");
+
+    db.resetRowIdTable("StateTable","rowid");
+//    cout << db.controlQuery("'s0':Select RawData from SampleTable where RawData > 60") << endl;
+//    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 
 
 //    /**SHOW DATABASE**/
