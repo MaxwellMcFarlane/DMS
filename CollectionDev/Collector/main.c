@@ -334,8 +334,8 @@ int main(int argc, char **argv) {
                 strcat(final, buff.samples[i]);
                 strcat(final, ",");
             }
-            strcat(&tmp, SAMPLE_POSTFIX);
-            printf("%s", tmp);
+            strcat(final, SAMPLE_POSTFIX);
+            printf("%s", final);
             //sqlite3_open(DB_PATH,&db);
             //sqlite3_exec(db, tmp, 0, 0, ermsg);
             //sqlite3_close(db);
