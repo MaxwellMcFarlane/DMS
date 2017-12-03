@@ -149,9 +149,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f),", millisecondsSinceEpoch, voltage);
         buffptr->samples[buffptr->index] = msg;
         buffptr->index++;
-        printf(msg);
-        //buffptr->samples[buffptr->index] = msg;
-        //buffptr->index++;
+        //printf(msg);
     }
 
     // file backup
