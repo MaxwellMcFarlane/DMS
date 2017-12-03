@@ -14,6 +14,9 @@
 #include <string.h>
 #include <errno.h>
 
+#include <sqlite3.h>
+
+#define DB_PATH "../../scada.db"
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 #define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
@@ -217,6 +220,14 @@ int main(int argc, char **argv) {
         }
     }
 
+    char *ermsg = 0;
+
+    sqlite3 *db;
+    sqlite3_open(DB_PATH,&db);
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
+
+    printf("%s\n", ermsg);
     /*
     * Enable logging to stdout
     */
