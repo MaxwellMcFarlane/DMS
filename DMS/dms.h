@@ -26,7 +26,8 @@ public:
 
     Table* getTable(string tableName);
     void dumpTable(string tableName);
-    void close();        
+    void clearTable(string tableName);
+    void close();
     Log* getLog();
     void getNewLog();
 
@@ -39,17 +40,20 @@ public:
     void loadConfigTable(string fileName , string myfile);
     bool isSensorExist(string sensorName);    
 
+    void resetRowIdTable(string tableName, string col);
+
 private:
 
     //callback methods
     static int cbDropTable           (void *data, int argc, char **argv, char **azColName);
     static int cbgetTableHeaders     (void *data, int argc, char **argv, char **azColName);
+    static int cbSize          (void *data, int argc, char **argv, char **azColName);
     //used to manipulate table with correct info
     vector <Table*> sensList;
     string filename;
     Table lookup;
     sqlite3 *db;
-    Log * log = new Log("log.txt");
+    Log * log = new Log("../error_files/dms_log.txt");
 
     static int n;
 

@@ -9,9 +9,9 @@ SOURCES += main.cpp \
     ../tools/log.cpp\
     ../tools/baseclass.cpp \
     dmswd.cpp \
-    sqlite3.c \
+#    sqlite3.c \
 
-#LIBS += -l sqlite3
+LIBS += -l sqlite3
 
 HEADERS += \
     dms.h \

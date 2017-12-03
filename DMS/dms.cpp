@@ -21,6 +21,7 @@ DMS::DMS(string name, string dbConfig){
     rc = sqlite3_open(name.c_str(),&db);
     //allow system to accept foreign keys
     rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    rc = sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
     //    *log << (string)ermsg << "\n";
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
@@ -62,7 +63,8 @@ DMS::DMS(string name){
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
     //allow system to accept foreign keys
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    rc = sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
     //    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_OK){
@@ -215,7 +217,11 @@ bool DMS::controlQuery(string cmd){
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-        cout << sql << endl;
+<<<<<<< HEAD
+
+=======
+//        cout << sql << endl;
+>>>>>>> refs/remotes/origin/master
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
@@ -270,7 +276,7 @@ string DMS::getTableHeaders(string tableName){
     string cmd = "Select * from " + tableName;
     const char* sql = cmd.c_str();
     sqlite3_exec(db,sql, cbgetTableHeaders, (void *)&headers, &ermsg);
-    n++;
+    n = 1;
     //    *log << (string)ermsg << "\n";
     return headers;
 }
@@ -313,7 +319,57 @@ int DMS::cbgetTableHeaders(void *data, int argc, char **argv, char **azColName){
 
 int DMS::n = 1;
 
+void DMS::clearTable(string tableName){
 
+    int rc = 0;
+    char *ermsg = 0;
+    const char * sql;
+    string cmd = "DELETE FROM ";
+    cmd += tableName;
+    cmd += ";\n VACUUM;";
+
+    sql = cmd.c_str();
+
+    rc = sqlite3_exec(db,sql,0,log, &ermsg);
+
+    if(rc != SQLITE_OK){
+        *log << "Error: " << rc;
+        *log << tableName << ": Row couldn't be deleted.\n";
+    }
+    else{
+        *log << tableName << "clear corruption.\n";
+    }
+
+
+}
+
+
+void DMS::resetRowIdTable(string tableName,string col){
+    string cmd,cmd1;
+    int rc;
+    string minIndex;
+    int index;
+    cmd1 = "select Min(rowid) from "+tableName + ";";
+    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &minIndex, 0);
+//    index =
+    cout << stoi(minIndex) + getTable(tableName)->count() << endl;
+    cout << minIndex << endl;
+    for(int j = 1; j < getTable(tableName)->count() + 1;j++){
+        for(int i = stoi(minIndex); i < stoi(minIndex) + getTable(tableName)->count() -1;i++){
+            cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(j) +" WHERE " + col + "= "+ to_string(i) +";";
+            cout << cmd << endl;
+            rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
+        }
+    }
+}
+
+
+int DMS::cbSize(void *data, int argc, char **argv, char **azColName){
+    string * number = (string *) data;
+    *number = (string)*argv;
+    (void)argc;
+    (void)azColName;
+}
 
 
 
