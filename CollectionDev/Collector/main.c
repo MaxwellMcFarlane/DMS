@@ -256,6 +256,7 @@ main(int argc, char **argv) {
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
+        prinf("%i", i);
         // read HUB and Port
         map[i].key.hub = 497194;
         map[i].key.port = i;
