@@ -348,3 +348,19 @@ ssleep(int tm) {
     sleep(tm);
 #endif
 }
+
+// struct for map structure adapted from
+// https://stackoverflow.com/questions/21958247/map-like-structure-in-c-use-int-and-struct-to-determine-a-value
+// and the wikipedia page on structs
+// utilizing linear search for Keys as there will not be an absurd ammount of sensors
+// and this will not be called relatively often
+
+struct Map{
+    struct Key key;
+    PhidgetHandle ch;
+};
+
+struct Key{
+    int hub;
+    int port;
+};
