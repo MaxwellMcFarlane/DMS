@@ -17,12 +17,10 @@ ModeManager::~ModeManager()
 
 }
 
-
 State* ModeManager::getState(string name){
     for(int i=0;i< states.size();i++){
         if(!states[i].name.compare(name)){
             return &states[i];// the name matches return the pointer to this state
-
         }
     }
     State defaultState("NULL");//the name is not found in the states list return a NULL name state
@@ -49,23 +47,26 @@ void ModeManager::configure(){
         //iterate till the end of the file
         lineCount++;//line counter
         getline(file,line);
+
         if(line.at(0) == '#'){
-            //meant for comments
+            // # is for commenting
+
         }
         else if (line.find(stateDeclaration) != std::string::npos) {
             //state declaration block
             getline(file,line);
             vector<string > stateLine= ModeManager::split(line,',');//split lines
             for(string s: stateLine){
+
                 State tempState(s);//create a state
                 *log<<"CFG: State " +tempState.name + " has been successfully created!\n";
                 states.push_back(tempState);//add the state to the states list
                 db->getTable("StateTable")->addToTable("'"+s+"'");//add the state to the statetable in the dms
-
             }
         }
-        if (line.find(branchDeclaration) != std::string::npos) {
 
+
+        if (line.find(branchDeclaration) != std::string::npos) {
             //branch declaration block
             while(!file.eof()) {
                 //iterate till end of the file
@@ -103,33 +104,30 @@ void ModeManager::configure(){
 
                             }
                             else{
-                                Branch tempBranch( new State("sfas"),"prepQuery(branchLine[2])");//create a branch
+                                Branch tempBranch( getState( branchLine[1]),prepQuery(branchLine[2]));//create a branch
                                 db->getTable("BranchTable")->addToTable("'"+from+"' , '"+to+"' , '"+branchLine[2]+"'");//add the branch to the DMS
 
                                 for(int i=0;i< states.size();i++){
                                     if(!branchLine[0].compare(states[i].name)) states[i].loadBranch(tempBranch);//add the branch to state_from
 
                                 }
-                                *log<<"CFG: A Branch from State " + from +" to State " + tempBranch.branchState->name +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
 
+                                *log<<"CFG: A Branch from State " + from +" to State " + tempBranch.branchState->name +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
                             }
 
                         }
-
                     }
 
                 }
             }
-
         }
     }
     file.close();
-
+    cout<<"jhahha";
     if(!states.empty()) {
         currentState=(states[0]).name;
         //set the first state to be the default currentstate
         *log<<"CFG: DONE! State " + currentState + " is assigned to be the default current state.\n";
-
     }
 }
 
@@ -168,4 +166,3 @@ string ModeManager::prepQuery(string condition){
     str.append(tokens[1]);
     return str;
 }
-
