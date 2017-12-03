@@ -21,8 +21,8 @@
 #define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
 #define MAXBUFFERED_SAMPLES 60
-#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values(\0"
-#define SAMPLE_POSTFIX "); \0"
+#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values\0"
+#define SAMPLE_POSTFIX "; \0"
 struct Sensor{
     int hub;
     int port;
