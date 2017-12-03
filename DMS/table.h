@@ -25,6 +25,8 @@ public:
     void setDimensions(string newD);
 
     void addToTable(string info);
+    void addMultiToTable(string info);
+
     void delRow(string col, string index);
     //provide cols, the table name, and operation
     //query with delimitter

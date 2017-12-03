@@ -16,6 +16,7 @@ Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
     cmd += tableName + " " + dim;
     sql = cmd.c_str();
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc << "\n";
@@ -65,6 +66,7 @@ Table::Table(string tableName, sqlite3 *db, Log * log){
     }
     sql = cmd.c_str();
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc << "\n";
@@ -95,6 +97,7 @@ void Table::addToTable(string info){
     sql = cmd.c_str();    
 
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc << " in " << tableName << "\n";
@@ -104,6 +107,19 @@ void Table::addToTable(string info){
     else{
         *log << tableName << ": Item was inserted.\n";
         tableLength++;
+    }
+}
+
+void Table::addMultiToTable(string info){
+    vector<char*> list;
+    char * it;
+    it = strtok((char*)info.c_str(), "\n");
+    while(it != NULL){
+        list.push_back(it);
+        it = strtok(NULL, "\n");
+    }
+    for(int i = 0; i < (int)list.size(); i++){
+        addToTable(list.at(i));
     }
 }
 
@@ -122,6 +138,7 @@ void Table::delRow(string col, string index){
     sql = cmd.c_str();
 
     rc = sqlite3_exec(db,sql,cbDelRow,log, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc;
@@ -142,6 +159,7 @@ string Table::createQuery(string cmd){
 
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
@@ -173,6 +191,7 @@ string Table::createQuery(string col, string op){
 
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
@@ -206,6 +225,7 @@ void Table::exp(string col, string op, string filePath){
     string result;
     headerN++;
     rc = sqlite3_exec(db,sql,cbExp,(void*)&result, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     myfile << result;
     myfile.close();
@@ -238,6 +258,7 @@ void Table::updateTable(string index, string op){
     sql = cmd.c_str();
     string result;
     rc = sqlite3_exec(db,sql,cbUpdate,&result, &ermsg);
+//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;

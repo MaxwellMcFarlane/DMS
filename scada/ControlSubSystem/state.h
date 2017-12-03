@@ -16,7 +16,7 @@ class State{
      int numOfBranches;
      State(string name);
      void loadBranch(Branch branch);
-     State *nextstate(DMS *db);
+     string nextstate(DMS *db);
      ~State();
 
 };

@@ -10,7 +10,11 @@ SOURCES += main.cpp \
     ControlSubSystem/state.cpp \
     ../tools/baseclass.cpp \
     ../tools/log.cpp \
-    ControlSubSystem/modemanager.cpp
+    ControlSubSystem/modemanager.cpp \
+    scada.cpp \
+    ../DMS/dms.cpp \
+    ../DMS/dmswd.cpp \
+    ../DMS/table.cpp
 
 LIBS += -l sqlite3
 
@@ -22,4 +26,8 @@ HEADERS += \
     ../tools/baseclass.h \
     ../tools/log.h \
     ../tools/macros.h \
-    ControlSubSystem/modemanager.h
+    ControlSubSystem/modemanager.h \
+    scada.h \
+    ../DMS/dms.h \
+    ../DMS/dmswd.h \
+    ../DMS/table.h

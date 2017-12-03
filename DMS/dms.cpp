@@ -20,8 +20,8 @@ DMS::DMS(string name, string dbConfig){
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
     //allow system to accept foreign keys
-    rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
-    cout << rc << endl;
+    rc = sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    //    *log << (string)ermsg << "\n";
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
@@ -62,8 +62,9 @@ DMS::DMS(string name){
     filename = name.c_str();
     rc = sqlite3_open(name.c_str(),&db);
     //allow system to accept foreign keys
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
-    cout << rc << endl;
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    //    *log << (string)ermsg << "\n";
+
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
@@ -74,7 +75,7 @@ DMS::DMS(string name){
 
 DMS::DMS(string name, string dbConfig, string logPath){    
     int rc = 0;
-    //    char *ermsg = 0;
+    char *ermsg = 0;
     log = new Log(logPath);
     time_t now = time(0);
     string dt = ctime(&now);
@@ -82,9 +83,29 @@ DMS::DMS(string name, string dbConfig, string logPath){
     *log << "\n" << dt;
 
     filename = name.c_str();
+    ifstream dbcheck("../scada.db");
+    bool fExist = dbcheck.good();
+
     rc = sqlite3_open(name.c_str(),&db);
+
+    if(!fExist){
+        this->loadDataBase("../testbench_files/StateTableTB.txt");
+        this->loadDataBase("../testbench_files/BranchTableTB.txt");
+        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
+
+        this->loadDataBase("../testbench_files/SensorTableTB.txt");
+        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
+        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
+
+        this->loadDataBase("../testbench_files/SampleTableTB.txt");
+        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
+
+        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+    }
+
     //allow system to accept foreign keys
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, 0);
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    //    *log << ermsg << "\n";
     if(rc == SQLITE_OK){
         *log << "DataBase " << filename << " is opened.\n";
     }
@@ -154,6 +175,7 @@ void DMS::dumpTable(string tableName){
         t = sensList.at(i);
         if(tableName == t->getTableName()){
             rc = sqlite3_exec(db,sql,cbDropTable,(void*)log,&ermsg);
+            //            *log << (string)ermsg << "\n";
             break;
         }
     }
@@ -179,7 +201,7 @@ vector<char*> DMS::delimitter(string cmd){
 }
 
 bool DMS::controlQuery(string cmd){    
-    string tableName, col, sql;
+    string sql,sensorName,tableName;
     vector<char*> list;
     char * t;
     t = strtok((char*)cmd.c_str(), ": ");
@@ -187,38 +209,17 @@ bool DMS::controlQuery(string cmd){
         list.push_back(t);
         t = strtok(NULL, ": ");
     }
-    tableName = (string)list.at(6);
-    col = (string)list.at(4);
-
-    sql = "select " + col + " from " + tableName + " where ";
-    //    for(int i = 0; i < (int)list.size() ; i ++){cout << list.at(i) << endl;}
-    for(int i = 8; i < (int)list.size() ; i ++){sql +=  (string)list.at(i) + " ";}
+    tableName = (string)list.at(4);
+    sensorName = (string)list.at(0);
+    for(int i = 1; i < (int)list.size(); i++){sql += (string)list.at(i) + " " ;}
+    sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-        string sensors = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where SensorType = " + (string)list.at(0) + ";");
-        vector<char*> sensorlist;
-        char * it;
-        it = strtok((char*)sensors.c_str(), "\n");
-        while(it != NULL){
-            sensorlist.push_back(it);
-            it = strtok(NULL, "\n");
-        }
-        for(int i = 0; i < (int)sensorlist.size(); i++){
-            if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = '" + sensorlist.at(i) + "';")){return true;}
-        }
-        return false;
-    }
-    else if((string)list.at(1) != "null" && (string)list.at(2) != "null"){
-        string sensor = getTable("SensorTable")->createQuery("Select SensorId from SensorTable where hubid = " + (string)list.at(1)
-                                                             + " and  portnumber = " + (string)list.at(2) + ";");
-        char * it;
-        it = strtok((char*)sensor.c_str(), "\n");
-        sensor = (string)it;
-        if(!getTable(tableName)->isQueryEmpty(sql + " and sensorid = '" + sensor + "';")){return true;}
-        return false;
+        cout << sql << endl;
+        if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
-
+    return false;
 }
 
 Log* DMS::getLog(){return log;}
@@ -243,10 +244,15 @@ void DMS::loadDataBase(string myfilePath){
     else{*log << "Unable to load data.\n"; cerr << "Unable to open file.\n";}
 }
 
-void DMS::loadConfigTable(){
-    sqlite3_exec(db,(char*)"insert into configfiletable(filename,contents) values('table_config.txt',readfile('/Users/maxwellmcfarlane/scada_repo/configuration_files/table_config.txt'));",0,0,0);
-    sqlite3_exec(db,(char*)"insert into configfiletable(filename,contents) values('deftable_config.txt',readfile('/Users/maxwellmcfarlane/scada_repo/configuration_files/deftable_config.txt'));",0,0,0);
-    sqlite3_exec(db,(char*)"insert into configfiletable(filename,contents) values('ControlState_config.txt',readfile('/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt'));",0,0,0);
+void DMS::loadConfigTable(string fileName, string myfilePath){
+    std::ifstream ifs(myfilePath);
+    std::string content( (std::istreambuf_iterator<char>(ifs) ),
+                         (std::istreambuf_iterator<char>()    ) );
+    string cmd = "insert into configfiletable(filename,contents) values('"+ fileName +"', \"" + content +"\" );";
+    int rc;
+    char * zErrmsg;
+
+    rc = sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
 }
 
 void DMS::close(){
@@ -264,14 +270,17 @@ string DMS::getTableHeaders(string tableName){
     string cmd = "Select * from " + tableName;
     const char* sql = cmd.c_str();
     sqlite3_exec(db,sql, cbgetTableHeaders, (void *)&headers, &ermsg);
+    n++;
+    //    *log << (string)ermsg << "\n";
     return headers;
 }
 
 bool DMS::isSensorExist(string sensorName){
     string cmd = "select sensorid from sensortable where sensorid = " + sensorName + ";";
+    char * ermsg;
     int rc;
-    cout << cmd << endl;
-    rc = sqlite3_exec(db,cmd.c_str(), 0, 0, 0);
+    rc = sqlite3_exec(db,cmd.c_str(), 0, 0, &ermsg);
+    //    *log << (string)ermsg << "\n";
     if(rc != SQLITE_OK){
         return false;
     }
@@ -290,10 +299,19 @@ int DMS::cbDropTable(void *data, int argc, char **argv, char **azColName){
 
 int DMS::cbgetTableHeaders(void *data, int argc, char **argv, char **azColName){
     string * headers = (string *) data;
-    for(int i = 0; i < argc; i++){*headers += azColName[i];if(i < argc-1){*headers += " | ";}}
+    if(n == 1){
+        for(int i = 0; i < argc; i++){
+            *headers += azColName[i];
+            if(i < argc-1){*headers += " | ";}
+        }
+        n--;
+    }
     (void)argc;
     (void)argv;
+    return 0;
 }
+
+int DMS::n = 1;
 
 
 
