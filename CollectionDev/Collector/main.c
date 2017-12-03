@@ -133,7 +133,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     char msg[32]; // 32 hardcode count for below (account for '\0')
     snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
-    printf("%s", msg);
+    strcat(ctx, vbuff);
 
     // file backup
     FILE *fp;
@@ -183,6 +183,8 @@ initChannel(PhidgetHandle ch, void *ctx) {
 
 int main(int argc, char **argv) {
 
+    char samples[1000];
+
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 1;
     struct Sensor map[numbSensors];
@@ -230,7 +232,7 @@ int main(int argc, char **argv) {
     }
 
     for(int i = 0; i < numbSensors; i++){
-        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, NULL);
+        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &samples);
         if (res != EPHIDGET_OK) {
             Phidget_getErrorDescription(res, &errs);
             fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
@@ -283,7 +285,7 @@ int main(int argc, char **argv) {
     volatile unsigned sink;
     struct timespec before, after, diff;
     clock_gettime(CLOCK_MONOTONIC, &before);
-    printf("***** MAIN LOOP ***** (%i %i)", (long) before.tv_sec, before.tv_nsec);
+    printf("***** MAIN LOOP ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
     while(1){
 
         clock_gettime(CLOCK_MONOTONIC, &after);
@@ -292,7 +294,10 @@ int main(int argc, char **argv) {
         if(((int) diff.tv_sec) > 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
-            printf("***** PUSH TO DMS ***** (%i %i)", (long) before.tv_sec, before.tv_nsec);
+            printf("***** PUSH TO DMS ***** (%i %i)/n", (long) before.tv_sec, before.tv_nsec);
+            printf("%s", samples);
+            printf("***** PUSH TO DMS *****/n");
+            samples = "\0";
 
         }
     }
