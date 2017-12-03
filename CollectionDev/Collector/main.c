@@ -304,7 +304,7 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("******** PUSH TO DMS ********\n");
             printf("%s", &buff.samples);
-            printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             samples[0] = '\0';
 
         }
