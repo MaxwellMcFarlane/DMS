@@ -206,7 +206,7 @@ int main(int argc, char **argv) {
     for(int i = 0; i < MAXBUFFERED_SAMPLES; i++){
         buff.samples[i] = "\0";
     }
-
+    printf("INSTANTIATED");
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
     struct Sensor map[numbSensors];
