@@ -248,14 +248,14 @@ main(int argc, char **argv) {
     }
 
     unsigned int* DI;
-    *DI = 500;
+    *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
     if (res != EPHIDGET_OK) {
         Phidget_getErrorDescription(res, &errs);
         fprintf(stderr, "failed to set DataInterval: %s\n", errs);
         goto done;
     }
-    *DI = 1500;
+    *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
     if (res != EPHIDGET_OK) {
         Phidget_getErrorDescription(res, &errs);
@@ -267,6 +267,22 @@ main(int argc, char **argv) {
     printf("Gathering data for 20 seconds...\n");
     ssleep(20);
 
+    printf("Gather data for 10 seconds with new dataInterval...\n");
+    *DI = 3000;
+    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
+    if (res != EPHIDGET_OK) {
+        Phidget_getErrorDescription(res, &errs);
+        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
+        goto done;
+    }
+    *DI = 3000;
+    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
+    if (res != EPHIDGET_OK) {
+        Phidget_getErrorDescription(res, &errs);
+        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
+        goto done;
+    }
+    ssleep(10);
 done:
     //printf("%s", samples);
     Phidget_close((PhidgetHandle)ch1);

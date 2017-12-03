@@ -16,13 +16,16 @@ void CCONV AttachHandler(PhidgetManagerHandle manager, void *userptr, PhidgetHan
 
 	int serialNumber;
 	const char *name;
-
+	Phidget_DeviceID devId;
 	LocalErrorCatcher(
 		Phidget_getDeviceName(device, &name));
 	LocalErrorCatcher(
 		Phidget_getDeviceSerialNumber(device, &serialNumber));
-
-	printf("Hello Device %s, Serial Number: %d\n", name, serialNumber);
+		LocalErrorCatcher(
+	Phidget_getDeviceID(device, &devId));
+	if(devId == PHIDID_VOLTAGEINPUT_PORT){
+		printf("Hello Device %s, Serial Number: %d\n", name, serialNumber);
+		}
 
 	return;
 }
