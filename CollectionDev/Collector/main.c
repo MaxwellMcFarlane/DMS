@@ -119,9 +119,10 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     struct timespec tv;
     //gettimeofday(&tv, NULL);
     // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
-    clock_gettime(CLOCK_REALTIME, &tv);
+    clock_gettime(CLOCK_REALTIME, &tv); // BROKEN
     unsigned long long millisecondsSinceEpoch =
-            (((unsigned long long) tv.tv_sec) * 1000) + ((unsigned long long) (tv.tv_nsec / 1000000));
+            (unsigned long long)(tv.tv_sec) * 1000 +
+            (unsigned long long)(tv.tv_nsec) / 1000000;
 
     int hubSN = -1;
     int hubPort = -1;
@@ -130,14 +131,14 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
 
     // print to string buffer
     char msg[32]; // 32 hardcode count for below (account for '\0')
-    snprintf(msg, (100*sizeof(char)), "%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
     printf("%s", msg);
 
     // file backup
     FILE *fp;
     fp = fopen(SAMPLE_BACKUPFILE, "a");
-    fprintf(fp,"%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     fclose(fp);
 
     // print to console/terminal
