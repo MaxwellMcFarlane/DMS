@@ -330,17 +330,15 @@ int main(int argc, char **argv) {
             char final[5000] = "";
             strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
-                printf("%s\n", buff.samples[i]);
-                //strcat(&tmp, buff.samples[i]);
-                //strcat(&tmp, ",");
+                //printf("%s\n", buff.samples[i]);
+                strcat(final, buff.samples[i]);
+                strcat(final, ",");
             }
-            /*strcat(&tmp, buff.samples[buff.index]);
-            char* postfix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
-            strcat(&tmp, postfix);
+            strcat(&tmp, SAMPLE_POSTFIX);
             printf("%s", tmp);
             //sqlite3_open(DB_PATH,&db);
-            sqlite3_exec(db, tmp, 0, 0, ermsg);
-            sqlite3_close(db);
+            //sqlite3_exec(db, tmp, 0, 0, ermsg);
+            //sqlite3_close(db);
 */
             // consol print
             //printf("%s", &buff.samples);
