@@ -146,7 +146,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
 
         char msg[100]; // 32 hardcode count for below (account for '\0')
-        msg = "\0";
+        msg[0] = "\0";
         snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f),", millisecondsSinceEpoch, voltage);
         snprintf(msg, (sizeof(char)), "\0");
         buffptr->samples[buffptr->index] = msg;
