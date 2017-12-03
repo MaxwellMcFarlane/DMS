@@ -116,12 +116,12 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-
-    unsigned long long millisecondsSinceEpoch =
-            (unsigned long long)(tv.tv_sec) * 1000 +
-            (unsigned long long)(tv.tv_usec) / 1000;
+    struct timespec tv;
+    //gettimeofday(&tv, NULL);
+    // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
+    clock_gettime(CLOCK_REALTIME, &tv);
+    long millisecondsSinceEpoch =
+            ((long)(tv.tv_sec) * 1000) + (tv.tv_usec / 1000000);
 
     int hubSN = -1;
     int hubPort = -1;
@@ -130,18 +130,18 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
 
     // print to string buffer
     char msg[32]; // 32 hardcode count for below (account for '\0')
-    snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    snprintf(msg, (100*sizeof(char)), "%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
     printf("%s", msg);
 
     // file backup
     FILE *fp;
     fp = fopen(SAMPLE_BACKUPFILE, "a");
-    fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    fprintf(fp,"%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     fclose(fp);
 
     // print to console/terminal
-    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    printf("%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -253,7 +253,8 @@ int main(int argc, char **argv) {
         }
     }
     // give some time for sensors to attach
-    ssleep(10);
+    ssleep(5);
+
 
     // check if channel is attached and report status
     int attached = 0;
