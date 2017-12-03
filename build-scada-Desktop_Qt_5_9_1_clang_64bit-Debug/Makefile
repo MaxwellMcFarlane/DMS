@@ -57,7 +57,11 @@ SOURCES       = ../scada/main.cpp \
 		../scada/ControlSubSystem/state.cpp \
 		../tools/baseclass.cpp \
 		../tools/log.cpp \
-		../scada/ControlSubSystem/modemanager.cpp 
+		../scada/ControlSubSystem/modemanager.cpp \
+		../scada/scada.cpp \
+		../DMS/dms.cpp \
+		../DMS/dmswd.cpp \
+		../DMS/table.cpp 
 OBJECTS       = main.o \
 		dms.o \
 		table.o \
@@ -65,7 +69,11 @@ OBJECTS       = main.o \
 		state.o \
 		baseclass.o \
 		log.o \
-		modemanager.o
+		modemanager.o \
+		scada.o \
+		dms.o \
+		dmswd.o \
+		table.o
 DIST          = ../../Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/qdevice.pri \
 		../../Qt/5.9.1/clang_64/mkspecs/features/device_config.prf \
@@ -224,6 +232,7 @@ DIST          = ../../Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/spec_post.prf \
+		../scada/.qmake.stash \
 		../../Qt/5.9.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/toolchain.prf \
@@ -251,14 +260,22 @@ DIST          = ../../Qt/5.9.1/clang_64/mkspecs/features/spec_pre.prf \
 		../tools/baseclass.h \
 		../tools/log.h \
 		../tools/macros.h \
-		ControlSubSystem/modemanager.h ../scada/main.cpp \
+		ControlSubSystem/modemanager.h \
+		scada.h \
+		../DMS/dms.h \
+		../DMS/dmswd.h \
+		../DMS/table.h ../scada/main.cpp \
 		../DMS/dms.cpp \
 		../DMS/table.cpp \
 		../scada/ControlSubSystem/branch.cpp \
 		../scada/ControlSubSystem/state.cpp \
 		../tools/baseclass.cpp \
 		../tools/log.cpp \
-		../scada/ControlSubSystem/modemanager.cpp
+		../scada/ControlSubSystem/modemanager.cpp \
+		../scada/scada.cpp \
+		../DMS/dms.cpp \
+		../DMS/dmswd.cpp \
+		../DMS/table.cpp
 QMAKE_TARGET  = scada
 DESTDIR       = 
 TARGET        = scada
@@ -433,6 +450,7 @@ Makefile: ../scada/scada.pro ../../Qt/5.9.1/clang_64/mkspecs/macx-clang/qmake.co
 		../../Qt/5.9.1/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.9.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.9.1/clang_64/mkspecs/features/toolchain.prf \
@@ -613,6 +631,7 @@ Makefile: ../scada/scada.pro ../../Qt/5.9.1/clang_64/mkspecs/macx-clang/qmake.co
 ../../Qt/5.9.1/clang_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.9.1/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../Qt/5.9.1/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.9.1/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.9.1/clang_64/mkspecs/features/mac/sdk.prf:
 ../../Qt/5.9.1/clang_64/mkspecs/features/toolchain.prf:
@@ -657,6 +676,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -737,6 +757,35 @@ modemanager.o: ../scada/ControlSubSystem/modemanager.cpp ../scada/ControlSubSyst
 		../tools/baseclass.h \
 		../tools/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modemanager.o ../scada/ControlSubSystem/modemanager.cpp
+
+scada.o: ../scada/scada.cpp ../scada/scada.h \
+		../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/baseclass.h \
+		../tools/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scada.o ../scada/scada.cpp
+
+dms.o: ../DMS/dms.cpp ../DMS/dms.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/baseclass.h \
+		../tools/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dms.o ../DMS/dms.cpp
+
+dmswd.o: ../DMS/dmswd.cpp ../DMS/dmswd.h \
+		../DMS/table.h \
+		../tools/macros.h \
+		../tools/baseclass.h \
+		../tools/log.h \
+		../DMS/dms.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dmswd.o ../DMS/dmswd.cpp
+
+table.o: ../DMS/table.cpp ../DMS/table.h \
+		../tools/macros.h \
+		../tools/baseclass.h \
+		../tools/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o table.o ../DMS/table.cpp
 
 ####### Install
 

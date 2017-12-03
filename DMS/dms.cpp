@@ -215,7 +215,7 @@ bool DMS::controlQuery(string cmd){
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-        cout << sql << endl;
+
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
