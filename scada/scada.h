@@ -7,8 +7,8 @@
 class Scada
 {
 public:
-    Scada();
-    Scada(string database file);
+    Scada ();
+    Scada (string database_file);
 };
 
 #endif // SCADA_H

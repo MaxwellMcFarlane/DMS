@@ -1,5 +1,36 @@
 
 <<<<<<< HEAD
+Sat Dec  2 22:27:18 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+=======
+<<<<<<< HEAD
 
 Fri Dec  1 09:47:49 2017
 Table Retrieval Error.
@@ -60,26 +91,36 @@ BranchTable: Item was inserted.
 BranchTable: Item was inserted.
 Error: 19 in BranchTable
 Item: 51,3 caused a constraint violation.
+>>>>>>> refs/remotes/origin/master
  Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-Error: 19 in ConditionTable
-Item: 5, 'RawData > 251' caused a constraint violation.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in ConditionTable
-Item: 15, 'RawData > 510' caused a constraint violation.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
  Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-SensorTable: Item was inserted.
-SensorTable: Item was inserted.
-SensorTable: Item was inserted.
-SensorTable: Item was inserted.
-SensorTable: Item was inserted.
-SensorTable: Item was inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
 Error: 19 in SensorTable
 Item: 's6',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -120,9 +161,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -151,11 +196,38 @@ CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
+<<<<<<< HEAD
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sat Dec  2 23:21:00 2017
+DataBase ../scada.db is opened.
+=======
 Query created.
 Fri Dec  1 09:47:49 2017
 
 Sat Dec  2 16:06:33 2017
 DataBase /Users/maxwellmcfarlane/scada_repo/scada.db is opened.
+>>>>>>> refs/remotes/origin/master
 Error: 1
 Table:ConfigFileTable already exists.
 ConfigFileTable could not be created.
@@ -167,11 +239,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -199,90 +266,7 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Query created.
-Query created.
-
-Sat Dec  2 16:06:43 2017
-DataBase ../scada.db is opened.
-Error: 1
-Table:ConfigFileTable already exists.
-ConfigFileTable could not be created.
-Error: 1
-Table:StateTable already exists.
-StateTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:BranchTable already exists.
-BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:CalConfTable already exists.
-CalConfTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:SensorTable already exists.
-SensorTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:SampleTable already exists.
-SampleTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:CalibratedSampleTable already exists.
-CalibratedSampleTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:SensorConfTable already exists.
-SensorConfTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-Error: 19 in ConditionTable
-Item: 15, 'RawData > 510' caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
+<<<<<<< HEAD
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -341,9 +325,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -372,10 +360,195 @@ CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
 CalibratedSampleTable: Item was inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sat Dec  2 23:22:08 2017
+=======
+Query created.
+Query created.
+
+Sat Dec  2 16:06:43 2017
+>>>>>>> refs/remotes/origin/master
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+<<<<<<< HEAD
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sat Dec  2 23:22:33 2017
+=======
 SampleTableclear corruption.
 Sat Dec  2 16:06:43 2017
 
 Sat Dec  2 16:17:24 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -388,11 +561,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -420,6 +588,8 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
+<<<<<<< HEAD
+=======
 Error: 19 in StateTable
 Item: 'Idle' caused a constraint violation.
  Item could not be inserted.
@@ -456,6 +626,7 @@ Item: 15, 'RawData > 510' caused a constraint violation.
 ConditionTable: Item was inserted.
 ConditionTable: Item was inserted.
 ConditionTable: Item was inserted.
+>>>>>>> refs/remotes/origin/master
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -514,9 +685,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -531,12 +706,48 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+
+Sat Dec  2 23:29:58 2017
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -562,6 +773,7 @@ Item: 7,1124,62,1,0 caused a constraint violation.
 Sat Dec  2 16:17:24 2017
 
 Sat Dec  2 16:27:34 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -574,11 +786,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -606,40 +813,6 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -698,9 +871,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -715,12 +892,27 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sat Dec  2 23:30:39 2017
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -1078,6 +1270,7 @@ Query created.
 Query created.
 
 Sat Dec  2 16:50:38 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -1090,11 +1283,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -1122,40 +1310,6 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -1214,9 +1368,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -1231,12 +1389,27 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sat Dec  2 23:33:40 2017
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -1262,6 +1435,7 @@ Item: 7,1124,62,1,0 caused a constraint violation.
 Sat Dec  2 16:50:38 2017
 
 Sat Dec  2 16:50:47 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -1274,11 +1448,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -1306,40 +1475,6 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -1398,9 +1533,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -1415,12 +1554,27 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sat Dec  2 23:33:59 2017
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -1447,6 +1601,7 @@ Query created.
 Sat Dec  2 16:50:47 2017
 
 Sat Dec  2 16:51:01 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -1459,11 +1614,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -1491,40 +1641,6 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -1583,9 +1699,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -1600,12 +1720,27 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+
+Sat Dec  2 23:34:13 2017
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -1632,6 +1767,7 @@ Query created.
 Sat Dec  2 16:51:01 2017
 
 Sat Dec  2 16:52:16 2017
+>>>>>>> refs/remotes/origin/master
 DataBase ../scada.db is opened.
 Error: 1
 Table:ConfigFileTable already exists.
@@ -1644,11 +1780,6 @@ Error: 1 in ConfigFileTable
 Error: 1
 Table:BranchTable already exists.
 BranchTable could not be created.
-Error: 1 in ConfigFileTable
- Item could not be inserted.
-Error: 1
-Table:ConditionTable already exists.
-ConditionTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
 Error: 1
@@ -1676,40 +1807,6 @@ Table:SensorConfTable already exists.
 SensorConfTable could not be created.
 Error: 1 in ConfigFileTable
  Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Idle' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Run' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
- Item could not be inserted.
-Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
- Item could not be inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-BranchTable: Item was inserted.
-Error: 19 in BranchTable
-Item: 51,3 caused a constraint violation.
- Item could not be inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
-ConditionTable: Item was inserted.
 Error: 19 in SensorTable
 Item: 's0',3890,1,'volt' caused a constraint violation.
  Item could not be inserted.
@@ -1768,9 +1865,13 @@ Item: 1,'s32',124,3,61,41 caused a constraint violation.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
 CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
 CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
-CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
 Error: 1 in CalConfTable
  Item could not be inserted.
 SampleTable: Item was inserted.
@@ -1785,12 +1886,25 @@ SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+SampleTable: Item was inserted.
+=======
+>>>>>>> refs/remotes/origin/master
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
 SampleTable: Item was inserted.
+<<<<<<< HEAD
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+=======
 SampleTable: Item was inserted.
 Error: 19 in CalibratedSampleTable
 Item: 1,500,66,1,0 caused a constraint violation.
@@ -1867,21 +1981,26 @@ Item: 'Idle' caused a constraint violation.
 Error: 19 in StateTable
 Item: 'Run' caused a constraint violation.
  Item could not be inserted.
+>>>>>>> refs/remotes/origin/master
 Error: 19 in StateTable
-Item: 'Warn' caused a constraint violation.
+Item: 'IDLE' caused a constraint violation.
  Item could not be inserted.
 Error: 19 in StateTable
-Item: 'Count' caused a constraint violation.
+Item: 'RUN' caused a constraint violation.
  Item could not be inserted.
 Error: 19 in StateTable
-Item: 'Jump' caused a constraint violation.
+Item: 'STOP' caused a constraint violation.
  Item could not be inserted.
 Error: 19 in StateTable
-Item: 'Shout' caused a constraint violation.
+Item: 'FINISH' caused a constraint violation.
  Item could not be inserted.
 BranchTable: Item was inserted.
 BranchTable: Item was inserted.
 BranchTable: Item was inserted.
+<<<<<<< HEAD
+Query created.
+Query created.
+=======
 BranchTable: Item was inserted.
 Error: 19 in BranchTable
 Item: 51,3 caused a constraint violation.
@@ -85947,6 +86066,7 @@ CalibratedSampleTable: Item was inserted.
 <<<<<<< HEAD
 Sat Dec  2 22:54:43 2017
 =======
+>>>>>>> refs/remotes/origin/master
 Query created.
 Query created.
 Query created.

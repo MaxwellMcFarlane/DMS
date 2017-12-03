@@ -53,7 +53,7 @@ private:
     string filename;
     Table lookup;
     sqlite3 *db;
-    Log * log = new Log("log.txt");
+    Log * log = new Log("../error_files/dms_log.txt");
 
     static int n;
 

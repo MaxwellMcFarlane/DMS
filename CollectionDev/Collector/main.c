@@ -19,6 +19,10 @@
 #include <sys/types.h>
 
 #define SAMPLEPIPE "/tmp/samplePipe"
+#define SAMPLEPIPE_PORT 0666
+#define SAMPLEPIPE_SETUP_MESSAGE "test"
+
+#define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 
 static void CCONV ssleep(int);
 
@@ -90,9 +94,8 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-    printf("hey its an event");
-    // clock_t start_t, end_t, total_t;
-    // start_t = clock();
+    clock_t start_t, end_t, total_t;
+    start_t = clock();
 
     struct timeval tv;
     gettimeofday(&tv, NULL);
@@ -107,22 +110,31 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
     // write to samplePipe
+    int* samplePipeFile;
+    samplePipeFile = malloc(sizeof(int));
+    char* samplePipe = SAMPLEPIPE;
+    *samplePipeFile = open(samplePipe, O_WRONLY);
+    int* numBits;
+    printf("Writing to pipe");
+    char* msg = SAMPLEPIPE_SETUP_MESSAGE;
+    numBits = write(*samplePipeFile, msg, sizeof(msg));
+    printf("Wrote to pipe");
+    printf("%i\n", numBits);
+    close(samplePipeFile);
+    free(numBits);
+    free(samplePipeFile);
 
     FILE *fp;
-    fp = fopen("test.txt", "a");
-
-    printf("%d %d %f\n", hubSN, hubPort,  voltage);
-
-    //char vbuff[100];
-    //snprintf(vbuff, 100, "%d,%d,%llu,%f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
-    //strcat(ctx, vbuff);
-
+    fp = fopen(SAMPLE_BACKUPFILE, "a");
     fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    fclose(fp);
 
-    //end_t = clock();
-    //total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-       //printf("Total time taken by CPU: %f\n", total_t  );
-	   fclose(fp);
+    // print to console/terminal
+    printf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+
+    end_t = clock();
+    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+    printf("Total time taken by CPU: %f\n", total_t);
 }
 
 /*
@@ -186,12 +198,27 @@ main(int argc, char **argv) {
     //fprintf(fp, "This is testing for fprintf...\n");
     //fputs("This is testing for fputs...\n", fp);
 
+    mkfifo(SAMPLEPIPE, SAMPLEPIPE_PORT);
+
+    // write to samplePipe
+    int* samplePipeFile;
+    samplePipeFile = malloc(sizeof(int));
+    char* samplePipe = SAMPLEPIPE;
+    *samplePipeFile = open(samplePipe, O_WRONLY);
+    int* numBits;
+    printf("Writing to pipe");
+    char* msg = SAMPLEPIPE_SETUP_MESSAGE;
+    numBits = write(*samplePipeFile, msg, sizeof(msg));
+    printf("Wrote to pipe");
+    printf("%i\n", numBits);
+    close(samplePipeFile);
+    free(numBits);
+    free(samplePipeFile);
+
     PhidgetVoltageInputHandle ch1;
     PhidgetVoltageInputHandle ch2;
     PhidgetReturnCode res;
     const char *errs;
-
-    //char samples[1000];
 
     /*
     * Enable logging to stdout
@@ -263,6 +290,7 @@ main(int argc, char **argv) {
     }
 
     unsigned int* DI;
+    DI = malloc(sizeof(unsigned int));
     *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
     if (res != EPHIDGET_OK) {
@@ -297,9 +325,13 @@ main(int argc, char **argv) {
         fprintf(stderr, "failed to set DataInterval: %s\n", errs);
         goto done;
     }
+    free(DI);
     ssleep(10);
 done:
     //printf("%s", samples);
+
+    unlink(SAMPLEPIPE);
+
     Phidget_close((PhidgetHandle)ch1);
     PhidgetVoltageInput_delete(&ch1);
     Phidget_close((PhidgetHandle)ch2);

@@ -83,7 +83,7 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-	printf("hey voltage change event here");
+	printf("hey voltage change event here\n");
 	
 	int hubSN = -1;
 	int hubPort = -1;
@@ -216,9 +216,10 @@ main(int argc, char **argv) {
 		}
 		goto done;
 	}
-	
-	unsigned int* DI;
-	/*res = PhidgetVoltageInput_getDataInterval(ch, DI);
+	printf("before DI declaration\n");
+	unsigned int* DI ;
+	DI = malloc(sizeof(unsigned int));
+        /*res = PhidgetVoltageInput_getDataInterval(ch, DI);
 	if (res != EPHIDGET_OK) {
 		Phidget_getErrorDescription(res, &errs);
 		fprintf(stderr, "failed to get Default DataInterval: %s\n", errs);
@@ -226,8 +227,10 @@ main(int argc, char **argv) {
 	}	
 	printf("Default DI: %u \n", DI);
 	*/
+        printf("before DI set\n");
 	*DI = 500;
 	res = PhidgetVoltageInput_setDataInterval(ch, *DI);
+        printf("after DI set\n");
 	if (res != EPHIDGET_OK) {
 		Phidget_getErrorDescription(res, &errs);
 		fprintf(stderr, "failed to set DataInterval: %s\n", errs);
@@ -239,8 +242,10 @@ main(int argc, char **argv) {
 
 done:
 	printf("%s", samples);
-	Phidget_close((PhidgetHandle)ch);
-	PhidgetVoltageInput_delete(&ch);
+	printf("get ready to close\n");
+        Phidget_close((PhidgetHandle) ch);
+	printf("phidget closed\n");
+        PhidgetVoltageInput_delete(&ch);
 
 	exit(res);
 }
