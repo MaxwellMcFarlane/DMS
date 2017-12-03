@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "exportwindow.h"
-#include "tableeditwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +29,13 @@ void MainWindow::on_actionExport_Table_triggered()
 }
 
 void MainWindow::on_actionConfiguration_triggered()
+{
+    ConfigurationEditWindow * ex = new ConfigurationEditWindow(0,db);
+//    tableEditWindow * ex = new tableEditWindow(0,db);
+    ex->show();
+}
+
+void MainWindow::on_actionEdit_Table_triggered()
 {
     tableEditWindow * ex = new tableEditWindow(0,db);
     ex->show();

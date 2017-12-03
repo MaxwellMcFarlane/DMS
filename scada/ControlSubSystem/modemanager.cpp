@@ -74,6 +74,9 @@ void ModeManager::configure(){
                 if(line.at(0) == '#'){
                     // # is for commenting
 
+                if(!from.compare("NULL")){
+                    cout<<"CFG: State " + branchLine[0] + " is not in your state declaration!\n";
+
                 }
                 else{
                     lineCount++;

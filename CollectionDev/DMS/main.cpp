@@ -22,16 +22,11 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    db.loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+    cout << db.controlQuery("'volt': 		null: 		null: 		Select RawData from SampleTable where RawData > 0") << endl;
+    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 
-//    db.clearTable("SampleTable");
+    /**SHOW DATABASE**/
 
-    db.resetRowIdTable("StateTable","rowid");
-//    cout << db.controlQuery("'s0':Select RawData from SampleTable where RawData > 60") << endl;
-//    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
-
-
-//    /**SHOW DATABASE**/
 //    cout<< "Rawdata larger than 50 " << endl;
 //    cout << db.getTable("SampleTable")->createQuery("RAWDATA", " RAWDATA > 50") << endl;
 //    cout<< "\n";
@@ -66,10 +61,7 @@ int main()
 //    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
 //    for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
 //    cout << db.getTableHeaders("SensorTable") << endl;
+//    db.loadConfigTable();
 //    cout<< db.isSensorExist("'s0'") << endl;
-//    db.getTableHeaders("StateTable");
-
-//    db.getTable("SampleTable")->addMultiToTable("'s0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n's0',2,3\n");
-
     db.close();
 }

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD:DMS/DMS.pro.user
+<!-- Written by QtCreator 4.3.1, 2017-12-02T16:36:56. -->
+=======
 <!-- Written by QtCreator 4.3.1, 2017-11-30T01:03:53. -->
+>>>>>>> 70471fdb2ce0089566b805cb559b00cd1540f323:DMS/DMS.pro.user.d535532
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>

@@ -34,7 +34,7 @@ SensorTable
 
 SampleTable
 (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 
-	SensorId 	TEXT,
+	SensorId 	TEXT NOT NULL,
 	TimeStamp 	INTEGER NOT NULL, 
 	RawData 	INTEGER NOT NULL, 
 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
