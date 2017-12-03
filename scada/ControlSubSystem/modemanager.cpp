@@ -31,27 +31,34 @@ void ModeManager::configure(){
     ifstream file;
     int lineCount=0;
     file.open(fileName.c_str());
-    errorLog->trunc_file();//configure is called clear any preexisiting ones
-    log->trunc_file();//configure is called clear any preexisiting ones
+    errorLog->trunc_file();//configure is called clear any preexisiting error log files
+    log->trunc_file();//configure is called clear any preexisiting  log files
+
+
     if (!file){
         //file not found
         *log<<"CFG: File " + fileName + " couldn't be found!\n";
         *errorLog<<"CFG: File " + fileName + " couldn't be found!\n";
         throw runtime_error("CFG: File " + fileName + " couldn't be found!\n");
     }
+
+    //Look for "STATES:" in a line, when found declare STATES
     string stateDeclaration("STATES:");
+    //Look for "BRANCHES:" in a line, when found declare BRANCHES
     string branchDeclaration("BRANCHES:");
     string line;
+
     while (!file.eof())
     {
         //iterate till the end of the file
+
         lineCount++;//line counter
-        getline(file,line);
+        getline(file,line);//iterator by line
 
-        if(line.at(0) == '#'){
-            // # is for commenting
+        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// this triggers an end to the script
+        if(line.at(0) == '#')  continue; // # is for commenting;
 
-        }
+
         else if (line.find(stateDeclaration) != std::string::npos) {
             //state declaration block
             getline(file,line);
@@ -66,17 +73,20 @@ void ModeManager::configure(){
         }
 
 
-        if (line.find(branchDeclaration) != std::string::npos) {
+        if (line.find(branchDeclaration) != std::string::npos)
+        {
             //branch declaration block
-            while(!file.eof()) {
+
+            while(!file.eof())
+            {
+
                 //iterate till end of the file
                 lineCount++;
                 getline(file,line);
-                if(line.at(0) == '#'){
-                    // # is for commenting
-                }
+                if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;
+                if(line.at(0) == '#') continue;// # is for commenting
                 else{
-                    lineCount++;
+                    lineCount++;//increment the line number
                     vector<string > branchLine= ModeManager::split(line,',');
                     if(branchLine.size()>3){
                         //more than 3 parameter errors
@@ -111,6 +121,7 @@ void ModeManager::configure(){
                                     if(!branchLine[0].compare(states[i].name)) states[i].loadBranch(tempBranch);//add the branch to state_from
 
                                 }
+
                                 *log<<"CFG: A Branch from State " + from +" to State " + tempBranch.branchState->name +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
                             }
 
@@ -118,8 +129,10 @@ void ModeManager::configure(){
                     }
 
                 }
+
             }
         }
+        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// END triggers an end to the script
     }
     file.close();
     if(!states.empty()) {
