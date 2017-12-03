@@ -20,7 +20,9 @@
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 #define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
-
+#define MAXBUFFERED_SAMPLES 60
+#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values("
+#define SAMPLE_POSTFIX "); \0"
 struct Sensor{
     int hub;
     int port;
@@ -29,8 +31,8 @@ struct Sensor{
 };
 
 struct dmsBuffer{
-    int numSample;
-    char samples[2000];
+    int index;
+    char* samples[MAXBUFFERED_SAMPLES];
 };
 
 static void CCONV ssleep(int);
@@ -138,15 +140,16 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     int hubPort = -1;
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
-
+'s0',123212,2131231);
     // print to string buffer
-    char msg[32]; // 32 hardcode count for below (account for '\0')
-    snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
-    strcat(msg, "\0");
-
     if(ctx){
-        struct dmsBuffer* append = (struct dmsBuffer*) ctx;
-        strcat(append->samples, msg);
+        struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
+
+        char msg[100]; // 32 hardcode count for below (account for '\0')
+        snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f),", millisecondsSinceEpoch, voltage);
+        strcat(msg, "\0");
+        buffptr->samples[buffptr->index] = msg;
+        buffptr->index++;
     }
 
     // file backup
@@ -198,8 +201,7 @@ initChannel(PhidgetHandle ch, void *ctx) {
 int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
-    buff.numSample = 0;
-    buff.samples[0] = '\0';
+    buff.index = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
@@ -320,19 +322,34 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
-        if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
+        if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
+            char* tmp[5000] = "";
+            char* prefix[sizeof(SAMPLE_PREFIX)] = SAMPLE_PREFIX;
+            strcat(tmp, prefix);
+            for(int i = 0; i < buff.index - 1; i++){
+                strcat(tmp, buff.samples[i]);
+                strcat(tmp, ",");
+            }
+            strcat(tmp, buff.samples[buff.index]);
+            char* postfix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
+            strcat(tmp, postfix);
+            printf("%s", tmp);
+            //sqlite3_open(DB_PATH,&db);
+            sqlite3_exec(db, tmp, 0, 0, ermsg);
+            sqlite3_close(db);
+
             // consol print
-            printf("%s", &buff.samples);
+            //printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             buff.numSample = 0;
             buff.samples[0] = '\0';
             FILE *fp;
             fp = fopen(SAMPLE_BACKUPFILE, "w");
-            fprintf(fp, "%s", &buff.samples);
+            //fprintf(fp, "%s", &buff.samples);
             fclose(fp);
         }
     }
