@@ -86073,3 +86073,158 @@ Query created.
 Query created.
 Fri Dec 01 09:41:44 2017
 >>>>>>> 70471fdb2ce0089566b805cb559b00cd1540f323
+
+Sat Dec  2 23:58:02 2017
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+Error: 1
+Table:StateTable already exists.
+StateTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:BranchTable already exists.
+BranchTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalConfTable already exists.
+CalConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorTable already exists.
+SensorTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SampleTable already exists.
+SampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:CalibratedSampleTable already exists.
+CalibratedSampleTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 1
+Table:SensorConfTable already exists.
+SensorConfTable could not be created.
+Error: 1 in ConfigFileTable
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's0',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's1',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's2',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's3',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's4',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's5',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s32',124,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 5,'sin','[1,3,0,4]' caused a constraint violation.
+ Item could not be inserted.
+CalConfTable: Item was inserted.
+Error: 19 in CalConfTable
+Item: 6,'linear','[5,4]' caused a constraint violation.
+ Item could not be inserted.
+Error: 1 in CalConfTable
+ Item could not be inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+SampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+CalibratedSampleTable: Item was inserted.
+Error: 19 in StateTable
+Item: 'IDLE' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'RUN' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'STOP' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in StateTable
+Item: 'FINISH' caused a constraint violation.
+ Item could not be inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+BranchTable: Item was inserted.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
+Query created.
