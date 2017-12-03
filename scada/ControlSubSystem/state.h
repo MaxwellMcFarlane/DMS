@@ -14,6 +14,7 @@
 using namespace std;
 
 class Branch;
+class DMS;
 
 class State{
 public:

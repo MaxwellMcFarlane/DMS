@@ -22,7 +22,7 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    db.loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+    db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
 
 //    db.clearTable("SampleTable");
 

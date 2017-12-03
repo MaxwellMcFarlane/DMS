@@ -10,8 +10,13 @@
 #include "../tools/log.h"
 #include <time.h>
 #include <cstring>
+#include <../scada/ControlSubSystem/modemanager.h>
+#include <../scada/ControlSubSystem/branch.h>
+#include <../scada/ControlSubSystem/state.h>
 
 using namespace std;
+
+class State;
 
 class DMS
 {
@@ -42,6 +47,9 @@ public:
 
     void resetRowIdTable(string tableName, string col);
 
+    void setCurrentState(State * currentState);
+    State* getCurrentState();
+
 private:
 
     //callback methods
@@ -56,6 +64,7 @@ private:
     Log * log = new Log("../error_files/dms_log.txt");
 
     static int n;
+    State * currentState;
 
 };
 
