@@ -119,9 +119,9 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     char* msg = SAMPLEPIPE_SETUP_MESSAGE;
     numBits = write(*samplePipeFile, msg, sizeof(msg));
     printf("Wrote to pipe");
-    printf("%i\n", numBits);
+   // printf("%i\n", numBits);
     close(samplePipeFile);
-    free(numBits);
+    //free(numBits);
     free(samplePipeFile);
 
     FILE *fp;
@@ -201,19 +201,24 @@ main(int argc, char **argv) {
     mkfifo(SAMPLEPIPE, SAMPLEPIPE_PORT);
 
     // write to samplePipe
-    int* samplePipeFile;
-    samplePipeFile = malloc(sizeof(int));
+    int samplePipeFile;
+    //samplePipeFile = (int*)malloc(sizeof(int));
     char* samplePipe = SAMPLEPIPE;
-    *samplePipeFile = open(samplePipe, O_WRONLY);
-    int* numBits;
-    printf("Writing to pipe");
+    samplePipeFile = open(samplePipe, O_WRONLY);
+    
+    //numBits = (int*)malloc(sizeof(int));
+    printf("Writing to pipe\n");
     char* msg = SAMPLEPIPE_SETUP_MESSAGE;
-    numBits = write(*samplePipeFile, msg, sizeof(msg));
-    printf("Wrote to pipe");
+    int numBits = write(samplePipeFile, msg, sizeof(msg));
+    printf("Wrote to pipe\n");
     printf("%i\n", numBits);
-    close(samplePipeFile);
-    free(numBits);
-    free(samplePipeFile);
+    //int n = close(samplePipeFile);
+    //printf("%i\n", n);
+    //printf("closed pipe file\n");
+    // free(numBits);
+    //free(samplePipeFile);
+
+    printf("done writing to pipe\n");
 
     PhidgetVoltageInputHandle ch1;
     PhidgetVoltageInputHandle ch2;
