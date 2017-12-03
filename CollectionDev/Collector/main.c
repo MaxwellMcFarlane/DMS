@@ -195,6 +195,8 @@ initChannel(PhidgetHandle ch, void *ctx) {
 int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
+    buff.numSample = 0;
+    buff.samples[0] = '\0';
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 2;
