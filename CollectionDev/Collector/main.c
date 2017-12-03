@@ -339,7 +339,7 @@ int main(int argc, char **argv) {
             //sqlite3_open(DB_PATH,&db);
             //sqlite3_exec(db, tmp, 0, 0, ermsg);
             //sqlite3_close(db);
-*/
+
             // consol print
             //printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
