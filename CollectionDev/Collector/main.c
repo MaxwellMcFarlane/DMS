@@ -341,13 +341,13 @@ int main(int argc, char **argv) {
             printf("%s\n", final);*/
 
             // multiple individual insert
-            sqlite3_open(DB_PATH,&db);
+
             for(int i = 0; i < buff.index; i++){
-                //printf("%s", buff.samples[i]);
+                printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                sqlite3_exec(db, final, 0, 0, ermsg);
+                //sqlite3_exec(db, final, 0, 0, ermsg);
             }
             sqlite3_close(db);
 
