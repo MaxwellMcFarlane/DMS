@@ -240,7 +240,7 @@ int main(int argc, char **argv) {
 //                 "values('s0',123212,2131231);",0,0,ermsg);
 
 
-    printf("%s\n", ermsg);
+    //printf("%s\n", ermsg);
     /*
     * Enable logging to stdout
     */
