@@ -329,11 +329,12 @@ int main(int argc, char **argv) {
 
             /*char* tmp[5000] = "\0" SAMPLE_PREFIX;
             char* prefix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
-            strcat(&tmp, prefix);
+            strcat(&tmp, prefix);*/
             for(int i = 0; i < buff.index - 1; i++){
-                strcat(&tmp, buff.samples[i]);
-                strcat(&tmp, ",");
-            }
+                printf(buff.samples[i]);
+                //strcat(&tmp, buff.samples[i]);
+                //strcat(&tmp, ",");
+            }/*
             strcat(&tmp, buff.samples[buff.index]);
             char* postfix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
             strcat(&tmp, postfix);
