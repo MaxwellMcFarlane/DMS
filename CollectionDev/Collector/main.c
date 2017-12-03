@@ -310,7 +310,7 @@ int main(int argc, char **argv) {
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             buff.samples[0] = '\0';
             FILE *fp
-            fp = freopen(SAMPLE_BACKUPFILE, "w");
+            fp = fopen(SAMPLE_BACKUPFILE, "w");
             fprintf(fp, "%s", &buff.samples);
             fclose(fp);
             free(fp);
