@@ -128,7 +128,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    printf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 
     end_t = clock();
     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
