@@ -292,6 +292,11 @@ main(int argc, char **argv) {
     }
 
     for(int i = 0; i < numbSensors; i++){
+        Phidget_setDeviceSerialNumber((PhidgetHandle) map[i].ch, map[i].key.hub);
+        Phidget_setHubPort((PhidgetHandle) map[i].ch, map[i].key.port);
+    }
+
+    for(int i = 0; i < numbSensors; i++){
         res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, NULL);
         if (res != EPHIDGET_OK) {
             Phidget_getErrorDescription(res, &errs);
