@@ -22,11 +22,11 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    db.loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+    db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
 
 //    db.clearTable("SampleTable");
 
-    db.resetRowIdTable("StateTable","rowid");
+//    db.resetRowIdTable("StateTable","rowid");
 //    cout << db.controlQuery("'s0':Select RawData from SampleTable where RawData > 60") << endl;
 //    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 

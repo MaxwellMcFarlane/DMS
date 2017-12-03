@@ -90,20 +90,20 @@ DMS::DMS(string name, string dbConfig, string logPath){
 
     rc = sqlite3_open(name.c_str(),&db);
 
-    if(!fExist){
-        this->loadDataBase("../testbench_files/StateTableTB.txt");
-        this->loadDataBase("../testbench_files/BranchTableTB.txt");
-        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
+//    if(!fExist){
+//        this->loadDataBase("../testbench_files/StateTableTB.txt");
+//        this->loadDataBase("../testbench_files/BranchTableTB.txt");
+//        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
 
-        this->loadDataBase("../testbench_files/SensorTableTB.txt");
-        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
-        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
+//        this->loadDataBase("../testbench_files/SensorTableTB.txt");
+//        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
+//        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
 
-        this->loadDataBase("../testbench_files/SampleTableTB.txt");
-        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
+//        this->loadDataBase("../testbench_files/SampleTableTB.txt");
+//        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
 
-        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
-    }
+//        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+//    }
 
     //allow system to accept foreign keys
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
@@ -217,6 +217,10 @@ bool DMS::controlQuery(string cmd){
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
@@ -251,9 +255,9 @@ void DMS::loadConfigTable(string fileName, string myfilePath){
                          (std::istreambuf_iterator<char>()    ) );
     string cmd = "insert into configfiletable(filename,contents) values('"+ fileName +"', \"" + content +"\" );";
     int rc;
-    char * zErrmsg;
-
+    char * zErrmsg;    
     rc = sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
+    cout << zErrmsg;
 }
 
 void DMS::close(){
@@ -287,6 +291,9 @@ bool DMS::isSensorExist(string sensorName){
     }
     else{return true;}
 }
+
+void DMS::setCurrentState(State *currentState){this->currentState = currentState;}
+State* DMS::getCurrentState(){return currentState;}
 
 //Callback Functions
 int DMS::cbDropTable(void *data, int argc, char **argv, char **azColName){
@@ -340,21 +347,30 @@ void DMS::clearTable(string tableName){
 
 
 void DMS::resetRowIdTable(string tableName,string col){
-    string cmd,cmd1;
+    string cmd,cmd1,cmd2;
     int rc;
-    string minIndex;
-    int index;
-    cmd1 = "select Min(rowid) from "+tableName + ";";
-    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &minIndex, 0);
-//    index =
-    cout << stoi(minIndex) + getTable(tableName)->count() << endl;
-    cout << minIndex << endl;
-    for(int j = 1; j < getTable(tableName)->count() + 1;j++){
-        for(int i = stoi(minIndex); i < stoi(minIndex) + getTable(tableName)->count() -1;i++){
-            cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(j) +" WHERE " + col + "= "+ to_string(i) +";";
-            cout << cmd << endl;
-            rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
-        }
+    string maxIndex,minIndex;
+    int index,sqindex;
+    cmd1 = "select Max(rowid) from "+tableName + ";";
+    cmd2 = "select Min(rowid) from "+tableName + ";";
+    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &maxIndex, 0);
+    index = stoi(maxIndex);
+    rc = sqlite3_exec(db,cmd2.c_str(),cbSize,(void *) &minIndex, 0);
+    sqindex = stoi(minIndex);
+    int j = 1;
+    while(j != index){
+        cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(sqindex) +" WHERE " + col + "= "+ to_string(j) +";";
+        cout << cmd << endl;
+//        cout << !getTable(tableName)->isQueryEmpty("select rowid from "
+//                                                   + tableName
+//                                                   + " where " +col+ "="
+//                                                   +to_string(j) + ";") << endl;
+        rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
+        if(!getTable(tableName)->isQueryEmpty("select rowid from "
+                                             + tableName
+                                             + " where " +col+ "="
+                                             +to_string(j) + ";")){sqindex++;}
+        j++;
     }
 }
 
@@ -364,6 +380,7 @@ int DMS::cbSize(void *data, int argc, char **argv, char **azColName){
     *number = (string)*argv;
     (void)argc;
     (void)azColName;
+    return 0;
 }
 
 

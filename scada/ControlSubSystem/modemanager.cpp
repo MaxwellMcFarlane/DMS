@@ -135,6 +135,7 @@ void ModeManager::configure(){
         if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// END triggers an end to the script
     }
     file.close();
+    cout<<"jhahha";
     if(!states.empty()) {
         currentState=(states[0]).name;
         //set the first state to be the default currentstate
@@ -177,4 +178,3 @@ string ModeManager::prepQuery(string condition){
     str.append(tokens[1]);
     return str;
 }
-

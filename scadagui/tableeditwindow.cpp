@@ -69,7 +69,7 @@ void tableEditWindow::on_deletebutton_clicked()
     {
         db->getTable(tableName)->delRow("rowid",to_string(i+1));
     }
-    db->resetRowIdTable(tableName);
+//    db->resetRowIdTable(tableName);
 
 
     //    string edits = ui->FileEditor->toPlainText().toStdString();

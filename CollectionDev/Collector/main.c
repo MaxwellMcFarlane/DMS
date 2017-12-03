@@ -10,15 +10,28 @@
 #endif
 
 #include <time.h>
+#include <sys/time.h>
 #include <string.h>
 #include <errno.h>
 
-// includes for piping
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <sqlite3.h>
 
-#define SAMPLEPIPE "/tmp/samplePipe"
+#define DB_PATH "../../scada.db"
+#define SAMPLE_BACKUPFILE "sampleBackUp.txt"
+#define DMSBUFFER_SMPLTHRESHOLD 60
+#define DMSBUFFER_SMPL_TIME 5
+
+struct Sensor{
+    int hub;
+    int port;
+    PhidgetVoltageInputHandle ch;
+    uint32_t samplingPeriod;
+};
+
+struct dmsBuffer{
+    int numSample;
+    char samples[2000];
+};
 
 static void CCONV ssleep(int);
 
@@ -28,6 +41,29 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     int hubPort;
     int channel;
     int serial;
+
+    if(ctx){
+        struct Sensor *sen;
+        sen = (struct Sensor*) ctx;
+        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, sen->samplingPeriod);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device data interval\n");
+            return;
+        }
+        uint32_t check = 0;
+        res = PhidgetVoltageInput_getDataInterval((PhidgetVoltageInputHandle) phid, &check);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device data interval\n");
+            return;
+        }
+        printf("SET DI %i %i %i\n",sen->hub, sen->port, check);
+
+        res = PhidgetVoltageInput_setVoltageChangeTrigger((PhidgetVoltageInputHandle) phid, 0);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device voltage change trigger\n");
+            return;
+        }
+    }
 
     res = Phidget_getDeviceSerialNumber(phid, &serial);
     if (res != EPHIDGET_OK) {
@@ -46,7 +82,7 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
         fprintf(stderr, "failed to get hub port\n");
         hubPort = -1;
     }
-
+    // send attach to SensorManger here
     if (hubPort == -1)
         printf("channel %d on device %d attached\n", channel, serial);
     else
@@ -90,49 +126,47 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-    printf("hey its an event");
-    // clock_t start_t, end_t, total_t;
-    // start_t = clock();
-
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-
+    struct timespec tv;
+    //gettimeofday(&tv, NULL);
+    // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
+    clock_gettime(CLOCK_REALTIME, &tv);
     unsigned long long millisecondsSinceEpoch =
             (unsigned long long)(tv.tv_sec) * 1000 +
-            (unsigned long long)(tv.tv_usec) / 1000;
+            (unsigned long long)(tv.tv_nsec) / 1000000;
 
     int hubSN = -1;
     int hubPort = -1;
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
-    // write to samplePipe
+    // print to string buffer
+    char msg[32]; // 32 hardcode count for below (account for '\0')
+    snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    strcat(msg, "\0");
 
+    if(ctx){
+        struct dmsBuffer* append = (struct dmsBuffer*) ctx;
+        strcat(append->samples, msg);
+    }
+
+    // file backup
     FILE *fp;
-    fp = fopen("test.txt", "a");
-
-    printf("%d %d %f\n", hubSN, hubPort,  voltage);
-
-    //char vbuff[100];
-    //snprintf(vbuff, 100, "%d,%d,%llu,%f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
-    //strcat(ctx, vbuff);
-
+    fp = fopen(SAMPLE_BACKUPFILE, "a");
     fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    fclose(fp);
 
-    //end_t = clock();
-    //total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-       //printf("Total time taken by CPU: %f\n", total_t  );
-	   fclose(fp);
+    // print to console/terminal
+    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
 * Creates and initializes the channel.
 */
 static PhidgetReturnCode CCONV
-initChannel(PhidgetHandle ch) {
+initChannel(PhidgetHandle ch, void *ctx) {
     PhidgetReturnCode res;
 
-    res = Phidget_setOnAttachHandler(ch, onAttachHandler, NULL);
+    res = Phidget_setOnAttachHandler(ch, onAttachHandler, ctx);
     if (res != EPHIDGET_OK) {
         fprintf(stderr, "failed to assign on attach handler\n");
         return (res);
@@ -151,26 +185,6 @@ initChannel(PhidgetHandle ch) {
     }
 
     /*
-    * Please review the Phidget22 channel matching documentation for details on the device
-    * and class architecture of Phidget22, and how channels are matched to device features.
-    */
-
-    /*
-    * Specifies the serial number of the device to attach to.
-    * For VINT devices, this is the hub serial number.
-    *
-    * The default is any device.
-    */
-    Phidget_setDeviceSerialNumber(ch, 497194);
-
-    /*
-    * For VINT devices, this specifies the port the VINT device must be plugged into.
-    *
-    * The default is any port.
-    */
-    //Phidget_setHubPort(ch, 3);
-
-    /*
     * Specifies that the channel should only match a VINT hub port.
     * The only valid channel id is 0.
     *
@@ -181,129 +195,154 @@ initChannel(PhidgetHandle ch) {
     return (EPHIDGET_OK);
 }
 
-int
-main(int argc, char **argv) {
-    //fprintf(fp, "This is testing for fprintf...\n");
-    //fputs("This is testing for fputs...\n", fp);
+int main(int argc, char **argv) {
 
-    PhidgetVoltageInputHandle ch1;
-    PhidgetVoltageInputHandle ch2;
+    struct dmsBuffer buff;
+    buff.numSample = 0;
+    buff.samples[0] = '\0';
+
+    // use readPipe to instantiate Map Sensor Architecture
+    int numbSensors = 4;
+    struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
+    for(int i = 0; i < numbSensors; i++){
+        printf("%i\n", i);
+        // read HUB and Port
+        map[i].hub = 497194;
+        map[i].port = i;
+        map[i].samplingPeriod = 2000 + i * 300; // in msec
+        // make ch
+        res = PhidgetVoltageInput_create(&map[i].ch);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to create voltage input channel\n");
+            exit(1);
+        }
+    }
 
-    //char samples[1000];
 
+    char** ermsg;
+
+    sqlite3 *db;
+    sqlite3_open(DB_PATH,&db);
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
+    sqlite3_exec(db, ".separator |", 0, 0, ermsg);
+
+    sqlite3_exec(db,
+                 "insert into "
+                 "sampletable(sensorid,timestamp,rawdata) "
+                 "values('s0',123212,2131231);",0,0,ermsg);
+
+
+    printf("%s\n", ermsg);
     /*
     * Enable logging to stdout
     */
     //PhidgetLog_enable(PHIDGET_LOG_INFO, NULL);
 
-    res = PhidgetVoltageInput_create(&ch1);
-    if (res != EPHIDGET_OK) {
-        fprintf(stderr, "failed to create voltage input channel\n");
-        exit(1);
-    }
-    res = PhidgetVoltageInput_create(&ch2);
-    if (res != EPHIDGET_OK) {
-        fprintf(stderr, "failed to create voltage input channel\n");
-        exit(1);
+    for(int i = 0; i < numbSensors; i++){
+        res = PhidgetVoltageInput_create(&map[i].ch);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to create voltage input channel\n");
+            exit(1);
+        }
     }
 
-    res = initChannel((PhidgetHandle)ch1);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to initialize channel:%s\n", errs);
-        exit(1);
-    }
-    res = initChannel((PhidgetHandle)ch2);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to initialize channel:%s\n", errs);
-        exit(1);
+    for(int i = 0; i < numbSensors; i++){
+        res = initChannel((PhidgetHandle) map[i].ch, &map[i]);
+        if (res != EPHIDGET_OK) {
+            Phidget_getErrorDescription(res, &errs);
+            fprintf(stderr, "failed to initialize channel:%s\n", errs);
+            exit(1);
+        }
     }
 
-    res = PhidgetVoltageInput_setOnVoltageChangeHandler(ch1, onVoltageChangeHandler, NULL);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
-        goto done;
-    }
-    res = PhidgetVoltageInput_setOnVoltageChangeHandler(ch2, onVoltageChangeHandler, NULL);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
-        goto done;
+    for(int i = 0; i < numbSensors; i++){
+        Phidget_setDeviceSerialNumber((PhidgetHandle) map[i].ch, map[i].hub);
+        Phidget_setHubPort((PhidgetHandle) map[i].ch, map[i].port);
     }
 
-    Phidget_setHubPort((PhidgetHandle) ch1, 3);
-    Phidget_setHubPort((PhidgetHandle) ch2, 5);
+    for(int i = 0; i < numbSensors; i++){
+        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &buff);
+        if (res != EPHIDGET_OK) {
+            Phidget_getErrorDescription(res, &errs);
+            fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
+            goto done;
+        }
+    }
 
     /*
-    * Open the channel synchronously: waiting a maximum of 5 seconds.
+    * Open the channel asynchronously: no waiting
     */
-    res = Phidget_openWaitForAttachment((PhidgetHandle)ch1, 5000);
-    if (res != EPHIDGET_OK) {
-        if (res == EPHIDGET_TIMEOUT) {
-            printf("Channel did not attach after 5 seconds: please check that the device is attached\n");
-        } else {
-            Phidget_getErrorDescription(res, &errs);
-            fprintf(stderr, "failed to open channel:%s\n", errs);
+    for(int i = 0; i < numbSensors; i++){
+        res = Phidget_open((PhidgetHandle) map[i].ch);
+        if (res != EPHIDGET_OK) {
+            if (res == EPHIDGET_TIMEOUT) {
+                printf("Channel did not open\n");
+            } else {
+                Phidget_getErrorDescription(res, &errs);
+                fprintf(stderr, "failed to open channel:%s\n", errs);
+            }
+            goto done;
         }
-        goto done;
     }
-    res = Phidget_openWaitForAttachment((PhidgetHandle)ch2, 5000);
-    if (res != EPHIDGET_OK) {
-        if (res == EPHIDGET_TIMEOUT) {
-            printf("Channel did not attach after 5 seconds: please check that the device is attached\n");
-        } else {
-            Phidget_getErrorDescription(res, &errs);
-            fprintf(stderr, "failed to open channel:%s\n", errs);
+    // give some time for sensors to attach
+    ssleep(3);
+
+
+    // check if channel is attached and report status
+    int attached = 0;
+    for(int i = 0; i < numbSensors; i++){
+        res = Phidget_getAttached((PhidgetHandle) map[i].ch, &attached);
+        if (res != EPHIDGET_OK) {
+            if (res == EPHIDGET_TIMEOUT) {
+                printf("Channel failed and error at getAttached\n");
+            } else {
+                Phidget_getErrorDescription(res, &errs);
+                fprintf(stderr, "failed to open channel:%s\n", errs);
+            }
+            goto done;
         }
-        goto done;
+        if(attached){
+            // report attached
+        } else {
+            // report detached
+        }
     }
 
-    unsigned int* DI;
-    *DI = 1000;
-    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-        goto done;
-    }
-    *DI = 1000;
-    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-        goto done;
+    // enter main loop
+    volatile unsigned sink;
+    struct timespec before, after, diff;
+    clock_gettime(CLOCK_MONOTONIC, &before);
+    printf("***** MAIN LOOP ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
+    while(1){
+
+        clock_gettime(CLOCK_MONOTONIC, &after);
+        diff.tv_sec = after.tv_sec - before.tv_sec;
+        diff.tv_nsec = after.tv_nsec - before.tv_nsec;
+        if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
+            before = after;
+            clock_gettime(CLOCK_MONOTONIC, &after);
+            printf("\n******** PUSH TO DMS ********\n");
+
+            // consol print
+            printf("%s", &buff.samples);
+            printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
+            buff.numSample = 0;
+            buff.samples[0] = '\0';
+            FILE *fp;
+            fp = fopen(SAMPLE_BACKUPFILE, "w");
+            fprintf(fp, "%s", &buff.samples);
+            fclose(fp);
+        }
     }
 
 
-    printf("Gathering data for 20 seconds...\n");
-    ssleep(20);
-
-    printf("Gather data for 10 seconds with new dataInterval...\n");
-    *DI = 3000;
-    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-        goto done;
-    }
-    *DI = 3000;
-    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
-    if (res != EPHIDGET_OK) {
-        Phidget_getErrorDescription(res, &errs);
-        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-        goto done;
-    }
-    ssleep(10);
 done:
-    //printf("%s", samples);
-    Phidget_close((PhidgetHandle)ch1);
-    PhidgetVoltageInput_delete(&ch1);
-    Phidget_close((PhidgetHandle)ch2);
-    PhidgetVoltageInput_delete(&ch2);
+    for(int i = 0; i < numbSensors; i++){
+        Phidget_close((PhidgetHandle) map[i].ch);
+        PhidgetVoltageInput_delete(&map[i].ch);
+    }
 
     exit(res);
 }
