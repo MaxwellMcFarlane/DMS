@@ -222,7 +222,7 @@ int main(int argc, char **argv) {
 
 
     char** ermsg;
-    ermsg = malloc(100 * sizeof(char**));
+    ermsg = malloc(100 * sizeof(char*));
 
     sqlite3 *db;
     sqlite3_open(DB_PATH,&db);
