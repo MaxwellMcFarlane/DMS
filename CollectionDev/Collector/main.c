@@ -346,7 +346,7 @@ int main(int argc, char **argv) {
             // consol print
             //printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
-            //buff.index = 0;
+            buff.index = 0;
             //.samples[0] = '\0';
             FILE *fp;
             fp = fopen(SAMPLE_BACKUPFILE, "w");
