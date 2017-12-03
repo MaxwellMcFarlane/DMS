@@ -142,7 +142,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    printf("%d %d %d %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
