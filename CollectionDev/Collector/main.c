@@ -355,12 +355,12 @@ ssleep(int tm) {
 // utilizing linear search for Keys as there will not be an absurd ammount of sensors
 // and this will not be called relatively often
 
-struct Map{
-    struct Key key;
-    PhidgetHandle ch;
-};
-
 struct Key{
     int hub;
     int port;
+};
+
+struct Map{
+    struct Key key;
+    PhidgetHandle ch;
 };
