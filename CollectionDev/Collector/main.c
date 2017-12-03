@@ -90,6 +90,7 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
+    printf("hey its an event");
     // clock_t start_t, end_t, total_t;
     // start_t = clock();
 
