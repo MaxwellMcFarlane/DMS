@@ -142,7 +142,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
 
     if(ctx){
         struct dmsBuffer* append = (struct dmsBuffer*) ctx;
-        strcat(&append->samples, msg);
+        strcat(append->samples, msg);
     }
 
     // file backup
@@ -242,7 +242,7 @@ int main(int argc, char **argv) {
     }
 
     for(int i = 0; i < numbSensors; i++){
-        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &dmsBuffer);
+        res = PhidgetVoltageInput_setOnVoltageChangeHandler(map[i].ch, onVoltageChangeHandler, &buff);
         if (res != EPHIDGET_OK) {
             Phidget_getErrorDescription(res, &errs);
             fprintf(stderr, "failed to set voltage change handler: %s\n", errs);
