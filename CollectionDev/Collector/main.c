@@ -295,8 +295,8 @@ int main(int argc, char **argv) {
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("******** PUSH TO DMS ********\n");
-            printf("     %s", &samples);
-            printf("*****************************\n");
+            printf("%s", &samples);
+            printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
             samples[0] = '\0';
 
         }
