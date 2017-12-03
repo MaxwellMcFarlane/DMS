@@ -303,7 +303,7 @@ int main(int argc, char **argv) {
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.numSample > DMSBUFFER_SMPLTHRESHOLD){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
-            printf("******** PUSH TO DMS ********\n");
+            printf("\n******** PUSH TO DMS ********\n");
 
             // consol print
             printf("%s", &buff.samples);
