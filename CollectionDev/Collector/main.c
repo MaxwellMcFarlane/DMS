@@ -280,7 +280,7 @@ int main(int argc, char **argv) {
     // enter main loop
     clock_t lastUpdated, now;
     volatile unsigned sink;
-    while(true){
+    while(1){
         for(size_t i=0; i<10000000; ++i)
               sink++;
 
