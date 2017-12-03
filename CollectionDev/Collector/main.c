@@ -330,7 +330,7 @@ int main(int argc, char **argv) {
             char final[5000] = "";
             strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
-                //printf("%s", buff.samples[i]);
+                printf("%s", buff.samples[i]);
                 strcat(final, buff.samples[i]);
                 strcat(final, ",");
             }
