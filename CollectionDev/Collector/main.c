@@ -328,7 +328,7 @@ int main(int argc, char **argv) {
             printf("\n******** PUSH TO DMS ********\n");
 
             char final[5000] = "";
-            strcat(final, SAMPLE_PREFIX);
+           /* strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
                 printf("%s", buff.samples[i]);
                 strcat(final, buff.samples[i]);
@@ -336,16 +336,28 @@ int main(int argc, char **argv) {
             }
             strcat(final, buff.samples[buff.index]);
             strcat(final, SAMPLE_POSTFIX);
-            printf("%s\n", final);
+            printf("%s\n", final);*/
+
+            // multiple individual insert
             sqlite3_open(DB_PATH,&db);
-            sqlite3_exec(db, final, 0, 0, ermsg);
+            for(int i = 0; i < buff.index; i++){
+                //printf("%s", buff.samples[i]);
+                strcat(final, SAMPLE_PREFIX);
+                strcat(final, buff.samples[i]);
+                strcat(final, SAMPLE_POSTFIX);
+                sqlite3_exec(db, final, 0, 0, ermsg);
+            }
             sqlite3_close(db);
+
+
 
             // console print
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
+            for(int i = 0; i < buff.index; i++){
+                buff.samples[i] = "";
+            }
             buff.index = 0;
-            //.samples[0] = '\0';
             FILE *fp;
             fp = fopen(SAMPLE_BACKUPFILE, "w");
             //fprintf(fp, "%s", &buff.samples);
