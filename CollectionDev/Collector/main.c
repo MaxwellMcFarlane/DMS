@@ -133,7 +133,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     char msg[32]; // 32 hardcode count for below (account for '\0')
     snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
-    strcat(ctx, vbuff);
+    strcat(ctx, msg);
 
     // file backup
     FILE *fp;
@@ -297,7 +297,7 @@ int main(int argc, char **argv) {
             printf("***** PUSH TO DMS ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
             printf("%s", samples);
             printf("***** PUSH TO DMS *****\n");
-            samples = "\0";
+            samples[0] = "\0";
 
         }
     }
