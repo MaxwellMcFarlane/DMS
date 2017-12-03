@@ -308,7 +308,7 @@ int main(int argc, char **argv) {
             // consol print
             printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
-            buff.samples = 0;
+            buff.numSample = 0;
             buff.samples[0] = '\0';
             FILE *fp;
             fp = fopen(SAMPLE_BACKUPFILE, "w");
