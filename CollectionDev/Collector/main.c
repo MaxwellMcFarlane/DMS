@@ -38,17 +38,20 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     int channel;
     int serial;
 
-    struct Map map = *ctx;
-    res = PhidgetVoltageInput_setDataInterval(phid, &map.samplingPeriod);
-    if (res != EPHIDGET_OK) {
-        fprintf(stderr, "failed to set device data interval\n");
-        return;
-    }
+    if(ctx != nullptr){
+        struct Map map;
+        map = (struct Map) *ctx;
+        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, &map.samplingPeriod);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device data interval\n");
+            return;
+        }
 
-    res = PhidgetVoltageInput_setVoltageChangeTrigger(phid, 0);
-    if (res != EPHIDGET_OK) {
-        fprintf(stderr, "failed to set device voltage change trigger\n");
-        return;
+        res = PhidgetVoltageInput_setVoltageChangeTrigger((PhidgetVoltageInputHandle) phid, 0);
+        if (res != EPHIDGET_OK) {
+            fprintf(stderr, "failed to set device voltage change trigger\n");
+            return;
+        }
     }
 
     res = Phidget_getDeviceSerialNumber(phid, &serial);
@@ -364,10 +367,10 @@ done:
 
     unlink(SAMPLEPIPE);
 
-    Phidget_close((PhidgetHandle)ch1);
-    PhidgetVoltageInput_delete(&ch1);
-    Phidget_close((PhidgetHandle)ch2);
-    PhidgetVoltageInput_delete(&ch2);
+    for(int i = 0; i < numbSensors; i++){
+        Phidget_close((PhidgetHandle) map[i].ch);
+        PhidgetVoltageInput_delete(&map[i].ch);
+    }
 
     exit(res);
 }
