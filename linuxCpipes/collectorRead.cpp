@@ -7,11 +7,15 @@ int main(int, char** argv){
     std::string line;
     //char dlm = ';';
     int i = 0;
-    while(getline(input, line)){
-        std::cout << line << "\n";
-        for(int i = 0; i < 999; i++){
-           i++;
-           i--;
+    bool done = false;
+    while(!done){
+        while(getline(input, line)){
+            std::cout << line << "\n";
+        }
+        if(input.eof()){
+            input.clear();
+        } else {
+            done = true;
         }
     }
     //input >> line;
