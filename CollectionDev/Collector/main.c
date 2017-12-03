@@ -275,7 +275,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    printf("Gathering data for 20 seconds...\n");
+    //printf("Gathering data for 20 seconds...\n");
     //ssleep(20);
     // enter main loop
     volatile unsigned sink;
@@ -289,10 +289,10 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
-        if(diff > 5000){
+        if(diff.tv_sec > 5){
         printf("***** PUSH TO DMS ***** (%l.%l)", (long) before.tv_sec, before.tv_nsec);
 
-         }
+        }
     }
 
 
