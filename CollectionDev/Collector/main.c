@@ -227,13 +227,15 @@ int main(int argc, char **argv) {
 
     sqlite3 *db;
     sqlite3_open(DB_PATH,&db);
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
+    printf("after open\n");
+    //sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, ermsg);
-
+    printf("after exec");
     sqlite3_exec(db,
                  "insert into "
                  "sampletable(sensorid,timestamp,rawdata) "
                  "values('s0',123212,2131231);",0,0,ermsg);
+    printf("after exec 2");
 
 
     //printf("%s\n", ermsg);
