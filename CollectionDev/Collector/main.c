@@ -14,30 +14,11 @@
 #include <string.h>
 #include <errno.h>
 
-// includes for piping
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-#define SAMPLEPIPE "/tmp/samplePipe"
-#define SAMPLEPIPE_PORT 0666
-#define SAMPLEPIPE_SETUP_MESSAGE "test"
-
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
 
-// struct for map structure adapted from
-// https://stackoverflow.com/questions/21958247/map-like-structure-in-c-use-int-and-struct-to-determine-a-value
-// and the wikipedia page on structs
-// utilizing linear search for Keys as there will not be an absurd ammount of sensors
-// and this will not be called relatively often
-
-struct Key{
+struct Sensor{
     int hub;
     int port;
-};
-
-struct Map{
-    struct Key key;
     PhidgetVoltageInputHandle ch;
     uint32_t samplingPeriod;
 };
@@ -52,9 +33,9 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
     int serial;
 
     if(ctx){
-        struct Map *map;
-        map = (struct Map*) ctx;
-        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, map->samplingPeriod);
+        struct Sensor *sen;
+        sen = (struct Sensor*) ctx;
+        res = PhidgetVoltageInput_setDataInterval((PhidgetVoltageInputHandle) phid, sen->samplingPeriod);
         if (res != EPHIDGET_OK) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
@@ -65,7 +46,7 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
         }
-        printf("SET DI %i %i %i\n",map->key.hub, map->key.port, check);
+        printf("SET DI %i %i %i\n",sen->hub, sen->port, check);
 
         res = PhidgetVoltageInput_setVoltageChangeTrigger((PhidgetVoltageInputHandle) phid, 0);
         if (res != EPHIDGET_OK) {
@@ -135,9 +116,6 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-    clock_t start_t, end_t, total_t;
-    start_t = clock();
-
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
@@ -150,22 +128,13 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
-    // write to samplePipe
-    int samplePipeFile;
-    char* samplePipe = SAMPLEPIPE;
-    samplePipeFile = open(samplePipe, O_WRONLY);
-    printf("Writing to pipe\n");
+    // print to string buffer
     char msg[32]; // 32 hardcode count for below (account for '\0')
     snprintf(msg, (100*sizeof(char)), "%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     strcat(msg, "\0");
     printf("%s", msg);
-    int numBits = write(samplePipeFile, &msg, sizeof(msg));
-    printf("Wrote to pipe\n");
-    printf("%i\n", numBits);
-    int n = close(samplePipeFile);
-    printf("%i\n", n);
-    printf("closed pipe file\n");
 
+    // file backup
     FILE *fp;
     fp = fopen(SAMPLE_BACKUPFILE, "a");
     fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
@@ -173,10 +142,6 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
 
     // print to console/terminal
     printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
-
-    end_t = clock();
-    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-    printf("Total time taken by CPU: %f\n", total_t);
 }
 
 /*
@@ -205,26 +170,6 @@ initChannel(PhidgetHandle ch, void *ctx) {
     }
 
     /*
-    * Please review the Phidget22 channel matching documentation for details on the device
-    * and class architecture of Phidget22, and how channels are matched to device features.
-    */
-
-    /*
-    * Specifies the serial number of the device to attach to.
-    * For VINT devices, this is the hub serial number.
-    *
-    * The default is any device.
-    */
-    //Phidget_setDeviceSerialNumber(ch, 497194);
-
-    /*
-    * For VINT devices, this specifies the port the VINT device must be plugged into.
-    *
-    * The default is any port.
-    */
-    //Phidget_setHubPort(ch, 3);
-
-    /*
     * Specifies that the channel should only match a VINT hub port.
     * The only valid channel id is 0.
     *
@@ -235,39 +180,19 @@ initChannel(PhidgetHandle ch, void *ctx) {
     return (EPHIDGET_OK);
 }
 
-int
-main(int argc, char **argv) {
-    //fprintf(fp, "This is testing for fprintf...\n");
-    //fputs("This is testing for fputs...\n", fp);
-
-    mkfifo(SAMPLEPIPE, SAMPLEPIPE_PORT);
-
-    // write to samplePipe
-    int samplePipeFile;
-    char* samplePipe = SAMPLEPIPE;
-    samplePipeFile = open(samplePipe, O_WRONLY);
-    printf("Writing to pipe\n");
-    char* msg = SAMPLEPIPE_SETUP_MESSAGE;
-    int numBits = write(samplePipeFile, msg, sizeof(msg));
-    printf("Wrote to pipe\n");
-    printf("%i\n", numBits);
-    int n = close(samplePipeFile);
-    printf("%i\n", n);
-    printf("closed pipe file\n");
-
-    // open readPipe
+int main(int argc, char **argv) {
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
-    struct Map map[numbSensors];
+    struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
         printf("%i\n", i);
         // read HUB and Port
-        map[i].key.hub = 497194;
-        map[i].key.port = i;
-        map[i].samplingPeriod = 100; // in msec
+        map[i].hub = 497194;
+        map[i].port = i;
+        map[i].samplingPeriod = 3000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -299,8 +224,8 @@ main(int argc, char **argv) {
     }
 
     for(int i = 0; i < numbSensors; i++){
-        Phidget_setDeviceSerialNumber((PhidgetHandle) map[i].ch, map[i].key.hub);
-        Phidget_setHubPort((PhidgetHandle) map[i].ch, map[i].key.port);
+        Phidget_setDeviceSerialNumber((PhidgetHandle) map[i].ch, map[i].hub);
+        Phidget_setHubPort((PhidgetHandle) map[i].ch, map[i].port);
     }
 
     for(int i = 0; i < numbSensors; i++){
@@ -350,49 +275,23 @@ main(int argc, char **argv) {
         }
     }
 
-//    unsigned int* DI;
-//    DI = malloc(sizeof(unsigned int));
-//    *DI = 1000;
-//    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
-//    if (res != EPHIDGET_OK) {
-//        Phidget_getErrorDescription(res, &errs);
-//        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-//        goto done;
-//    }
-//    *DI = 1000;
-//    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
-//    if (res != EPHIDGET_OK) {
-//        Phidget_getErrorDescription(res, &errs);
-//        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-//        goto done;
-//    }
-
-
     printf("Gathering data for 20 seconds...\n");
-    ssleep(20);
+    //ssleep(20);
+    // enter main loop
+    clock_t lastUpdated, now;
+    while(true){
+        for(size_t i=0; i<10000000; ++i)
+              sink++;
 
-    //printf("Gather data for 10 seconds with new dataInterval...\n");
-//    *DI = 3000;
-//    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
-//    if (res != EPHIDGET_OK) {
-//        Phidget_getErrorDescription(res, &errs);
-//        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-//        goto done;
-//    }
-//    *DI = 3000;
-//    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
-//    if (res != EPHIDGET_OK) {
-//        Phidget_getErrorDescription(res, &errs);
-//        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
-//        goto done;
-//    }
-//    free(DI);
-//    ssleep(10);
+          clock_t end = clock();
+          double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+         if(cpu_time_used > 5){
+          printf("for loop took %f seconds to execute \n", cpu_time_used);
+         }
+    }
+
+
 done:
-    //printf("%s", samples);
-
-    unlink(SAMPLEPIPE);
-
     for(int i = 0; i < numbSensors; i++){
         Phidget_close((PhidgetHandle) map[i].ch);
         PhidgetVoltageInput_delete(&map[i].ch);
