@@ -334,7 +334,7 @@ int main(int argc, char **argv) {
                 printf("%s\n", buff.samples[i]);
                 //strcat(&tmp, buff.samples[i]);
                 //strcat(&tmp, ",");
-            //}
+            }
             /*strcat(&tmp, buff.samples[buff.index]);
             char* postfix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
             strcat(&tmp, postfix);
