@@ -13,6 +13,13 @@
 #include <string.h>
 #include <errno.h>
 
+// includes for piping
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+#define SAMPLEPIPE "/tmp/samplePipe"
+
 static void CCONV ssleep(int);
 
 static void CCONV
@@ -83,27 +90,35 @@ errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, co
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
-	FILE *fp;
-    fp = fopen("test.txt", "a");
-	
+    printf("hey its an event");
     // clock_t start_t, end_t, total_t;
     // start_t = clock();
+
     struct timeval tv;
     gettimeofday(&tv, NULL);
+
+    unsigned long long millisecondsSinceEpoch =
+            (unsigned long long)(tv.tv_sec) * 1000 +
+            (unsigned long long)(tv.tv_usec) / 1000;
 
     int hubSN = -1;
     int hubPort = -1;
     Phidget_getDeviceSerialNumber((PhidgetHandle) ch, &hubSN);
     Phidget_getHubPort((PhidgetHandle) ch, &hubPort);
 
-    unsigned long long millisecondsSinceEpoch =
-            (unsigned long long)(tv.tv_sec) * 1000 +
-            (unsigned long long)(tv.tv_usec) / 1000;
+    // write to samplePipe
+
+    FILE *fp;
+    fp = fopen("test.txt", "a");
+
     printf("%d %d %f\n", hubSN, hubPort,  voltage);
+
     //char vbuff[100];
     //snprintf(vbuff, 100, "%d,%d,%llu,%f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
     //strcat(ctx, vbuff);
+
     fprintf(fp,"%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+
     //end_t = clock();
     //total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
        //printf("Total time taken by CPU: %f\n", total_t  );
@@ -248,14 +263,14 @@ main(int argc, char **argv) {
     }
 
     unsigned int* DI;
-    *DI = 500;
+    *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
     if (res != EPHIDGET_OK) {
         Phidget_getErrorDescription(res, &errs);
         fprintf(stderr, "failed to set DataInterval: %s\n", errs);
         goto done;
     }
-    *DI = 1500;
+    *DI = 1000;
     res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
     if (res != EPHIDGET_OK) {
         Phidget_getErrorDescription(res, &errs);
@@ -267,6 +282,22 @@ main(int argc, char **argv) {
     printf("Gathering data for 20 seconds...\n");
     ssleep(20);
 
+    printf("Gather data for 10 seconds with new dataInterval...\n");
+    *DI = 3000;
+    res = PhidgetVoltageInput_setDataInterval(ch1, *DI);
+    if (res != EPHIDGET_OK) {
+        Phidget_getErrorDescription(res, &errs);
+        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
+        goto done;
+    }
+    *DI = 3000;
+    res = PhidgetVoltageInput_setDataInterval(ch2, *DI);
+    if (res != EPHIDGET_OK) {
+        Phidget_getErrorDescription(res, &errs);
+        fprintf(stderr, "failed to set DataInterval: %s\n", errs);
+        goto done;
+    }
+    ssleep(10);
 done:
     //printf("%s", samples);
     Phidget_close((PhidgetHandle)ch1);

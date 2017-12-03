@@ -8,6 +8,7 @@
 #include "state.h"
 #include "../DMS/dms.h"
 #include "../DMS/table.h"
+#include "../tools/log.h"
 class ModeManager
 {
 
@@ -23,6 +24,8 @@ public:
     void nextstate(DMS *db);
     ~ModeManager();
     vector<string> split(const string s, char delimiter);
+    Log * log = new Log("../stateError.txt");
+
 
 };
 

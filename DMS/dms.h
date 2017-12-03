@@ -8,6 +8,8 @@
 #include "../tools/macros.h"
 #include "../tools/baseclass.h"
 #include "../tools/log.h"
+#include <time.h>
+#include <cstring>
 
 using namespace std;
 

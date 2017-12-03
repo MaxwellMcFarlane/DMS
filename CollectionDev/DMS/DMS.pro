@@ -6,17 +6,17 @@ CONFIG -= qt
 SOURCES += main.cpp \
     dms.cpp \
     table.cpp\
-    ../tools/log.cpp\
-    ../tools/baseclass.cpp \
+    ../../tools/log.cpp\
+    ../../tools/baseclass.cpp \
     dmswd.cpp \
-#    sqlite3.c \
+    sqlite3.c \
 
-LIBS += -l sqlite3
+#LIBS += -l sqlite3
 
 HEADERS += \
     dms.h \
     table.h\
-    ../tools/log.h\
-    ../tools/baseclass.h \
+    ../../tools/log.h\
+    ../../tools/baseclass.h \
     dmswd.h \
     sqlite3.h

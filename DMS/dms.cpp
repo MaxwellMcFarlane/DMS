@@ -347,6 +347,7 @@ void DMS::resetRowIdTable(string tableName,string col){
     int index;
     cmd1 = "select Min(rowid) from "+tableName + ";";
     rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &minIndex, 0);
+//    index =
     cout << stoi(minIndex) + getTable(tableName)->count() << endl;
     cout << minIndex << endl;
     for(int j = 1; j < getTable(tableName)->count() + 1;j++){

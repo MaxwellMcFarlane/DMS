@@ -1,11 +1,12 @@
 #ifndef TABLE_H
 #define TABLE_H
 #include <iostream>
-#include <sqlite3.h>
+#include "sqlite3.h"
 #include <vector>
 #include "../tools/macros.h"
 #include "../tools/baseclass.h"
 #include "../tools/log.h"
+#include <cstring>
 
 using namespace std;
 
