@@ -313,8 +313,6 @@ int main(int argc, char **argv) {
             fp = fopen(SAMPLE_BACKUPFILE, "w");
             fprintf(fp, "%s", &buff.samples);
             fclose(fp);
-            free(fp);
-
         }
     }
 
