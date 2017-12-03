@@ -26,7 +26,7 @@ int main()
 
 //    db.clearTable("SampleTable");
 
-    db.resetRowIdTable("StateTable","rowid");
+//    db.resetRowIdTable("StateTable","rowid");
 //    cout << db.controlQuery("'s0':Select RawData from SampleTable where RawData > 60") << endl;
 //    cout << db.controlQuery("null : 		3890: 		1: 		Select RawData from SampleTable where RawData > 30") << endl;
 
