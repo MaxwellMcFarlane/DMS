@@ -146,10 +146,11 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
 
         char msg[100]; // 32 hardcode count for below (account for '\0')
-        msg[0] = '\0';
+
         snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f),", millisecondsSinceEpoch, voltage);
-        buffptr->samples[buffptr->index] = msg;
-        buffptr->index++;
+        printf(msg);
+        //buffptr->samples[buffptr->index] = msg;
+        //buffptr->index++;
     }
 
     // file backup
@@ -202,6 +203,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+    buff.samples =
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
@@ -330,12 +332,12 @@ int main(int argc, char **argv) {
             /*char* tmp[5000] = "\0" SAMPLE_PREFIX;
             char* prefix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
             strcat(&tmp, prefix);*/
-            for(int i = 0; i < buff.index - 1; i++){
-                printf(buff.samples[i]);
+            //for(int i = 0; i < buff.index - 1; i++){
+            //    printf(buff.samples[i]);
                 //strcat(&tmp, buff.samples[i]);
                 //strcat(&tmp, ",");
-            }/*
-            strcat(&tmp, buff.samples[buff.index]);
+            //}
+            /*strcat(&tmp, buff.samples[buff.index]);
             char* postfix[sizeof(SAMPLE_POSTFIX)] = SAMPLE_POSTFIX;
             strcat(&tmp, postfix);
             printf("%s", tmp);
@@ -346,8 +348,8 @@ int main(int argc, char **argv) {
             // consol print
             //printf("%s", &buff.samples);
             printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
-            buff.index = 0;
-            buff.samples[0] = '\0';
+            //buff.index = 0;
+            //.samples[0] = '\0';
             FILE *fp;
             fp = fopen(SAMPLE_BACKUPFILE, "w");
             //fprintf(fp, "%s", &buff.samples);
