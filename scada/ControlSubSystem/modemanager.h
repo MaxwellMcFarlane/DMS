@@ -36,11 +36,11 @@ public:
         */
     State *getState(string name);
     /**
-        * @brief     Configures the mode mangaer using the scripts written in the configuration file
+        * @brief     Configures the mode mangaer using the scripts written in the configuration file.
         */
     void configure();
     /**
-        * @brief     It branches to the nextstate if the branch condiiton is found to be true
+        * @brief     It branches to the nextstate if the branch condiiton is found to be true.
         */
     void nextstate();
     /**
@@ -48,22 +48,22 @@ public:
         */
     ~ModeManager();
     /**
-        * @brief     Given a string and a delimter , it splits strings
+        * @brief     Given a string and a delimter , it splits strings.
         * @param     string s- a string to be split
-        * @param     char  delimiter - a character to split the string with
+        * @param     char  delimiter - a character to split the string with.
         * @return    vector<string>- split tokens
         */
     vector<string> split(const string s, char delimiter);
 
     /**
-        * @brief     Given a condition it prepares a command query for the DMS
+        * @brief     Given a condition it prepares a command query for the DMS.
         * @param     string condition - a condition to query
         * @return    string -  a refined query for the DMS
         */
     string prepQuery(string condition);
 
 
-    Log * errorLog = new Log("../error_files/control_error.txt");//error log files
+    Log * errorLog = new Log("../error_files/control_error.txt");//error log files.
     Log * log = new Log("../log_files/control_log.txt");// processs log files
 
 

@@ -16,6 +16,7 @@ int main()
     // cout << "Mode Manager Configured" << endl;
 
     DMS db("../scada.db","../configuration_files/deftables_config.txt","../log.txt");
+    //
     //db.loadDataBase("../testbench_files/StateTableTB.txt");
     //db.loadDataBase("../testbench_files/BranchTableTB.txt");
     //db.loadDataBase("../testbench_files/ConditionTableTB.txt");
@@ -32,13 +33,13 @@ int main()
 
         // Test for Mode Manager with data reaction
         m.configure();
-        cout<<"CurrentState: "+m.currentState<<endl;
+        cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
-        cout<<"CurrentState: "+m.currentState<<endl;
+        cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
-        cout<<"CurrentState: "+m.currentState<<endl;
+        cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
-        cout<<"CurrentState: "+m.currentState<<endl;
+        cout<<"CurrentState:"+m.currentState<<endl;
     }
     catch (const std::exception& e) {
         std::cout <<e.what();

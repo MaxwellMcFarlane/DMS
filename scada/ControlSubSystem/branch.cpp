@@ -4,7 +4,7 @@ using namespace std;
 #include "state.h"
 
 Branch::Branch (State *branchState, string condition ){
-    this->branchState=branchState;
+    this->branchState= branchState;
     this->condition=condition;
 }
 

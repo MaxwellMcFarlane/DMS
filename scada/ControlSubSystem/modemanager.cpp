@@ -7,6 +7,7 @@
 
 ModeManager::ModeManager(string fileName, DMS *db)
 {
+    //store
     this->fileName=fileName;
     this->db=db;
 }
@@ -73,10 +74,6 @@ void ModeManager::configure(){
                 getline(file,line);
                 if(line.at(0) == '#'){
                     // # is for commenting
-
-                if(!from.compare("NULL")){
-                    cout<<"CFG: State " + branchLine[0] + " is not in your state declaration!\n";
-
                 }
                 else{
                     lineCount++;

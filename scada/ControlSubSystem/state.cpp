@@ -6,6 +6,7 @@ using namespace std;
 State::State (string name){
     this->name=name;
     numOfBranches=0;
+    //
 }
 
 
