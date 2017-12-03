@@ -220,7 +220,8 @@ int main(int argc, char **argv) {
         }
     }
 
-    char *ermsg = 0;
+
+    char *ermsg[100];
 
     sqlite3 *db;
     sqlite3_open(DB_PATH,&db);
