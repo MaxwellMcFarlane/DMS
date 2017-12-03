@@ -278,16 +278,21 @@ int main(int argc, char **argv) {
     printf("Gathering data for 20 seconds...\n");
     //ssleep(20);
     // enter main loop
-    clock_t lastUpdated, now;
     volatile unsigned sink;
+    struct timespec before, after;
+    clock_gettime(CLOCK_MONOTONIC, &before);
     while(1){
-        for(size_t i=0; i<10000000; ++i)
+        for(size_t i=0; i<10000000; ++i){
               sink++;
-
-          clock_t end = clock();
-          double cpu_time_used = ((double) (now - lastUpdated)) / CLOCKS_PER_SEC;
-         if(cpu_time_used > 5){
-          printf("for loop took %f seconds to execute \n", cpu_time_used);
+        }
+        clock_gettime(CLOCK_MONOTONIC, &after);
+        unsigned long long diff =
+                  ((unsigned long long)(after.tv_sec) * 1000 +
+                  (unsigned long long)(after.tv_usec) / 1000) -
+                  ((unsigned long long)(before.tv_sec) * 1000 +
+                  (unsigned long long)(before.tv_usec) / 1000);
+         if(cpu_time_used > 5000){
+          printf("***** PUSH TO DMS *****");
          }
     }
 
