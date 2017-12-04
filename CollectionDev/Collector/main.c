@@ -59,7 +59,7 @@ onAttachHandler(PhidgetHandle phid, void *ctx) {
             fprintf(stderr, "failed to set device data interval\n");
             return;
         }
-        // printf("SET DI %i %i %i\n",sen->hub, sen->port, check);
+        printf("SET DI %i %i %i\n",sen->hub, sen->port, check);
 
         res = PhidgetVoltageInput_setVoltageChangeTrigger((PhidgetVoltageInputHandle) phid, 0);
         if (res != EPHIDGET_OK) {
@@ -123,13 +123,14 @@ onDetachHandler(PhidgetHandle phid, void *ctx) {
 
 static void CCONV
 errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, const char *errorString) {
+
     fprintf(stderr, "Error: %s (%d)\n", errorString, errorCode);
 }
 
 static void CCONV
 onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) {
     struct timespec tv;
-    // gettimeofday(&tv, NULL);
+    //gettimeofday(&tv, NULL);
     // use CLOCK_MONOTONIC for systems that want a time that will not be adjusted
     clock_gettime(CLOCK_REALTIME, &tv);
     unsigned long long millisecondsSinceEpoch =
@@ -150,7 +151,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
             int index = buffptr->index;
             buffptr->index++;
             buffptr->samples[index] = msg;
-            // printf("%s\n", msg);
+            printf("%s\n", msg);
         }
     }
 
@@ -161,7 +162,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    // printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    //printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -206,39 +207,17 @@ int main(int argc, char **argv) {
     buff.index = 0;
     buff.record = 0;
 
-    char *ermsg = 0;
-    sqlite3 *db;
-    sqlite3_open(DB_PATH, &db);
-    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
-    sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
-    sqlite3_close(db);
-
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 3;
-    int loadConfig = 0;
-//    if(argc > 2){
-//        numbSensors = (argc - 1)/2;
-//        loadConfig = 1;
-//    }
-
+    int numbSensors = 4;
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
-        //printf("%i\n", i);
-
-        // if provided configs
+        printf("%i\n", i);
         // read HUB and Port
-        //if(loadConfig){
-          //  map[i].hub = atoi(argv[(3*i)]);
-          //  map[i].port = atoi(argv[(3*i) + 1]);
-         //   map[i].samplingPeriod = atoi(argv[(3*i) + 2]); // in msec
-        //} else { // defaults
-            printf("DEFAULTS\n");
-            map[i].hub = 497194;
-            map[i].port = i;
-            map[i].samplingPeriod = 1500; // in msec
-        //}
+        map[i].hub = 497194;
+        map[i].port = i;
+        map[i].samplingPeriod = 1000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -246,6 +225,15 @@ int main(int argc, char **argv) {
             exit(1);
         }
     }
+
+
+    char *ermsg = 0;
+    sqlite3 *db;
+    sqlite3_open(DB_PATH, &db);
+    sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+    sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
+    printf("after exec 2");
+    sqlite3_close(db);
 
     /*
     * Enable logging to stdout
