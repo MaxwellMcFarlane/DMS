@@ -161,7 +161,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    //printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -345,20 +345,20 @@ int main(int argc, char **argv) {
             printf("%s\n", final);*/
 
             // multiple individual insert
-            //sqlite3_open(DB_PATH, &db);
-            //sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
-            //sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
+            sqlite3_open(DB_PATH, &db);
+            sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
+            sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
 
                 printf("*** %s\n", buff.samples[i]);
-                //(final, SAMPLE_PREFIX);
-                //strcat(final, buff.samples[i]);
-                //strcat(final, SAMPLE_POSTFIX);
-                //printf("%s\n", final);
-                //sqlite3_exec(db, (const char) final, 0, 0, &ermsg);
-                //printf("%s\n", ermsg);
+                srcat(final, SAMPLE_PREFIX);
+                strcat(final, buff.samples[i]);
+                strcat(final, SAMPLE_POSTFIX);
+                printf($$$ "%s\n", final);
+                sqlite3_exec(db, (const char) final, 0, 0, &ermsg);
+                printf("err: %s\n", ermsg);
             }
-            //sqlite3_close(db);
+            sqlite3_close(db);
 
             // console print
             //printf("%s", &buff.samples);
