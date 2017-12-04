@@ -33,6 +33,7 @@ struct Sensor{
 struct dmsBuffer{
     int index;
     char* samples[MAXBUFFERED_SAMPLES];
+    int record;
 };
 
 static void CCONV ssleep(int);
@@ -144,12 +145,13 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     // print to string buffer
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
-
-        char msg[50] = ""; // 32 hardcode count for below (account for '\0')
-        snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-        buffptr->samples[buffptr->index] = msg;
-        buffptr->index++;
-        printf("%s\n", msg);
+        if(buffptr->record){
+            char msg[50] = ""; // 32 hardcode count for below (account for '\0')
+            snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
+            buffptr->samples[buffptr->index] = msg;
+            buffptr->index++;
+            printf("%s\n", msg);
+        }
     }
 
     // file backup
@@ -202,6 +204,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+    buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 1;
@@ -318,7 +321,8 @@ int main(int argc, char **argv) {
     volatile unsigned sink;
     struct timespec before, after, diff;
     clock_gettime(CLOCK_MONOTONIC, &before);
-    printf("***** MAIN LOOP ***** (%i %i)\n", (long) before.tv_sec, before.tv_nsec);
+    printf("******** MAIN LOOP ********\n");
+    buff.record = 1;
     while(1){
 
         clock_gettime(CLOCK_MONOTONIC, &after);
