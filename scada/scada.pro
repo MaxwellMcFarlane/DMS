@@ -13,6 +13,7 @@ SOURCES += main.cpp \
     ControlSubSystem/modemanager.cpp \
     scada.cpp \
     ../DMS/dmswd.cpp \
+    ControlSubSystem/calibration.cpp
 
 LIBS += -l sqlite3
 
@@ -27,3 +28,4 @@ HEADERS += \
     ControlSubSystem/modemanager.h \
     scada.h \
     ../DMS/dmswd.h \
+    ControlSubSystem/calibration.h
