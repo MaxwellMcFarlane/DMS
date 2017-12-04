@@ -148,8 +148,8 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         if(buffptr->record){
             char msg[50] = ""; // 32 hardcode count for below (account for '\0')
             snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-            buffptr->samples[buffptr->index] = msg;
             buffptr->index++;
+            buffptr->samples[buffptr->index] = msg;
             printf("%s\n", msg);
         }
     }
@@ -205,6 +205,9 @@ int main(int argc, char **argv) {
     struct dmsBuffer buff;
     buff.index = 0;
     buff.record = 0;
+    for(int i = 0; i < buff.index; i++){
+        buff.samples[i] = " ";
+    }
 
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 4;
@@ -364,7 +367,7 @@ int main(int argc, char **argv) {
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             for(int i = 0; i < buff.index; i++){
-                buff.samples[i] = "";
+                buff.samples[i] = " ";
             }
             buff.index = 0;
             FILE *fp;
