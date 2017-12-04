@@ -351,10 +351,10 @@ int main(int argc, char **argv) {
             for(int i = 0; i < buff.index; i++){
 
                 printf("*** %s\n", buff.samples[i]);
-                srcat(final, SAMPLE_PREFIX);
+                strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                printf($$$ "%s\n", final);
+                printf("$$$ %s\n", final);
                 sqlite3_exec(db, (const char) final, 0, 0, &ermsg);
                 printf("err: %s\n", ermsg);
             }
