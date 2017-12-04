@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+//#include <QString>
 
 
 ModeManager::ModeManager(string fileName, DMS *db)
@@ -53,11 +54,13 @@ void ModeManager::configure(){
         //iterate till the end of the file
 
         lineCount++;//line counter
-        getline(file,line);//iterator by line
-
-        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// this triggers an end to the script
+        getline(file,line);
+        char E = line.at(0);
+        char N = line.at(1);
+        char D = line.at(2);
+        if(strcmp(&E,"E") == 0 && strcmp(&N,"N") == 0 && strcmp(&D,"D") == 0){cout << "hello" << endl;}
+        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D'){break;}// this triggers an end to the script
         if(line.at(0) == '#')  continue; // # is for commenting;
-
 
         else if (line.find(stateDeclaration) != std::string::npos) {
             //state declaration block
@@ -134,8 +137,7 @@ void ModeManager::configure(){
         }
         if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// END triggers an end to the script
     }
-    file.close();
-    cout<<"jhahha";
+    file.close();    
     if(!states.empty()) {
         currentState=(states[0]).name;
         //set the first state to be the default currentstate
