@@ -47,8 +47,8 @@ public:
 
     void resetRowIdTable(string tableName, string col);
 
-    void setCurrentState(State * currentState);
-    State* getCurrentState();
+    void setCurrentState(string  currentState);
+    string getCurrentState();
 
 private:
 
@@ -64,7 +64,7 @@ private:
     Log * log = new Log("../error_files/dms_log.txt");
 
     static int n;
-    State * currentState;
+    string currentState;
 
 };
 
