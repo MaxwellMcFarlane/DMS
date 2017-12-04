@@ -216,7 +216,7 @@ int main(int argc, char **argv) {
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 3;
     int loadConfig = 0;
-    if(argc > 1){
+    if(argc > 2){
         numbSensors = (argc - 1)/2;
         loadConfig = 1;
     }
@@ -230,9 +230,9 @@ int main(int argc, char **argv) {
         // if provided configs
         // read HUB and Port
         if(loadConfig){
-            map[i].hub = atoi(argv[(3*i) - 1]);
-            map[i].port = atoi(argv[(3*i)]);
-            map[i].samplingPeriod = atoi(argv[(3*i) + 1]); // in msec
+            map[i].hub = atoi(argv[(3*i)]);
+            map[i].port = atoi(argv[(3*i) + 1]);
+            map[i].samplingPeriod = atoi(argv[(3*i) + 2]); // in msec
         } else { // defaults
             map[i].hub = 497194;
             map[i].port = i;
