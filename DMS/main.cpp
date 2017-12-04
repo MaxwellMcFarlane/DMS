@@ -23,6 +23,7 @@ int main()
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
     db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
+    db.loadConfigTable("sensor_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/sensor_config.txt");
 
 //    db.clearTable("SampleTable");
 
@@ -33,7 +34,8 @@ int main()
 
 //    /**SHOW DATABASE**/
 //    cout<< "Rawdata larger than 50 " << endl;
-//    cout << db.getTable("SampleTable")->createQuery("RAWDATA", " RAWDATA > 50") << endl;
+//    cout << db.getTable("SampleTable")->createQuery("RAWDATA", "") << endl;
+//    cout << db.getTable("SampleTable")->createQuery("SAMPLEID", "") << endl;
 //    cout<< "\n";
 //    cout<< "All sensors in architecture" << endl;
 //    cout << db.getTable("HubTable")->createQuery("*", "")<< endl;

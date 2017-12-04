@@ -18,35 +18,61 @@ using namespace std;
 
 class State;
 
+
+/**
+ * @brief The DMS class,This class is made to wrapper the sqlite3 database and allow the surrounding systems
+ * to access the informaiton while also storing their information within the tables as well.
+ * @author Maxwell McFarlane
+ * @date 12/03/2017
+ */
 class DMS
 {
 public:
     DMS();
     DMS(string name);    
     DMS(string name, string dbConfig);
+
+    //This consrtuctor is the preferred constructor , specifies name, configuration of tables, and logging path
     DMS(string name, string dbConfig, string logPath);
 
+    //methods allow the user to create a table
     void createTable(string tableName);
     void createTable(string tableName, string dim);    
 
+    //returns table
     Table* getTable(string tableName);
+    //removes table
     void dumpTable(string tableName);
+    //clears table
     void clearTable(string tableName);
+    //closes database
     void close();
+    //returns the log
     Log* getLog();
+    //changes the log used
     void getNewLog();
 
+    //delimitter for commands
     vector<char*> delimitter(string cmd);    
+
+    //query method that returns whether a condition is true or false
     bool controlQuery(string cmd);
+    //returns the headers of a table
     string getTableHeaders(string tableName);
+    //returns the list of tables
     vector<Table*> getTableList();
 
+    //loads .db with testbench file
     void loadDataBase(string  myfile);
+    //loads .db with config files
     void loadConfigTable(string fileName , string myfile);
+    //shows if sensorExists in .db
     bool isSensorExist(string sensorName);    
 
+    //resets row ids after data deletion
     void resetRowIdTable(string tableName, string col);
 
+    //shows the current state of the control system
     void setCurrentState(State * currentState);
     State* getCurrentState();
 

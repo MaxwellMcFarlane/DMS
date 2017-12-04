@@ -1,5 +1,6 @@
 #include "dms.h"
 
+//constructors
 DMS::DMS()
 {
     time_t now = time(0);
@@ -90,20 +91,20 @@ DMS::DMS(string name, string dbConfig, string logPath){
 
     rc = sqlite3_open(name.c_str(),&db);
 
-//    if(!fExist){
-//        this->loadDataBase("../testbench_files/StateTableTB.txt");
-//        this->loadDataBase("../testbench_files/BranchTableTB.txt");
-//        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
+    //    if(!fExist){
+    //        this->loadDataBase("../testbench_files/StateTableTB.txt");
+    //        this->loadDataBase("../testbench_files/BranchTableTB.txt");
+    //        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
 
-//        this->loadDataBase("../testbench_files/SensorTableTB.txt");
-//        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
-//        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
+    //        this->loadDataBase("../testbench_files/SensorTableTB.txt");
+    //        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
+    //        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
 
-//        this->loadDataBase("../testbench_files/SampleTableTB.txt");
-//        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
+    //        this->loadDataBase("../testbench_files/SampleTableTB.txt");
+    //        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
 
-//        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
-//    }
+    //        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
+    //    }
 
     //allow system to accept foreign keys
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
@@ -127,7 +128,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
             while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
             //creates table
             createTable(tableName,dimensions);
-            getTable("ConfigFileTable")->addToTable("'" + tableName + " " + dimensions + "'");
+//            getTable("ConfigFileTable")->addToTable("'" + tableName + " " + dimensions + "'");
             getline(myconfig,dimensions);
             //sets dimensions to a usable format
             getTable(tableName)->setDimensions(dimensions);
@@ -142,16 +143,30 @@ DMS::DMS(string name, string dbConfig, string logPath){
 }
 
 //methods
+/**
+ * @brief DMS::createTable, creates a table based on a name
+ * @param name
+ */
 void DMS::createTable(string name){
     Table * t = new Table(name,db,log);
     sensList.push_back(t);
 }
 
+/**
+ * @brief DMS::createTable, creates table based on namd and dim
+ * @param name
+ * @param dim
+ */
 void DMS::createTable(string name, string dim){
     Table * t = new Table(name,dim, db,log);
     sensList.push_back(t);
 }
 
+/**
+ * @brief DMS::getTable, returns table from table list vector
+ * @param tableName
+ * @return
+ */
 Table* DMS::getTable(string tableName){
     for(int i = 0; i < (int)sensList.size(); i++){
         Table * t = sensList.at(i);
@@ -160,10 +175,18 @@ Table* DMS::getTable(string tableName){
     return nullptr;
 }
 
+/**
+ * @brief DMS::getTableList, returns the table list vector
+ * @return
+ */
 vector<Table*> DMS::getTableList(){
     return sensList;
 }
 
+/**
+ * @brief DMS::dumpTable, removes table from database
+ * @param tableName
+ */
 void DMS::dumpTable(string tableName){
     int rc = 0;
     char *ermsg = 0;
@@ -190,6 +213,11 @@ void DMS::dumpTable(string tableName){
     }
 }
 
+/**
+ * @brief DMS::delimitter, delimits string based on commas for .db entries
+ * @param cmd
+ * @return
+ */
 vector<char*> DMS::delimitter(string cmd){
     vector<char*> k;
     char * it;
@@ -202,8 +230,15 @@ vector<char*> DMS::delimitter(string cmd){
     return k;
 }
 
+/**
+ * @brief DMS::controlQuery, a specified method used by the control subsystem
+ * that allows the subsystem to determine if a condition has been met.
+ * @param cmd
+ * @return
+ */
 bool DMS::controlQuery(string cmd){    
     string sql,sensorName,tableName;
+    //delimitter
     vector<char*> list;
     char * t;
     t = strtok((char*)cmd.c_str(), ": ");
@@ -211,26 +246,29 @@ bool DMS::controlQuery(string cmd){
         list.push_back(t);
         t = strtok(NULL, ": ");
     }
+    //specified format data acquisition
     tableName = (string)list.at(4);
     sensorName = (string)list.at(0);
     for(int i = 1; i < (int)list.size(); i++){sql += (string)list.at(i) + " " ;}
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
     return false;
 }
 
+//returns the log of the system
 Log* DMS::getLog(){return log;}
 
+//refreshes the log
 void DMS::getNewLog(){log = new Log();}
 
+/**
+ * @brief DMS::loadDataBase, loads testbench data into the .db
+ * @param myfilePath
+ */
 void DMS::loadDataBase(string myfilePath){
     ifstream myfile(myfilePath);
     string tableName;
@@ -249,17 +287,30 @@ void DMS::loadDataBase(string myfilePath){
     else{*log << "Unable to load data.\n"; cerr << "Unable to open file.\n";}
 }
 
+/**
+ * @brief DMS::loadConfigTable, loads and updates confguraiton files stored in .db
+ * @param fileName
+ * @param myfilePath
+ */
 void DMS::loadConfigTable(string fileName, string myfilePath){
     std::ifstream ifs(myfilePath);
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                          (std::istreambuf_iterator<char>()    ) );
     string cmd = "insert into configfiletable(filename,contents) values('"+ fileName +"', \"" + content +"\" );";
     int rc;
-    char * zErrmsg;    
+    char * zErrmsg;
     rc = sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
-    cout << zErrmsg;
+    if(rc != SQLITE_OK){
+//        cout << endl;
+//        cout << zErrmsg << endl;
+        string cmd = "Update configfiletable Set contents = '"+ content +"' where filename = '"+ fileName +"';";
+//        cout << cmd << endl;
+        sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
+//        cout << zErrmsg << endl;
+    }
 }
 
+//closes the .db
 void DMS::close(){
     sqlite3_close(db);
     //current time
@@ -269,6 +320,12 @@ void DMS::close(){
     *log << dt;
 }
 
+
+/**
+ * @brief DMS::getTableHeaders,
+ * @param tableName
+ * @return
+ */
 string DMS::getTableHeaders(string tableName){
     string headers;
     char* ermsg;
@@ -320,7 +377,6 @@ int DMS::cbgetTableHeaders(void *data, int argc, char **argv, char **azColName){
 }
 
 int DMS::n = 1;
-
 void DMS::clearTable(string tableName){
 
     int rc = 0;
@@ -345,36 +401,33 @@ void DMS::clearTable(string tableName){
 
 }
 
-
-void DMS::resetRowIdTable(string tableName,string col){
-    string cmd,cmd1,cmd2;
-    int rc;
-    string maxIndex,minIndex;
-    int index,sqindex;
-    cmd1 = "select Max(rowid) from "+tableName + ";";
-    cmd2 = "select Min(rowid) from "+tableName + ";";
-    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &maxIndex, 0);
-    index = stoi(maxIndex);
-    rc = sqlite3_exec(db,cmd2.c_str(),cbSize,(void *) &minIndex, 0);
-    sqindex = stoi(minIndex);
-    int j = 1;
-    while(j != index){
-        cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(sqindex) +" WHERE " + col + "= "+ to_string(j) +";";
-        cout << cmd << endl;
-//        cout << !getTable(tableName)->isQueryEmpty("select rowid from "
-//                                                   + tableName
-//                                                   + " where " +col+ "="
-//                                                   +to_string(j) + ";") << endl;
-        rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
-        if(!getTable(tableName)->isQueryEmpty("select rowid from "
-                                             + tableName
-                                             + " where " +col+ "="
-                                             +to_string(j) + ";")){sqindex++;}
-        j++;
-    }
-}
-
-
+//void DMS::resetRowIdTable(string tableName,string col){
+//    string cmd,cmd1,cmd2;
+//    int rc;
+//    string maxIndex,minIndex;
+//    int index,sqindex;
+//    cmd1 = "select Max(rowid) from "+tableName + ";";
+//    cmd2 = "select Min(rowid) from "+tableName + ";";
+//    rc = sqlite3_exec(db,cmd1.c_str(),cbSize,(void *) &maxIndex, 0);
+//    index = stoi(maxIndex);
+//    rc = sqlite3_exec(db,cmd2.c_str(),cbSize,(void *) &minIndex, 0);
+//    sqindex = stoi(minIndex);
+//    int j = 1;
+//    while(j != index){
+//        cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(j) +" WHERE " + col + "= "+ to_string(sqindex) +";";
+//        cout << cmd << endl;
+//        //        cout << !getTable(tableName)->isQueryEmpty("select rowid from "
+//        //                                                   + tableName
+//        //                                                   + " where " +col+ "="
+//        //                                                   +to_string(j) + ";") << endl;
+//        rc = sqlite3_exec(db,cmd.c_str(),0,0, 0);
+//        if(!getTable(tableName)->isQueryEmpty("select rowid from "
+//                                              + tableName
+//                                              + " where " +col+ "="
+//                                              +to_string(j) + ";")){sqindex++;}
+//        j++;
+//    }
+//}
 int DMS::cbSize(void *data, int argc, char **argv, char **azColName){
     string * number = (string *) data;
     *number = (string)*argv;

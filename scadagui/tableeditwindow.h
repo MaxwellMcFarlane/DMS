@@ -31,11 +31,7 @@ public:
 
 private slots:    
 
-    void on_listWidget_itemSelectionChanged();
-
-    void on_getTablebutton_clicked();
-
-    void on_deletebutton_clicked();
+    void on_listWidget_itemSelectionChanged();    
 
 private:
 

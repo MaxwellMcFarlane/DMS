@@ -3,6 +3,9 @@
 
 #include "../DMS/dms.h"
 #include "../DMS/table.h"
+#include <ostream>
+#include <fstream>
+#include <istream>
 #include <QWidget>
 #include <QMessageBox>
 #include <QFileDialog>

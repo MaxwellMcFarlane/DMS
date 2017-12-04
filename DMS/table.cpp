@@ -97,9 +97,11 @@ void Table::addToTable(string info){
     sql = cmd.c_str();    
 
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
+//    cout << ermsg << endl;
 //    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
+//        cout << cmd << endl;
         *log << "Error: " << rc << " in " << tableName << "\n";
         if(rc == 19){*log << "Item: " << info << " caused a constraint violation.\n";}
         *log << " Item could not be inserted.\n";
@@ -259,7 +261,6 @@ void Table::updateTable(string index, string op){
     sql = cmd.c_str();
     string result;
     rc = sqlite3_exec(db,sql,cbUpdate,&result, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;

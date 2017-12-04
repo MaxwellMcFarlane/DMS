@@ -24,13 +24,14 @@ public:
 private slots:
     void on_actionExport_Table_triggered();
 
-    void on_actionConfiguration_triggered();
+    void on_actionConfiguration_triggered();    
 
-    void on_actionEdit_Table_triggered();
+    void on_actionView_Table_triggered();
 
 private:
     Ui::MainWindow *ui;
     DMS *db;
+//    ModeManager *m = new ModeManager("");
 };
 
 #endif // MAINWINDOW_H
