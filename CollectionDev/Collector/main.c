@@ -151,7 +151,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
             int index = buffptr->index;
             buffptr->index++;
             buffptr->samples[index] = msg;
-            // printf("%s\n", msg);
+            printf("%s\n", msg);
         }
     }
 
@@ -314,7 +314,7 @@ int main(int argc, char **argv) {
     volatile unsigned sink;
     struct timespec before, after, diff;
     clock_gettime(CLOCK_MONOTONIC, &before);
-    //printf("******** MAIN LOOP ********\n");
+    printf("******** MAIN LOOP ********\n");
     buff.record = 1;
     while(1){
 
@@ -326,7 +326,7 @@ int main(int argc, char **argv) {
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
 
-            printf("\n******** PUSH TO DMS ********\n");
+            // printf("\n******** PUSH TO DMS ********\n");
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
@@ -338,7 +338,7 @@ int main(int argc, char **argv) {
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                printf("$$$ %s\n", final);
+                //printf("$$$ %s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
                 //printf("err: %s\n", ermsg);
             }
