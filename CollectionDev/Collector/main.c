@@ -32,7 +32,6 @@ struct Sensor{
 
 struct dmsBuffer{
     int index;
-    int nextindex;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
 };
@@ -206,7 +205,6 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
-    buff.nextindex = 0;
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
@@ -234,17 +232,9 @@ int main(int argc, char **argv) {
     sqlite3_open(DB_PATH, &db);
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
-    printf("after exec");
-//    sqlite3_exec(db,
-//                 "insert into "
-//                 "sampletable(sensorid,timestamp,rawdata) "
-//                 "values('s0',123212,2131231);",0,0, &ermsg);
-    char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);";
-    sqlite3_exec(db, test,0,0, &ermsg);
     printf("after exec 2");
     sqlite3_close(db);
 
-    //printf("%s\n", ermsg);
     /*
     * Enable logging to stdout
     */
@@ -328,24 +318,15 @@ int main(int argc, char **argv) {
     buff.record = 1;
     while(1){
 
+        // check if it is time to dump sample buffer to DMS
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
-            printf("\n******** PUSH TO DMS ********\n");
 
-
-           /* strcat(final, SAMPLE_PREFIX);
-            for(int i = 0; i < buff.index - 1; i++){
-                printf("%s", buff.samples[i]);
-                strcat(final, buff.samples[i]);
-                strcat(final, ",");
-            }
-            strcat(final, buff.samples[buff.index]);
-            strcat(final, SAMPLE_POSTFIX);
-            printf("%s\n", final);*/
+            // printf("\n******** PUSH TO DMS ********\n");
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
@@ -353,19 +334,23 @@ int main(int argc, char **argv) {
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
                 char final[200] = "";
-                printf("*** %s\n", buff.samples[i]);
+                //printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                printf("$$$ %s\n", final);
+                //printf("$$$ %s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
-                printf("err: %s\n", ermsg);
+                //printf("err: %s\n", ermsg);
             }
             sqlite3_close(db);
 
             // console print
             //printf("%s", &buff.samples);
+
+            // End of DMS DUMP
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
+
+            // Reset sample buffer array and other tools
             for(int i = 0; i < buff.index; i++){
                 buff.samples[i] = " ";
             }
