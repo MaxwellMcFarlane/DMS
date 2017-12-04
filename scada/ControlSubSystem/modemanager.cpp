@@ -137,9 +137,14 @@ void ModeManager::configure(){
         }
         if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// END triggers an end to the script
     }
+<<<<<<< HEAD
     file.close();    
+=======
+    file.close();
+>>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
     if(!states.empty()) {
         currentState=(states[0]).name;
+        db->setCurrentState(currentState);//update the dms
         //set the first state to be the default currentstate
         *log<<"CFG: DONE! State " + currentState + " is assigned to be the default current state.\n";
     }
@@ -153,6 +158,7 @@ void ModeManager::nextstate(){
             //check if the next state branch can be taken
             *log<<"Now currrentState is: "+states[i].nextstate(db)+"\n";
             currentState=states[i].nextstate(db);//set whateever you got from the nextstate call to the current state
+            db->setCurrentState(currentState);//update the currentstate in the dms
             break;
         }
     }

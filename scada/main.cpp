@@ -7,6 +7,7 @@
 #include "ControlSubSystem/state.h"
 #include "../DMS/dms.h"
 #include "../DMS/table.h"
+#include "ControlSubSystem/calibration.h"
 using namespace std;
 
 int main()
@@ -22,28 +23,34 @@ int main()
     //db.loadDataBase("../testbench_files/ConditionTableTB.txt");
 
     db.loadDataBase("../testbench_files/SensorTableTB.txt");
-    db.loadDataBase("../testbench_files/SensorConfTableTB.txt");
-    db.loadDataBase("../testbench_files/CalConfTableTB.txt");
+    db.loadDataBase("../testbench_files/SensorConfTableTB.txt");   
 
     db.loadDataBase("../testbench_files/SampleTableTB.txt");
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
     DMS *dbp=&db;
+
+
     try{
         ModeManager m("../configuration_files/control_config.txt", dbp);
 
         // Test for Mode Manager with data reaction
         m.configure();
+        /*
         cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
         cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
         cout<<"CurrentState:"+m.currentState<<endl;
         m.nextstate();
-        cout<<"CurrentState:"+m.currentState<<endl;
+        cout<<"CurrentState:"+m.currentState<<endl;*/
     }
     catch (const std::exception& e) {
         std::cout <<e.what();
     }
+
+    db.loadDataBase("../testbench_files/CalConfTableTB.txt");
+    Calibration c(dbp);
+    c.calibrate("1");
 
 
     // Unit test for state and state transition

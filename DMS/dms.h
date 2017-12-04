@@ -72,9 +72,14 @@ public:
     //resets row ids after data deletion
     void resetRowIdTable(string tableName, string col);
 
+<<<<<<< HEAD
     //shows the current state of the control system
     void setCurrentState(State * currentState);
     State* getCurrentState();
+=======
+    void setCurrentState(string  currentState);
+    string getCurrentState();
+>>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
 
 private:
 
@@ -90,7 +95,7 @@ private:
     Log * log = new Log("../error_files/dms_log.txt");
 
     static int n;
-    State * currentState;
+    string currentState;
 
 };
 
