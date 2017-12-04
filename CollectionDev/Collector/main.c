@@ -229,10 +229,12 @@ int main(int argc, char **argv) {
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
     printf("after exec");
-    sqlite3_exec(db,
-                 "insert into "
-                 "sampletable(sensorid,timestamp,rawdata) "
-                 "values('s0',123212,2131231);",0,0, &ermsg);
+//    sqlite3_exec(db,
+//                 "insert into "
+//                 "sampletable(sensorid,timestamp,rawdata) "
+//                 "values('s0',123212,2131231);",0,0, &ermsg);
+    char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);"
+    sqlite3_exec(db, test,0,0, &ermsg);
     printf("after exec 2");
     sqlite3_close(db);
 
@@ -349,7 +351,7 @@ int main(int argc, char **argv) {
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
                 printf("%s\n", final);
-                sqlite3_exec(db, (const char) final, 0, 0, &ermsg);
+                //sqlite3_exec(db, (const char) final, 0, 0, &ermsg);
                 printf("%s\n", ermsg);
             }
             sqlite3_close(db);
