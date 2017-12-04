@@ -216,10 +216,10 @@ int main(int argc, char **argv) {
     // use readPipe to instantiate Map Sensor Architecture
     int numbSensors = 3;
     int loadConfig = 0;
-    if(argc > 2){
-        numbSensors = (argc - 1)/2;
-        loadConfig = 1;
-    }
+//    if(argc > 2){
+//        numbSensors = (argc - 1)/2;
+//        loadConfig = 1;
+//    }
 
     struct Sensor map[numbSensors];
     PhidgetReturnCode res;
@@ -234,6 +234,7 @@ int main(int argc, char **argv) {
             map[i].port = atoi(argv[(3*i) + 1]);
             map[i].samplingPeriod = atoi(argv[(3*i) + 2]); // in msec
         } else { // defaults
+            printf("DEFAULTS");
             map[i].hub = 497194;
             map[i].port = i;
             map[i].samplingPeriod = 1500; // in msec
