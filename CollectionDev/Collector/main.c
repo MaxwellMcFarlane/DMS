@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
 
         // if provided configs
         // read HUB and Port
-        if(loafConfig){
+        if(loadConfig){
             map[i].hub = atoi(argv[(3*i) - 1]);
             map[i].port = atoi(argv[(3*i)]);
             map[i].samplingPeriod = atoi(argv[(3*i) + 1]); // in msec
