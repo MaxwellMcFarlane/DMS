@@ -115,7 +115,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
         *log <<"Error: " << rc << " has occured.\n";
     }
     createTable("ConfigFileTable","(fileName TEXT PRIMARY KEY, contents TEXT);");
-    getTable("ConfigFileTable")->setDimensions("Configuration");
+    getTable("ConfigFileTable")->setDimensions("(Configuration)");
     string tableName,dimensions,dummy;
     ifstream myconfig(dbConfig);
 
@@ -217,10 +217,6 @@ bool DMS::controlQuery(string cmd){
     sql += " And SensorId = " + sensorName+ ";";
 
     if((string)list.at(0) != "null"){
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
         if(!getTable(tableName)->isQueryEmpty(sql)){return true;}
     }
     else{cerr << "Err: Incorrect Format for Query Condition." << endl;}
@@ -257,7 +253,7 @@ void DMS::loadConfigTable(string fileName, string myfilePath){
     int rc;
     char * zErrmsg;    
     rc = sqlite3_exec(db,cmd.c_str(),0,0,&zErrmsg);
-    cout << zErrmsg;
+
 }
 
 void DMS::close(){
@@ -292,8 +288,8 @@ bool DMS::isSensorExist(string sensorName){
     else{return true;}
 }
 
-void DMS::setCurrentState(State *currentState){this->currentState = currentState;}
-State* DMS::getCurrentState(){return currentState;}
+void DMS::setCurrentState(string currentState){this->currentState = currentState;}
+string  DMS::getCurrentState(){return currentState;}
 
 //Callback Functions
 int DMS::cbDropTable(void *data, int argc, char **argv, char **azColName){
@@ -360,8 +356,6 @@ void DMS::resetRowIdTable(string tableName,string col){
     int j = 1;
     while(j != index){
         cmd = "UPDATE "+tableName+" SET "+ col + "= "+ to_string(sqindex) +" WHERE " + col + "= "+ to_string(j) +";";
-        cout << cmd << endl;
-//        cout << !getTable(tableName)->isQueryEmpty("select rowid from "
 //                                                   + tableName
 //                                                   + " where " +col+ "="
 //                                                   +to_string(j) + ";") << endl;

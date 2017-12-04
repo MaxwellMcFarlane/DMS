@@ -3,9 +3,4 @@ CFG: State RUN has been successfully created!
 CFG: State STOP has been successfully created!
 CFG: State FINISH has been successfully created!
 CFG: A Branch from State IDLE to State RUN with the condition 's0':Select RawData from SampleTable where RawData > 60 has been successfully loaded!
-CFG: A Branch from State RUN to State STOP with the condition 's0':Select RawData from SampleTable where RawData > 60 has been successfully loaded!
-CFG: A Branch from State STOP to State FINISH with the condition 's0':Select RawData from SampleTable where RawData > 60 has been successfully loaded!
 CFG: DONE! State IDLE is assigned to be the default current state.
-Now currrentState is: RUN
-Now currrentState is: STOP
-Now currrentState is: FINISH
