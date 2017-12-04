@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
 //                 "insert into "
 //                 "sampletable(sensorid,timestamp,rawdata) "
 //                 "values('s0',123212,2131231);",0,0, &ermsg);
-    char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);"
+    char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);";
     sqlite3_exec(db, test,0,0, &ermsg);
     printf("after exec 2");
     sqlite3_close(db);
