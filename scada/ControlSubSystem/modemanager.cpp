@@ -137,11 +137,7 @@ void ModeManager::configure(){
         }
         if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D') break;// END triggers an end to the script
     }
-<<<<<<< HEAD
-    file.close();    
-=======
     file.close();
->>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
     if(!states.empty()) {
         currentState=(states[0]).name;
         db->setCurrentState(currentState);//update the dms

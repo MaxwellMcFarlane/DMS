@@ -31,7 +31,7 @@ private:
     void printExportTable();
 
     Ui::ExportWindow *ui;
-    DMS *db;
+    DMS *db;    
 };
 
 #endif // EXPORTWINDOW_H
