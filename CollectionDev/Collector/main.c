@@ -148,9 +148,8 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         if(buffptr->record){
             char msg[50] = ""; // 32 hardcode count for below (account for '\0')
             snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-            int index = buffptr->index;
+            buffptr->samples[buffptr->index] = msg;
             buffptr->index++;
-            buffptr->samples[index] = msg;
             printf("%s\n", msg);
         }
     }
@@ -217,7 +216,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = 1000; // in msec
+        map[i].samplingPeriod = 1500 + (300 * i); // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -232,9 +231,17 @@ int main(int argc, char **argv) {
     sqlite3_open(DB_PATH, &db);
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
+    printf("after exec");
+//    sqlite3_exec(db,
+//                 "insert into "
+//                 "sampletable(sensorid,timestamp,rawdata) "
+//                 "values('s0',123212,2131231);",0,0, &ermsg);
+    char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);";
+    sqlite3_exec(db, test,0,0, &ermsg);
     printf("after exec 2");
     sqlite3_close(db);
 
+    //printf("%s\n", ermsg);
     /*
     * Enable logging to stdout
     */
@@ -318,39 +325,44 @@ int main(int argc, char **argv) {
     buff.record = 1;
     while(1){
 
-        // check if it is time to dump sample buffer to DMS
         clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
+            printf("\n******** PUSH TO DMS ********\n");
 
-            // printf("\n******** PUSH TO DMS ********\n");
+            char final[200] = "";
+           /* strcat(final, SAMPLE_PREFIX);
+            for(int i = 0; i < buff.index - 1; i++){
+                printf("%s", buff.samples[i]);
+                strcat(final, buff.samples[i]);
+                strcat(final, ",");
+            }
+            strcat(final, buff.samples[buff.index]);
+            strcat(final, SAMPLE_POSTFIX);
+            printf("%s\n", final);*/
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
-                char final[200] = "";
-                //printf("*** %s\n", buff.samples[i]);
+
+                printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                //printf("$$$ %s\n", final);
+                printf("$$$ %s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
-                //printf("err: %s\n", ermsg);
+                printf("err: %s\n", ermsg);
             }
             sqlite3_close(db);
 
             // console print
             //printf("%s", &buff.samples);
-
-            // End of DMS DUMP
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
-
-            // Reset sample buffer array and other tools
             for(int i = 0; i < buff.index; i++){
                 buff.samples[i] = " ";
             }
