@@ -32,6 +32,7 @@ struct Sensor{
 
 struct dmsBuffer{
     int index;
+    int nextindex;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
 };
@@ -148,8 +149,9 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         if(buffptr->record){
             char msg[50] = ""; // 32 hardcode count for below (account for '\0')
             snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-            buffptr->samples[buffptr->index] = msg;
+            int index = buffptr->index;
             buffptr->index++;
+            buffptr->samples[index] = msg;
             printf("%s\n", msg);
         }
     }
@@ -204,6 +206,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+    buff.nextindex = 0;
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
@@ -332,6 +335,7 @@ int main(int argc, char **argv) {
             before = after;
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
+
 
            /* strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
