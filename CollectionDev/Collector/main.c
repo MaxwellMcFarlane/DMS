@@ -32,6 +32,7 @@ struct Sensor{
 
 struct dmsBuffer{
     int index;
+    int nextindex;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
 };
@@ -150,7 +151,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
             snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
             int index = buffptr->index;
             buffptr->index++;
-            buffptr->samples[buffptr->index] = msg;
+            buffptr->samples[index] = msg;
             printf("%s\n", msg);
         }
     }
@@ -205,6 +206,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+    buff.nextindex = 0;
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
@@ -350,7 +352,6 @@ int main(int argc, char **argv) {
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
-
                 printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
