@@ -21,7 +21,7 @@
 #define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
 #define MAXBUFFERED_SAMPLES 60
-#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values\0"
+#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values \0"
 #define SAMPLE_POSTFIX "; \0"
 struct Sensor{
     int hub;
@@ -229,11 +229,11 @@ int main(int argc, char **argv) {
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
     printf("after exec");
-    /*sqlite3_exec(db,
+    sqlite3_exec(db,
                  "insert into "
                  "sampletable(sensorid,timestamp,rawdata) "
                  "values('s0',123212,2131231);",0,0, &ermsg);
-    */printf("after exec 2");
+    printf("after exec 2");
     sqlite3_close(db);
 
     //printf("%s\n", ermsg);
