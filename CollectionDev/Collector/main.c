@@ -348,20 +348,6 @@ int main(int argc, char **argv) {
             sqlite3_open(DB_PATH, &db);
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
-
-            FILE* fp;
-            fp = fopen(SAMPLE_BACKUPFILE,"r");
-            while(getline(fp, final)){
-                    printf("%s", final);
-                    }
-                    /*if(input.eof()){
-                        input.clear();
-                    } else {
-                        done = true;
-                    }*/
-            }
-            fclose(fp);
-            /*
             for(int i = 0; i < buff.index; i++){
 
                 printf("*** %s\n", buff.samples[i]);
@@ -371,7 +357,7 @@ int main(int argc, char **argv) {
                 printf("$$$ %s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
                 printf("err: %s\n", ermsg);
-            }*/
+            }
             sqlite3_close(db);
 
             // console print
