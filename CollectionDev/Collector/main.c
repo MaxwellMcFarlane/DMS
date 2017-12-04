@@ -349,10 +349,10 @@ int main(int argc, char **argv) {
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
 
-            std::ifstream input(SAMPLE_BACKUPFILE,"r");
-            std::string line;
-            while(getline(input, line)){
-                    printf("%s", line);
+            FILE* fp;
+            fp = fopen(SAMPLE_BACKUPFILE,"r");
+            while(getline(fp, final)){
+                    printf("%s", final);
                     }
                     /*if(input.eof()){
                         input.clear();
@@ -360,7 +360,7 @@ int main(int argc, char **argv) {
                         done = true;
                     }*/
             }
-            input.close();
+            fclose(fp);
             /*
             for(int i = 0; i < buff.index; i++){
 
