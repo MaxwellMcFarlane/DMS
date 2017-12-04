@@ -229,16 +229,16 @@ int main(int argc, char **argv) {
 
         // if provided configs
         // read HUB and Port
-        if(loadConfig){
-            map[i].hub = atoi(argv[(3*i)]);
-            map[i].port = atoi(argv[(3*i) + 1]);
-            map[i].samplingPeriod = atoi(argv[(3*i) + 2]); // in msec
-        } else { // defaults
-            printf("DEFAULTS");
+        //if(loadConfig){
+          //  map[i].hub = atoi(argv[(3*i)]);
+          //  map[i].port = atoi(argv[(3*i) + 1]);
+         //   map[i].samplingPeriod = atoi(argv[(3*i) + 2]); // in msec
+        //} else { // defaults
+            printf("DEFAULTS\n");
             map[i].hub = 497194;
             map[i].port = i;
             map[i].samplingPeriod = 1500; // in msec
-        }
+        //}
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
