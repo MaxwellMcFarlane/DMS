@@ -333,7 +333,7 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
-            //char final[200] = "";
+            char final[200] = "";
            /* strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
                 printf("%s", buff.samples[i]);
