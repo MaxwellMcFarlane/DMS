@@ -149,7 +149,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
         buffptr->samples[buffptr->index] = msg;
         buffptr->index++;
-        //printf(msg);
+        printf(msg);
     }
 
     // file backup
@@ -329,7 +329,7 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
-            char final[200] = "";
+            //char final[200] = "";
            /* strcat(final, SAMPLE_PREFIX);
             for(int i = 0; i < buff.index - 1; i++){
                 printf("%s", buff.samples[i]);
@@ -340,13 +340,13 @@ int main(int argc, char **argv) {
             strcat(final, SAMPLE_POSTFIX);
             printf("%s\n", final);*/
 
-            // multiple individual insert
+            /*// multiple individual insert
             sqlite3_open(DB_PATH, &db);
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
 
-                printf("*** %s\n", buff.samples[i]);
+                //printf("*** %s\n", buff.samples[i]);
                 //(final, SAMPLE_PREFIX);
                 //strcat(final, buff.samples[i]);
                 //strcat(final, SAMPLE_POSTFIX);
@@ -355,7 +355,7 @@ int main(int argc, char **argv) {
                 //printf("%s\n", ermsg);
             }
             sqlite3_close(db);
-
+            */
             // console print
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
