@@ -23,6 +23,7 @@
 #define MAXBUFFERED_SAMPLES 60
 #define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values \0"
 #define SAMPLE_POSTFIX "; \0"
+
 struct Sensor{
     int hub;
     int port;
@@ -147,12 +148,11 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
         if(buffptr->record){
-            char msg[50] = ""; // 32 hardcode count for below (account for '\0')
-            snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
+            char msg[100] = ""; // 32 hardcode count for below (account for '\0')
+            snprintf(msg, (sizeof(msg)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
             int index = buffptr->index;
             buffptr->index++;
             buffptr->samples[index] = msg;
-            printf("%s\n", msg);
         }
     }
 
@@ -163,7 +163,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    //printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -332,20 +332,10 @@ int main(int argc, char **argv) {
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
-            before = after;
-            clock_gettime(CLOCK_MONOTONIC, &after);
             printf("\n******** PUSH TO DMS ********\n");
 
-
-           /* strcat(final, SAMPLE_PREFIX);
-            for(int i = 0; i < buff.index - 1; i++){
-                printf("%s", buff.samples[i]);
-                strcat(final, buff.samples[i]);
-                strcat(final, ",");
-            }
-            strcat(final, buff.samples[buff.index]);
-            strcat(final, SAMPLE_POSTFIX);
-            printf("%s\n", final);*/
+            before = after;
+            clock_gettime(CLOCK_MONOTONIC, &after);
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
