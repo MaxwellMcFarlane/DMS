@@ -22,6 +22,7 @@
 #define MAXBUFFERED_SAMPLES 60
 #define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values \0"
 #define SAMPLE_POSTFIX "; \0"
+
 struct Sensor{
     int hub;
     int port;
@@ -31,6 +32,7 @@ struct Sensor{
 
 struct dmsBuffer{
     int index;
+    int nextindex;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
 };
@@ -145,11 +147,11 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
         if(buffptr->record){
-            char msg[50] = ""; // 32 hardcode count for below (account for '\0')
-            snprintf(msg, (100*sizeof(char)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-            buffptr->samples[buffptr->index] = msg;
+            char msg[100] = ""; // 32 hardcode count for below (account for '\0')
+            snprintf(msg, (sizeof(msg)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
+            int index = buffptr->index;
             buffptr->index++;
-            printf("%s\n", msg);
+            buffptr->samples[index] = msg;
         }
     }
 
@@ -160,7 +162,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    //printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -203,6 +205,7 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
+    buff.nextindex = 0;
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
@@ -215,7 +218,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = 1500 + (300 * i); // in msec
+        map[i].samplingPeriod = 1000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -331,23 +334,15 @@ int main(int argc, char **argv) {
             clock_gettime(CLOCK_MONOTONIC, &after);            
             printf("\n******** PUSH TO DMS ********\n");
 
-            char final[200] = "";
-           /* strcat(final, SAMPLE_PREFIX);
-            for(int i = 0; i < buff.index - 1; i++){
-                printf("%s", buff.samples[i]);
-                strcat(final, buff.samples[i]);
-                strcat(final, ",");
-            }
-            strcat(final, buff.samples[buff.index]);
-            strcat(final, SAMPLE_POSTFIX);
-            printf("%s\n", final);*/
+            before = after;
+            clock_gettime(CLOCK_MONOTONIC, &after);
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
-
+                char final[200] = "";
                 printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
