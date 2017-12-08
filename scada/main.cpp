@@ -17,16 +17,21 @@ int main()
     // cout << "Mode Manager Configured" << endl;
 
     DMS db("../scada.db","../configuration_files/deftables_config.txt","../log.txt");
-    //
-    //db.loadDataBase("../testbench_files/StateTableTB.txt");
-    //db.loadDataBase("../testbench_files/BranchTableTB.txt");
-    //db.loadDataBase("../testbench_files/ConditionTableTB.txt");
+
+    db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
+    db.loadConfigTable("sensor_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/sensor_config.txt");
+
+//    db.loadDataBase("../testbench_files/StateTableTB.txt");
+//    db.loadDataBase("../testbench_files/BranchTableTB.txt");
+//    db.loadDataBase("../testbench_files/ConditionTableTB.txt");
+
 
     db.loadDataBase("../testbench_files/SensorTableTB.txt");
     db.loadDataBase("../testbench_files/SensorConfTableTB.txt");   
 
     db.loadDataBase("../testbench_files/SampleTableTB.txt");
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
+
     DMS *dbp=&db;
 
 
