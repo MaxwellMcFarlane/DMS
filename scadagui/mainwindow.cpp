@@ -22,15 +22,15 @@ MainWindow::MainWindow(QWidget *parent) :
         list.push_back(it);
         it = strtok(NULL, "\n");
     }
-    try{ModeManager m("/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt",db);m.configure();}
+    try{m = new ModeManager("/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt",db);m->configure();}
     catch(const std::exception &e){cout << e.what() << endl;}
     for(int i = 0; i < (int)list.size();i++){
 //        if(db->currentState = ){}
 //        else{}
     }
-//    ui->StateArch->setText(QString::fromStdString(db->getTableHeaders("StateTable")
-//                                                  + "\n"
-//                                                  + db->getTable("StateTable")->createQuery("Select * from StateTable")));
+    ui->StateArch->setText(QString::fromStdString(db->getTableHeaders("StateTable")
+                                                  + "\n"
+                                                  + db->getTable("StateTable")->createQuery("Select * from StateTable")));
 //    m->configure();
 //    db->setCurrentState();
 
@@ -42,20 +42,21 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_actionExport_Table_triggered()
 {
-    ExportWindow * ex = new ExportWindow(0,db);
+    ExportWindow * ex = new ExportWindow(0,db);    
     ex->show();
-
+    m->configure();
 }
 
 void MainWindow::on_actionConfiguration_triggered()
 {
     ConfigurationEditWindow * ex = new ConfigurationEditWindow(0,db);
-//    tableEditWindow * ex = new tableEditWindow(0,db);
-    ex->show();
+    ex->show();    
+//    m->configure();
 }
 
 void MainWindow::on_actionView_Table_triggered()
 {
-    tableEditWindow * ex = new tableEditWindow(0,db);
+    tableEditWindow * ex = new tableEditWindow(0,db);    
     ex->show();
+    m->configure();
 }

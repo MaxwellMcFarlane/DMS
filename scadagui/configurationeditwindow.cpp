@@ -13,11 +13,21 @@ ConfigurationEditWindow::ConfigurationEditWindow(QWidget *parent, DMS *db):
     ui(new Ui::ConfigurationEditWindow)
 {
     ui->setupUi(this);
+//    this->parent = parent;
     this->db = db;
     ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("control_config.txt")));
     ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("sensor_config.txt")));
     ui->FileEditor->setText(QString::fromStdString("<No Contents>"));
 }
+
+//ConfigurationEditWindow::ConfigurationEditWindow(QWidget *parent, DMS *db, QTextEdit *edit){
+//    ui->setupUi(this);
+//    this->edit = edit;
+//    this->db = db;
+//    ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("control_config.txt")));
+//    ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("sensor_config.txt")));
+//    ui->FileEditor->setText(QString::fromStdString("<No Contents>"));
+//}
 
 ConfigurationEditWindow::~ConfigurationEditWindow()
 {
@@ -115,7 +125,12 @@ void ConfigurationEditWindow::on_Savebutton_clicked()
 //    }
     string cmd;
     cmd = "contents = '" + edits.toStdString() + "'";    
-    db->getTable("ConfigFileTable")->updateTable("filename = '" + configname + "'", cmd);
+    db->getTable("ConfigFileTable")->updateTable("filename = '" + configname + "'", cmd);    
+
+//    edit->setText(QString::fromStdString(db->getTableHeaders("StateTable")
+//                                                  + "\n"
+//                                                  + db->getTable("StateTable")->createQuery("Select * from StateTable")));
+
     this->close();
 }
 

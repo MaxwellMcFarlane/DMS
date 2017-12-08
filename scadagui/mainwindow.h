@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     DMS *db;
-//    ModeManager *m = new ModeManager("");
+    ModeManager * m;
 };
 
 #endif // MAINWINDOW_H

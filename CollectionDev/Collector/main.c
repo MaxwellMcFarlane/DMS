@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <phidget22.h>
 
 #ifndef _WIN32
@@ -331,12 +330,13 @@ int main(int argc, char **argv) {
     clock_gettime(CLOCK_MONOTONIC, &before);
     printf("******** MAIN LOOP ********\n");
     buff.record = 1;
-    while(1){
-
-        //clock_gettime(CLOCK_MONOTONIC, &after);
+    while(1){        
+        clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
+            before = after;            
+            clock_gettime(CLOCK_MONOTONIC, &after);            
             printf("\n******** PUSH TO DMS ********\n");
 
             before = after;
@@ -357,7 +357,6 @@ int main(int argc, char **argv) {
                 printf("err: %s\n", ermsg);
             }
             sqlite3_close(db);
-
             // console print
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");

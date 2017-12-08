@@ -17,6 +17,7 @@
 #include <QInputDialog>
 #include <QProgressBar>
 #include <QTextStream>
+#include <QTextEdit>
 #include "../scada/ControlSubSystem/branch.h"
 #include "../scada/ControlSubSystem/modemanager.h"
 #include "../scada/ControlSubSystem/state.h"
@@ -32,6 +33,7 @@ class ConfigurationEditWindow : public QWidget
 public:
     explicit ConfigurationEditWindow(QWidget *parent = 0);    
     explicit ConfigurationEditWindow(QWidget *parent = 0, DMS * db = 0);
+//    explicit ConfigurationEditWindow(QWidget *parent = 0, DMS * db = 0, QTextEdit * edit = 0);
     ~ConfigurationEditWindow();
 
 private slots:
@@ -44,7 +46,8 @@ private slots:
 private:
     Ui::ConfigurationEditWindow *ui;
     bool checkModeManagerConfigure(string file);
-    DMS * db;
+    DMS * db;    
+//    QTextEdit * edit;
 };
 
 #endif // CONFIGURATIONEDITWINDOW_H

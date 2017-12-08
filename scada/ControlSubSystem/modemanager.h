@@ -25,6 +25,7 @@ class ModeManager
 public:
     string fileName;
     vector<State> states;
+    vector<string> sensors;
     string currentState;
     DMS* db;
     /**
@@ -39,6 +40,12 @@ public:
         * @return    State* - a pointer to a state if found or a pointer to a NULL state
         */
     State *getState(string name);
+    /**
+        * @brief     checks if a sensor exists
+        * @param     string name -  the name of the sensor
+        * @return    bool true/false
+        */
+     bool  sensorExists(string name);
     /**
         * @brief     Configures the mode mangaer using the scripts written in the configuration file.
         */
