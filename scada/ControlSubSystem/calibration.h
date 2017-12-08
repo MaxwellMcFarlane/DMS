@@ -18,8 +18,8 @@ class Calibration
 public:
     string calId;
     string type;
-    vector<int> coeff;
-    vector<int> rawData;
+    vector<double> coeff;
+    vector<double> rawData;
     vector<int> sampleIds;
     DMS* db;
     /**
@@ -31,7 +31,7 @@ public:
       * @brief      Calibrates data and stores it in the dms given a modelNumber
       * @param      string modelNumber - model Number of the calibration
       */
-    void calibrate(string modelNumber);
+    void calibrate();
     /**
         * @brief     Given a string and a delimter , it splits strings.
         * @param     string s- a string to be split
@@ -39,6 +39,14 @@ public:
         * @return    vector<string>- split tokens
         */
     vector<string> split(const string s, char delimiter);
+    /**
+        * @brief     Given a string and a delimter , it splits strings.
+        * @param     string s- a string to be split
+        * @param     char  delimiter - a character to split the string with.
+        * @return    vector<double>- split tokens turned into integer
+        */
+    vector<double> split_toDouble(const string s, char delimiter);
+
     /**
         * @brief     Given a string and a delimter , it splits strings.
         * @param     string s- a string to be split

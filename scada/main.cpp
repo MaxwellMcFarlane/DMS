@@ -53,9 +53,9 @@ int main()
         std::cout <<e.what();
     }
 
-    db.loadDataBase("../testbench_files/CalConfTableTB.txt");
-    Calibration c(dbp);
-    c.calibrate("1");
+//    db.loadDataBase("../testbench_files/CalConfTableTB.txt");
+//    Calibration c(dbp);
+//    c.calibrate("1");
 
 
     // Unit test for state and state transition
