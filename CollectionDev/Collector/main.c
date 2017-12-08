@@ -5,10 +5,8 @@
 
 #ifndef _WIN32
 #include <unistd.h>
-#include <sqlite3.h>
 #else
 #include <Windows.h>
-#include "sqlite3.h"
 #endif
 
 #include <time.h>
@@ -16,7 +14,7 @@
 #include <string.h>
 #include <errno.h>
 
-
+#include <sqlite3.h>
 
 #define DB_PATH "../../scada.db"
 #define SAMPLE_BACKUPFILE "sampleBackUp.txt"
@@ -150,7 +148,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     if(ctx){
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
         if(buffptr->record){
-            char msg[200] = ""; // 32 hardcode count for below (account for '\0')
+            char msg[100] = ""; // 32 hardcode count for below (account for '\0')
             snprintf(msg, (sizeof(msg)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
             int index = buffptr->index;
             buffptr->index++;
