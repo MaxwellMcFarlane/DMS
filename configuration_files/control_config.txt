@@ -1,13 +1,10 @@
-#STATE syntax->List all your states’ name with space in between-> STATE_1_Name STATE_2_Name STATE_3_Name 
+#STATES
 STATES:
-IDLE,RUN,ICE,STOP
-#BRANCH syntax-> STATE_FROM,STATE_TO,CONDITION 
+Idle,Run,Warn,Count,Jump,Shout
+#BRANCHES
 BRANCHES:
-IDLE,RUN,s0:Select RawData from SampleTable where RawData > 60
-<<<<<<< HEAD
-RUN,STOP,s0:Select RawData from SampleTable where RawData > 60
-=======
-#RUN,STOP,s0:Select RawData from SampleTable where RawData > 60
-#STOP,FINISH,s0:Select RawData from SampleTable where RawData > 60
->>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
-END
+Idle,Run,'s0’:Select RawData from SampleTable where RawData > 0
+Run,Shout,'s1':Select RawData from SampleTable where RawData > 100
+Shout,Warn,'s2':Select RawData from SampleTable where RawData > 120
+Warn,Run,'s3':Select RawData from SampleTable where RawData > 140
+Run,Run,'s0':Select RawData from SampleTable where RawData < 30

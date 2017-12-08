@@ -1,2 +1,9 @@
 CalConfTable
-'s4','IDLE','quad,5:4:19'
+'s0','IDLE','linear,5:419'
+'s2','RUN','linear,54:19'
+'s3','FILE','quad,5:4:19'
+'s1','DANCE','quad,2:3:19'
+'s4','SPIN','linear,5:4:19'
+'s5','JOG','quad,5:4:19'
+'s3','STOP','quad,5:4:19'
+'s2','HOLD','quad,5:4:19'

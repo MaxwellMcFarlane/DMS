@@ -6,9 +6,11 @@ CONFIG -= qt
 SOURCES += main.c \
     oneSensorMain.c \
     main_copy.c \
-    main_copy1.c
 
-INCLUDEPATH += "C:/Program Files/Phidgets/Phidget22"
-LIBS += -L "C:/Program Files/Phidgets/Phidget22/x86" -lphidget22
-LIBS += -L sqlite3
+
+#INCLUDEPATH += "C:/Program Files/Phidgets/Phidget22"
+INCLUDEPATH += "/Library/Frameworks/Phidget22.framework/Versions/A/Headers"
+#LIBS += -F "C:/Program Files/Phidgets/Phidget22/x86" -lphidget22
+
+LIBS += -l sqlite3
 
