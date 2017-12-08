@@ -34,7 +34,7 @@ struct Sensor{
 
 struct dmsBuffer{
     int index;
-    int nextindex;
+    int locked;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
 };
@@ -155,9 +155,15 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         if(buffptr->record){
             char msg[200] = ""; // 32 hardcode count for below (account for '\0')
             snprintf(msg, (sizeof(msg)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
-            int index = buffptr->index;
+            while(buffptr->locked){
+
+            }
+            buffptr->locked = 1;
+            buffptr->samples[buffptr->index] = msg;
             buffptr->index++;
-            buffptr->samples[index] = msg;
+            buffptr->locked = 0;
+            printf("%s\n", msg);
+            printf("%s\n", buffptr->samples[buffptr->index - 1]);
         }
     }
 
@@ -211,11 +217,11 @@ int main(int argc, char **argv) {
 
     struct dmsBuffer buff;
     buff.index = 0;
-    buff.nextindex = 0;
+    buff.locked = 0;
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 5;
+    int numbSensors = 1;
     struct Sensor map[10];
     PhidgetReturnCode res;
     const char *errs;
@@ -347,7 +353,7 @@ int main(int argc, char **argv) {
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
-                char final[200] = "";
+                char final[300] = "";
                 printf("*** %s\n", buff.samples[i]);
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
@@ -361,7 +367,8 @@ int main(int argc, char **argv) {
             //printf("%s", &buff.samples);
             printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
             for(int i = 0; i < buff.index; i++){
-                buff.samples[i] = " ";
+                char clear[200] = " ";
+                buff.samples[i] = clear;
             }
             buff.index = 0;
             FILE *fp;
