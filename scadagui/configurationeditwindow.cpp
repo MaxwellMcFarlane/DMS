@@ -15,6 +15,7 @@ ConfigurationEditWindow::ConfigurationEditWindow(QWidget *parent, DMS *db):
     ui->setupUi(this);
     this->db = db;
     ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("control_config.txt")));
+    ui->listWidget->addItem(new QListWidgetItem(QString::fromStdString("sensor_config.txt")));
     ui->FileEditor->setText(QString::fromStdString("<No Contents>"));
 }
 
@@ -55,7 +56,7 @@ ConfigurationEditWindow::~ConfigurationEditWindow()
 //        }
 //        else if (branch) {
 //                vector<string> branchLine= m.split(line,',');
-////                for(int i = 0; i < (int)branchLine.size(); i++){cout << branchLine.at(i) << endl;}
+//                for(int i = 0; i < (int)branchLine.size(); i++){cout << branchLine.at(i) << endl;}
 //                State from= m.getState(branchLine[0]);
 //                State to = m.getState(branchLine[1]);
 //                if(!from.name.compare("NULL")){return false;}
@@ -98,21 +99,24 @@ void ConfigurationEditWindow::on_Savebutton_clicked()
 
     QString edits = ui->FileEditor->toPlainText();
 
-    QFile file("/Users/maxwellmcfarlane/scada_repo/configuration_files/modeConf.txt");
+    QFile file("/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
-
     out << edits;
-    cout << edits.toStdString();
-
-    ModeManager m(file.fileName().toStdString(), db);
-
-    try{
-        m.configure();
-        db->getTable("ConfigFileTable")->updateTable("filename = " + configname,edits.toStdString());
-    }
-    catch(const std::exception &e){QMessageBox::about(this,"Error",e.what());cout << e.what() << endl;}
-//    if(!checkModeManagerConfigure(edits)){QMessageBox::about(this,"Error","Error File Corrupt Resolve Error");}
+//    cout << file.fileName().toStdString();
+//    ModeManager m("../configuration_files/control_config.txt", db);
+//    m.configure();
+//    try{
+//        if(configname == "control_config.txt"){m.configure();}
+////        db->getTable("ConfigFileTable")->updateTable("filename = " + configname, "'" + edits.toStdString() + "'");
+//    }
+//    catch(const std::exception &e){
+//        QMessageBox::about(this,"Error",e.what());cout << e.what() << endl;
+//    }
+    string cmd;
+    cmd = "contents = '" + edits.toStdString() + "'";    
+    db->getTable("ConfigFileTable")->updateTable("filename = '" + configname + "'", cmd);
+    this->close();
 }
 
 void ConfigurationEditWindow::on_listWidget_itemSelectionChanged()

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+//#include <QString>
 
 
 ModeManager::ModeManager(string fileName, DMS *db)
@@ -67,6 +68,7 @@ void ModeManager::configure(){
     {
         //iterate till the end of the file
 
+<<<<<<< HEAD
 
         getline(file,line);//iterator by line
         lineCount++;//line counter
@@ -76,6 +78,18 @@ void ModeManager::configure(){
 
         else if (line.find(stateDeclaration) != std::string::npos)
         {
+=======
+        lineCount++;//line counter
+        getline(file,line);
+        char E = line.at(0);
+        char N = line.at(1);
+        char D = line.at(2);
+        if(strcmp(&E,"E") == 0 && strcmp(&N,"N") == 0 && strcmp(&D,"D") == 0){cout << "hello" << endl;}
+        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D'){break;}// this triggers an end to the script
+        if(line.at(0) == '#')  continue; // # is for commenting;
+
+        else if (line.find(stateDeclaration) != std::string::npos) {
+>>>>>>> refs/remotes/origin/master
             //state declaration block
             getline(file,line);
             lineCount++;//line counter
@@ -237,8 +251,15 @@ void ModeManager::configure(){
         }
         if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
     }
+<<<<<<< HEAD
     cout<<lineCount<<endl;
+=======
+<<<<<<< HEAD
+    file.close();    
+=======
+>>>>>>> refs/remotes/origin/master
     file.close();
+>>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
     if(!states.empty()) {
         currentState=(states[0]).name;
         db->setCurrentState(currentState);//update the dms

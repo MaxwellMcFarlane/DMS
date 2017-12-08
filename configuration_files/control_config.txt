@@ -1,13 +1,20 @@
 #STATE 
 STATES:
-IDLE,RUN,STOP,FINISH
+IDLE,RUN,ICE,STOP
 #BRANCH syntax-> STATE_FROM,STATE_TO,CONDITION 
 BRANCHES:
 IDLE,RUN,s0:Select RawData from SampleTable where RawData > 60
+<<<<<<< HEAD
+RUN,STOP,s0:Select RawData from SampleTable where RawData > 60
+=======
 #RUN,STOP,s0:Select RawData from SampleTable where RawData > 60
 #STOP,FINISH,s0:Select RawData from SampleTable where RawData > 60
+<<<<<<< HEAD
 SENSORS:
 124332,0,sensor1
 CALIBRATION:
 s1,IDLE,quad:2:3:4
+=======
+>>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
+>>>>>>> refs/remotes/origin/master
 END
