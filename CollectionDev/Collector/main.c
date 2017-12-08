@@ -20,7 +20,7 @@
 #define DMSBUFFER_SMPLTHRESHOLD 60
 #define DMSBUFFER_SMPL_TIME 5
 #define MAXBUFFERED_SAMPLES 60
-#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata) values \0"
+#define SAMPLE_PREFIX "insert into sampletable(sensorid,timestamp,rawdata,iscal,collectstate) values \0"
 #define SAMPLE_POSTFIX "; \0"
 
 struct Sensor{
@@ -35,6 +35,7 @@ struct dmsBuffer{
     int locked;
     char* samples[MAXBUFFERED_SAMPLES];
     int record;
+    char [];
 };
 
 static void CCONV ssleep(int);
@@ -152,7 +153,11 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
         struct dmsBuffer* buffptr = (struct dmsBuffer*) ctx;
         if(buffptr->record){
             char msg[100] = ""; // 32 hardcode count for below (account for '\0')
-            snprintf(msg, (sizeof(msg)), "('exampleSensor',%llu,%f)", millisecondsSinceEpoch, voltage);
+            if(hubSN == 497194){
+                snprintf(msg, (sizeof(msg)), "('s0',%llu,%f,0,'IDLE')", millisecondsSinceEpoch, voltage);
+            } else {
+                snprintf(msg, (sizeof(msg)), "('s1',%llu,%f,0,'IDLE')", millisecondsSinceEpoch, voltage);
+            }
             while(buffptr->locked){
 
             }
@@ -161,7 +166,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
             buffptr->index++;
             buffptr->locked = 0;
             printf("%s\n", msg);
-            printf("%s\n", buffptr->samples[buffptr->index - 1]);
+            //printf("%s\n", buffptr->samples[buffptr->index - 1]);
         }
     }
 
@@ -172,7 +177,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     fclose(fp);
 
     // print to console/terminal
-    printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
+    //printf("%d %d %llu %f\n", hubSN, hubPort, millisecondsSinceEpoch, voltage);
 }
 
 /*
@@ -219,16 +224,27 @@ int main(int argc, char **argv) {
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 1;
+    int numbSensors = 2;
     struct Sensor map[10];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
-        printf("%i\n", i);
-        // read HUB and Port
-        map[i].hub = 497194;
-        map[i].port = i;
-        map[i].samplingPeriod = 4000; // in msec
+//        printf("%i\n", i);
+//        // read HUB and Port
+//        map[i].hub = 497194;
+//        map[i].port = i;
+//        map[i].samplingPeriod = 4000; // in msec
+
+        if(i == 0){
+            map[i].hub = 497194;
+            map[i].port = 1;
+            map[i].samplingPeriod = 2500;
+        }
+        if(i == 1){
+            map[i].hub = 495331;
+            map[i].port = 5;
+            map[i].samplingPeriod = 750;
+        }
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -348,6 +364,7 @@ int main(int argc, char **argv) {
 
             // multiple individual insert
             sqlite3_open(DB_PATH, &db);
+            //sqlite3_exec(db, 0, 0, &ermsg);
             sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
             sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
             for(int i = 0; i < buff.index; i++){
@@ -356,9 +373,9 @@ int main(int argc, char **argv) {
                 strcat(final, SAMPLE_PREFIX);
                 strcat(final, buff.samples[i]);
                 strcat(final, SAMPLE_POSTFIX);
-                printf("$$$ %s\n", final);
+                //printf("%s\n", final);
                 sqlite3_exec(db, final, 0, 0, &ermsg);
-                printf("err: %s\n", ermsg);
+                //printf("err: %s\n", ermsg);
             }
             sqlite3_close(db);
             // console print
