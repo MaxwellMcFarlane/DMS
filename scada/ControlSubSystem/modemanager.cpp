@@ -67,29 +67,12 @@ void ModeManager::configure(){
     while (!file.eof())
     {
         //iterate till the end of the file
-
-<<<<<<< HEAD
-
         getline(file,line);//iterator by line
         lineCount++;//line counter
         if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
         if(line.at(0) == '#')  continue; // # is for commenting;
 
-
-        else if (line.find(stateDeclaration) != std::string::npos)
-        {
-=======
-        lineCount++;//line counter
-        getline(file,line);
-        char E = line.at(0);
-        char N = line.at(1);
-        char D = line.at(2);
-        if(strcmp(&E,"E") == 0 && strcmp(&N,"N") == 0 && strcmp(&D,"D") == 0){cout << "hello" << endl;}
-        if(line.at(0)=='E' && line.at(1)=='N' && line.at(2)=='D'){break;}// this triggers an end to the script
-        if(line.at(0) == '#')  continue; // # is for commenting;
-
         else if (line.find(stateDeclaration) != std::string::npos) {
->>>>>>> refs/remotes/origin/master
             //state declaration block
             getline(file,line);
             lineCount++;//line counter
@@ -107,7 +90,6 @@ void ModeManager::configure(){
         if (line.find(branchDeclaration) != std::string::npos)
         {
             //branch declaration block
-
             while(!file.eof())
             {
 
@@ -119,7 +101,6 @@ void ModeManager::configure(){
                 else if(line.find(calDeclaration)!= std::string::npos) break;//this triggers the beginning of calibration declaration
                 if(line.at(0) == '#') continue;// # is for commenting
                 else{
-
                     vector<string > branchLine= ModeManager::split(line,',');
                     if(branchLine.size()>3){
                         //more than 3 parameter errors
@@ -153,7 +134,6 @@ void ModeManager::configure(){
 
                                 for(int i=0;i< states.size();i++){
                                     if(!branchLine[0].compare(states[i].name)) states[i].loadBranch(tempBranch);//add the branch to state_from
-
                                 }
                                 *log<<"CFG: A Branch from State " + from +" to State " + tempBranch.branchState->name +" with the condition "+tempBranch.condition+" has been successfully loaded!\n";
                             }
@@ -165,6 +145,7 @@ void ModeManager::configure(){
 
             }
         }
+
         if(line.find(sensorDeclaration)!= std::string::npos){
 
             while(!file.eof())
@@ -186,14 +167,14 @@ void ModeManager::configure(){
                     else{
 
                         sensors.push_back(sensorLine[2]);//add the name of the sensor
-                        cout<<"CFG: Sensor configured with "<<sensorLine[0]<<","<<sensorLine[1]<<","<<sensorLine[2]<<"\n";
                         string cmd = "'";
-                        cmd += sensorLine[0];
-                        cmd += "'," ;
-                        cmd += sensorLine[1];
-                        cmd += ",";
                         cmd += sensorLine[2];
+                        cmd += "'," ;
+                        cmd += sensorLine[0];
+                        cmd += ",";
+                        cmd += sensorLine[1];
                         cmd += ", null";
+                        cout<<"CFG: Sensor configured with "<<cmd<<endl;
                         db->getTable("SensorTable")->addToTable(cmd); //add the branch to the DMS
                     }
 
@@ -240,7 +221,8 @@ void ModeManager::configure(){
                         }
 
                         cout<<"CFG: Calibration Configuration with stateId:" + calibrationLine[0]+" stateName:"+calibrationLine[1]+" calibration:"+calibrationLine[2]+" has been successfully added to the DMS!\n";
-                        db->getTable("CalConfTable")->addToTable("'"+calibrationLine[0]+"' , '"+calibrationLine[1]+"' , '"+calibrationLine[2]+"'");//add the calibration line to DMS
+                        cout<<"'"+calibrationLine[0]+"','"+calibrationLine[1]+"','"+calibrationLine[2]+"'"<<endl;
+                        db->getTable("CalConfTable")->addToTable("'"+calibrationLine[0]+"','"+calibrationLine[1]+"','"+calibrationLine[2]+"'");//add the calibration line to DMS
                     }
 
 
@@ -251,15 +233,8 @@ void ModeManager::configure(){
         }
         if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
     }
-<<<<<<< HEAD
-    cout<<lineCount<<endl;
-=======
-<<<<<<< HEAD
-    file.close();    
-=======
->>>>>>> refs/remotes/origin/master
+
     file.close();
->>>>>>> 5a29b0fc87ac160df2d0f79dcceb9503298270cd
     if(!states.empty()) {
         currentState=(states[0]).name;
         db->setCurrentState(currentState);//update the dms
