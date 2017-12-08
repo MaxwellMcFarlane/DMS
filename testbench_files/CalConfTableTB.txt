@@ -1,2 +1,2 @@
 CalConfTable
-'s4','IDLE','quad,5:4:19'
+'s4','IDLE','quad,5.13:4.89:19.9'
