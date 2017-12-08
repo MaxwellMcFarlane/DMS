@@ -129,6 +129,10 @@ static void CCONV
 errorHandler(PhidgetHandle phid, void *ctx, Phidget_ErrorEventCode errorCode, const char *errorString) {
 
     fprintf(stderr, "Error: %s (%d)\n", errorString, errorCode);
+    if(errorCode == EEPHIDGET_SATURATION){
+        fprintf(stderr, "SATURATION");
+    }
+
 }
 
 static void CCONV
@@ -139,7 +143,7 @@ onVoltageChangeHandler(PhidgetVoltageInputHandle ch, void *ctx, double voltage) 
     clock_gettime(CLOCK_REALTIME, &tv);
     unsigned long long millisecondsSinceEpoch =
             (unsigned long long)(tv.tv_sec) * 1000 +
-            (unsigned long long)(tv.tv_nsec) / 1000000;
+            (unsigned long long)(tv.tv_nsec)/ 1000000;
 
     int hubSN = -1;
     int hubPort = -1;
@@ -212,8 +216,8 @@ int main(int argc, char **argv) {
     buff.record = 0;
 
     // use readPipe to instantiate Map Sensor Architecture
-    int numbSensors = 4;
-    struct Sensor map[numbSensors];
+    int numbSensors = 5;
+    struct Sensor map[10];
     PhidgetReturnCode res;
     const char *errs;
     for(int i = 0; i < numbSensors; i++){
@@ -221,7 +225,7 @@ int main(int argc, char **argv) {
         // read HUB and Port
         map[i].hub = 497194;
         map[i].port = i;
-        map[i].samplingPeriod = 1000; // in msec
+        map[i].samplingPeriod = 4000; // in msec
         // make ch
         res = PhidgetVoltageInput_create(&map[i].ch);
         if (res != EPHIDGET_OK) {
@@ -236,14 +240,14 @@ int main(int argc, char **argv) {
     sqlite3_open(DB_PATH, &db);
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     sqlite3_exec(db, ".separator |", 0, 0, &ermsg);
-    printf("after exec");
+    printf("after exec\n");
 //    sqlite3_exec(db,
 //                 "insert into "
 //                 "sampletable(sensorid,timestamp,rawdata) "
 //                 "values('s0',123212,2131231);",0,0, &ermsg);
     char test[] = "insert into sampletable(sensorid,timestamp,rawdata) values('s0',123212,2131231);";
     sqlite3_exec(db, test,0,0, &ermsg);
-    printf("after exec 2");
+    printf("after exec 2\n");
     sqlite3_close(db);
 
     //printf("%s\n", ermsg);
@@ -323,14 +327,13 @@ int main(int argc, char **argv) {
     }
 
     // enter main loop
-    volatile unsigned sink;
     struct timespec before, after, diff;
     clock_gettime(CLOCK_MONOTONIC, &before);
     printf("******** MAIN LOOP ********\n");
     buff.record = 1;
     while(1){
 
-        clock_gettime(CLOCK_MONOTONIC, &after);
+        //clock_gettime(CLOCK_MONOTONIC, &after);
         diff.tv_sec = after.tv_sec - before.tv_sec;
         diff.tv_nsec = after.tv_nsec - before.tv_nsec;
         if(((int) diff.tv_sec) > DMSBUFFER_SMPL_TIME || buff.index > MAXBUFFERED_SAMPLES - 5){
