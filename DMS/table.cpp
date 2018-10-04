@@ -16,7 +16,6 @@ Table::Table(string tableName, string dim, sqlite3 *db, Log *log){
     cmd += tableName + " " + dim;
     sql = cmd.c_str();
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc << "\n";

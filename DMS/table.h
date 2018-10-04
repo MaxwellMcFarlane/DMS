@@ -21,6 +21,7 @@ public:
     string getTableName();
     int getTableLength();
 
+    //sets dimensions using sqlite commands
     string getDimensions();
     void setDimensions(string newD);
 
@@ -30,8 +31,8 @@ public:
     void delRow(string col, string index);
     //provide cols, the table name, and operation
     //query with delimitter
-    string createQuery(string cmd);     //unfinished
-    bool isQueryEmpty(string cmd);     //unfinished
+    string createQuery(string cmd);
+    bool isQueryEmpty(string cmd);
     //query without delimitter
     string createQuery(string col, string op);   
     void updateTable(string col, string op);

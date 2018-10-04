@@ -90,22 +90,7 @@ DMS::DMS(string name, string dbConfig, string logPath){
     bool fExist = dbcheck.good();
 
     rc = sqlite3_open(name.c_str(),&db);
-
-    //    if(!fExist){
-    //        this->loadDataBase("../testbench_files/StateTableTB.txt");
-    //        this->loadDataBase("../testbench_files/BranchTableTB.txt");
-    //        this->loadDataBase("../testbench_files/ConditionTableTB.txt");
-
-    //        this->loadDataBase("../testbench_files/SensorTableTB.txt");
-    //        this->loadDataBase("../testbench_files/SensorConfTableTB.txt");
-    //        this->loadDataBase("../testbench_files/CalConfTableTB.txt");
-
-    //        this->loadDataBase("../testbench_files/SampleTableTB.txt");
-    //        this->loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");
-
-    //        this->loadConfigTable("ControlState_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/ControlState_config.txt");
-    //    }
-
+    
     //allow system to accept foreign keys
     sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, &ermsg);
     //    *log << ermsg << "\n";
