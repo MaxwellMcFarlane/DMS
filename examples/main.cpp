@@ -1,13 +1,6 @@
-/*
-Author: Maxwell McFarlane
-
-*/
-
-
-
 #include <iostream>
-#include "dms.h"
-#include "table.h"
+#include "../src/dms.h"
+#include "../src/table.h"
 
 using namespace std;
 static DMS db("../scada.db", "../configuration_files/deftables_config.txt","../log.txt");
@@ -22,6 +15,8 @@ void testMultiQuery();
 void testExport();
 void testClrTable();
 
+#define CONFIG_PATH "../configuration_files/deftables_config.txt";
+#define DB_PATH "../scada.db";
 
 int main()
 {

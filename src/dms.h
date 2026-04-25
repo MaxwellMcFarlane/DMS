@@ -5,8 +5,8 @@
 #include "sqlite3.h"
 #include <vector>
 #include "table.h"
-#include "../tools/macros.h"
-#include "../tools/baseclass.h"
+// #include "../tools/macros.h"
+// #include "../tools/baseclass.h"
 #include "../tools/log.h"
 #include <time.h>
 #include <cstring>
@@ -86,7 +86,7 @@ private:
     string filename;
     Table lookup;
     sqlite3 *db;
-    Log * log = new Log("../error_files/dms_log.txt");
+    Log * log = new Log();
 
     static int n;
     string currentState;

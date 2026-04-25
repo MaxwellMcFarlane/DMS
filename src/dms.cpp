@@ -415,6 +415,12 @@ void DMS::clearTable(string tableName){
 //    }
 //}
 
+void DMS::resetRowIdTable(string tableName, string col){
+    // Legacy API retained for compatibility with older testbench code.
+    *log << "resetRowIdTable is not currently implemented for table: " << tableName
+         << ", column: " << col << "\n";
+}
+
 int DMS::cbSize(void *data, int argc, char **argv, char **azColName){
     string * number = (string *) data;
     *number = (string)*argv;

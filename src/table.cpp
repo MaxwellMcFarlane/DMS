@@ -391,6 +391,7 @@ int Table::cbSize(void *data, int argc, char **argv, char **azColName){
     *number = (string)*argv;
     (void)argc;
     (void)azColName;
+    return 0;
 }
 
 int Table::headerN = 0;
