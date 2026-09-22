@@ -74,7 +74,7 @@ void testSampleTable(){
     cout<< "All data collected" << endl;
 
 
-    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
+    vector<string> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
     for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
     cout << db.getTableHeaders("SensorTable") << endl;
     cout<< db.isSensorExist("'s0'") << endl;

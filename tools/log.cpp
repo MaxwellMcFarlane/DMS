@@ -15,20 +15,18 @@
  * @param:std::string fileName, the name of the file, getState stored
 **/
 
-Log::Log() {    
-    this->fileName = "default.txt";
+Log::Log() : fileName("default.txt")
+{
     fh.open(fileName, std::ofstream::app);
 }
 
-
-Log::Log(std::string fileName) {    
-    this->fileName = fileName;
+Log::Log(std::string fileName) : fileName(fileName)
+{
     fh.open(fileName, std::ofstream::app);
 }
 
-Log::Log(Log &obj) {    
-    this->fileName = obj.fileName;
-    fh.open(fileName, std::ofstream::app);
+Log::Log(Log &obj) : Log(obj.fileName)
+{
 }
 
 // In the destructor the file handler is closed.

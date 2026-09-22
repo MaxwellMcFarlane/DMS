@@ -1,6 +1,7 @@
 #include "calibration.h"
 #include <time.h>
 #include <math.h>
+#include <sstream>
 Calibration::Calibration( DMS*db)
 {
     string calibrationDeclaration=db->getTable("CalConfTable")->createQuery("select calibration from calconftable where stateName = '"+ db->getCurrentState() + "';");

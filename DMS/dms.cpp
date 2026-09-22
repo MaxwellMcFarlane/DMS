@@ -1,5 +1,11 @@
 #include "dms.h"
 
+//getline that also strips a trailing '\r' so CRLF config files parse correctly
+static istream& readLine(istream& in, string& line){
+    if(getline(in,line) && !line.empty() && line[line.size()-1] == '\r'){line.erase(line.size()-1);}
+    return in;
+}
+
 //constructors
 DMS::DMS()
 {
@@ -37,13 +43,13 @@ DMS::DMS(string name, string dbConfig){
     if(myconfig.is_open()){
         while(!myconfig.eof()){
             //searches for the next chunk of text
-            while(tableName.empty()){getline(myconfig,tableName);}
-            getline(myconfig,tableName);
+            while(tableName.empty()){readLine(myconfig,tableName);}
+            readLine(myconfig,tableName);
             //getState the list of dimensions
-            while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
-            //            getline(myconfig,dimensions);
+            while(dummy != "*"){dimensions += dummy;readLine(myconfig,dummy);}
+            //            readLine(myconfig,dimensions);
             createTable(tableName,dimensions);
-            getline(myconfig,dimensions);
+            readLine(myconfig,dimensions);
             getTable(tableName)->setDimensions(dimensions);
         }
         myconfig.close();
@@ -106,21 +112,17 @@ DMS::DMS(string name, string dbConfig, string logPath){
     ifstream myconfig(dbConfig);
 
     if(myconfig.is_open()){
-        while(!myconfig.eof()){
-            //searches for the next chunk of text
-            while(tableName.empty()){getline(myconfig,tableName);}
-            //getState the list of dimensions
-            while(dummy != "*"){dimensions += dummy;getline(myconfig,dummy);}
+        //searches for the next chunk of text (skipping blank lines)
+        while(readLine(myconfig,tableName)){
+            if(tableName.find_first_not_of(" \t\r") == string::npos){continue;}
+            //getState the list of dimensions (terminated by a "*" line)
+            dimensions = "";
+            while(readLine(myconfig,dummy) && dummy != "*"){dimensions += dummy;}
             //creates table
             createTable(tableName,dimensions);
 //            getTable("ConfigFileTable")->addToTable("'" + tableName + " " + dimensions + "'");
-            getline(myconfig,dimensions);
             //sets dimensions to a usable format
-            getTable(tableName)->setDimensions(dimensions);
-            //reset parsing variables
-            tableName = "";
-            dimensions = "";
-            dummy = "";
+            if(readLine(myconfig,dimensions)){getTable(tableName)->setDimensions(dimensions);}
         }
         myconfig.close();
     }
@@ -203,8 +205,8 @@ void DMS::dumpTable(string tableName){
  * @param cmd
  * @return
  */
-vector<char*> DMS::delimitter(string cmd){
-    vector<char*> k;
+vector<string> DMS::delimitter(string cmd){
+    vector<string> k;
     char * it;
     it = strtok((char*)cmd.c_str(), ",");
     while(it != NULL){
@@ -259,10 +261,10 @@ void DMS::loadDataBase(string myfilePath){
     string tableName;
     string data;
     if(myfile.is_open()){
-        getline(myfile,tableName);
+        readLine(myfile,tableName);
         if(getTable(tableName) != 0){
-            while(!myfile.eof()){
-                getline(myfile,data);
+            while(readLine(myfile,data)){
+                if(data.find_first_not_of(" \t\r") == string::npos){continue;}
                 getTable(tableName)->addToTable(data);
             }
         }

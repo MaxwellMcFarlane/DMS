@@ -3,9 +3,9 @@
 #include <iostream>
 #include "sqlite3.h"
 #include <vector>
-#include "../tools/macros.h"
-#include "../tools/baseclass.h"
-#include "../tools/log.h"
+#include "../../tools/macros.h"
+#include "../../tools/baseclass.h"
+#include "../../tools/log.h"
 #include <cstring>
 
 using namespace std;
@@ -21,26 +21,22 @@ public:
     string getTableName();
     int getTableLength();
 
-    //sets dimensions using sqlite commands
     string getDimensions();
     void setDimensions(string newD);
 
     void addToTable(string info);
-    void addMultiToTable(string info);
-
     void delRow(string col, string index);
     //provide cols, the table name, and operation
     //query with delimitter
-    string createQuery(string cmd);
-    bool isQueryEmpty(string cmd);
+    string createQuery(string cmd);     //unfinished
+    bool isQueryEmpty(string cmd);     //unfinished
     //query without delimitter
     string createQuery(string col, string op);   
     void updateTable(string col, string op);
-    void exp(string col, string op, string filePath);
-    int count();
+    void exp(string col, string op, string filePath);    
     //clearing function for table so that information doesn't get tangeled
 
-    vector<string> delimitter(string cmd);
+    vector<char*> delimitter(string cmd);
 
     //callback methods
     static int cbAddToTable    (void *data, int argc, char **argv, char **azColName);
@@ -49,8 +45,7 @@ public:
     static int cbCreateTable   (void *data, int argc, char **argv, char **azColName);
     static int cbCreateQuery   (void *data, int argc, char **argv, char **azColName);
     static int cbUpdate        (void *data, int argc, char **argv, char **azColName);    
-    static int cbExp           (void *data, int argc, char **argv, char **azColName);    
-    static int cbSize          (void *data, int argc, char **argv, char **azColName);
+    static int cbExp           (void *data, int argc, char **argv, char **azColName);
 private:
     string tableName;
     int tableLength;

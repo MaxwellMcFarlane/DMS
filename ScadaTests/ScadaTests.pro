@@ -12,5 +12,3 @@ INCLUDEPATH +=  ../gtest                                   \
                 ../gtest/googletest/include/gtest
 
 CONFIG += thread
-
-SOURCES += main.cpp

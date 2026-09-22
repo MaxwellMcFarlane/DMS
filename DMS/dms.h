@@ -53,7 +53,7 @@ public:
     void getNewLog();
 
     //delimitter for commands
-    vector<char*> delimitter(string cmd);    
+    vector<string> delimitter(string cmd);    
 
     //query method that returns whether a condition is true or false
     bool controlQuery(string cmd);

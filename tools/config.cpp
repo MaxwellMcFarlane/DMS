@@ -1,53 +1,39 @@
 #include "config.h"
 #include "macros.h"
 
-
-
 using namespace std;
 
-//initialize functions
-string get_config_path();
-string change_file_path(string filePath);
-
-int check_for_file(string filePath);
-int create_file(string filePath);
-int write_to_file(string filePath, string data);
-void initialize_files();
-void print_map();
-void set_map_defaults();
-void update_config_file(string filePath);
-void change_file_name(string pathToFile, string prevName, string newName);
-
-map<string,int> read_config(string filePath);
-
-
-//initialize global variables
-bool filePresent;
-map <string,int> container;
-
+namespace {
+std::string default_config_path(const std::string& homeDirectory)
+{
+    return homeDirectory + "/config.txt";
+}
+}
 
 /*
  * Class Constructor
  */
-Config::Config()
+Config::Config() : someData(0), filePresent(false), state("Constructor")
 {
     SHOW_WHERE;
-    someData = 0;
-    state = "Constructor";
     initialize_files();
     state = "Program running";
 }
 
-Config::Config(Config &obj)
+Config::Config(Config &obj) : someData(obj.someData), filePresent(obj.filePresent), state("Constructor")
 {
-  SHOW_WHERE;
-  someData = obj.someData;
-  state = "Constructor";
-  initialize_files();
-  state = "Program running";
+    SHOW_WHERE;
+    initialize_files();
+    state = "Program running";
 }
 
-void Config::operator =(Config &obj){someData = obj.someData;}
+void Config::operator =(Config &obj)
+{
+    someData = obj.someData;
+    filePresent = obj.filePresent;
+    state = obj.state;
+    container = obj.container;
+}
 
 /*
  * Class Destructor
@@ -69,6 +55,7 @@ int Config::check_for_file(string filePath){
     ifstream myfile(filePath);
     if (myfile){
         filePresent = true;
+        state = "Program running";
         return 1;
     }
     filePresent = false;
@@ -132,17 +119,16 @@ void Config::initialize_files(){
 
     state = "Configuration";
     string path;
-    string user = getenv("HOME");
 
     // check for preconfig file
-    if (!check_for_file((user + "/preconfig.txt").c_str())){
+    if (!check_for_file(get_preconfig_path())){
         cout << "Creating preconfig file...\n";
-        create_file((user + "/preconfig.txt").c_str());
+        create_file(get_preconfig_path());
     }
     cout << "Preconfig file found...\n";
 
     // check for config file
-    ifstream myfile((user + "/preconfig.txt").c_str());
+    ifstream myfile(get_preconfig_path().c_str());
     if (myfile){
         getline (myfile,path);
         myfile.close();
@@ -151,14 +137,15 @@ void Config::initialize_files(){
     // create config file if there isn't
     if (path.empty()){
         cout << "Creating config file...\n";
-        create_file((user + "/config.txt").c_str());
-        change_file_path((user + "/config.txt").c_str());
+        const string defaultPath = default_config_path(get_home_directory());
+        create_file(defaultPath);
+        change_file_path(defaultPath);
         set_map_defaults();
     } else {
         cout << "Config file found..." << endl << endl;
         container = read_config(path);
     }
-    update_config_file(path);
+    update_config_file(path.empty() ? default_config_path(get_home_directory()) : path);
     state = "Program running";
 }
 
@@ -252,12 +239,11 @@ string Config::get_config_path(){
     state = "Program running";
     string path;
     string err = "No configuration file";
-    string user = getenv("HOME");
-    if (!check_for_file((user + "/preconfig.txt").c_str())){
+    if (!check_for_file(get_preconfig_path())){
         cout << "Configuration file does not exist...\n";
         return err;
     }
-    ifstream myfile((user + "/preconfig.txt").c_str());
+    ifstream myfile(get_preconfig_path().c_str());
     if (myfile){
         getline (myfile,path);
         myfile.close();
@@ -284,10 +270,24 @@ void Config::print_map(){
 void Config::set_map_defaults(){
     state = "Set defaults";
     string path = get_config_path();
+    if (path == "No configuration file") {
+        path = default_config_path(get_home_directory());
+    }
     container.clear();
     container["empty"] = 0;
 
     update_config_file(path);
 
+}
+
+std::string Config::get_home_directory() const
+{
+    const char* home = getenv("HOME");
+    return home ? home : ".";
+}
+
+std::string Config::get_preconfig_path() const
+{
+    return get_home_directory() + "/preconfig.txt";
 }
 
