@@ -5,11 +5,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);    
-    db = new DMS("/Users/maxwellmcfarlane/scada_repo/scada.db",
-                 "/Users/maxwellmcfarlane/scada_repo/configuration_files/deftables_config.txt",
-                 "/Users/maxwellmcfarlane/scada_repo/log.txt");
-    db->loadConfigTable("control.config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
+    ui->setupUi(this);
+    db = new DMS("../scada.db",
+                 "../configuration_files/deftables_config.txt",
+                 "../log.txt");
+    db->loadConfigTable("control.config.txt","../configuration_files/control_config.txt");
     ui->SensorArch->setText(QString::fromStdString(db->getTableHeaders("SensorTable")
                                                    + "\n"
                                                    + db->getTable("SensorTable")->createQuery("Select * from SensorTable")));
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
         list.push_back(it);
         it = strtok(NULL, "\n");
     }
-    try{m = new ModeManager("/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt",db);m->configure();}
+    try{m = new ModeManager("../configuration_files/control_config.txt",db);m->configure();}
     catch(const std::exception &e){cout << e.what() << endl;}
     for(int i = 0; i < (int)list.size();i++){
 //        if(db->currentState = ){}

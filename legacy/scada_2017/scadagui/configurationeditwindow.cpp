@@ -109,7 +109,7 @@ void ConfigurationEditWindow::on_Savebutton_clicked()
 
     QString edits = ui->FileEditor->toPlainText();
 
-    QFile file("/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
+    QFile file("../configuration_files/control_config.txt");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << edits;
