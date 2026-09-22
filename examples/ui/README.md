@@ -5,11 +5,9 @@ counterpart: a small Qt Widgets front end (mainwindow, table/config
 editors, calibration/export windows) over the same DMS/Table data
 layer.
 
-The GUI's actual source lives at
-[legacy/scada_2017/scadagui/](../../legacy/scada_2017/scadagui/) --
-it's 2017 Qt project code with relative includes into the rest of
-`legacy/scada_2017/` (DMS, tools, ControlSubSystem), so it isn't
-duplicated here.
+The GUI's actual source lives at [gui/](../../gui/) -- a Qt Widgets
+project with relative includes into `src/` (DMS, Table, the control
+subsystem), so it isn't duplicated here.
 
 Run it with either:
 

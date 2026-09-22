@@ -7,26 +7,27 @@
 ############### File/Directories Definitions ##################
 PRJDIR=.
 SRCDIR=${PRJDIR}/src
-# Full 2017 SCADA system (DMS + control subsystem)
-SCADADIR=${PRJDIR}/legacy/scada_2017
-GUIDIR=${SCADADIR}/scadagui
+GUIDIR=${PRJDIR}/gui
+
+.PHONY: all clean example run_example control_example run_control_example gui run_gui gui_clean
 
 ############### Recipes #################
 all:
-	@echo "example      :  Builds the DMS example (examples/scada_example)"
-	@echo "run_example  :  Builds and runs the DMS example"
-	@echo "scada        :  Builds and runs the full SCADA program (${SCADADIR}/scada)"
-	@echo "example_clean:  Removes the example binary"
-	@echo "gui          :  Builds the SCADA GUI (${GUIDIR}/scadagui.app)"
-	@echo "run_gui      :  Builds and launches the SCADA GUI (same as bin/scada)"
-	@echo "gui_clean    :  Removes GUI build artifacts"
+	@echo "example        :  Builds the DMS console example (examples/scada_example)"
+	@echo "run_example    :  Builds and runs the DMS console example"
+	@echo "control_example:  Builds the control-subsystem console example (examples/control_example)"
+	@echo "run_control_example: Builds and runs the control-subsystem console example"
+	@echo "gui            :  Builds the SCADA GUI (${GUIDIR}/scadagui.app)"
+	@echo "run_gui        :  Builds and launches the SCADA GUI (same as bin/scada)"
+	@echo "gui_clean      :  Removes GUI build artifacts"
 
-clean:
+clean: gui_clean
 	@echo "Cleaning generated runtime artifacts"
-	@rm -f examples/scada_example examples/dms.log log.txt scada.db data.csv data1.csv data2.csv
+	@rm -f examples/scada_example examples/control_example examples/dms.log \
+	       log.txt control_log.txt control_error.txt scada.db data.csv data1.csv data2.csv
 
 example:
-	@echo "Building SCADA example..."
+	@echo "Building SCADA DMS example..."
 	@cd examples && g++ -std=c++17 main.cpp ../src/dms.cpp ../src/table.cpp ../libs/log.cpp -I../src -I../libs -lsqlite3 -o scada_example
 	@echo "Built examples/scada_example"
 
@@ -34,12 +35,15 @@ example:
 run_example: example
 	@cd examples && ./scada_example
 
-scada:
-	@${SCADADIR}/run_scada.sh
+control_example:
+	@echo "Building SCADA control-subsystem example..."
+	@cd examples && g++ -std=c++17 control_main.cpp ../src/dms.cpp ../src/table.cpp \
+		../src/control/branch.cpp ../src/control/state.cpp ../src/control/modemanager.cpp \
+		../libs/log.cpp -I../src -I../libs -lsqlite3 -o control_example
+	@echo "Built examples/control_example"
 
-example_clean:
-	@echo "Removing example binary..."
-	@rm -f examples/scada_example
+run_control_example: control_example
+	@cd examples && ./control_example
 
 # qmake's macx-clang mkspec links a -framework AGL that no longer ships with
 # modern macOS SDKs; strip it from the generated Makefile before building.
