@@ -27,7 +27,6 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp\
     ../DMS/dms.cpp \
-    ../DMS/dmswd.cpp \
     ../DMS/table.cpp \
     ../tools/baseclass.cpp \
     ../tools/log.cpp \
@@ -37,14 +36,13 @@ SOURCES += \
     ../scada/ControlSubSystem/modemanager.cpp \
     ../scada/ControlSubSystem/state.cpp \
     configurationeditwindow.cpp \
-    sqlite3.c
+    ../../../src/sqlite3.c
 
 #LIBS += -l sqlite3
 
 HEADERS += \
         mainwindow.h\
     ../DMS/dms.h \
-    ../DMS/dmswd.h \
     ../DMS/table.h \
     ../tools/baseclass.h \
     ../tools/log.h \
@@ -55,7 +53,7 @@ HEADERS += \
     ../scada/ControlSubSystem/modemanager.h \
     ../scada/ControlSubSystem/state.h \
     configurationeditwindow.h \
-    sqlite3.h
+    ../../../src/sqlite3.h
 
 FORMS += \
         mainwindow.ui \
