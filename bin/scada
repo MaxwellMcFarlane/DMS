@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Launches the SCADA GUI (legacy/scada_2017/scadagui), building it first if needed.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+GUI_DIR="$ROOT_DIR/legacy/scada_2017/scadagui"
+BIN="$GUI_DIR/scadagui.app/Contents/MacOS/scadagui"
+
+if [[ ! -x "$BIN" ]]; then
+    echo "scadagui not built yet -- building now (requires Qt5/6 + qmake)..."
+    make -C "$ROOT_DIR" gui
+fi
+
+# Run with cwd = scadagui/ so its "../scada.db" etc. paths resolve to
+# legacy/scada_2017/ (launching the .app via `open` loses this cwd).
+cd "$GUI_DIR" && exec "$BIN"
