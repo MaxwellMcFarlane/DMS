@@ -18,8 +18,8 @@ int main()
 
     DMS db("../scada.db","../configuration_files/deftables_config.txt","../log.txt");
 
-    db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
-    db.loadConfigTable("sensor_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/sensor_config.txt");
+    db.loadConfigTable("control_config.txt","../configuration_files/control_config.txt");
+    db.loadConfigTable("sensor_config.txt","../configuration_files/sensor_config.txt");
 
 //    db.loadDataBase("../testbench_files/StateTableTB.txt");
 //    db.loadDataBase("../testbench_files/BranchTableTB.txt");

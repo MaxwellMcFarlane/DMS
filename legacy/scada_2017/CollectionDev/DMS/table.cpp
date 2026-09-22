@@ -65,7 +65,6 @@ Table::Table(string tableName, sqlite3 *db, Log * log){
     }
     sql = cmd.c_str();
     rc = sqlite3_exec(db,sql,cbCreateTable,0, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc << "\n";
@@ -96,9 +95,8 @@ void Table::addToTable(string info){
     sql = cmd.c_str();    
 
     rc = sqlite3_exec(db,sql,cbAddToTable,0, &ermsg);
-//    cout <<cmd << endl;
-//    cout << ermsg <<endl;
-    if(rc != SQLITE_OK){        
+
+    if(rc != SQLITE_OK){
         *log << "Error: " << rc << " in " << tableName << "\n";
         if(rc == 19){*log << "Item: " << info << " caused a constraint violation.\n";}
         *log << " Item could not be inserted.\n";
@@ -106,19 +104,6 @@ void Table::addToTable(string info){
     else{
         *log << tableName << ": Item was inserted.\n";
         tableLength++;
-    }
-}
-
-void Table::addMultiToTable(string info){
-    vector<char*> list;
-    char * it;
-    it = strtok((char*)info.c_str(), "\n");
-    while(it != NULL){
-        list.push_back(it);
-        it = strtok(NULL, "\n");
-    }
-    for(int i = 0; i < (int)list.size(); i++){
-        addToTable(list.at(i));
     }
 }
 
@@ -132,19 +117,18 @@ void Table::delRow(string col, string index){
     cmd += col;
     cmd += " = ";
     cmd += index;
-    cmd += ";";    
+    cmd += ";";
+
     sql = cmd.c_str();
 
     rc = sqlite3_exec(db,sql,cbDelRow,log, &ermsg);
-
-    *log << (string)ermsg << "\n";
 
     if(rc != SQLITE_OK){
         *log << "Error: " << rc;
         *log << tableName << ": Row couldn't be deleted.\n";
     }
     else{
-        *log << tableName << " row[ " << index << "] was deleted.\n";        
+        *log << tableName << " row[ " << index << "] was deleted.\n";
         tableLength--;
     }
 }
@@ -158,7 +142,6 @@ string Table::createQuery(string cmd){
 
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
@@ -190,7 +173,6 @@ string Table::createQuery(string col, string op){
 
     string result;
     rc = sqlite3_exec(db,sql,cbCreateQuery,&result, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     if(rc == SQLITE_ERROR){
         *log << "Error: " << rc;
@@ -224,7 +206,6 @@ void Table::exp(string col, string op, string filePath){
     string result;
     headerN++;
     rc = sqlite3_exec(db,sql,cbExp,(void*)&result, &ermsg);
-//    *log << (string)ermsg << "\n";
 
     myfile << result;
     myfile.close();
@@ -276,8 +257,8 @@ bool Table::isQueryEmpty(string cmd){
     else{return false;}
 }
 
-vector<string> Table::delimitter(string cmd){
-    vector<string> k;
+vector<char*> Table::delimitter(string cmd){
+    vector<char*> k;
     char * it;
     it = strtok((char*)cmd.c_str(), " ");
     while(it != NULL){
@@ -288,19 +269,6 @@ vector<string> Table::delimitter(string cmd){
     return k;
 }
 
-int Table::count(){
-    int rc = 0;
-    char *ermsg = 0;
-    const char * sql;
-    string size;
-    string cmd = "SELECT count(*) from ";
-    cmd+= tableName;
-    cmd += ";";
-    sql = cmd.c_str();
-
-    rc = sqlite3_exec(db,sql,cbSize,(void *)&size, &ermsg);
-    return stoi(size);
-}
 //callback methods
 
 int Table::cbCreateTable(void *data, int argc, char **argv, char **azColName){
@@ -383,14 +351,6 @@ int Table::cbExp(void *data, int argc, char **argv, char **azColName){
         if(i < argc-1){*myfile +=  ",";}
     }
     *myfile += "\n";
-    return 0;
-}
-
-int Table::cbSize(void *data, int argc, char **argv, char **azColName){
-    string * number = (string *) data;
-    *number = (string)*argv;
-    (void)argc;
-    (void)azColName;
     return 0;
 }
 

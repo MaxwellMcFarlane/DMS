@@ -5,6 +5,12 @@
 #include <vector>
 //#include <QString>
 
+//getline that also strips a trailing '\r' so CRLF config files parse correctly
+static istream& readLine(istream& in, string& line){
+    if(getline(in,line) && !line.empty() && line[line.size()-1] == '\r'){line.erase(line.size()-1);}
+    return in;
+}
+
 
 ModeManager::ModeManager(string fileName, DMS *db)
 {
@@ -24,7 +30,7 @@ State* ModeManager::getState(string name){
             return &states[i];// the name matches return the pointer to this state
         }
     }
-    State defaultState("NULL");//the name is not found in the states list return a NULL name state
+    static State defaultState("NULL");//the name is not found in the states list return a NULL name state
     return &defaultState;
 }
 bool ModeManager::sensorExists(string name){
@@ -67,14 +73,14 @@ void ModeManager::configure(){
     while (!file.eof())
     {
         //iterate till the end of the file
-        getline(file,line);//iterator by line
+        readLine(file,line);//iterator by line
         lineCount++;//line counter
         if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
-        if(line.at(0) == '#')  continue; // # is for commenting;
+        if(line.empty() || line.at(0) == '#')  continue; // # is for commenting;
 
         else if (line.find(stateDeclaration) != std::string::npos) {
             //state declaration block
-            getline(file,line);
+            readLine(file,line);
             lineCount++;//line counter
             vector<string > stateLine= ModeManager::split(line,',');//split lines
             for(string s: stateLine){
@@ -94,12 +100,12 @@ void ModeManager::configure(){
             {
 
                 //iterate till end of the file
-                getline(file,line);
+                readLine(file,line);
                 lineCount++;//line counter
                 if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
                 if(line.find(sensorDeclaration)!= std::string::npos) break;//this triggers the beginning of sensor declaration
                 else if(line.find(calDeclaration)!= std::string::npos) break;//this triggers the beginning of calibration declaration
-                if(line.at(0) == '#') continue;// # is for commenting
+                if(line.empty() || line.at(0) == '#') continue;// # is for commenting
                 else{
                     vector<string > branchLine= ModeManager::split(line,',');
                     if(branchLine.size()>3){
@@ -152,10 +158,10 @@ void ModeManager::configure(){
             {
 
                 //iterate till end of the file
-                getline(file,line);
+                readLine(file,line);
                 lineCount++;//line counter
                 if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
-                if(line.at(0) == '#') continue;// # is for commenting
+                if(line.empty() || line.at(0) == '#') continue;// # is for commenting
                 if(line.find(calDeclaration)!= std::string::npos) break;//this triggers the beginning of calibration declaration
                 else{
                     vector<string > sensorLine= ModeManager::split(line,',');
@@ -187,10 +193,10 @@ void ModeManager::configure(){
             {
 
                 //iterate till end of the file
-                getline(file,line);
+                readLine(file,line);
                 lineCount++;//line counter
                 if(line.find(endDeclaration)!= std::string::npos) break;// this triggers an end to the script
-                if(line.at(0) == '#') continue;// # is for commenting
+                if(line.empty() || line.at(0) == '#') continue;// # is for commenting
                 else{
                     vector<string > calibrationLine= ModeManager::split(line,',');
                     if(calibrationLine.size()>3){

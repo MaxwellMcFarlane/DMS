@@ -36,9 +36,10 @@ SOURCES += \
     ../scada/ControlSubSystem/branch.cpp \
     ../scada/ControlSubSystem/modemanager.cpp \
     ../scada/ControlSubSystem/state.cpp \
-    configurationeditwindow.cpp
+    configurationeditwindow.cpp \
+    sqlite3.c
 
-LIBS += -l sqlite3
+#LIBS += -l sqlite3
 
 HEADERS += \
         mainwindow.h\
@@ -53,7 +54,8 @@ HEADERS += \
     ../scada/ControlSubSystem/branch.h \
     ../scada/ControlSubSystem/modemanager.h \
     ../scada/ControlSubSystem/state.h \
-    configurationeditwindow.h
+    configurationeditwindow.h \
+    sqlite3.h
 
 FORMS += \
         mainwindow.ui \

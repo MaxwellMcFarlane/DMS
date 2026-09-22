@@ -36,8 +36,7 @@
 #include <map>
 #include <sstream>
 #include <cstdio>
-#include <unistd.h>
-#include <pwd.h>
+#include <cstdlib>
 #include "baseclass.h"
 
 using namespace std;
@@ -70,8 +69,8 @@ public:
     //config& operator<<(const std::string str);
 
 private:
-
-
+    std::string get_home_directory() const;
+    std::string get_preconfig_path() const;
 };
 
 #endif // CONFIG_H
