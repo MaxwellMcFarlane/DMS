@@ -8,7 +8,7 @@
 PRJDIR=.
 SRCDIR=${PRJDIR}/src
 # Full 2017 SCADA system (DMS + control subsystem)
-SCADADIR=${SRCDIR}/scada_repo/scada_repo
+SCADADIR=${PRJDIR}/legacy/scada_2017
 
 ############### Recipes #################
 all:
