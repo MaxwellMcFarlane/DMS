@@ -12,6 +12,7 @@ public:
 	~Log();
 
 	void open(const std::string& filePath);
+	void truncate();
 	bool isOpen() const;
 	void flush();
 
@@ -27,6 +28,7 @@ public:
 
 private:
 	std::ofstream stream;
+	std::string path;
 };
 
 #endif // LOG_H

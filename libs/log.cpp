@@ -20,11 +20,20 @@ void Log::open(const std::string& filePath) {
 		stream.close();
 	}
 
-	stream.open(filePath.c_str(), std::ios::out | std::ios::app);
+	path = filePath;
+	stream.open(path.c_str(), std::ios::out | std::ios::app);
 	if (!stream.is_open()) {
 		// Fallback path to avoid losing logs when the requested path is invalid.
-		stream.open("dms.log", std::ios::out | std::ios::app);
+		path = "dms.log";
+		stream.open(path.c_str(), std::ios::out | std::ios::app);
 	}
+}
+
+void Log::truncate() {
+	if (stream.is_open()) {
+		stream.close();
+	}
+	stream.open(path.c_str(), std::ios::out | std::ios::trunc);
 }
 
 bool Log::isOpen() const {

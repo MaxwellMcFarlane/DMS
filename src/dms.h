@@ -5,14 +5,9 @@
 #include "sqlite3.h"
 #include <vector>
 #include "table.h"
-// #include "../tools/macros.h"
-// #include "../tools/baseclass.h"
 #include "../libs/log.h"
 #include <time.h>
 #include <cstring>
-// #include <../scada/ControlSubSystem/modemanager.h>
-// #include <../scada/ControlSubSystem/branch.h>
-// #include <../scada/ControlSubSystem/state.h>
 
 using namespace std;
 

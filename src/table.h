@@ -3,8 +3,6 @@
 #include <iostream>
 #include "sqlite3.h"
 #include <vector>
-// #include "../tools/macros.h"
-// #include "../tools/baseclass.h"
 #include "../libs/log.h"
 #include <cstring>
 
