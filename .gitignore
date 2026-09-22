@@ -1,6 +1,10 @@
 # OS cruft
 .DS_Store
 
+# draw.io editor autosave/lock files
+.$*.bkp
+.~lock.*
+
 # Build artifacts
 examples/scada_example
 *.o
