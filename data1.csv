@@ -1,7 +1,0 @@
-SensorId,HubID,PortNumber,SensorType
-s0,3890,1,volt
-s1,4082,2,volt
-s2,4082,3,volt
-s3,4018,4,amp
-s4,4002,3,amp
-s5,4042,1,volt
