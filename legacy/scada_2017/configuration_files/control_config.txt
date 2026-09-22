@@ -1,7 +1,0 @@
-#STATES
-STATES:
-Idle,Run,Warn,Count,Jump,Shout, FUCME, HELLO
-#BRANCHES
-BRANCHES:
-Idle,Run,s0:Select RawData from SampleTable where RawData > 0
-END
