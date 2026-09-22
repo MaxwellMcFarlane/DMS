@@ -5,7 +5,7 @@
 #include <vector>
 // #include "../tools/macros.h"
 // #include "../tools/baseclass.h"
-#include "../tools/log.h"
+#include "../libs/log.h"
 #include <cstring>
 
 using namespace std;
@@ -40,7 +40,7 @@ public:
     int count();
     //clearing function for table so that information doesn't get tangeled
 
-    vector<char*> delimitter(string cmd);
+    vector<string> delimitter(string cmd);
 
     //callback methods
     static int cbAddToTable    (void *data, int argc, char **argv, char **azColName);

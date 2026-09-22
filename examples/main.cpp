@@ -34,8 +34,8 @@ int main()
     db.loadDataBase("../testbench_files/SampleTableTB.txt");    
     db.loadDataBase("../testbench_files/CalibrationSampleTableTB.txt");   
 
-    db.loadConfigTable("control_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/control_config.txt");
-    db.loadConfigTable("sensor_config.txt","/Users/maxwellmcfarlane/scada_repo/configuration_files/sensor_config.txt");
+    db.loadConfigTable("control_config.txt","../configuration_files/control_config.txt");
+    db.loadConfigTable("sensor_config.txt","../configuration_files/sensor_config.txt");
 
     //Call tests
     testSampleTable();
@@ -64,12 +64,12 @@ void testSampleTable(){
     cout << db.getTable("SampleTable")->createQuery("SAMPLEID", "") << endl;
     cout<< "\n";
     cout<< "All sensors in architecture" << endl;
-    cout << db.getTable("HubTable")->createQuery("*", "")<< endl;
+    cout << db.getTable("SensorTable")->createQuery("*", "")<< endl;
     cout<< "\n";
     cout<< "All data collected" << endl;
 
 
-    vector<char*> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
+    vector<string> s = db.getTable("SampleTable")->delimitter("select * from SampleTable");
     for(int i = 0; i < (int)s.size(); i++){cout << s.at(i) <<endl;}
     cout << db.getTableHeaders("SensorTable") << endl;
     cout<< db.isSensorExist("'s0'") << endl;
@@ -96,20 +96,20 @@ void testTableFnc(){
 void testExport(){
     db.getTable("SampleTable")->exp("*","","../data.csv");
     db.getTable("SampleTable")->exp("TimeStamp,RawData","RawData > 200","../data2.csv");
-    db.getTable("HubTable")->exp("*","","../data1.csv");
+    db.getTable("SensorTable")->exp("*","","../data1.csv");
 }
 
 void testCalTable(){
-    cout << db.getTable("CalModTable")->createQuery("*", "")<< endl;
+    cout << db.getTable("CalConfTable")->createQuery("*", "")<< endl;
     cout<< "\n";
 
     //Change Calibration Data in Database
-    db.getTable("CalModTable")->updateTable("Type = 'volt'", "ModelNumber = 18");
-    db.getTable("CalModTable")->updateTable("Type = 'amp'", "ModelNumber = 5");
+    db.getTable("CalConfTable")->updateTable("Calibration = 'linear,1:0'", "SensorId = 's0'");
+    db.getTable("CalConfTable")->updateTable("Calibration = 'quad,1:0:0'", "SensorId = 's1'");
 
     //Print new Data in Calibration table
     cout<< "All data collected" << endl;
-    cout << db.getTable("CalModTable")->createQuery("*", "")<< endl;
+    cout << db.getTable("CalConfTable")->createQuery("*", "")<< endl;
     cout<< "\n";
 
 }

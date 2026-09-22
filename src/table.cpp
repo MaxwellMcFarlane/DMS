@@ -276,8 +276,8 @@ bool Table::isQueryEmpty(string cmd){
     else{return false;}
 }
 
-vector<char*> Table::delimitter(string cmd){
-    vector<char*> k;
+vector<string> Table::delimitter(string cmd){
+    vector<string> k;
     char * it;
     it = strtok((char*)cmd.c_str(), " ");
     while(it != NULL){

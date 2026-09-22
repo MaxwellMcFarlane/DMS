@@ -1,0 +1,7 @@
+StateTable
+'Idle'
+'Run'
+'Warn'
+'Count'
+'Jump'
+'Shout'

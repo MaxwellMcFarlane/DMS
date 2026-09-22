@@ -1,1 +1,78 @@
 
+
+Wed Sep 23 00:11:30 2026
+DataBase ../scada.db is opened.
+Error: 1
+Table:ConfigFileTable already exists.
+ConfigFileTable could not be created.
+StateTable was created.
+Dimensions: (	StateId		INTEGER PRIMARY KEY AUTOINCREMENT, 	StateName 	TEXT UNIQUE NOT NULL);
+BranchTable was created.
+Dimensions: (	BranchId 	INTEGER PRIMARY KEY AUTOINCREMENT,	FromState 	TEXT,	ToState 	TEXT,	Condition 	TEXT NOT NULL,	FOREIGN KEY(FromState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY(ToState) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON DELETE CASCADE);
+CalConfTable was created.
+Dimensions: (	ModelNumber 	INTEGER PRIMARY KEY AUTOINCREMENT,		SensorId  	TEXT,	StateName 	TEXT,	Calibration 	TEXT NOT NULL,  	UNIQUE (SensorId, StateName),	FOREIGN KEY (StateName) REFERENCES StateTable (StateName) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+SensorTable was created.
+Dimensions: (	SensorId 	TEXT PRIMARY KEY, 	HubID 		INT NOT NULL, 	PortNumber 	INT NOT NULL, 	SensorType 	TEXT,	UNIQUE (HubID, PortNumber));
+SampleTable was created.
+Dimensions: (	SampleId 	INTEGER PRIMARY KEY AUTOINCREMENT, 	SensorId 	TEXT NOT NULL,	TimeStamp 	INTEGER NOT NULL, 	RawData 	INTEGER NOT NULL, 	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+CalibratedSampleTable was created.
+Dimensions: (	CalId 		INTEGER PRIMARY KEY AUTOINCREMENT, 	SampleId 	INTEGER, 	CalTimeStamp 	INTEGER NOT NULL, 	CalVal 		INTEGER NOT NULL, 	ModelNumber 	INTEGER NOT NULL,  	FOREIGN KEY (SampleId) REFERENCES SampleTable (SampleId) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (ModelNumber) REFERENCES CalConfTable (ModelNumber) ON UPDATE CASCADE ON DELETE CASCADE);
+SensorConfTable was created.
+Dimensions: (	SensorConfId	INTEGER PRIMARY KEY AUTOINCREMENT,	StateId		INTEGER,	SensorId	TEXT,	SampleRate	INTEGER NOT NULL,	Priority	INTEGER,	MaxValue	INTEGER,	MinValue	INTGER,	FOREIGN KEY (StateId) REFERENCES StateTable (StateId) ON UPDATE CASCADE ON DELETE CASCADE,	FOREIGN KEY (SensorId) REFERENCES SensorTable (SensorId) ON UPDATE CASCADE ON DELETE CASCADE);
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+StateTable: Item was inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Error: 1 in BranchTable
+ Item could not be inserted.
+Table Retrieval Error.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+SensorTable: Item was inserted.
+Error: 19 in SensorTable
+Item: 's6',3890,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's7',4082,2,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's8',4082,3,'volt' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's9',4018,4,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's10',4002,3,'amp' caused a constraint violation.
+ Item could not be inserted.
+Error: 19 in SensorTable
+Item: 's11',4042,1,'volt' caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s23',323,3,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s21',333,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorConfTable: Item was inserted.
+Error: 19 in SensorConfTable
+Item: 1,'s31',532,2,61,41 caused a constraint violation.
+ Item could not be inserted.
+SensorC

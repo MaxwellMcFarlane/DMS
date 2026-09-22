@@ -7,7 +7,7 @@
 #include "table.h"
 // #include "../tools/macros.h"
 // #include "../tools/baseclass.h"
-#include "../tools/log.h"
+#include "../libs/log.h"
 #include <time.h>
 #include <cstring>
 // #include <../scada/ControlSubSystem/modemanager.h>
@@ -53,7 +53,7 @@ public:
     void getNewLog();
 
     //delimitter for commands
-    vector<char*> delimitter(string cmd);    
+    vector<string> delimitter(string cmd);    
 
     //query method that returns whether a condition is true or false
     bool controlQuery(string cmd);

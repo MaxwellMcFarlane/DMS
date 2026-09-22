@@ -7,6 +7,8 @@
 ############### File/Directories Definitions ##################
 PRJDIR=.
 SRCDIR=${PRJDIR}/src
+# Full 2017 SCADA system (DMS + control subsystem)
+SCADADIR=${SRCDIR}/scada_repo/scada_repo
 RUNDIR=${PRJDIR}/run # Work Directory
 ############### Parameter Definitions ##################
 FPU = $(shell basename $$(pwd) | cut -d"_" -f2)
@@ -15,8 +17,10 @@ ARGS = "-std=c++11 -I./src -lsqlite3"
 
 ############### Recipes #################
 all:
-	@echo "compile  :  Compiles VHDL Code"
-	@echo "gen_lib  :  Generates Timing Libraries"
+	@echo "example      :  Builds the DMS example (examples/scada_example)"
+	@echo "run_example  :  Builds and runs the DMS example"
+	@echo "scada        :  Builds and runs the full SCADA program (${SCADADIR}/scada)"
+	@echo "example_clean:  Removes the example binary"
 
 test:
 	@echo -e "\033[92m Running Test \033[0m"
@@ -37,8 +41,15 @@ clean:
 
 example:
 	@echo "Building SCADA example..."
-	@cd examples && g++ -std=c++17 main.cpp ../src/dms.cpp ../src/table.cpp ../tools/log.cpp -I../src -I../tools -lsqlite3 -o scada_example
+	@cd examples && g++ -std=c++17 main.cpp ../src/dms.cpp ../src/table.cpp ../libs/log.cpp -I../src -I../libs -lsqlite3 -o scada_example
 	@echo "Built examples/scada_example"
+
+# Run from examples/ so the ../scada.db, ../configuration_files and ../testbench_files paths resolve
+run_example: example
+	@cd examples && ./scada_example
+
+scada:
+	@${SCADADIR}/run_scada.sh
 
 example_clean:
 	@echo "Removing example binary..."
