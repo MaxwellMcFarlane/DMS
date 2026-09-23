@@ -3,141 +3,155 @@ Reference Manual
 Module & Architecture Reference
 
 **Author:** Maxwell McFarlane
-**Date:** 2026-09-16
-**Version:** 1.0
+**Date:** 2026-09-23
+**Version:** 2.0
+**Branch:** `modernize-gui-control`
 
 ---
 ## Table of Contents
 1. Overview
 2. System Flow
 3. Module Reference
-4. Revision History
-5. Related Documents
-6. References
-
----
-## Revision History
-| Version | Date | Author | Description |
-|---|---|---|---|
-| 1.0 | 2026-09-16 | Maxwell McFarlane | Initial generated reference manual. |
+4. Known Limitations
+5. Revision History
+6. Related Documents
+7. References
 
 ---
 ## 1. Overview
-`SCADA` reuses [[DMS]]'s `DMS`/`Table`/vendored-SQLite data layer (`src/dms.cpp`, `src/table.cpp`, `src/sqlite3.c`/`.h` — directly descended from the same source, confirmed by identical git remote and near-identical file diffs) and adds a `libs/` directory meant to hold the "supervisory layer" (`baseclass`, `macros`, `Log`) that `dms.h`/`table.h` expect at `../tools/`. Of the three, only `libs/log.cpp`/`log.h` has real content — a small `std::ofstream` wrapper with a template `operator<<` and a fallback-to-`dms.log` constructor. `libs/baseclass.h`, `libs/baseclass.cpp`, `libs/macros.h`, and `libs/macros.cpp` all exist but are 0 bytes; their corresponding `#include` lines in `src/dms.h`/`src/table.h` are commented out. `examples/main.cpp` is the sole entry point, functionally identical to [[DMS]]'s `ws/main.cpp`. The repo does not build as checked out because `src/dms.h`/`src/table.h` hardcode `#include "../tools/log.h"` but the sibling directory here is named `libs/`, not `tools/` — the Makefile's `example` target has the same mismatch. Unlike [[DMS]], this repo's `DMS::resetRowIdTable()` has a one-line logging stub rather than a commented-out body, so once the `tools/`-vs-`libs/` path is fixed, the example driver links and runs (verified).
+SCADA is a small data-management-and-control stack built on a vendored SQLite amalgamation. It has three layers:
+
+- **Data layer** (`src/`) — `DMS` (one `sqlite3*` handle, a list of `Table*`, a shared `Log*`) and `Table` (schema + CRUD + query + CSV export over one SQLite table), plus the vendored `sqlite3.c`/`.h`.
+- **Control layer** (`src/control/`) — `State`, `Branch`, `ModeManager` implement a config-driven finite state machine (state → branch-on-SQL-condition → next state) over the same `DMS`. `Calibration` (linear/quadratic sensor calibration) lives here too but nothing currently constructs it.
+- **Presentation layer** — a Qt Widgets GUI (`gui/`) and two console drivers (`examples/main.cpp`, `examples/control_main.cpp`), all built directly against the two layers above. There is no service boundary between them; every entry point links the same `.cpp` files.
+
+`libs/log.cpp`/`log.h` is a small shared logger (`std::ofstream` wrapper, append-mode by default, with an explicit `truncate()`) used by all three layers — it is the only piece of what used to be called the "supervisory layer" that has real content.
+
+This branch (`modernize-gui-control`) removed `legacy/scada_2017/` — a full import of the original 2017 Lafayette CS205 course project, including its own commit history — and replaced it with the two pieces of it that were actually load-bearing: the GUI and the control subsystem, ported to build against the modern `src/` data layer instead of a separate, near-duplicate copy of it. Everything else that lived under `legacy/` (Phidget hardware test rigs, named-pipe experiments, a vendored gtest copy, IDE project files) had no dependents anywhere in the codebase and was dropped rather than carried forward; it is still fully present in `master`'s history if it's ever needed.
+
+```mermaid
+flowchart TB
+    subgraph Data["src/ — data layer"]
+        DMS["DMS"] --> Table["Table"]
+        Table --> SQLite["sqlite3.c/.h<br/>(vendored)"]
+    end
+    subgraph Control["src/control/ — control layer"]
+        MM["ModeManager"] --> State
+        State --> Branch
+        MM --> DMS
+        Calibration -.unused.-> DMS
+    end
+    subgraph Present["presentation — gui/ and examples/"]
+        GUI["gui/ (Qt Widgets)"]
+        Ex1["examples/main.cpp"]
+        Ex2["examples/control_main.cpp"]
+    end
+    GUI --> DMS
+    GUI --> MM
+    Ex1 --> DMS
+    Ex2 --> DMS
+    Ex2 --> MM
+    Log["libs/log.cpp"] -.shared logger.-> DMS
+    Log -.-> MM
+```
 
 ---
 ## 2. System Flow
-Runtime flow, as exercised by `examples/main.cpp` (functionally the same lifecycle as [[DMS]]'s driver, plus routing through `libs/log.cpp` for logging):
-- **Construct:** `DMS db("../scada.db", "../configuration_files/deftables_config.txt", "../log.txt")` at file scope — opens the SQLite db, sets `PRAGMA foreign_keys = ON`, auto-creates `ConfigFileTable`, parses the config file into per-table `CREATE TABLE` calls. Every `DMS`/`Table` operation that logs routes through the shared `Log*`, which is the only real piece of `libs/` — `baseclass`/`macros` are 0-byte stubs and contribute nothing at runtime.
-- **Load:** eight `db.loadDataBase(path)` calls in dependency order, plus two `db.loadConfigTable(name, path)` calls (one with a hardcoded absolute path off the original author's machine, same issue as [[DMS]]).
-- **Query:** the same `test*()` battery as [[DMS]] — `createQuery`, `controlQuery`, `updateTable`, `addMultiToTable`, `getTableHeaders`, `isSensorExist`, `resetRowIdTable` (here a no-op stub that logs "not currently implemented" instead of failing to link).
-- **Export:** `Table::exp` writes CSV files (`../data.csv`, `../data2.csv`, `../data1.csv`).
+
+### 2.1 DMS console example (`examples/main.cpp`, `make run_example`)
+- **Construct:** `DMS db("../scada.db", "../configuration_files/deftables_config.txt", "../log.txt")` at file scope — opens the SQLite db, sets `PRAGMA foreign_keys = ON`, auto-creates `ConfigFileTable`, parses the config file into per-table `CREATE TABLE` calls.
+- **Load:** eight `db.loadDataBase(path)` calls (dependency order) against `testbench_files/*.txt`, plus two `db.loadConfigTable(name, path)` calls against `configuration_files/*.txt`.
+- **Query/exercise:** `testSampleTable`, `testQueries`, `testCalTable`, `testResetRowID`, `testTableFnc`, `testMultiQuery`, `testExport`, `testClrTable` — `createQuery`, `controlQuery`, `updateTable`, `addMultiToTable`, `getTableHeaders`, `isSensorExist`.
+- **Export:** `Table::exp` writes `../data.csv`, `../data1.csv`, `../data2.csv`.
 - **Close:** `db.close()`.
 
-There is no separate FSM (Initialize → Calibration → Update → Event/Exception) in the code — `DMS::setCurrentState`/`getCurrentState` are plain string accessors with no transition logic, so the diagram below reflects the actual linear lifecycle, not the aspirational design in `docs/`.
+### 2.2 Control-subsystem console example (`examples/control_main.cpp`, `make run_control_example`)
+Same `DMS` construction and config/testbench loading as above, then:
+- `ModeManager m("../configuration_files/control_config.txt", &db)` — parses `control_config.txt`'s `STATES:`/`BRANCHES:` sections, builds one `State` per name and one `Branch` per `<from>,<to>,<SQL condition>` line, and sets `currentState` to the first declared state.
+- `m.configure()` does the parse; `m.nextstate()` (not called by either example) would evaluate the current state's branch conditions via `DMS::controlQuery` and advance `currentState` on the first true one.
+
+### 2.3 GUI (`gui/`, `make run_gui` / `bin/scada`)
+`MainWindow`'s constructor does the same `DMS` + `ModeManager` construction as the console examples (same relative paths, so it must be launched with cwd = `gui/` — see §3.8), then populates two read-only text panes (`SensorArch`, `StateArch`) from `SELECT * FROM SensorTable` / `StateTable`. Three menu actions open modeless child widgets that share the same `DMS*`:
+- **Export Table** → `ExportWindow` (pick a table + filter, preview, write CSV) — re-runs `m->configure()` on open, re-parsing the control config.
+- **View Table** → `tableEditWindow` (browse/edit rows) — also re-runs `m->configure()`.
+- **Configuration** → `ConfigurationEditWindow` (edit `control_config.txt` in place, save, re-validate via `ModeManager`) — does *not* re-run `configure()` after a save (see §4).
 
 ```mermaid
 flowchart LR
-    CFG[(dbConfig text file)] --> CTOR["DMS(name, dbConfig, logPath)<br/>open db, PRAGMA, parse config"]
-    CTOR --> CT["DMS::createTable<br/>per config entry"]
-    CT --> TBL["Table objects<br/>(CREATE TABLE)"]
-    TB[(testbench .txt files)] -->|loadDataBase| LOAD["Table::addToTable<br/>per row"]
-    CFF[(config .txt files)] -->|loadConfigTable| UPSERT["INSERT/UPDATE<br/>ConfigFileTable"]
-    LOAD --> TBL
-    UPSERT --> TBL
-    TBL -->|createQuery / controlQuery / updateTable| QUERY[SQL via sqlite3_exec]
-    QUERY --> TBL
-    TBL -->|Table::exp| CSV[(CSV export files)]
-    CTOR -.every op logs via.-> LOGCLS["Log (libs/log.cpp)<br/>only real libs/ file"]
-    TBL -.-> LOGCLS
-    LOGCLS --> LOGFILE[(log.txt)]
-    TBL --> CLOSE["DMS::close()"]
+    Ctor["MainWindow()"] --> D["new DMS(../scada.db, ...)"]
+    Ctor --> M["new ModeManager(../configuration_files/control_config.txt, db)<br/>m->configure()"]
+    D --> Panes["SensorArch / StateArch text panes"]
+    Ctor --> Menu{Menu action}
+    Menu -->|Export Table| EW["ExportWindow<br/>(re-runs configure())"]
+    Menu -->|View Table| TW["tableEditWindow<br/>(re-runs configure())"]
+    Menu -->|Configuration| CW["ConfigurationEditWindow<br/>(edits control_config.txt)"]
 ```
 
 ---
 ## 3. Module Reference
 
-### 3.1 src/dms.cpp, src/dms.h
-Same class shape as [[DMS]]'s `DMS` — one `sqlite3*` handle, `vector<Table*> sensList`, `Log* log`, `currentState` string, and the same four constructors, `createTable`/`getTable`/`dumpTable`/`clearTable`, `controlQuery`, `loadDataBase`, `loadConfigTable`, `getTableHeaders`, `isSensorExist`, `setCurrentState`/`getCurrentState`, and the same static callbacks. Verified two functional differences from [[DMS]]'s `src/dms.cpp`/`dms.h`: (1) `dms.h` here comments out `#include "../tools/macros.h"` and `"../tools/baseclass.h"`, leaving only `../tools/log.h` active (both repos' headers still reference the nonexistent `../tools/` path rather than the local `libs/` directory — the include-path bug the project doc documents); (2) `DMS::resetRowIdTable(string tableName, string col)` is not commented out here — it has a one-line body that logs `"resetRowIdTable is not currently implemented for table: " + tableName + ", column: " + col` and returns, so (unlike [[DMS]]) any driver calling it links successfully. The default-constructor `Log*` member initializer also differs trivially (`new Log()` here vs. `new Log("../error_files/dms_log.txt")` in [[DMS]]), consistent with `libs/log.h`'s parameterless-constructor fallback to `dms.log`.
+### 3.1 `src/dms.cpp`, `src/dms.h`
+`DMS`: one `sqlite3*` handle, `vector<Table*> sensList`, `Log* log`, a `currentState` string. Four constructors (name-only, name+dbConfig, name+dbConfig+logPath, plus the implicit default), `createTable`/`getTable`/`dumpTable`/`clearTable`, `controlQuery`, `loadDataBase`, `loadConfigTable`, `getTableHeaders`, `isSensorExist`, `setCurrentState`/`getCurrentState`, static `sqlite3_exec` callbacks. `resetRowIdTable(tableName, col)` is a one-line logging stub, not implemented.
 
-```mermaid
-flowchart LR
-    IN1[db name / dbConfig path / logPath] --> CTOR[DMS constructors]
-    IN2["testbench & config file paths<br/>(loadDataBase / loadConfigTable)"] --> METHODS
-    IN3["cmd strings<br/>(controlQuery)"] --> METHODS
-    CTOR --> STATE["sensList: vector&lt;Table*&gt;<br/>db: sqlite3*<br/>log: Log*"]
-    STATE --> METHODS["createTable / getTable / dumpTable /<br/>clearTable / controlQuery / resetRowIdTable(stub)"]
-    METHODS -->|sqlite3_exec via Table| SQLOUT[(SQLite tables)]
-    METHODS --> LOGOUT["log entries<br/>(via libs/log.cpp)"]
-    METHODS --> BOOLOUT["bool / string returns<br/>(controlQuery, getTableHeaders, isSensorExist)"]
-```
+### 3.2 `src/table.cpp`, `src/table.h`
+`Table`: constructors for a generic dimension string plus hardcoded `HubTable`/`SampleTable`/`CalibrationTable` schemas. `addToTable`/`addMultiToTable`, `delRow`, `createQuery` (two overloads), `isQueryEmpty`, `updateTable`, `exp` (CSV export), `count`. Same static-callback-into-`void*`-cast-`string*`/`Log*` pattern as `DMS`.
 
-### 3.2 src/table.cpp, src/table.h
-Byte-for-byte the same API and logic as [[DMS]]'s `Table` — same constructors (generic dimension string, plus hardcoded `HubTable`/`SampleTable`/`CalibrationTable` schemas), `addToTable`/`addMultiToTable`, `delRow`, `createQuery` (two overloads), `isQueryEmpty`, `updateTable`, `exp`, `count`, and the same static-callback pattern (`cbAddToTable`, `cbCreateQuery`, `cbExp`, etc.) accumulating `sqlite3_exec` output into a `void*`-cast `string*`/`Log*`. The only diffs found by direct comparison against [[DMS]]'s `table.h`/`table.cpp`: `table.h` here comments out the `../tools/macros.h` and `../tools/baseclass.h` includes (same as `dms.h`), and `Table::cbSize` in `table.cpp` has an explicit `return 0;` at the end where [[DMS]]'s copy falls off the end of a non-void function without one (a latent UB/warning fixed here, not a behavioral change in practice).
+### 3.3 `src/control/branch.cpp`, `branch.h`
+`Branch`: a target `State*` and a `condition` string (a raw SQL fragment, evaluated later via `DMS::controlQuery`). Constructor only; no behavior of its own.
 
-```mermaid
-flowchart LR
-    IN1["tableName, dim, sqlite3* db, Log* log"] --> CTOR[Table constructors]
-    IN2["col/op/cmd strings<br/>(addToTable, createQuery, updateTable, delRow, exp)"] --> METHODS
-    CTOR --> STATE["tableName, dimensions,<br/>tableLength, db, log"]
-    STATE --> METHODS["addToTable / addMultiToTable /<br/>createQuery / updateTable / delRow / exp / count"]
-    METHODS -->|sqlite3_exec + static callbacks| SQL[(SQLite table rows)]
-    METHODS --> STROUT["string results<br/>(createQuery, isQueryEmpty)"]
-    METHODS --> CSVOUT[(CSV file via exp)]
-    METHODS --> LOGOUT["log entries<br/>(via libs/log.cpp)"]
-```
+### 3.4 `src/control/state.cpp`, `state.h`
+`State`: a `name` and a `vector<Branch>`. `loadBranch` appends; `nextstate(DMS* db)` walks the branches in order and returns the target state's name for the first branch whose `condition` query returns a non-empty result — first-match-wins, no explicit "no transition" case beyond returning the current name unchanged.
 
-### 3.3 libs/baseclass.cpp, libs/baseclass.h
-Both files exist in the repo but are **0 bytes** — confirmed directly (`ls -la` shows 0-byte size for each). No supervisory/base-class logic is implemented anywhere in this repo. The corresponding `#include "../tools/baseclass.h"` lines in `src/dms.h`/`src/table.h` are commented out, so nothing references these files at compile time; they are placeholders only.
+### 3.5 `src/control/modemanager.cpp`, `modemanager.h`
+`ModeManager`: owns `vector<State> states`, `vector<string> sensors`, `currentState`, a `DMS*`, and two `Log*` members (`errorLog` → `../control_error.txt`, `log` → `../control_log.txt`, both truncated at the start of `configure()` via the new `Log::truncate()`). `configure()` line-parses the config file's `STATES:` and `BRANCHES:` sections (format: `STATES:` then a comma-separated name list; `BRANCHES:` then `from,to,condition` lines; `END` terminates), logging one line per state/branch created or rejected, and sets `currentState` to the first declared state. `nextstate()` delegates to the current `State::nextstate(db)`. `getState(name)` and `sensorExists(name)` are linear lookups.
 
-```mermaid
-flowchart LR
-    IN["(none — file is empty)"] -.-> CORE["baseclass.h / baseclass.cpp<br/>0 bytes, unimplemented stub"]
-    CORE -.-> OUT["(none — not compiled or included)"]
-```
+### 3.6 `src/control/calibration.cpp`, `calibration.h`
+`Calibration`: given a `DMS*`, `calibrate()` is meant to read `CalConfTable` coefficients and write calibrated values back via `db`. **Not constructed anywhere** in `gui/` or either console example — carried forward from the legacy code as-is because it's real, non-trivial logic, but it isn't wired into any entry point yet.
 
-### 3.4 libs/log.cpp, libs/log.h
-The one real piece of the intended supervisory layer. `Log` wraps a `std::ofstream` opened in append mode (`ios::out | ios::app`). Constructors: parameterless (`Log()`, opens `"dms.log"`) and `explicit Log(const string& filePath)`. `open(filePath)` closes any existing stream and reopens at the new path, falling back to a local `dms.log` if the requested path can't be opened (e.g. a missing parent directory) — this is what makes `DMS`'s `../error_files/dms_log.txt` / `../log.txt` paths silently degrade rather than crash when directories don't exist. A template `operator<<(const T&)` forwards any streamable value directly to the file stream (used throughout `dms.cpp`/`table.cpp` as `*log << ...`); a separate non-template overload handles stream manipulators (e.g. `std::endl`). `isOpen()` and `flush()` are thin accessors; the destructor flushes and closes.
+### 3.7 `libs/log.cpp`, `libs/log.h`
+`Log` wraps a `std::ofstream`. `Log()` opens `dms.log`; `Log(filePath)` opens `filePath`. `open(filePath)` closes any existing stream, tracks the path, and reopens in append mode, falling back to `dms.log` if the requested path can't be opened. `truncate()` (added on this branch, for `ModeManager`'s legacy `trunc_file()` call) reopens the tracked path with `ios::trunc`. A template `operator<<(const T&)` forwards any streamable value; a separate overload handles manipulators like `std::endl`. `isOpen()`/`flush()` are thin accessors.
 
-```mermaid
-flowchart LR
-    IN1["filePath string<br/>(constructor / open)"] --> CTOR["Log constructors / open()"]
-    IN2["streamable values<br/>(operator<<)"] --> STREAM
-    CTOR --> STATE["std::ofstream stream<br/>(append mode, fallback to dms.log)"]
-    STATE --> STREAM["operator<< (template + manip overload)"]
-    STREAM --> OUT[(log file on disk)]
-```
+### 3.8 `gui/` (Qt Widgets, `scadagui.pro`)
+`main.cpp` → `QApplication` + `MainWindow`. `mainwindow.{h,cpp}` is described in §2.3. `exportwindow.*`, `tableeditwindow.*`, `configurationeditwindow.*` are modeless child widgets, each holding the same `DMS*` passed in from `MainWindow`. `calibrationwindow.ui` exists (a Qt Designer form) but has no corresponding `.h`/`.cpp` class — it was never wired up in the original 2017 code and still isn't. All paths inside `gui/*.cpp` (`../scada.db`, `../configuration_files/...`, `../control_config.txt`, `../log.txt`) are relative to the **process's working directory**, not the source file location — the app must be launched with cwd = `gui/`, which is what `bin/scada` and the `run_gui` Makefile target do (a plain `open scadagui.app` from Finder or elsewhere would break this).
 
-### 3.5 libs/macros.cpp, libs/macros.h
-Both files exist but are **0 bytes** — confirmed directly. No macro helpers are implemented. Like `baseclass.*`, the `#include "../tools/macros.h"` lines that would pull this in are commented out in `src/dms.h`/`src/table.h`, so this module is inert placeholder content only.
+Build note: `scadagui.pro` builds against the shared `../src/sqlite3.c`/`.h`, `../src/dms.cpp`/`table.cpp`, `../libs/log.cpp`, and `../src/control/{branch,state,modemanager}.cpp` — no vendored copies. qmake's `macx-clang` mkspec unconditionally links `-framework AGL`, which no longer ships with current macOS SDKs; the `gui` Makefile target strips it from the generated Makefile before building (see §3.11).
 
-```mermaid
-flowchart LR
-    IN["(none — file is empty)"] -.-> CORE["macros.h / macros.cpp<br/>0 bytes, unimplemented stub"]
-    CORE -.-> OUT["(none — not compiled or included)"]
-```
+### 3.9 `examples/main.cpp`
+Described in §2.1. Builds to `examples/scada_example`.
 
-### 3.6 examples/main.cpp
-Entry point and smoke-test driver, functionally identical to [[DMS]]'s `ws/main.cpp`: statically constructs `DMS db("../scada.db", "../configuration_files/deftables_config.txt", "../log.txt")`, loads the same eight testbench files in the same dependency order, calls `loadConfigTable` twice with the same hardcoded absolute path (`/Users/maxwellmcfarlane/scada_repo/configuration_files/...`), and runs the same eight `test*()` functions (`testSampleTable`, `testQueries`, `testCalTable`, `testResetRowID`, `testTableFnc`, `testMultiQuery`, `testExport`, `testClrTable`). Differs from [[DMS]]'s driver only in include paths (`#include "../src/dms.h"` / `"../src/table.h"` directly, vs. [[DMS]]'s local `table.h`) and two locally defined but unused macros, `CONFIG_PATH`/`DB_PATH`. Because `DMS::resetRowIdTable()` has a real (if stub) body in this repo's `dms.cpp`, `testResetRowID()` calling it does not break the link — this file builds and runs successfully once the `tools/`-vs-`libs/` include path is worked around (verified: a committed `examples/scada_example` binary plus `examples/dms.log`, `scada.db`, `log.txt` at the repo root confirm it has been run before).
+### 3.10 `examples/control_main.cpp`
+Described in §2.2. Builds to `examples/control_example`. Added on this branch to replace `legacy/scada_2017/scada/main.cpp`'s console driver, with the dead `Scada` class and unused `Calibration` instantiation attempt dropped.
 
-```mermaid
-flowchart LR
-    IN["static DMS db(...)<br/>at file scope"] --> LOADSEQ["main(): 8x loadDataBase<br/>+ 2x loadConfigTable"]
-    LOADSEQ --> TESTS["test* functions<br/>(createQuery, controlQuery, updateTable,<br/>addMultiToTable, resetRowIdTable(stub), exp, clearTable)"]
-    TESTS --> COUT[(cout smoke-test output)]
-    TESTS --> CSV[(CSV export files)]
-    TESTS --> CLOSE["db.close()"]
-```
+### 3.11 `examples/ui/`, `bin/scada`
+`examples/ui/README.md` + `run.sh` is a thin pointer at the real GUI source (`gui/`) and at `bin/scada`, kept for symmetry with `examples/main.cpp` and `examples/control_main.cpp` rather than duplicating Qt project files. `bin/scada` builds the GUI on first run (`make gui`) if `gui/scadagui.app` doesn't exist yet, then runs the binary directly with cwd = `gui/` (not `open`, which would launch the app with an unpredictable working directory and break the relative paths in §3.8).
+
+### 3.12 `Makefile`
+`example` / `run_example` / `control_example` / `run_control_example` build and optionally run the two console drivers with plain `g++ -std=c++17`. `gui` runs `qmake` + the AGL workaround + `make` in `gui/`; `run_gui` builds then launches with the correct cwd; `gui_clean` removes GUI build output. `clean` removes generated runtime files (logs, `scada.db`, CSV exports) and depends on `gui_clean`. All targets are declared `.PHONY` — without that, a target whose name matches an existing top-level directory (as `gui` now does) silently no-ops instead of running, which is exactly what happened once `gui/` was created and is why `.PHONY` was added on this branch.
 
 ---
-## 4. Related Documents
-- [[SCADA]] — project-level doc (status, timeline, roadmap, build verification) at `../docs/Projects/SCADA/SCADA.md`
-- [[DMS]] Manual — `../DMS/Manual.md`, the upstream project this repo's `src/dms.cpp`/`table.cpp`/`sqlite3.c` are directly descended from (same git remote, near-identical sources)
-- `readme.md` — repo root readme (currently an unedited copy of DMS's README)
-- `TECH-SUMMARY.md` — design notes describing the aspirational Initialize → Calibration → Update → Event/Exception FSM, not implemented in this codebase
-- `docs/cs205_report.pdf`, `docs/formal_design_proposal_cs205.docx`, `docs/ScadaFinalDocumentation_Max_Robson_Hayden/` — original 2017-2018 course deliverables
-- `docs/models.drawio`, `docs/scada-*.png` — original design diagrams (not re-derived in this manual)
+## 4. Known Limitations
+- **`Calibration` is unwired** (§3.6) — real logic, no caller.
+- **`calibrationwindow.ui` has no controller class** — a designed-but-never-implemented GUI feature, carried forward as-is.
+- **`ConfigurationEditWindow` doesn't re-validate on save** — the other two child windows call `m->configure()` when opened; the config editor does not call it after writing `control_config.txt`, so a `ModeManager` already open in `MainWindow` won't see edits until the app restarts.
+- **`ModeManager::nextstate()` is never called** by either console example or the GUI — the state machine parses and holds state/branch data but nothing currently drives a transition.
+- **Log files reset on every `configure()` call** — `ModeManager::configure()` truncates `control_log.txt`/`control_error.txt` unconditionally, so opening `ExportWindow`/`tableEditWindow` (both call `configure()`) discards prior log content, not just on startup.
+- **`resetRowIdTable` is a stub** on `DMS` — logs a message and returns, does not reset a rowid sequence.
 
 ---
-## 5. References
-- [SQLite](https://www.sqlite.org/) — vendored amalgamation, v3.21.0, byte-identical to [[DMS]]'s copy, used unmodified as the storage engine
+## 5. Revision History
+| Version | Date | Author | Description |
+|---|---|---|---|
+| 1.0 | 2026-09-16 | Maxwell McFarlane | Initial generated reference manual (pre-branch: `src/`+`libs/` only, `examples/main.cpp` as sole entry point). |
+| 2.0 | 2026-09-23 | Maxwell McFarlane | Rewritten for the `modernize-gui-control` branch: `legacy/scada_2017/` removed; GUI and control subsystem ported to top-level `gui/` and `src/control/`; added `examples/control_main.cpp`, `Log::truncate()`, `bin/scada`. |
+
+---
+## 6. Related Documents
+- `docs/archive/` — 2017 Lafayette CS205 course deliverables (report, design proposal, grading assessment, final presentation) and `Manual-export.docx`, a prior Word export of this manual.
+- `docs/models.drawio`, `docs/scada-*.png` — original design diagrams (not re-derived in this manual; may not reflect the current `gui/`/`src/control/` layout).
+- `docs/readme.md` — one-paragraph repo summary.
+- `master` branch — still has the full `legacy/scada_2017/` tree (2017 CollectionDev/, Phidget test code, vendored gtest, and the original nested-repo commit history, imported intact) for anything not carried forward here.
+
+---
+## 7. References
+- [SQLite](https://www.sqlite.org/) — vendored amalgamation, used unmodified as the storage engine (`src/sqlite3.c`/`.h`).
+- [Qt](https://www.qt.io/) Widgets — `gui/`'s UI toolkit; built and verified against Qt 6.7.3 via `qmake`, despite the project file predating Qt6.
